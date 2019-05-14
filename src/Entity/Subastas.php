@@ -7,8 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Subastas
  *
- * @ORM\Table(name="subastas", indexes={@ORM\Index(name="token_admin", columns={"token_admin"}), @ORM\Index(name="id_semana", columns={"id_semana"}), @ORM\Index(name="usuario", columns={"email"})})
- * @ORM\Entity
+ * @ORM\Table(name="subastas", indexes={@ORM\Index(name="usuario", columns={"email"}), @ORM\Index(name="token_admin", columns={"token_admin"}), @ORM\Index(name="id_residencia", columns={"id_residencia"})})
+ * @ORM\Entity(repositoryClass="App\Repository\SubastasRepository")
  */
 class Subastas
 {
@@ -43,6 +43,13 @@ class Subastas
     private $fechaFin;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="finalizada", type="boolean", nullable=false)
+     */
+    private $finalizada;
+
+    /**
      * @var \Administradores
      *
      * @ORM\ManyToOne(targetEntity="Administradores")
@@ -63,14 +70,14 @@ class Subastas
     private $email;
 
     /**
-     * @var \SemanasReserva
+     * @var \Residencias
      *
-     * @ORM\ManyToOne(targetEntity="SemanasReserva")
+     * @ORM\ManyToOne(targetEntity="Residencias")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_semana", referencedColumnName="id_semana")
+     *   @ORM\JoinColumn(name="id_residencia", referencedColumnName="id_residencia")
      * })
      */
-    private $idSemana;
+    private $idResidencia;
 
     public function getIdSubasta(): ?int
     {
@@ -113,6 +120,18 @@ class Subastas
         return $this;
     }
 
+    public function getFinalizada(): ?bool
+    {
+        return $this->finalizada;
+    }
+
+    public function setFinalizada(bool $finalizada): self
+    {
+        $this->finalizada = $finalizada;
+
+        return $this;
+    }
+
     public function getTokenAdmin(): ?Administradores
     {
         return $this->tokenAdmin;
@@ -137,14 +156,14 @@ class Subastas
         return $this;
     }
 
-    public function getIdSemana(): ?SemanasReserva
+    public function getIdResidencia(): ?Residencias
     {
-        return $this->idSemana;
+        return $this->idResidencia;
     }
 
-    public function setIdSemana(?SemanasReserva $idSemana): self
+    public function setIdResidencia(?Residencias $idResidencia): self
     {
-        $this->idSemana = $idSemana;
+        $this->idResidencia = $idResidencia;
 
         return $this;
     }

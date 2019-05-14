@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Administradores
  *
  * @ORM\Table(name="administradores")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\AdministradoresRepository")
  */
 class Administradores
 {
@@ -17,7 +17,7 @@ class Administradores
      *
      * @ORM\Column(name="token", type="string", length=50, nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue(strategy="NONE")
      */
     private $token;
 
@@ -25,10 +25,10 @@ class Administradores
     {
         return $this->token;
     }
-
-    public function setToken($token) {
+    public function setToken(int $token): self
+    {
         $this->token = $token;
-        
+
         return $this;
     }
 

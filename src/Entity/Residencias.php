@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Residencias
  *
- * @ORM\Table(name="residencias", indexes={@ORM\Index(name="direccion", columns={"numero", "codigo_postal"})})
+ * @ORM\Table(name="residencias", indexes={@ORM\Index(name="id_direccion", columns={"id_direccion"})})
  * @ORM\Entity
  */
 class Residencias
@@ -47,11 +47,15 @@ class Residencias
      *
      * @ORM\ManyToOne(targetEntity="Direcciones")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="numero", referencedColumnName="numero"),
-     *   @ORM\JoinColumn(name="codigo_postal", referencedColumnName="codigo_postal")
+     *   @ORM\JoinColumn(name="id_direccion", referencedColumnName="id_direccion")
      * })
      */
-    private $direccion;
+    private $idDireccion;
+
+    /**
+     * @ORM\OneToMany(targetEntity="SemanasReserva", mappedBy="idResidencia")
+     */
+    private $reservas;
 
     public function getIdResidencia(): ?int
     {
@@ -94,14 +98,14 @@ class Residencias
         return $this;
     }
 
-    public function getDireccion(): ?Direcciones
+    public function getIdDireccion(): ?Direcciones
     {
-        return $this->numero;
+        return $this->idDireccion;
     }
 
-    public function setDireccion(?Direcciones $direccion): self
+    public function setIdDireccion(?Direcciones $idDireccion): self
     {
-        $this->direccion = $direccion;
+        $this->idDireccion = $idDireccion;
 
         return $this;
     }

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services https://symfony.com/schema/dic/services/services-1.0.xsd">
   <parameters>
-    <parameter key="kernel.root_dir">D:\xampp\htdocs\homeswitchhome\src</parameter>
-    <parameter key="kernel.project_dir">D:\xampp\htdocs\homeswitchhome</parameter>
+    <parameter key="kernel.root_dir">D:\xampp\htdocs\HomeSwitchHome\src</parameter>
+    <parameter key="kernel.project_dir">D:\xampp\htdocs\HomeSwitchHome</parameter>
     <parameter key="kernel.environment">dev</parameter>
     <parameter key="kernel.debug">true</parameter>
     <parameter key="kernel.name">src</parameter>
-    <parameter key="kernel.cache_dir">D:\xampp\htdocs\homeswitchhome\var\cache\dev</parameter>
-    <parameter key="kernel.logs_dir">D:\xampp\htdocs\homeswitchhome\var\log</parameter>
+    <parameter key="kernel.cache_dir">D:\xampp\htdocs\HomeSwitchHome\var\cache\dev</parameter>
+    <parameter key="kernel.logs_dir">D:\xampp\htdocs\HomeSwitchHome\var\log</parameter>
     <parameter key="kernel.bundles" type="collection">
       <parameter key="FrameworkBundle">Symfony\Bundle\FrameworkBundle\FrameworkBundle</parameter>
       <parameter key="TwigBundle">Symfony\Bundle\TwigBundle\TwigBundle</parameter>
@@ -19,31 +19,31 @@
     </parameter>
     <parameter key="kernel.bundles_metadata" type="collection">
       <parameter key="FrameworkBundle" type="collection">
-        <parameter key="path">D:\xampp\htdocs\homeswitchhome\vendor\symfony\framework-bundle</parameter>
+        <parameter key="path">D:\xampp\htdocs\HomeSwitchHome\vendor\symfony\framework-bundle</parameter>
         <parameter key="namespace">Symfony\Bundle\FrameworkBundle</parameter>
       </parameter>
       <parameter key="TwigBundle" type="collection">
-        <parameter key="path">D:\xampp\htdocs\homeswitchhome\vendor\symfony\twig-bundle</parameter>
+        <parameter key="path">D:\xampp\htdocs\HomeSwitchHome\vendor\symfony\twig-bundle</parameter>
         <parameter key="namespace">Symfony\Bundle\TwigBundle</parameter>
       </parameter>
       <parameter key="MakerBundle" type="collection">
-        <parameter key="path">D:\xampp\htdocs\homeswitchhome\vendor\symfony\maker-bundle\src</parameter>
+        <parameter key="path">D:\xampp\htdocs\HomeSwitchHome\vendor\symfony\maker-bundle\src</parameter>
         <parameter key="namespace">Symfony\Bundle\MakerBundle</parameter>
       </parameter>
       <parameter key="DoctrineCacheBundle" type="collection">
-        <parameter key="path">D:\xampp\htdocs\homeswitchhome\vendor\doctrine\doctrine-cache-bundle</parameter>
+        <parameter key="path">D:\xampp\htdocs\HomeSwitchHome\vendor\doctrine\doctrine-cache-bundle</parameter>
         <parameter key="namespace">Doctrine\Bundle\DoctrineCacheBundle</parameter>
       </parameter>
       <parameter key="DoctrineBundle" type="collection">
-        <parameter key="path">D:\xampp\htdocs\homeswitchhome\vendor\doctrine\doctrine-bundle</parameter>
+        <parameter key="path">D:\xampp\htdocs\HomeSwitchHome\vendor\doctrine\doctrine-bundle</parameter>
         <parameter key="namespace">Doctrine\Bundle\DoctrineBundle</parameter>
       </parameter>
       <parameter key="DoctrineMigrationsBundle" type="collection">
-        <parameter key="path">D:\xampp\htdocs\homeswitchhome\vendor\doctrine\doctrine-migrations-bundle</parameter>
+        <parameter key="path">D:\xampp\htdocs\HomeSwitchHome\vendor\doctrine\doctrine-migrations-bundle</parameter>
         <parameter key="namespace">Doctrine\Bundle\MigrationsBundle</parameter>
       </parameter>
       <parameter key="SensioFrameworkExtraBundle" type="collection">
-        <parameter key="path">D:\xampp\htdocs\homeswitchhome\vendor\sensio\framework-extra-bundle</parameter>
+        <parameter key="path">D:\xampp\htdocs\HomeSwitchHome\vendor\sensio\framework-extra-bundle</parameter>
         <parameter key="namespace">Sensio\Bundle\FrameworkExtraBundle</parameter>
       </parameter>
     </parameter>
@@ -67,11 +67,11 @@
       <parameter key="cookie_samesite">lax</parameter>
       <parameter key="gc_probability">1</parameter>
     </parameter>
-    <parameter key="session.save_path">D:\xampp\htdocs\homeswitchhome\var\cache\dev/sessions</parameter>
+    <parameter key="session.save_path">D:\xampp\htdocs\HomeSwitchHome\var\cache\dev/sessions</parameter>
     <parameter key="session.metadata.update_threshold">0</parameter>
     <parameter key="data_collector.templates" type="collection"/>
     <parameter key="debug.error_handler.throw_at">-1</parameter>
-    <parameter key="debug.container.dump">D:\xampp\htdocs\homeswitchhome\var\cache\dev/srcApp_KernelDevDebugContainer.xml</parameter>
+    <parameter key="debug.container.dump">D:\xampp\htdocs\HomeSwitchHome\var\cache\dev/srcApp_KernelDevDebugContainer.xml</parameter>
     <parameter key="router.request_context.host">localhost</parameter>
     <parameter key="router.request_context.scheme">http</parameter>
     <parameter key="router.request_context.base_url"></parameter>
@@ -83,7 +83,7 @@
     <parameter key="twig.form.resources" type="collection">
       <parameter>form_div_layout.html.twig</parameter>
     </parameter>
-    <parameter key="twig.default_path">D:\xampp\htdocs\homeswitchhome/templates</parameter>
+    <parameter key="twig.default_path">D:\xampp\htdocs\HomeSwitchHome/templates</parameter>
     <parameter key="doctrine_cache.apc.class">Doctrine\Common\Cache\ApcCache</parameter>
     <parameter key="doctrine_cache.apcu.class">Doctrine\Common\Cache\ApcuCache</parameter>
     <parameter key="doctrine_cache.array.class">Doctrine\Common\Cache\ArrayCache</parameter>
@@ -191,9 +191,9 @@
     <parameter key="doctrine.orm.second_level_cache.cache_configuration.class">Doctrine\ORM\Cache\CacheConfiguration</parameter>
     <parameter key="doctrine.orm.second_level_cache.regions_configuration.class">Doctrine\ORM\Cache\RegionsConfiguration</parameter>
     <parameter key="doctrine.orm.auto_generate_proxy_classes">true</parameter>
-    <parameter key="doctrine.orm.proxy_dir">D:\xampp\htdocs\homeswitchhome\var\cache\dev/doctrine/orm/Proxies</parameter>
+    <parameter key="doctrine.orm.proxy_dir">D:\xampp\htdocs\HomeSwitchHome\var\cache\dev/doctrine/orm/Proxies</parameter>
     <parameter key="doctrine.orm.proxy_namespace">Proxies</parameter>
-    <parameter key="doctrine_migrations.dir_name">D:\xampp\htdocs\homeswitchhome/src/Migrations</parameter>
+    <parameter key="doctrine_migrations.dir_name">D:\xampp\htdocs\HomeSwitchHome/src/Migrations</parameter>
     <parameter key="doctrine_migrations.namespace">DoctrineMigrations</parameter>
     <parameter key="doctrine_migrations.table_name">migration_versions</parameter>
     <parameter key="doctrine_migrations.column_name">version</parameter>
@@ -276,7 +276,7 @@
     <service id="cache_warmer" class="Symfony\Component\HttpKernel\CacheWarmer\CacheWarmerAggregate" public="true">
       <argument type="tagged" tag="kernel.cache_warmer"/>
       <argument>true</argument>
-      <argument>D:\xampp\htdocs\homeswitchhome\var\cache\dev/srcApp_KernelDevDebugContainerDeprecations.log</argument>
+      <argument>D:\xampp\htdocs\HomeSwitchHome\var\cache\dev/srcApp_KernelDevDebugContainerDeprecations.log</argument>
     </service>
     <service id="cache_clearer" class="Symfony\Component\HttpKernel\CacheClearer\ChainCacheClearer" public="true">
       <argument type="tagged" tag="kernel.cache_clearer"/>
@@ -285,9 +285,9 @@
     <service id="filesystem" class="Symfony\Component\Filesystem\Filesystem" public="true"/>
     <service id="file_locator" class="Symfony\Component\HttpKernel\Config\FileLocator" public="false">
       <argument type="service" id="kernel"/>
-      <argument>D:\xampp\htdocs\homeswitchhome\src/Resources</argument>
+      <argument>D:\xampp\htdocs\HomeSwitchHome\src/Resources</argument>
       <argument type="collection">
-        <argument>D:\xampp\htdocs\homeswitchhome\src</argument>
+        <argument>D:\xampp\htdocs\HomeSwitchHome\src</argument>
       </argument>
     </service>
     <service id="uri_signer" class="Symfony\Component\HttpKernel\UriSigner" public="false">
@@ -433,9 +433,9 @@
     </service>
     <service id="cache.app" class="Symfony\Component\Cache\Adapter\FilesystemAdapter" public="true">
       <tag name="cache.pool"/>
-      <argument>+JckGtAR+D</argument>
+      <argument>feppdnUxYK</argument>
       <argument>0</argument>
-      <argument>D:\xampp\htdocs\homeswitchhome\var\cache\dev/pools</argument>
+      <argument>D:\xampp\htdocs\HomeSwitchHome\var\cache\dev/pools</argument>
       <argument type="service" id="cache.default_marshaller" on-invalid="ignore"/>
       <call method="setLogger">
         <argument type="service" id="logger" on-invalid="ignore"/>
@@ -449,37 +449,37 @@
     </service>
     <service id="cache.system" class="Symfony\Component\Cache\Adapter\AdapterInterface" public="true">
       <tag name="cache.pool"/>
-      <argument>UI99eseAWL</argument>
+      <argument>cYxf0U+pws</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>D:\xampp\htdocs\homeswitchhome\var\cache\dev/pools</argument>
+      <argument>D:\xampp\htdocs\HomeSwitchHome\var\cache\dev/pools</argument>
       <argument type="service" id="logger" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
     <service id="cache.validator" class="Symfony\Component\Cache\Adapter\AdapterInterface" public="false">
       <tag name="cache.pool"/>
-      <argument>KnkOy1WyF0</argument>
+      <argument>7nEXL5uhk+</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>D:\xampp\htdocs\homeswitchhome\var\cache\dev/pools</argument>
+      <argument>D:\xampp\htdocs\HomeSwitchHome\var\cache\dev/pools</argument>
       <argument type="service" id="logger" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
     <service id="cache.serializer" class="Symfony\Component\Cache\Adapter\AdapterInterface" public="false">
       <tag name="cache.pool"/>
-      <argument>KVmD+fFUxG</argument>
+      <argument>kDzMW4n1EV</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>D:\xampp\htdocs\homeswitchhome\var\cache\dev/pools</argument>
+      <argument>D:\xampp\htdocs\HomeSwitchHome\var\cache\dev/pools</argument>
       <argument type="service" id="logger" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
     <service id="cache.annotations" class="Symfony\Component\Cache\Adapter\AdapterInterface" public="false">
       <tag name="cache.pool"/>
-      <argument>YOVYo+uIXH</argument>
+      <argument>adNBon94Tm</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>D:\xampp\htdocs\homeswitchhome\var\cache\dev/pools</argument>
+      <argument>D:\xampp\htdocs\HomeSwitchHome\var\cache\dev/pools</argument>
       <argument type="service" id="logger" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
@@ -489,7 +489,7 @@
       <argument></argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>D:\xampp\htdocs\homeswitchhome\var\cache\dev/pools</argument>
+      <argument>D:\xampp\htdocs\HomeSwitchHome\var\cache\dev/pools</argument>
       <argument type="service" id="logger" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
@@ -518,7 +518,7 @@
       <tag name="monolog.logger" channel="cache"/>
       <argument></argument>
       <argument>0</argument>
-      <argument>D:\xampp\htdocs\homeswitchhome\var\cache\dev/pools</argument>
+      <argument>D:\xampp\htdocs\HomeSwitchHome\var\cache\dev/pools</argument>
       <argument type="service" id="cache.default_marshaller" on-invalid="ignore"/>
       <call method="setLogger">
         <argument type="service" id="logger" on-invalid="ignore"/>
@@ -601,8 +601,8 @@
         <argument key="cache.annotations" type="service" id="cache.annotations" on-invalid="ignore_uninitialized"/>
       </argument>
     </service>
-    <service id=".1_NativeFileSessionHandler~qB.B3Hl" class="Symfony\Component\HttpFoundation\Session\Storage\Handler\NativeFileSessionHandler" public="false">
-      <argument>D:\xampp\htdocs\homeswitchhome\var\cache\dev/sessions</argument>
+    <service id=".1_NativeFileSessionHandler~O9Bfya5" class="Symfony\Component\HttpFoundation\Session\Storage\Handler\NativeFileSessionHandler" public="false">
+      <argument>D:\xampp\htdocs\HomeSwitchHome\var\cache\dev/sessions</argument>
     </service>
     <service id="session" class="Symfony\Component\HttpFoundation\Session\Session" public="true">
       <argument type="service" id="session.storage.native"/>
@@ -625,12 +625,12 @@
     <service id="session.flash_bag" class="Symfony\Component\HttpFoundation\Session\Flash\FlashBag" public="false"/>
     <service id="session.attribute_bag" class="Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag" public="false"/>
     <service id="session.storage.mock_file" class="Symfony\Component\HttpFoundation\Session\Storage\MockFileSessionStorage" public="false">
-      <argument>D:\xampp\htdocs\homeswitchhome\var\cache\dev/sessions</argument>
+      <argument>D:\xampp\htdocs\HomeSwitchHome\var\cache\dev/sessions</argument>
       <argument>MOCKSESSID</argument>
       <argument type="service" id="session.storage.metadata_bag"/>
     </service>
     <service id="session.handler.native_file" class="Symfony\Component\HttpFoundation\Session\Storage\Handler\StrictSessionHandler" public="false">
-      <argument type="service" id=".1_NativeFileSessionHandler~qB.B3Hl"/>
+      <argument type="service" id=".1_NativeFileSessionHandler~O9Bfya5"/>
     </service>
     <service id="session_listener" class="Symfony\Component\HttpKernel\EventListener\SessionListener" public="false">
       <tag name="kernel.event_subscriber"/>
@@ -981,7 +981,7 @@
       <argument type="service" id=".service_locator.MAfdX1A.router.default"/>
       <argument>kernel::loadRoutes</argument>
       <argument type="collection">
-        <argument key="cache_dir">D:\xampp\htdocs\homeswitchhome\var\cache\dev</argument>
+        <argument key="cache_dir">D:\xampp\htdocs\HomeSwitchHome\var\cache\dev</argument>
         <argument key="debug">true</argument>
         <argument key="generator_class">Symfony\Component\Routing\Generator\UrlGenerator</argument>
         <argument key="generator_base_class">Symfony\Component\Routing\Generator\UrlGenerator</argument>
@@ -1024,7 +1024,7 @@
       <argument type="service" id="request_stack"/>
       <argument type="service" id="router.request_context" on-invalid="ignore"/>
       <argument type="service" id="logger" on-invalid="ignore"/>
-      <argument>D:\xampp\htdocs\homeswitchhome</argument>
+      <argument>D:\xampp\htdocs\HomeSwitchHome</argument>
       <argument>true</argument>
     </service>
     <service id="Symfony\Bundle\FrameworkBundle\Controller\RedirectController" class="Symfony\Bundle\FrameworkBundle\Controller\RedirectController" public="true">
@@ -1050,12 +1050,12 @@
       <argument type="service" id="file_locator"/>
       <argument type="service" id="routing.loader.annotation"/>
     </service>
-    <service id=".2_PhpArrayAdapter~nfUH_jb" class="Symfony\Component\Cache\Adapter\PhpArrayAdapter" public="false">
-      <argument>D:\xampp\htdocs\homeswitchhome\var\cache\dev/annotations.php</argument>
+    <service id=".2_PhpArrayAdapter~BiV0gNk" class="Symfony\Component\Cache\Adapter\PhpArrayAdapter" public="false">
+      <argument>D:\xampp\htdocs\HomeSwitchHome\var\cache\dev/annotations.php</argument>
       <argument type="service" id="cache.annotations"/>
       <factory class="Symfony\Component\Cache\Adapter\PhpArrayAdapter" method="create"/>
     </service>
-    <service id=".1_ArrayCache~nfUH_jb" class="Doctrine\Common\Cache\ArrayCache" public="false"/>
+    <service id=".1_ArrayCache~BiV0gNk" class="Doctrine\Common\Cache\ArrayCache" public="false"/>
     <service id="annotations.reader" class="Doctrine\Common\Annotations\AnnotationReader" public="false">
       <call method="addGlobalIgnoredName">
         <argument>required</argument>
@@ -1070,7 +1070,7 @@
     <service id="annotations.cached_reader" class="Doctrine\Common\Annotations\CachedReader" public="false">
       <tag name="annotations.cached_reader"/>
       <argument type="service" id="annotations.reader"/>
-      <argument type="service" id=".1_ArrayCache~nfUH_jb"/>
+      <argument type="service" id=".1_ArrayCache~BiV0gNk"/>
       <argument>true</argument>
       <property name="cacheProviderBackup" type="service" id="annotations.cache"/>
     </service>
@@ -1080,17 +1080,17 @@
     <service id="annotations.cache_warmer" class="Symfony\Bundle\FrameworkBundle\CacheWarmer\AnnotationsCacheWarmer" public="false">
       <tag name="kernel.cache_warmer"/>
       <argument type="service" id="annotations.reader"/>
-      <argument>D:\xampp\htdocs\homeswitchhome\var\cache\dev/annotations.php</argument>
+      <argument>D:\xampp\htdocs\HomeSwitchHome\var\cache\dev/annotations.php</argument>
       <argument>#^Symfony\\(?:Component\\HttpKernel\\|Bundle\\FrameworkBundle\\Controller\\(?!AbstractController$|Controller$))#</argument>
       <argument>true</argument>
     </service>
     <service id="annotations.cache" class="Symfony\Component\Cache\DoctrineProvider" public="false">
-      <argument type="service" id=".2_PhpArrayAdapter~nfUH_jb"/>
+      <argument type="service" id=".2_PhpArrayAdapter~BiV0gNk"/>
     </service>
     <service id="twig" class="Twig\Environment" public="true">
       <argument type="service" id="twig.loader.native_filesystem"/>
       <argument type="collection">
-        <argument key="default_path">D:\xampp\htdocs\homeswitchhome/templates</argument>
+        <argument key="default_path">D:\xampp\htdocs\HomeSwitchHome/templates</argument>
         <argument key="debug">true</argument>
         <argument key="strict_variables">true</argument>
         <argument key="exception_controller">twig.controller.exception::showAction</argument>
@@ -1098,7 +1098,7 @@
           <argument>form_div_layout.html.twig</argument>
         </argument>
         <argument key="autoescape">name</argument>
-        <argument key="cache">D:\xampp\htdocs\homeswitchhome\var\cache\dev/twig</argument>
+        <argument key="cache">D:\xampp\htdocs\HomeSwitchHome\var\cache\dev/twig</argument>
         <argument key="charset">UTF-8</argument>
         <argument key="paths" type="collection"/>
         <argument key="date" type="collection">
@@ -1171,9 +1171,9 @@
     </service>
     <service id="twig.template_iterator" class="Symfony\Bundle\TwigBundle\TemplateIterator" public="false">
       <argument type="service" id="kernel"/>
-      <argument>D:\xampp\htdocs\homeswitchhome\src</argument>
+      <argument>D:\xampp\htdocs\HomeSwitchHome\src</argument>
       <argument type="collection"/>
-      <argument>D:\xampp\htdocs\homeswitchhome/templates</argument>
+      <argument>D:\xampp\htdocs\HomeSwitchHome/templates</argument>
     </service>
     <service id="twig.template_cache_warmer" class="Symfony\Bundle\TwigBundle\CacheWarmer\TemplateCacheWarmer" public="false">
       <tag name="kernel.cache_warmer"/>
@@ -1184,33 +1184,33 @@
     <service id="twig.loader.native_filesystem" class="Symfony\Bundle\TwigBundle\Loader\NativeFilesystemLoader" public="false">
       <tag name="twig.loader"/>
       <argument type="collection"/>
-      <argument>D:\xampp\htdocs\homeswitchhome</argument>
+      <argument>D:\xampp\htdocs\HomeSwitchHome</argument>
       <call method="addPath">
-        <argument>D:\xampp\htdocs\homeswitchhome\vendor\symfony\framework-bundle/Resources/views</argument>
+        <argument>D:\xampp\htdocs\HomeSwitchHome\vendor\symfony\framework-bundle/Resources/views</argument>
         <argument>Framework</argument>
       </call>
       <call method="addPath">
-        <argument>D:\xampp\htdocs\homeswitchhome\vendor\symfony\framework-bundle/Resources/views</argument>
+        <argument>D:\xampp\htdocs\HomeSwitchHome\vendor\symfony\framework-bundle/Resources/views</argument>
         <argument>!Framework</argument>
       </call>
       <call method="addPath">
-        <argument>D:\xampp\htdocs\homeswitchhome\vendor\symfony\twig-bundle/Resources/views</argument>
+        <argument>D:\xampp\htdocs\HomeSwitchHome\vendor\symfony\twig-bundle/Resources/views</argument>
         <argument>Twig</argument>
       </call>
       <call method="addPath">
-        <argument>D:\xampp\htdocs\homeswitchhome\vendor\symfony\twig-bundle/Resources/views</argument>
+        <argument>D:\xampp\htdocs\HomeSwitchHome\vendor\symfony\twig-bundle/Resources/views</argument>
         <argument>!Twig</argument>
       </call>
       <call method="addPath">
-        <argument>D:\xampp\htdocs\homeswitchhome\vendor\doctrine\doctrine-bundle/Resources/views</argument>
+        <argument>D:\xampp\htdocs\HomeSwitchHome\vendor\doctrine\doctrine-bundle/Resources/views</argument>
         <argument>Doctrine</argument>
       </call>
       <call method="addPath">
-        <argument>D:\xampp\htdocs\homeswitchhome\vendor\doctrine\doctrine-bundle/Resources/views</argument>
+        <argument>D:\xampp\htdocs\HomeSwitchHome\vendor\doctrine\doctrine-bundle/Resources/views</argument>
         <argument>!Doctrine</argument>
       </call>
       <call method="addPath">
-        <argument>D:\xampp\htdocs\homeswitchhome/templates</argument>
+        <argument>D:\xampp\htdocs\HomeSwitchHome/templates</argument>
       </call>
     </service>
     <service id="twig.loader.chain" class="Twig\Loader\ChainLoader" public="false"/>
@@ -1232,7 +1232,7 @@
     <service id="twig.extension.code" class="Symfony\Bridge\Twig\Extension\CodeExtension" public="false">
       <tag name="twig.extension"/>
       <argument type="service" id="debug.file_link_formatter" on-invalid="ignore"/>
-      <argument>D:\xampp\htdocs\homeswitchhome</argument>
+      <argument>D:\xampp\htdocs\HomeSwitchHome</argument>
       <argument>UTF-8</argument>
     </service>
     <service id="twig.extension.routing" class="Symfony\Bridge\Twig\Extension\RoutingExtension" public="false">
@@ -1294,10 +1294,10 @@
     <service id="twig.command.debug" class="Symfony\Bridge\Twig\Command\DebugCommand" public="false">
       <tag name="console.command" command="debug:twig"/>
       <argument type="service" id="twig"/>
-      <argument>D:\xampp\htdocs\homeswitchhome</argument>
+      <argument>D:\xampp\htdocs\HomeSwitchHome</argument>
       <argument>%kernel.bundles_metadata%</argument>
-      <argument>D:\xampp\htdocs\homeswitchhome/templates</argument>
-      <argument>D:\xampp\htdocs\homeswitchhome\src</argument>
+      <argument>D:\xampp\htdocs\HomeSwitchHome/templates</argument>
+      <argument>D:\xampp\htdocs\HomeSwitchHome\src</argument>
       <call method="setName">
         <argument>debug:twig</argument>
       </call>
@@ -1312,7 +1312,7 @@
     <service id="maker.file_manager" class="Symfony\Bundle\MakerBundle\FileManager" public="false">
       <argument type="service" id="filesystem"/>
       <argument type="service" id="maker.autoloader_util"/>
-      <argument>D:\xampp\htdocs\homeswitchhome</argument>
+      <argument>D:\xampp\htdocs\HomeSwitchHome</argument>
     </service>
     <service id="maker.autoloader_finder" class="Symfony\Bundle\MakerBundle\Util\ComposerAutoloaderFinder" public="false"/>
     <service id="maker.autoloader_util" class="Symfony\Bundle\MakerBundle\Util\AutoloaderUtil" public="false">
@@ -1368,7 +1368,7 @@
       <tag name="maker.command"/>
       <argument type="service" id="maker.file_manager"/>
       <argument type="service" id="maker.doctrine_helper"/>
-      <argument>D:\xampp\htdocs\homeswitchhome</argument>
+      <argument>D:\xampp\htdocs\HomeSwitchHome</argument>
       <argument type="service" id="maker.generator"/>
     </service>
     <service id="maker.maker.make_fixtures" class="Symfony\Bundle\MakerBundle\Maker\MakeFixtures" public="false">
@@ -1418,7 +1418,7 @@
     </service>
     <service id="maker.maker.make_migration" class="Symfony\Bundle\MakerBundle\Maker\MakeMigration" public="false">
       <tag name="maker.command"/>
-      <argument>D:\xampp\htdocs\homeswitchhome</argument>
+      <argument>D:\xampp\htdocs\HomeSwitchHome</argument>
     </service>
     <service id="doctrine_cache.abstract.apc" class="Doctrine\Common\Cache\ApcCache" abstract="true"/>
     <service id="doctrine_cache.abstract.apcu" class="Doctrine\Common\Cache\ApcuCache" abstract="true"/>
@@ -1716,7 +1716,7 @@
         <argument type="service" id="doctrine.orm.default_metadata_driver"/>
       </call>
       <call method="setProxyDir">
-        <argument>D:\xampp\htdocs\homeswitchhome\var\cache\dev/doctrine/orm/Proxies</argument>
+        <argument>D:\xampp\htdocs\HomeSwitchHome\var\cache\dev/doctrine/orm/Proxies</argument>
       </call>
       <call method="setProxyNamespace">
         <argument>Proxies</argument>
@@ -1746,7 +1746,7 @@
     <service id="doctrine.orm.default_annotation_metadata_driver" class="Doctrine\ORM\Mapping\Driver\AnnotationDriver" public="false">
       <argument type="service" id="annotations.cached_reader"/>
       <argument type="collection">
-        <argument>D:\xampp\htdocs\homeswitchhome\src\Entity</argument>
+        <argument>D:\xampp\htdocs\HomeSwitchHome\src\Entity</argument>
       </argument>
     </service>
     <service id="doctrine.orm.default_metadata_driver" class="Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain" public="false">
@@ -1757,17 +1757,17 @@
     </service>
     <service id="doctrine_cache.providers.doctrine.orm.default_metadata_cache" class="Doctrine\Common\Cache\ArrayCache" public="true">
       <call method="setNamespace">
-        <argument>sf_orm_default_54937f8238d79a470d4fe7cb3a2356bf39774dbc4ab5620d7f62969e042482cd</argument>
+        <argument>sf_orm_default_cc30e3e9928b742ecfbcca6c276d8cbfca7d1de6cedb980565e32bf3d30e22ad</argument>
       </call>
     </service>
     <service id="doctrine_cache.providers.doctrine.orm.default_result_cache" class="Doctrine\Common\Cache\ArrayCache" public="true">
       <call method="setNamespace">
-        <argument>sf_orm_default_54937f8238d79a470d4fe7cb3a2356bf39774dbc4ab5620d7f62969e042482cd</argument>
+        <argument>sf_orm_default_cc30e3e9928b742ecfbcca6c276d8cbfca7d1de6cedb980565e32bf3d30e22ad</argument>
       </call>
     </service>
     <service id="doctrine_cache.providers.doctrine.orm.default_query_cache" class="Doctrine\Common\Cache\ArrayCache" public="true">
       <call method="setNamespace">
-        <argument>sf_orm_default_54937f8238d79a470d4fe7cb3a2356bf39774dbc4ab5620d7f62969e042482cd</argument>
+        <argument>sf_orm_default_cc30e3e9928b742ecfbcca6c276d8cbfca7d1de6cedb980565e32bf3d30e22ad</argument>
       </call>
     </service>
     <service id="doctrine.orm.default_entity_listener_resolver" class="Doctrine\Bundle\DoctrineBundle\Mapping\ContainerAwareEntityListenerResolver">

@@ -8,16 +8,23 @@ use Doctrine\ORM\Mapping as ORM;
  * Direcciones
  *
  * @ORM\Table(name="direcciones")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\DireccionesRepository")
  */
 class Direcciones
 {
     /**
      * @var int
      *
-     * @ORM\Column(name="numero", type="integer", nullable=false)
+     * @ORM\Column(name="id_direccion", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idDireccion;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="numero", type="integer", nullable=false)
      */
     private $numero;
 
@@ -25,8 +32,6 @@ class Direcciones
      * @var int
      *
      * @ORM\Column(name="codigo_postal", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
      */
     private $codigoPostal;
 
@@ -65,12 +70,17 @@ class Direcciones
      */
     private $depto;
 
+    public function getIdDireccion(): ?int
+    {
+        return $this->idDireccion;
+    }
+
     public function getNumero(): ?int
     {
         return $this->numero;
     }
-    
-    public function setNumero(string $numero): self
+
+    public function setNumero(int $numero): self
     {
         $this->numero = $numero;
 
@@ -82,7 +92,7 @@ class Direcciones
         return $this->codigoPostal;
     }
 
-    public function setCodigoPostal(string $codigoPostal): self
+    public function setCodigoPostal(int $codigoPostal): self
     {
         $this->codigoPostal = $codigoPostal;
 
