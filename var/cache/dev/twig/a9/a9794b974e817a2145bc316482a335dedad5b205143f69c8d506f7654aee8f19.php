@@ -51,15 +51,23 @@ class __TwigTemplate_ab4124005f0ba74388ac69ddf837f925dd40e332c8678d17e2d5162ae1b
         // line 6
         $this->displayBlock('stylesheets', $context, $blocks);
         // line 7
-        echo "    </head>
+        echo "
+        <!-- Bootstrap y jQuery-->
+        <script src=\"https://code.jquery.com/jquery-3.3.1.slim.min.js\" integrity=\"sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo\" crossorigin=\"anonymous\"></script>
+        <script src=\"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js\" integrity=\"sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1\" crossorigin=\"anonymous\"></script>
+        <script src=\"https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js\" integrity=\"sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM\" crossorigin=\"anonymous\"></script>
+
+        <!--Tema de bootswatch-->
+        <link rel=\"stylesheet\" href=\"https://bootswatch.com/4/materia/bootstrap.min.css\">
+    </head>
     <body>
         ";
-        // line 9
+        // line 17
         $this->displayBlock('body', $context, $blocks);
-        // line 10
+        // line 18
         echo "        ";
         $this->displayBlock('javascripts', $context, $blocks);
-        // line 11
+        // line 19
         echo "    </body>
 </html>
 ";
@@ -91,7 +99,7 @@ class __TwigTemplate_ab4124005f0ba74388ac69ddf837f925dd40e332c8678d17e2d5162ae1b
 
     }
 
-    // line 9
+    // line 17
     public function block_body($context, array $blocks = [])
     {
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
@@ -102,7 +110,7 @@ class __TwigTemplate_ab4124005f0ba74388ac69ddf837f925dd40e332c8678d17e2d5162ae1b
 
     }
 
-    // line 10
+    // line 18
     public function block_javascripts($context, array $blocks = [])
     {
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
@@ -120,7 +128,7 @@ class __TwigTemplate_ab4124005f0ba74388ac69ddf837f925dd40e332c8678d17e2d5162ae1b
 
     public function getDebugInfo()
     {
-        return array (  106 => 10,  95 => 9,  84 => 6,  72 => 5,  63 => 11,  60 => 10,  58 => 9,  54 => 7,  52 => 6,  48 => 5,  42 => 1,);
+        return array (  114 => 18,  103 => 17,  92 => 6,  80 => 5,  71 => 19,  68 => 18,  66 => 17,  54 => 7,  52 => 6,  48 => 5,  42 => 1,);
     }
 
     public function getSourceContext()
@@ -131,12 +139,20 @@ class __TwigTemplate_ab4124005f0ba74388ac69ddf837f925dd40e332c8678d17e2d5162ae1b
         <meta charset=\"UTF-8\">
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
+
+        <!-- Bootstrap y jQuery-->
+        <script src=\"https://code.jquery.com/jquery-3.3.1.slim.min.js\" integrity=\"sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo\" crossorigin=\"anonymous\"></script>
+        <script src=\"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js\" integrity=\"sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1\" crossorigin=\"anonymous\"></script>
+        <script src=\"https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js\" integrity=\"sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM\" crossorigin=\"anonymous\"></script>
+
+        <!--Tema de bootswatch-->
+        <link rel=\"stylesheet\" href=\"https://bootswatch.com/4/materia/bootstrap.min.css\">
     </head>
     <body>
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>
 </html>
-", "base.html.twig", "D:\\xampp\\htdocs\\homeswitchhome\\templates\\base.html.twig");
+", "base.html.twig", "D:\\xampp\\htdocs\\HomeSwitchHome\\templates\\base.html.twig");
     }
 }

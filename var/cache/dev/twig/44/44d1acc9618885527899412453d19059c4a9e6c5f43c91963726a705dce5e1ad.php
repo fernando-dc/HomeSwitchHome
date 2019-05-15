@@ -88,9 +88,9 @@ class __TwigTemplate_f263846c8a0c86db9e8e3c8242543601418493843bc6f53e5447a6424e5
             ob_start();
             // line 23
             echo twig_include($this->env, $context, "@Twig/Exception/traces.txt.twig", ["exception" => (isset($context["exception"]) || array_key_exists("exception", $context) ? $context["exception"] : (function () { throw new RuntimeError('Variable "exception" does not exist.', 23, $this->source); })()), "format" => "html"], false);
-            $___internal_d5177159cc6d2a0fed025c86228be330e7d33ee485631d1c82e7fcac4501d5f4_ = ('' === $tmp = ob_get_clean()) ? '' : new Markup($tmp, $this->env->getCharset());
+            $___internal_ec1bd4d53da4bfeb42da1361e49b008f2d2fa5df8e548a86463775ca64bb7d4e_ = ('' === $tmp = ob_get_clean()) ? '' : new Markup($tmp, $this->env->getCharset());
             // line 22
-            echo twig_escape_filter($this->env, $___internal_d5177159cc6d2a0fed025c86228be330e7d33ee485631d1c82e7fcac4501d5f4_, "html");
+            echo twig_escape_filter($this->env, $___internal_ec1bd4d53da4bfeb42da1361e49b008f2d2fa5df8e548a86463775ca64bb7d4e_, "html");
             // line 25
             echo "</pre>
                 ";
@@ -153,6 +153,6 @@ class __TwigTemplate_f263846c8a0c86db9e8e3c8242543601418493843bc6f53e5447a6424e5
         </tr>
     </tbody>
 </table>
-", "@Twig/Exception/traces_text.html.twig", "D:\\xampp\\htdocs\\homeswitchhome\\vendor\\symfony\\twig-bundle\\Resources\\views\\Exception\\traces_text.html.twig");
+", "@Twig/Exception/traces_text.html.twig", "D:\\xampp\\htdocs\\HomeSwitchHome\\vendor\\symfony\\twig-bundle\\Resources\\views\\Exception\\traces_text.html.twig");
     }
 }

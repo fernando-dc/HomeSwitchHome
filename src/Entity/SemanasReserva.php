@@ -45,7 +45,7 @@ class SemanasReserva
     /**
      * @var \Residencias
      *
-     * @ORM\ManyToOne(targetEntity="Residencias",inversedBy='reservas')
+     * @ORM\ManyToOne(targetEntity="Residencias",inversedBy="reservas")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_residencia", referencedColumnName="id_residencia")
      * })
