@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block styelsheets %}
+    {{ parent() }}
+        
+       
+        
+    
+{% endblock %}
+
+
+
+{% block body %}
+
+    {% form_theme subastaForm 'bootstrap_4_layout.html.twig' %}
+    <h1>Nueva Subasta:</h1>
+    <div class="container">
+        
+        {{form_start(subastaForm)}}
+        
+        {{form_widget(subastaForm)}}
+        
+        <button type="submit" class="btn btn-primary">Crear</button>
+    </div>
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent()}}
+    
+    <script>
+        jQuery(document).ready(function(){
+            $('.js-datepicker-start').datepicker({
+                weekStart: 1,
+                startDate: "+25w",
+                endDate: "+26w",
+                daysOfWeekDisabled: "0,2,3,4,5,6",
+                daysOfWeekHighlighted: "1",
+                format: "yyyy/mm/dd",
+            });
+        });
+    </script>
+
+{% endblock %}

@@ -96,6 +96,6 @@ class __TwigTemplate_577870c59395918c3263027dba8bb531491b81fa0a68373de801fdb2317
   {{ include('@Twig/Exception/trace.txt.twig', { trace: trace }, with_context = false) }}
 {% endfor %}
 {% endif %}
-", "@Twig/Exception/traces.txt.twig", "D:\\xampp\\htdocs\\homeswitchhome\\vendor\\symfony\\twig-bundle\\Resources\\views\\Exception\\traces.txt.twig");
+", "@Twig/Exception/traces.txt.twig", "D:\\xampp\\htdocs\\HomeSwitchHome\\vendor\\symfony\\twig-bundle\\Resources\\views\\Exception\\traces.txt.twig");
     }
 }

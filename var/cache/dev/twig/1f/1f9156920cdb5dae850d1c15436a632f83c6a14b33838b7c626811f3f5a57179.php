@@ -384,6 +384,6 @@ class __TwigTemplate_ba417975dfadb96f73b535b4bead7f29747ed6e26dff271a5d34b545873
 {% block body %}
     {% include '@Twig/Exception/exception.html.twig' %}
 {% endblock %}
-", "@Twig/Exception/exception_full.html.twig", "D:\\xampp\\htdocs\\homeswitchhome\\vendor\\symfony\\twig-bundle\\Resources\\views\\Exception\\exception_full.html.twig");
+", "@Twig/Exception/exception_full.html.twig", "D:\\xampp\\htdocs\\HomeSwitchHome\\vendor\\symfony\\twig-bundle\\Resources\\views\\Exception\\exception_full.html.twig");
     }
 }

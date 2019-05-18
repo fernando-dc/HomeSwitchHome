@@ -198,6 +198,6 @@ class __TwigTemplate_7cf48ddb2232cd19ee998490ee1f3884fa6987e26953ca2d3dc6050f321
         {{ include('@Twig/base_js.html.twig') }}
     </body>
 </html>
-", "@Twig/layout.html.twig", "D:\\xampp\\htdocs\\homeswitchhome\\vendor\\symfony\\twig-bundle\\Resources\\views\\layout.html.twig");
+", "@Twig/layout.html.twig", "D:\\xampp\\htdocs\\HomeSwitchHome\\vendor\\symfony\\twig-bundle\\Resources\\views\\layout.html.twig");
     }
 }

@@ -467,6 +467,6 @@ header .container { display: flex; justify-content: space-between; }
     .hidden-xs-down { display: initial; }
     .help-link { margin-left: 30px; }
 }
-", "@Twig/exception.css.twig", "D:\\xampp\\htdocs\\homeswitchhome\\vendor\\symfony\\twig-bundle\\Resources\\views\\exception.css.twig");
+", "@Twig/exception.css.twig", "D:\\xampp\\htdocs\\HomeSwitchHome\\vendor\\symfony\\twig-bundle\\Resources\\views\\exception.css.twig");
     }
 }

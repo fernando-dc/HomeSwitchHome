@@ -47,4 +47,15 @@ class SemanasReservaRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function reservasEnFecha($idResidencia, $fecha){
+        return $this->createQueryBuilder('s')
+            ->andWhere('s.idResidencia = :idRes')
+            ->setParameter('idRes', $idResidencia)
+            ->andWhere(':fecha BETWEEN s.fechaInicio AND s.fechaFin')
+            ->setParameter('fecha',$fecha)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
 }

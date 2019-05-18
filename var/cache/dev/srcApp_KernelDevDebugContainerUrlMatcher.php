@@ -14,6 +14,9 @@ class srcApp_KernelDevDebugContainerUrlMatcher extends Symfony\Bundle\FrameworkB
     public function __construct(RequestContext $context)
     {
         $this->context = $context;
+        $this->staticRoutes = [
+            '/subasta/new' => [[['_route' => 'subasta_nueva', '_controller' => 'App\\Controller\\SubastasController::new'], null, null, null, false, false, null]],
+        ];
         $this->regexpList = [
             0 => '{^(?'
                     .'|/_error/(\\d+)(?:\\.([^/]++))?(*:35)'
