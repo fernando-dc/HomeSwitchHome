@@ -2,13 +2,15 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Residencias
  *
  * @ORM\Table(name="residencias", indexes={@ORM\Index(name="id_direccion", columns={"id_direccion"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\ResidenciasRepository")
  */
 class Residencias
 {
@@ -56,6 +58,18 @@ class Residencias
      * @ORM\OneToMany(targetEntity="SemanasReserva", mappedBy="idResidencia")
      */
     private $reservas;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Subastas", mappedBy="idResidencia")
+     */
+    private $subastas;
+
+
+    public function __construct()
+    {
+        $this->reservas = new ArrayCollection();
+        $this->subastas = new ArrayCollection();
+    }
 
     public function getIdResidencia(): ?int
     {
@@ -111,4 +125,78 @@ class Residencias
     }
 
 
+    /**
+     * @return Collection|SemanasReserva[]
+     */
+    public function getReservas(): Collection
+    {
+        return $this->reservas;
+    }
+
+    public function addReserva(SemanasReserva $reserva): self
+    {
+        if (!$this->reservas->contains($reserva)) {
+            $this->reservas[] = $reserva;
+            $reserva->setIdResidencia($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReserva(SemanasReserva $reserva): self
+    {
+        if ($this->reservas->contains($reserva)) {
+            $this->reservas->removeElement($reserva);
+            // set the owning side to null (unless already changed)
+            if ($reserva->getIdResidencia() === $this) {
+                $reserva->setIdResidencia(null);
+            }
+        }
+
+        return $this;
+    }
+    
+    /**
+     * @return Collection|Subastas[]
+     */
+    public function getSubastas(): Collection
+    {
+        return $this->subastas;
+    }
+    
+    public function addSubasta(Subastas $subasta): self
+    {
+        if (!$this->subastas->contains($subasta)) {
+            $this->subastas[] = $subasta;
+            $subasta->setIdResidencia($this);
+        }
+        
+        return $this;
+    }
+    
+    public function removeSubasta(Subastas $subasta): self
+    {
+        if ($this->subastas->contains($subasta)) {
+            $this->subastas->removeElement($subasta);
+            // set the owning side to null (unless already changed)
+            if ($subasta->getIdResidencia() === $this) {
+                $subasta->setIdResidencia(null);
+            }
+        }
+        
+        return $this;
+    }
+    
+    public function existeSubastaEntreFechas($fecha_inicio, $fecha_fin, $duracion):bool
+    {
+        foreach ($this->subastas as $subasta) {
+            $fecha_fin_subasta = date('Y-m-d',strtotime(($subasta->getFechaInicio()->format('Y-m-d')) . $duracion));
+            if($fecha_inicio >= $subasta->getFechaInicio() && $fecha_fin <= $fecha_fin_subasta){
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    
 }

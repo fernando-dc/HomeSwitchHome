@@ -4,6 +4,9 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
+
 /**
  * Subastas
  *
@@ -47,7 +50,7 @@ class Subastas
      *
      * @ORM\Column(name="finalizada", type="boolean", nullable=false)
      */
-    private $finalizada;
+    private $finalizada = 0;
 
     /**
      * @var \Administradores
@@ -62,7 +65,7 @@ class Subastas
     /**
      * @var \Usuarios
      *
-     * @ORM\ManyToOne(targetEntity="Usuarios")
+     * @ORM\ManyToOne(targetEntity="Usuarios",inversedBy="subastas")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="email", referencedColumnName="email")
      * })
@@ -168,5 +171,39 @@ class Subastas
         return $this;
     }
 
+    
+    /**
+     * @Assert\Callback
+     * 
+     * Se asegura que para la fecha de reserva, no haya sido reservada la propiedad
+     */
 
+    public function validarFechaReserva(ExecutionContextInterface $context, $payload){
+        foreach ($this->idResidencia->getReservas() as $reserva) {
+            if ($this->fechaInicio >= $reserva->getFechaInicio() && $this->fechaInicio <= $reserva->getFechaFin()) {
+                $context->buildViolation('Esa fecha ya fue reservada')
+                    -> atPath('fechaInicio')
+                    ->addViolation();
+            }
+        }
+
+    }
+
+    /**
+     * @Assert\Callback
+     * 
+     * Se asegura que no haya otra subasta para la misma fecha de reserva
+     */
+
+    public function validarFechaSubastas(ExecutionContextInterface $context, $payload){
+        $duracion = '+ 6 days'; //duracion arbitraria de 1 semana (fecha de inicio + 6 dias) para la semana de reserva
+        $fecha_fin = date('Y-m-d',strtotime(($this->fechaInicio->format('Y-m-d')) . $duracion));
+
+        if ($this->idResidencia->existeSubastaEntreFechas($this->fechaInicio,$fecha_fin,$duracion)) {
+            $context->buildViolation('Ya existe una subasta para esa fecha')
+                -> atPath('fechaInicio')
+                ->addViolation();
+        }
+
+    }
 }

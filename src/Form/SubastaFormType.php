@@ -7,31 +7,38 @@ use App\Entity\Residencias;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class SubastaFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('precioActual')
+            ->add('precioActual', TextType::class, ['label' => 'Precio minimo inicial'])
             
             ->add('fechaInicio', DateType::class, [
                 'widget' => 'single_text',
-                'attr' => ['class' => 'js-datepicker-start'],
+                'attr' => ['class' => 'js-datepicker-start',
+                    'onkeydown'=>'return false',
+                    'autocomplete'=>'off',  
+                ],
                 'html5'=>false,
+                //'format' => 'dd-mm-yyyy',
+                //'format' => 'yyyy-mm-dd',
+                'label' => 'Fecha de inicio de reserva'  
             ])
-            ->add('fechaFin')
-
             
-            ->add('finalizada')
-            ->add('residencias', EntityType::class,[
+
+            ->add('idResidencia', EntityType::class,[
                 'class' => Residencias::class,
                 'choice_label' => function($residencia){
-                    return $residencia->getTipo() . ' habitaciones: ' . $residencia->getHabitaciones();
+                    return '(' . $residencia->getIdResidencia() . ') ' . $residencia->getTipo() . '; habitaciones: ' . $residencia->getHabitaciones();
                 },
                 'multiple'=>false,
+                'label' => 'Residencia'
             ])
             
             //->add('tokenAdmin')
