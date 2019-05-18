@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Residencias{% endblock %}
+
+{% block body %}
+    <h1>Edit Residencias</h1>
+
+    {{ include('residencias/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('residencias_index') }}">back to list</a>
+
+    {{ include('residencias/_delete_form.html.twig') }}
+{% endblock %}
