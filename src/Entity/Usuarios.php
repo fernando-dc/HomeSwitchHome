@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -54,7 +56,7 @@ class Usuarios
      *
      * @ORM\Column(name="creditos", type="integer", nullable=false)
      */
-    private $creditos;
+    private $creditos = '2';
 
     /**
      * @var string
@@ -62,6 +64,22 @@ class Usuarios
      * @ORM\Column(name="suscripcion", type="string", length=30, nullable=false, options={"default"="standard"})
      */
     private $suscripcion = 'standard';
+
+    /**
+     * @ORM\OneToMany(targetEntity="Subastas", mappedBy="email")
+     */
+    private $subastas;
+
+    /**
+     * @ORM\OneToMany(targetEntity="SemanasReserva", mappedBy="idResidencia")
+     */
+    private $reservas;
+
+    public function __construct()
+    {
+        $this->subastas = new ArrayCollection();
+        $this->reservas = new ArrayCollection();
+    }
 
     public function getEmail(): ?string
     {
@@ -140,5 +158,65 @@ class Usuarios
         return $this;
     }
 
+    /**
+     * @return Collection|Subastas[]
+     */
+    public function getSubastas(): Collection
+    {
+        return $this->subastas;
+    }
 
+    public function addSubasta(Subastas $subasta): self
+    {
+        if (!$this->subastas->contains($subasta)) {
+            $this->subastas[] = $subasta;
+            $subasta->setEmail($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSubasta(Subastas $subasta): self
+    {
+        if ($this->subastas->contains($subasta)) {
+            $this->subastas->removeElement($subasta);
+            // set the owning side to null (unless already changed)
+            if ($subasta->getEmail() === $this) {
+                $subasta->setEmail(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|SemanasReserva[]
+     */
+    public function getReservas(): Collection
+    {
+        return $this->reservas;
+    }
+
+    public function addReserva(SemanasReserva $reserva): self
+    {
+        if (!$this->reservas->contains($reserva)) {
+            $this->reservas[] = $reserva;
+            $reserva->setIdResidencia($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReserva(SemanasReserva $reserva): self
+    {
+        if ($this->reservas->contains($reserva)) {
+            $this->reservas->removeElement($reserva);
+            // set the owning side to null (unless already changed)
+            if ($reserva->getIdResidencia() === $this) {
+                $reserva->setIdResidencia(null);
+            }
+        }
+
+        return $this;
+    }
 }

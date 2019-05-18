@@ -64,11 +64,23 @@ class Residencias
      */
     private $subastas;
 
-
     public function __construct()
     {
         $this->reservas = new ArrayCollection();
         $this->subastas = new ArrayCollection();
+    }
+
+
+    public function existeSubastaEntreFechas($fecha_inicio, $fecha_fin, $duracion):bool
+    {
+        foreach ($this->subastas as $subasta) {
+            $fecha_fin_subasta = date('Y-m-d',strtotime(($subasta->getFechaInicio()->format('Y-m-d')) . $duracion));
+            if($fecha_inicio >= $subasta->getFechaInicio() && $fecha_fin <= $fecha_fin_subasta){
+                return true;
+            }
+        }
+        
+        return false;
     }
 
     public function getIdResidencia(): ?int
@@ -124,7 +136,6 @@ class Residencias
         return $this;
     }
 
-
     /**
      * @return Collection|SemanasReserva[]
      */
@@ -155,7 +166,7 @@ class Residencias
 
         return $this;
     }
-    
+
     /**
      * @return Collection|Subastas[]
      */
@@ -163,17 +174,17 @@ class Residencias
     {
         return $this->subastas;
     }
-    
+
     public function addSubasta(Subastas $subasta): self
     {
         if (!$this->subastas->contains($subasta)) {
             $this->subastas[] = $subasta;
             $subasta->setIdResidencia($this);
         }
-        
+
         return $this;
     }
-    
+
     public function removeSubasta(Subastas $subasta): self
     {
         if ($this->subastas->contains($subasta)) {
@@ -183,20 +194,8 @@ class Residencias
                 $subasta->setIdResidencia(null);
             }
         }
-        
+
         return $this;
     }
-    
-    public function existeSubastaEntreFechas($fecha_inicio, $fecha_fin, $duracion):bool
-    {
-        foreach ($this->subastas as $subasta) {
-            $fecha_fin_subasta = date('Y-m-d',strtotime(($subasta->getFechaInicio()->format('Y-m-d')) . $duracion));
-            if($fecha_inicio >= $subasta->getFechaInicio() && $fecha_fin <= $fecha_fin_subasta){
-                return true;
-            }
-        }
-        
-        return false;
-    }
-    
+
 }
