@@ -15,6 +15,7 @@ class srcApp_KernelDevDebugContainerUrlMatcher extends Symfony\Bundle\FrameworkB
     {
         $this->context = $context;
         $this->staticRoutes = [
+            '/residencias' => [[['_route' => 'residencias_listado', '_controller' => 'App\\Controller\\ResidenciasController::listadoResidencias'], null, null, null, false, false, null]],
             '/subasta/new' => [[['_route' => 'subasta_nueva', '_controller' => 'App\\Controller\\SubastasController::new'], null, null, null, false, false, null]],
         ];
         $this->regexpList = [
