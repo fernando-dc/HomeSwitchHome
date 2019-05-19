@@ -116,7 +116,7 @@ class SubastasController extends AbstractController
 
         if ($subasta->getFinalizada()){
             $this -> addFlash('danger','La subasta ya fue finalizada');
-            return $this ->redirectToRoute('residencias_listado');
+            return $this ->redirectToRoute('residencias_index');
         }
 
         $usuario = $this->obtenerGanador($subasta);
@@ -125,7 +125,7 @@ class SubastasController extends AbstractController
         if(date('Y-m-d', strtotime('today')) < ($subasta->getFechaSubasta()->modify($duracion))->format('Y-m-d') ){
             if (!is_null($usuario)){
                 $this -> addFlash('danger','La subasta tiene pujas, por lo que no puede finalizarse antes de la duracion de la misma');
-                return $this ->redirectToRoute('residencias_listado');
+                return $this ->redirectToRoute('residencias_index');
             }
         }
         //si ya se cumplio la duracion de la subasta
@@ -148,7 +148,7 @@ class SubastasController extends AbstractController
                 $em->flush();
 
                 $this -> addFlash('success','Subasta finalizada con exito. El ganador de la subasta es: ' . $usuario->getNombre() . ' ' . $usuario->getApellido());
-                return $this ->redirectToRoute('residencias_listado');
+                return $this ->redirectToRoute('residencias_index');
             }
         }
 
@@ -156,7 +156,7 @@ class SubastasController extends AbstractController
         $em ->flush();
 
         $this -> addFlash('danger','No hay ganadores posibles, la subasta queda cancelada');
-        return $this ->redirectToRoute('residencias_listado');
+        return $this ->redirectToRoute('residencias_index');
 
     }
 
