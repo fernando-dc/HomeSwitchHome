@@ -1,0 +1,38 @@
+{% block title %}{% endblock %}
+
+{% block body %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<br/><br/><br/><br/>
+<form method="post">
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+    <div align="center">
+        <h1 class="h3 mb-3 font-weight-normal">Ingresa tu token:</h1>
+    
+        <label for="inputToken" class="sr-only">Token</label>
+        <input type="text" style="width:200px;height:15px" value="{{ last_username }}" name="token" id="inputToken" class="form-control" placeholder="Token" required autofocus>
+    </div>
+
+    <input type="hidden" name="_csrf_token"
+           value="{{ csrf_token('authenticate') }}"
+    >
+
+    {#
+        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+        See https://symfony.com/doc/current/security/remember_me.html
+
+        <div class="checkbox mb-3">
+            <label>
+                <input type="checkbox" name="_remember_me"> Remember me
+            </label>
+        </div>
+    #}
+    <br/>
+    <div align="center">
+        <button class="btn btn-lg btn-primary" type="submit">
+            Iniciar sesión
+        </button>
+    </div>
+</form>
+{% endblock %}

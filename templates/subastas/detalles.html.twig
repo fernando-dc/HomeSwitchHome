@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+{% block title %}Subasta{% endblock %}
+
+{% block body %}
+    <div class="container">
+    <h1>Subasta: {{ subasta.getIdSubasta() }} de la residencia: {{ (subasta.getIdResidencia()).getIdResidencia() }} </h1>
+    <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Residencia</th>
+                    <th>Precio actual</th>
+                    <th>Fecha de reserva</th>
+                    <th>Estado</th>
+                    <th>Ganador</th>
+                </tr>
+            </thead>
+            <tbody>
+                    <tr>
+                        <td>{{ (subasta.getIdResidencia()).getIdResidencia() }}</td>
+                        <td>{{ subasta.getPrecioActual() }}</td>
+                        <td>{{ subasta.getFechaInicio().format('Y-m-d')}}</td>
+                        {% if (subasta.getFinalizada() == 1) %}
+                                    <td>{{ "Finalizada" }}</td>
+                                    <td>{{ (subasta.getEmail()).getEmail() }}</td>
+                        {% else %}
+                            <td>{{ "Activa" }}</td>
+                            <td>{{ "--------------" }}</td>
+                        {% endif %}
+                        <td>
+                            {# TODO #}
+                            {% if (subasta.getFinalizada() != 1) %}
+                                    <a href="/subasta/finalizar{{ subasta.getIdSubasta() }}" class="btn btn-danger">Finalizar subasta</a>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a href="/residencia{{ (subasta.getIdResidencia()).getIdResidencia() }}"  class="btn btn-info">Detalles residencia</a>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+        <a href="/subastas/listado" class="btn btn-outline-info">Volver a subastas</a>
+        </div>
+{% endblock %}

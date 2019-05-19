@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+{% block title %}Subastas{% endblock %}
+{% block body %}
+    <div class="container">
+<h1>Subastas:</h1>
+    {% if subastas %}
+        <h1>{{ subastas.getSize() }}</h1>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Subasta</th>
+                    <th>Residencia</th>
+                    <th>Precio actual</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for subasta in subastas %}
+                    <tr>
+                        <td>{{ subasta.getIdSubasta() }}</td>
+                        <td>{{ (subasta.getIdResidencia()).getIdResidencia() }}</td>
+                        <td>{{ subasta.getPrecioActual() }}</td>
+                        {% if (subasta.getFinalizada() == 1) %}
+                                    <td>{{ "Finalizada" }}</td>
+                        {% else %}
+                            <td>{{ "Activa" }}</td>
+                        {% endif %}
+                        <td>
+                            <a href="/homeswitchhome/public/subasta_detalles/{{ subasta.getIdSubasta() }}" class="btn btn-dark">Ver Detalles</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No hay subastas para mostrar</p>
+    {% endif %}
+{% endblock %}

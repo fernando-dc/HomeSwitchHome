@@ -102,4 +102,13 @@ class ResidenciasController extends AbstractController
 
         return $this->redirectToRoute('residencias_index');
     }
+    /**
+     * @Route("/residencia{id}", name="residencia_detalle");
+     */
+    public function detallesResidencia($id){
+
+        $residencia = $this->getDoctrine()->getRepository(Residencias::class)->find($id);
+
+        return $this-> render('residencias/detalles.html.twig', ['residencia' => $residencia]);
+    }
 }
