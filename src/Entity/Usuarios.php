@@ -219,4 +219,9 @@ class Usuarios
 
         return $this;
     }
+
+    public function restarCredito(){
+        $this-> creditos -= 1 ;
+        return $this->creditos;
+    }
 }
