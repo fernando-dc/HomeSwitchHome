@@ -32,8 +32,7 @@
                     <td>{{ residencia.habitaciones }}</td>
                     <td>{{ residencia.descripcion }}</td>
                     <td>
-                        <a href="{{ path('residencias_show', {'idResidencia': residencia.idResidencia}) }}" class="btn btn-info">Ver</a>
-                        <a href="{{ path('residencias_edit', {'idResidencia': residencia.idResidencia}) }}" class="btn btn-primary">Editar</a>
+                        <a href="{{ path('residencias_show', {'idResidencia': residencia.idResidencia}) }}" class="btn btn-info">Detalle</a>
                     </td>
                 </tr>
             {% else %}
