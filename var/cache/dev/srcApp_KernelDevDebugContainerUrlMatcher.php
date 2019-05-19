@@ -21,10 +21,12 @@ class srcApp_KernelDevDebugContainerUrlMatcher extends Symfony\Bundle\FrameworkB
         $this->regexpList = [
             0 => '{^(?'
                     .'|/_error/(\\d+)(?:\\.([^/]++))?(*:35)'
+                    .'|/subasta/finalizar/([^/]++)(*:69)'
                 .')/?$}sDu',
         ];
         $this->dynamicRoutes = [
             35 => [[['_route' => '_twig_error_test', '_controller' => 'twig.controller.preview_error::previewErrorPageAction', '_format' => 'html'], ['code', '_format'], null, null, false, true, null]],
+            69 => [[['_route' => 'subasta_finalizar', '_controller' => 'App\\Controller\\SubastasController::finalizarSubasta'], ['id'], null, null, false, true, null]],
         ];
     }
 }

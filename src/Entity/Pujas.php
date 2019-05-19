@@ -41,7 +41,7 @@ class Pujas
     /**
      * @var \Subastas
      *
-     * @ORM\ManyToOne(targetEntity="Subastas")
+     * @ORM\ManyToOne(targetEntity="Subastas", inversedBy="pujas")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_subasta", referencedColumnName="id_subasta")
      * })
