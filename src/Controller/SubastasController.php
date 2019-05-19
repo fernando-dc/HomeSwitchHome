@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Administradores;
 use App\Entity\SemanasReserva;
+USE App\Entity\Residencias;
 
 use App\Form\SubastaFormType;
 use App\Entity\Subastas;
@@ -77,7 +78,8 @@ class SubastasController extends AbstractController
     public function subastasResidencia($id){
         $em = $this-> getDoctrine()->getManager();
         //hacer query
-        $subastas = $em->getRepository(Subastas::class)->findBy($id);
+        $residencia = $em->getRepository(Residencias::class)->find($id);
+        $subastas = $residencia->getSubastas();
 
         return $this->render("/subastas/listado_de_residenciaX.html.twig", ['subastas' => $subastas ]);
     }

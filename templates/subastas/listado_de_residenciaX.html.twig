@@ -4,7 +4,6 @@
     <div class="container">
 <h1>Subastas:</h1>
     {% if subastas %}
-        <h1>{{ subastas.getSize() }}</h1>
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -26,7 +25,7 @@
                             <td>{{ "Activa" }}</td>
                         {% endif %}
                         <td>
-                            <a href="/homeswitchhome/public/subasta_detalles/{{ subasta.getIdSubasta() }}" class="btn btn-dark">Ver Detalles</a>
+                            <a href="/subasta/detalles{{ subasta.idSubasta }}" class="btn btn-dark">Ver Detalles</a>
                         </td>
                     </tr>
                 {% endfor %}
