@@ -15,7 +15,7 @@ class ResidenciasType extends AbstractType
             ->add('tipo')
             ->add('habitaciones')
             ->add('descripcion')        
-            ->add('IdDireccion',DireccionesType::class)  
+            ->add('IdDireccion',DireccionesType::class, ['label'=>'Direccion:'])  
         ;
     }
 

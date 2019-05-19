@@ -1,39 +1,49 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Residencias index{% endblock %}
+{% block title %}Residencias{% endblock %}
 
 {% block body %}
-    <h1>Residencias index</h1>
+    <br>
+    <h1>Listado de residencias</h1>
+    <hr>
+    <br>
+    
+    <div class="container">
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>IdResidencia</th>
-                <th>Tipo</th>
-                <th>Habitaciones</th>
-                <th>Descripcion</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for residencia in residencias %}
-            <tr>
-                <td>{{ residencia.idResidencia }}</td>
-                <td>{{ residencia.tipo }}</td>
-                <td>{{ residencia.habitaciones }}</td>
-                <td>{{ residencia.descripcion }}</td>
-                <td>
-                    <a href="{{ path('residencias_show', {'idResidencia': residencia.idResidencia}) }}">Ver</a>
-                    <a href="{{ path('residencias_edit', {'idResidencia': residencia.idResidencia}) }}">Editar</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('residencias_new') }}">Añadir residencia</a>
+        <table class="table table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <!--
+                        <th>IdResidencia</th>
+                    -->
+                    <th>Tipo</th>
+                    <th>Habitaciones</th>
+                    <th>Descripcion</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for residencia in residencias %}
+                <tr>
+                    <!--
+                        <td>{{ residencia.idResidencia }}</td>
+                    -->
+                    <td>{{ residencia.tipo }}</td>
+                    <td>{{ residencia.habitaciones }}</td>
+                    <td>{{ residencia.descripcion }}</td>
+                    <td>
+                        <a href="{{ path('residencias_show', {'idResidencia': residencia.idResidencia}) }}" class="btn btn-info">Ver</a>
+                        <a href="{{ path('residencias_edit', {'idResidencia': residencia.idResidencia}) }}" class="btn btn-primary">Editar</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">No hay residencias para ver</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    
+        <a href="{{ path('residencias_new') }}" class="btn btn-success">Añadir residencia</a>
+    </div>
 {% endblock %}

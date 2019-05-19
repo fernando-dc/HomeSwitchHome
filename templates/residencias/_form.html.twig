@@ -1,4 +1,10 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Guardar Residencia') }}</button>
+    
+    <div class="col-md-8">
+        {{ form_widget(form) }}
+
+    </div>
+    <div class="col-md-4">
+        <button class="btn btn-success ">{{ button_label|default('Guardar Residencia') }}</button>
+    </div>
 {{ form_end(form) }}

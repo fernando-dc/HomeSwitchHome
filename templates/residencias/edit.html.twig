@@ -1,13 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Residencias{% endblock %}
+{% block title %}Editar residencia{% endblock %}
 
 {% block body %}
-    <h1>Edit Residencias</h1>
+    {% form_theme form 'bootstrap_4_layout.html.twig' %}
 
-    {{ include('residencias/_form.html.twig', {'button_label': 'Guardar cambios'}) }}
+    <h1>Editar residencia</h1>
+    <div class="container">
 
-    <a href="{{ path('residencias_index') }}">Atras</a>
-
-    {{ include('residencias/_delete_form.html.twig') }}
+        {{ include('residencias/_form.html.twig', {'button_label': 'Guardar cambios'}) }}
+            
+        <br>
+        <a href="{{ path('residencias_index') }}" class="btn btn-secondary">Atras</a>
+        <br>
+        {{ include('residencias/_delete_form.html.twig') }}
+        <br>
+            
+    </div>
 {% endblock %}
