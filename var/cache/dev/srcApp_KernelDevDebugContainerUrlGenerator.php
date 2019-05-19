@@ -21,7 +21,14 @@ class srcApp_KernelDevDebugContainerUrlGenerator extends Symfony\Component\Routi
         if (null === self::$declaredRoutes) {
             self::$declaredRoutes = [
         '_twig_error_test' => [['code', '_format'], ['_controller' => 'twig.controller.preview_error::previewErrorPageAction', '_format' => 'html'], ['code' => '\\d+'], [['variable', '.', '[^/]++', '_format', true], ['variable', '/', '\\d+', 'code', true], ['text', '/_error']], [], []],
+        'inicio' => [[], ['_controller' => 'App\\Controller\\InicioController::inicio'], [], [['text', '/inicio']], [], []],
+        'residencias_listado' => [[], ['_controller' => 'App\\Controller\\ResidenciasController::listadoResidencias'], [], [['text', '/residencias']], [], []],
+        'residencia_detalle' => [['id'], ['_controller' => 'App\\Controller\\ResidenciasController::detallesResidencia'], [], [['variable', '', '[^/]++', 'id', true], ['text', '/residencia']], [], []],
+        'app_login' => [[], ['_controller' => 'App\\Controller\\SecurityController::login'], [], [['text', '/login']], [], []],
         'subasta_nueva' => [[], ['_controller' => 'App\\Controller\\SubastasController::new'], [], [['text', '/subasta/new']], [], []],
+        'subastas_de_residenciaX' => [['id'], ['_controller' => 'App\\Controller\\SubastasController::subastasResidencia'], [], [['variable', '', '[^/]++', 'id', true], ['text', '/subastas/residencia']], [], []],
+        'subastas_listado' => [[], ['_controller' => 'App\\Controller\\SubastasController::subastas'], [], [['text', '/subastas/listado']], [], []],
+        'subasta_detalles' => [['id'], ['_controller' => 'App\\Controller\\SubastasController::subastasDetalles'], [], [['variable', '', '[^/]++', 'id', true], ['text', '/subasta/detalles']], [], []],
     ];
         }
     }

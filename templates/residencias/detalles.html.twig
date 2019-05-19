@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+{% block title %}Residencia{% endblock %}
+
+{% block body %}
+    <div class="container">
+    <h1>Residencia: {{ residencia.getIdResidencia() }} </h1>
+    <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Residencia</th>
+                    <th>Tipo</th>
+                    <th>Habitaciones</th>
+                    <th>Dirección</th>
+                    <th>Descripcion</th>
+                    {#<th></th>#}
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                    <tr>
+                        <td>{{  residencia.getIdResidencia() }}</td>
+                        <td>{{  residencia.getTipo() }}</td>
+                        <td>{{  residencia.getHabitaciones() }}</td>
+                        <td>
+                           <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Calle</th>
+                                        <th>Número</th>
+                                        <th>Codigo postal</th>
+                                        <th>Ciudad</th>
+                                        <th>Provincia</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{{  (residencia.getIdDireccion().getCalle()) }}</td>
+                                        <td>{{  (residencia.getIdDireccion().getNumero()) }}</td>
+                                        <td>{{  (residencia.getIdDireccion().getCodigoPostal()) }}</td>
+                                        <td>{{  (residencia.getIdDireccion()).getCiudad() }}</td>
+                                        <td>{{ (residencia.getIdDireccion().getProvincia())  }}</td>
+                                    </tr>
+                                </tbody>
+                        </table>
+                        </td>
+                        <td>{{ residencia.getDescripcion()  }}</td>
+                        <td>
+                            <a href="/subasta/new" class="btn btn-info">Subastar</a>
+                        {#</td>
+                        <td>#}
+                            <a href="/subastas/residencia{{ residencia.getIdResidencia() }} " class="btn btn-info">Ver subastas</a>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+        <a href="/residencias" class="btn btn-outline-info">Volver a residencias</a>
+        </div>
+{% endblock %}

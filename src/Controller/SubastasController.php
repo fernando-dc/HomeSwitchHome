@@ -70,4 +70,35 @@ class SubastasController extends AbstractController
 
         return $this->render('subastas/new.html.twig',['subastaForm'=> $form->createView(),]);
     }
+
+    /**
+     * @Route("/subastas/residencia{id}", name="subastas_de_residenciaX")
+     */
+    public function subastasResidencia($id){
+        $em = $this-> getDoctrine()->getManager();
+        //hacer query
+        $subastas = $em->getRepository(Subastas::class)->findBy($id);
+
+        return $this->render("/subastas/listado_de_residenciaX.html.twig", ['subastas' => $subastas ]);
+    }
+
+    /**
+     * @Route("/subastas/listado", name="subastas_listado")
+     */
+    public function subastas(){
+        $em = $this-> getDoctrine()->getManager();
+        $subastas = $em->getRepository(Subastas::class)->findAll();
+
+        return $this->render("/subastas/listado.html.twig", ['subastas' => $subastas ]);
+    }
+
+    /**
+     * @Route("/subasta/detalles{id}", name="subasta_detalles")
+     */
+    public function subastasDetalles($id){
+        $em = $this-> getDoctrine()->getManager();
+        $subasta = $em->getRepository(Subastas::class)->find($id);
+
+        return $this->render("/subastas/detalles.html.twig", ['subasta' => $subasta ]);
+    }
 }
