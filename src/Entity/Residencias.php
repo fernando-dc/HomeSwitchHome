@@ -52,7 +52,7 @@ class Residencias
      *   @ORM\JoinColumn(name="id_direccion", referencedColumnName="id_direccion")
      * })
      */
-    private $idDireccion;
+    protected $idDireccion;
 
     /**
      * @ORM\OneToMany(targetEntity="SemanasReserva", mappedBy="idResidencia")
@@ -64,10 +64,80 @@ class Residencias
      */
     private $subastas;
 
+
     public function __construct()
     {
         $this->reservas = new ArrayCollection();
         $this->subastas = new ArrayCollection();
+    }
+
+    public function getCodigoPostal(): ?int
+    {
+        return $this->idDireccion->getCodigoPostal();
+    }
+    public function setCodigoPostal(int $codigoPostal): self
+    {
+        $this->idDireccion->setCodigoPostal($codigoPostal);
+        return $this;
+    }
+
+    public function getNumero(): ?int
+    {  
+        return $this->idDireccion->getNumero();
+        
+    }
+
+    public function setNumero(int $numero =null): self
+    {
+        $this->idDireccion->setNumero($numero);
+        return $this;
+        
+    }
+
+    public function getCalle(): ?string
+    {
+        return $this->idDireccion->getCalle();
+    }
+    public function setCalle(string $calle): self
+    {
+        $this->idDireccion->setCalle($calle);
+        return $this;
+    }
+    public function getCiudad(): ?string 
+    {
+        return $this->idDireccion->getCiudad();
+    }
+    public function setCiudad(string $ciudad): self
+    {
+        $this->idDireccion->setCiudad($ciudad);
+        return $this;
+    }
+    public function getProvincia(): ?string 
+    {
+        return $this->idDireccion->getProvincia();
+    }
+    public function setProvincia(string $provincia): self
+    {
+        $this->idDireccion->setProvincia($provincia);
+        return $this;
+    }
+    public function getPiso(): ?string 
+    {
+        return $this->idDireccion->getPiso();
+    }
+    public function setPiso(int $piso): self
+    {
+        $this->idDireccion->setPiso($piso);
+        return $this;
+    }
+    public function getDepto(): ?string 
+    {
+        return $this->idDireccion->getDepto();
+    }
+    public function setDepto(string $depto): self
+    {
+        $this->idDireccion->setDepto($depto);
+        return $this;
     }
 
 

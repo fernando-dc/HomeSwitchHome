@@ -44,6 +44,7 @@ class ResidenciasController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($residencia->getIDdireccion());
             $entityManager->persist($residencia);
             $entityManager->flush();
 

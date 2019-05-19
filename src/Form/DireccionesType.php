@@ -2,27 +2,30 @@
 
 namespace App\Form;
 
-use App\Entity\Residencias;
+use App\Entity\Direcciones;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ResidenciasType extends AbstractType
+class DireccionesType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('tipo')
-            ->add('habitaciones')
-            ->add('descripcion')        
-            ->add('IdDireccion',DireccionesType::class)  
+            ->add('codigo_postal')
+            ->add('calle')
+            ->add('numero')
+            ->add('ciudad')
+            ->add('provincia')
+            ->add('piso')
+            ->add('depto')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Residencias::class,
+            'data_class' => Direcciones::class,
         ]);
     }
 }

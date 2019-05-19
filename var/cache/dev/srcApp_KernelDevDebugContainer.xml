@@ -227,12 +227,25 @@
   </parameters>
   <services>
     <service id="service_container" class="Symfony\Component\DependencyInjection\ContainerInterface" public="true" synthetic="true"/>
+    <service id="App\Controller\ResidenciasController" class="App\Controller\ResidenciasController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.KTVqfp6.App\Controller\ResidenciasController"/>
+      </call>
+    </service>
     <service id="App\Controller\SubastasController" class="App\Controller\SubastasController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
       <call method="setContainer">
         <argument type="service" id=".service_locator.KTVqfp6.App\Controller\SubastasController"/>
       </call>
+    </service>
+    <service id="App\Form\DireccionesType" class="App\Form\DireccionesType" autowire="true" autoconfigure="true">
+      <tag name="form.type"/>
+    </service>
+    <service id="App\Form\ResidenciasType" class="App\Form\ResidenciasType" autowire="true" autoconfigure="true">
+      <tag name="form.type"/>
     </service>
     <service id="App\Form\SubastaFormType" class="App\Form\SubastaFormType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
@@ -495,6 +508,8 @@
         <argument>Symfony\Bridge\Doctrine\Form\Type</argument>
       </argument>
       <argument type="collection">
+        <argument>App\Form\DireccionesType</argument>
+        <argument>App\Form\ResidenciasType</argument>
         <argument>App\Form\SubastaFormType</argument>
         <argument>Symfony\Component\Form\Extension\Core\Type\FormType</argument>
         <argument>Symfony\Component\Form\Extension\Core\Type\ChoiceType</argument>
@@ -754,7 +769,7 @@
       <argument type="service" id="form.registry"/>
     </service>
     <service id="form.extension" class="Symfony\Component\Form\Extension\DependencyInjection\DependencyInjectionExtension" public="false">
-      <argument type="service" id=".service_locator..mGQcG."/>
+      <argument type="service" id=".service_locator.8lgBja8"/>
       <argument type="collection">
         <argument key="Symfony\Component\Form\Extension\Core\Type\FormType" type="iterator">
           <argument type="service" id="form.type_extension.form.transformation_failure_handling"/>
@@ -1023,14 +1038,6 @@
       </call>
       <call method="addListener">
         <argument>kernel.request</argument>
-        <argument type="collection">
-          <argument type="service" id="debug.debug_handlers_listener"/>
-          <argument>configure</argument>
-        </argument>
-        <argument>2048</argument>
-      </call>
-      <call method="addListener">
-        <argument>console.command</argument>
         <argument type="collection">
           <argument type="service" id="debug.debug_handlers_listener"/>
           <argument>configure</argument>
@@ -2149,9 +2156,16 @@
     <service id="framework_extra_bundle.argument_name_convertor" class="Sensio\Bundle\FrameworkExtraBundle\Request\ArgumentNameConverter" public="false">
       <argument type="service" id="argument_metadata_factory"/>
     </service>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\ResidenciasController" class="App\Controller\ResidenciasController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\ResidenciasController" class="App\Controller\ResidenciasController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\ResidenciasController" class="App\Controller\ResidenciasController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\SubastasController" class="App\Controller\SubastasController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\SubastasController" class="App\Controller\SubastasController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\SubastasController" class="App\Controller\SubastasController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\DireccionesType" class="App\Form\DireccionesType" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\DireccionesType" class="App\Form\DireccionesType" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\ResidenciasType" class="App\Form\ResidenciasType" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\ResidenciasType" class="App\Form\ResidenciasType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\SubastaFormType" class="App\Form\SubastaFormType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\SubastaFormType" class="App\Form\SubastaFormType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\AdministradoresRepository" class="App\Repository\AdministradoresRepository" autowire="true" abstract="true"/>
@@ -2334,9 +2348,30 @@
         <argument>make:migration</argument>
       </call>
     </service>
-    <service id=".service_locator.9_yeNH1" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+    <service id=".service_locator.iAgrosP" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
-      <argument type="collection"/>
+      <argument type="collection">
+        <argument key="residenciasRepository" type="service" id="App\Repository\ResidenciasRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.He_3lwD" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="residencia" type="service" id=".errored..service_locator.He_3lwD.App\Entity\Residencias"/>
+      </argument>
+    </service>
+    <service id=".service_locator.8O7W7P3" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="App\Controller\ResidenciasController::delete" type="service" id=".service_locator.He_3lwD"/>
+        <argument key="App\Controller\ResidenciasController::edit" type="service" id=".service_locator.He_3lwD"/>
+        <argument key="App\Controller\ResidenciasController::index" type="service" id=".service_locator.iAgrosP"/>
+        <argument key="App\Controller\ResidenciasController::show" type="service" id=".service_locator.He_3lwD"/>
+        <argument key="App\Controller\ResidenciasController:delete" type="service" id=".service_locator.He_3lwD"/>
+        <argument key="App\Controller\ResidenciasController:edit" type="service" id=".service_locator.He_3lwD"/>
+        <argument key="App\Controller\ResidenciasController:index" type="service" id=".service_locator.iAgrosP"/>
+        <argument key="App\Controller\ResidenciasController:show" type="service" id=".service_locator.He_3lwD"/>
+      </argument>
     </service>
     <service id=".service_locator.G5eXEg0" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
@@ -2384,9 +2419,11 @@
       <argument type="service" id="debug.argument_resolver.variadic.inner"/>
       <argument type="service" id="debug.stopwatch"/>
     </service>
-    <service id=".service_locator..mGQcG." class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+    <service id=".service_locator.8lgBja8" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
+        <argument key="App\Form\DireccionesType" type="service" id="App\Form\DireccionesType"/>
+        <argument key="App\Form\ResidenciasType" type="service" id="App\Form\ResidenciasType"/>
         <argument key="App\Form\SubastaFormType" type="service" id="App\Form\SubastaFormType"/>
         <argument key="Symfony\Bridge\Doctrine\Form\Type\EntityType" type="service" id="form.type.entity"/>
         <argument key="Symfony\Component\Form\Extension\Core\Type\ChoiceType" type="service" id="form.type.choice"/>
@@ -2436,6 +2473,12 @@
         <argument key="session" type="service" id="session" on-invalid="ignore"/>
         <argument key="twig" type="service" id="twig" on-invalid="ignore"/>
       </argument>
+    </service>
+    <service id=".service_locator.KTVqfp6.App\Controller\ResidenciasController" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator_context" id="App\Controller\ResidenciasController"/>
+      <argument>App\Controller\ResidenciasController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.KTVqfp6" method="withContext"/>
     </service>
     <service id=".service_locator.KTVqfp6.App\Controller\SubastasController" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator_context" id="App\Controller\SubastasController"/>
@@ -2506,10 +2549,11 @@
     <service id="debug.argument_resolver.request.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\RequestValueResolver" public="false"/>
     <service id="debug.argument_resolver.session.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\SessionValueResolver" public="false"/>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver" public="false">
-      <argument type="service" id=".service_locator.9_yeNH1"/>
+      <argument type="service" id=".service_locator.8O7W7P3"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver" public="false"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver" public="false"/>
+    <service id=".errored..service_locator.He_3lwD.App\Entity\Residencias" class="App\Entity\Residencias"/>
     <service id="console.command_loader" class="Symfony\Component\Console\CommandLoader\ContainerCommandLoader" public="true">
       <argument type="service" id=".service_locator.OY10w18"/>
       <argument type="collection">
@@ -2703,7 +2747,7 @@
     <service id="doctrine.orm.default_result_cache" alias="doctrine_cache.providers.doctrine.orm.default_result_cache" public="true"/>
     <service id="doctrine.orm.default_query_cache" alias="doctrine_cache.providers.doctrine.orm.default_query_cache" public="true"/>
     <service id="doctrine.orm.default_entity_manager.event_manager" alias="doctrine.dbal.default_connection.event_manager" public="false"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.9_yeNH1"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.8O7W7P3"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem" public="false"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface" alias="logger" public="false"/>

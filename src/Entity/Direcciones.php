@@ -158,11 +158,12 @@ class Direcciones
 
         return $this;
     }
-    public function __toString(): ?string
-   {
+   //public function __toString(): ?string
+  // {
    
-    return 'calle : ' . $this->calle . ',' . $this->numero;
-   } 
+  //  return $this->calle;
+
+   //} 
 
 
 }

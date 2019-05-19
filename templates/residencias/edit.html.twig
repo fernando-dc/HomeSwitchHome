@@ -5,9 +5,9 @@
 {% block body %}
     <h1>Edit Residencias</h1>
 
-    {{ include('residencias/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('residencias/_form.html.twig', {'button_label': 'Guardar cambios'}) }}
 
-    <a href="{{ path('residencias_index') }}">back to list</a>
+    <a href="{{ path('residencias_index') }}">Atras</a>
 
     {{ include('residencias/_delete_form.html.twig') }}
 {% endblock %}
