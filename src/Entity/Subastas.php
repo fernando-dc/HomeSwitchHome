@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 use Symfony\Component\Validator\Constraints as Assert;
@@ -35,6 +37,9 @@ class Subastas
      * @var int
      *
      * @ORM\Column(name="duracion", type="integer", nullable=false, options={"default"="3"})
+     * 
+     * @Assert\GreaterThan(0)
+     * @Assert\LessThanOrEqual(3)
      */
     private $duracion = '3';
 
@@ -42,6 +47,9 @@ class Subastas
      * @var float
      *
      * @ORM\Column(name="precio_actual", type="float", precision=10, scale=0, nullable=false)
+     * 
+     * @Assert\GreaterThan(0)
+     * 
      */
     private $precioActual;
 
@@ -96,7 +104,15 @@ class Subastas
      */
     private $idResidencia;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Pujas", mappedBy="idSubasta")
+     */
+    private $pujas;
 
+    public function __construct()
+    {
+        $this->pujas = new ArrayCollection();
+    }
     
     public function getIdSubasta(): ?int
     {
@@ -212,6 +228,38 @@ class Subastas
     }
     
     
+        /**
+         * @return Collection|Pujas[]
+         */
+        public function getPujas(): Collection
+        {
+            return $this->pujas;
+        }
+    
+        public function addPuja(Pujas $puja): self
+        {
+            if (!$this->pujas->contains($puja)) {
+                $this->pujas[] = $puja;
+                $puja->setIdSubasta($this);
+            }
+    
+            return $this;
+        }
+    
+        public function removePuja(Pujas $puja): self
+        {
+            if ($this->pujas->contains($puja)) {
+                $this->pujas->removeElement($puja);
+                // set the owning side to null (unless already changed)
+                if ($puja->getIdSubasta() === $this) {
+                    $puja->setIdSubasta(null);
+                }
+            }
+    
+            return $this;
+        }
+    
+        
     /**
      * @Assert\Callback
      * 

@@ -18,6 +18,8 @@ class SubastaFormType extends AbstractType
     {
         $builder
             ->add('precioActual', TextType::class, ['label' => 'Precio minimo inicial'])
+
+            ->add('duracion',TextType::class,['label' => 'Duracion de la subasta en dias (por defecto es 3)' ])
             
             ->add('fechaInicio', DateType::class, [
                 'widget' => 'single_text',

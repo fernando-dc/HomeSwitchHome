@@ -3,6 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\Pujas;
+use App\Entity\Usuarios;
+
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -47,4 +49,19 @@ class PujasRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function pujasOrdenadasMontoUsuarioValido($id_subasta){
+        return $this -> createQueryBuilder('p')
+        
+        ->innerJoin('p.email','usuarios')
+        ->addSelect('usuarios')
+        ->andWhere('p.idSubasta >= :subasta')
+        ->setParameter('subasta', $id_subasta)
+        ->andWhere('usuarios.creditos > 0')
+        ->orderBy('p.monto','DESC')
+        ->getQuery()
+        ->getResult()
+        ;
+        //->innerJoin('p', 'usuarios', 'u', 'p.email = u.email')
+    }
 }
