@@ -21,7 +21,7 @@
                         <td>{{ (subasta.getIdResidencia()).getIdResidencia() }}</td>
                         <td>{{ subasta.getPrecioActual() }}</td>
                         {% if (subasta.getFinalizada() == 1) %}
-                                    <td>{{ "Finalizada" }}</td>
+                                <td>{{ "Finalizada" }}</td>
                         {% else %}
                             <td>{{ "Activa" }}</td>
                         {% endif %}
@@ -31,7 +31,7 @@
                         <td>
                             {# TODO #}
                             {% if (subasta.getFinalizada() != 1) %}
-                                    <a href="/subasta/finalizar{{ subasta.getIdSubasta() }}" class="btn btn-danger">Finalizar subasta</a>
+                                    <a href="/subasta/finalizar/{{ subasta.getIdSubasta() }}" class="btn btn-danger">Finalizar subasta</a>
                             {% endif %}
                         </td>
                     </tr>

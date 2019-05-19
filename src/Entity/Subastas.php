@@ -226,7 +226,7 @@ class Subastas
         
         return $this;
     }
-    
+
     
         /**
          * @return Collection|Pujas[]
