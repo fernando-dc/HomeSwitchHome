@@ -41,14 +41,14 @@
                                 Ubicacion
                             </a>
                         </td>
-                            <td>{{ subasta.getPrecioActual() }}</td>
-                            <td>{{ subasta.getFechaInicio().format('Y-m-d')}}</td>
-
-                            {% if (subasta.getFinalizada() == 1) %}
-                                <td>{{ "Finalizada" }}</td>
-                            {% else %}
-                                <td>{{ "Activa" }}</td>
+                        <td>{{ subasta.getPrecioActual() }}</td>
                         <td>{{ subasta.getFechaInicio().format('Y-m-d')}}</td>
+
+                        {% if (subasta.getFinalizada() == 1) %}
+                            <td>{{ "Finalizada" }}</td>
+                        {% else %}
+                            <td>{{ "Activa" }}</td>
+                        {% endif %}
 
                         {% if subasta.getEmail() is null %}
                             <td>{{ "------" }}</td>

@@ -45,8 +45,6 @@
                             {% if (subasta.getFinalizada() != 1) %}
                                     <a href="/subasta/finalizar/{{ subasta.getIdSubasta() }}" class="btn btn-danger">Finalizar subasta</a>
                             {% endif %}
-                        </td>
-                        <td>
                             {% if (subasta.getFinalizada() != 1) %}
                                     <a href="/subasta/participarDeLaSubasta{{ subasta.getIdSubasta() }}" class="btn btn-info">Participar</a>
                             {% endif %}
@@ -58,7 +56,7 @@
     {% else %}
         <p>No hay subastas para mostrar</p>
     {% endif %}
-    <a href="/subasta/new" class="btn btn-info">Crear subasta</a>
-    <a href="/subasta/participando" class="btn btn-info">Ver subastas en las que participo</a>
+    <a href="/subasta/new" class="btn btn-success">Crear subasta</a>
+    <a href="/subasta/participando" class="btn btn-primary">Ver subastas en las que participo</a>
 </div>
 {% endblock %}
