@@ -103,7 +103,7 @@ class ResidenciasController extends AbstractController
         return $this->redirectToRoute('residencias_index');
     }
     /**
-     * @Route("/residencia{id}", name="residencia_detalle");
+     * @Route("/residencia{id}", name="residencia_detalle", methods={"GET"});
      */
     public function detallesResidencia($id){
 
