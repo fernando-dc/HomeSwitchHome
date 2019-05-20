@@ -34,6 +34,8 @@ class srcApp_KernelDevDebugContainerUrlGenerator extends Symfony\Component\Routi
         'subastas_listado' => [[], ['_controller' => 'App\\Controller\\SubastasController::subastas'], [], [['text', '/subastas/listado']], [], []],
         'subasta_detalles' => [['id'], ['_controller' => 'App\\Controller\\SubastasController::subastasDetalles'], [], [['variable', '', '[^/]++', 'id', true], ['text', '/subasta/detalles']], [], []],
         'subasta_finalizar' => [['id'], ['_controller' => 'App\\Controller\\SubastasController::finalizarSubasta'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/subasta/finalizar']], [], []],
+        'subastas_participar' => [['id'], ['_controller' => 'App\\Controller\\SubastasController::participarDeSubasta'], [], [['variable', '', '[^/]++', 'id', true], ['text', '/subasta/participarDeLaSubasta']], [], []],
+        'subastas_participando' => [[], ['_controller' => 'App\\Controller\\SubastasController::subastasParticipando'], [], [['text', '/subasta/participando']], [], []],
     ];
         }
     }

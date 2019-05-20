@@ -20,20 +20,23 @@
                         <td>{{ (subasta.getIdResidencia()).getIdResidencia() }}</td>
                         <td>{{ subasta.getPrecioActual() }}</td>
                         <td>{{ subasta.getFechaInicio().format('Y-m-d')}}</td>
-                        
+
                         {% if (subasta.getFinalizada() == 1) %}
                             <td>{{ "Finalizada" }}</td>
                         {% else %}
                             <td>{{ "Activa" }}</td>
                         {% endif %}
-                        
+
                         {% if subasta.getEmail() is null %}
                             <td>{{ "------" }}</td>
-                            
+
                         {% else %}
                             <td>{{ (subasta.getEmail()).getEmail() }}</td>
                         {% endif %}
-                        
+
+                        <td>
+                            {{ subasta.getPrecioActual() }}
+                        </td>
                         <td>
                             {# TODO #}
                             {% if (subasta.getFinalizada() != 1) %}

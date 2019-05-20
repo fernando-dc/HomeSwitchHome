@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+{% block title %}Paticipar en subasta{% endblock %}
+
+{% block body %}
+    <div align="center">
+        <h1>Monto mínimo: {{ subasta.precioActual() }}</h1>
+        <br/>
+        <h1 class="h3 mb-3 font-weight-normal">Ingresa el monto a pujar:</h1>
+        <br/>
+
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        {{ form_end(form) }}
+
+        <br/>
+        <a href="/subastas/listado" class="btn btn-outline-info">Cancelar</a>
+
+    </div>
+{% endblock %}
