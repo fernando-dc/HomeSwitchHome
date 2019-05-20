@@ -97,8 +97,8 @@ class SubastasController extends AbstractController
     public function subastasDetalles($id){
         $em = $this-> getDoctrine()->getManager();
         $subasta = $em->getRepository(Subastas::class)->find($id);
-
-        return $this->render("/subastas/detalles.html.twig", ['subasta' => $subasta ]);
+        $pujas = $em->getRepository(Pujas::class)->pujasOrdenadasMonto($id);
+        return $this->render("/subastas/detalles.html.twig", ['subasta' => $subasta, 'pujas' =>$pujas ]);
     }
 
     /**
@@ -122,47 +122,50 @@ class SubastasController extends AbstractController
 
         if ($subasta->getFinalizada()){
             $this -> addFlash('danger','La subasta ya fue finalizada');
-            return $this ->redirectToRoute('residencias_index');
+            return $this ->redirectToRoute('subastas_listado');
         }
 
         $usuario = $this->obtenerGanador($subasta);
 
         //si la fecha actual es menor a la fecha en la que debe finalizar la subasta (duracion + fecha_subasta)
+        /*
         if(date('Y-m-d', strtotime('today')) < ($subasta->getFechaSubasta()->modify($duracion))->format('Y-m-d') ){
             if (!is_null($usuario)){
                 $this -> addFlash('danger','La subasta tiene pujas, por lo que no puede finalizarse antes de la duracion de la misma');
-                return $this ->redirectToRoute('residencias_index');
+                return $this ->redirectToRoute('subastas_listado');
             }
         }
         //si ya se cumplio la duracion de la subasta
+        
         else{
+            */
+            
+            
+        if (!is_null($usuario)){
+            $reserva = new SemanasReserva();
+            $reserva -> setPrecio($subasta->getPrecioActual());
+            $reserva -> setFechaInicio($subasta->getFechaInicio());
+            $reserva -> setFechaFin($subasta->getFechaFin());
+            $reserva -> setIdResidencia($subasta->getIdResidencia());
+            $reserva -> setEmail($usuario);
 
-            if (!is_null($usuario)){
-                $reserva = new SemanasReserva();
-                $reserva -> setPrecio($subasta->getPrecioActual());
-                $reserva -> setFechaInicio($subasta->getFechaInicio());
-                $reserva -> setFechaFin($subasta->getFechaFin());
-                $reserva -> setIdResidencia($subasta->getIdResidencia());
-                $reserva -> setEmail($usuario);
+            //se establece el ganador en la subasta
+            $subasta -> setEmail($usuario);
+            $subasta -> setFinalizada(true);
+            $usuario -> restarCredito();
 
-                //se establece el ganador en la subasta
-                $subasta -> setEmail($usuario);
-                $subasta -> setFinalizada(true);
-                $usuario -> restarCredito();
+            $em->persist($reserva);
+            $em->flush();
 
-                $em->persist($reserva);
-                $em->flush();
-
-                $this -> addFlash('success','Subasta finalizada con exito. El ganador de la subasta es: ' . $usuario->getNombre() . ' ' . $usuario->getApellido());
-                return $this ->redirectToRoute('residencias_index');
-            }
+            $this -> addFlash('success','Subasta finalizada con exito. El ganador de la subasta es: ' . $usuario->getNombre() . ' ' . $usuario->getApellido());
+            return $this ->redirectToRoute('subastas_listado');
         }
-
+            
         $subasta -> setFinalizada(true);
         $em ->flush();
 
         $this -> addFlash('danger','No hay ganadores posibles, la subasta queda cancelada');
-        return $this ->redirectToRoute('residencias_index');
+        return $this ->redirectToRoute('subastas_listado');
 
     }
 

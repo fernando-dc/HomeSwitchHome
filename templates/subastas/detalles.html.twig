@@ -2,30 +2,53 @@
 {% block title %}Subasta{% endblock %}
 
 {% block body %}
-    <div class="container">
-    <h1>Subasta: {{ subasta.getIdSubasta() }} de la residencia: {{ (subasta.getIdResidencia()).getIdResidencia() }} </h1>
-    <table class="table table-hover">
-            <thead class="thead-dark">
-                <tr>
-                    <th>Residencia</th>
-                    <th>Puja maxima</th>
-                    <th>Fecha de reserva</th>
-                    <th>Estado</th>
-                    <th>Ganador</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                    <tr>
-                        <td>{{ (subasta.getIdResidencia()).getIdResidencia() }}</td>
-                        <td>{{ subasta.getPrecioActual() }}</td>
-                        <td>{{ subasta.getFechaInicio().format('Y-m-d')}}</td>
+    <br>
+    <div class="row" style="padding-left: 50px;">
+        <div class="col-md-8">
+            <h1>Subasta numero: {{ subasta.getIdSubasta() }}</h1>
+        </div>
+    </div>
+    <hr>
+    <br>
+    <!--
+        <h6>
+            <p class="font-weight-light">
 
-                        {% if (subasta.getFinalizada() == 1) %}
-                            <td>{{ "Finalizada" }}</td>
-                        {% else %}
-                            <td>{{ "Activa" }}</td>
-                        {% endif %}
+            </p>
+        </h6>
+    -->
+
+    <div class="container">
+        <table class="table table-hover table-responsive-lg">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Residencia</th>
+                        <th>Puja actual</th>
+                        <th>Fecha de reserva</th>
+                        <th>Estado</th>
+                        <th>Ganador</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td> Residencia numero: {{ (subasta.getIdResidencia()).getIdResidencia() }}
+                            <a href="#" title="Direccion" data-toggle="popover" data-trigger="hover" data-content="
+                                [ Calle: {{subasta.getIdResidencia().getIdDireccion().getCalle()}}
+                                Numero: {{subasta.getIdResidencia().getIdDireccion().getNumero()}}
+                                Ciudad: {{subasta.getIdResidencia().getIdDireccion().getCiudad()}}
+                                Provincia: {{subasta.getIdResidencia().getIdDireccion().getProvincia}} ]">
+                                Ubicacion
+                            </a>
+                        </td>
+                            <td>{{ subasta.getPrecioActual() }}</td>
+                            <td>{{ subasta.getFechaInicio().format('Y-m-d')}}</td>
+
+                            {% if (subasta.getFinalizada() == 1) %}
+                                <td>{{ "Finalizada" }}</td>
+                            {% else %}
+                                <td>{{ "Activa" }}</td>
+                        <td>{{ subasta.getFechaInicio().format('Y-m-d')}}</td>
 
                         {% if subasta.getEmail() is null %}
                             <td>{{ "------" }}</td>
@@ -35,18 +58,40 @@
                         {% endif %}
 
                         <td>
-                            {{ subasta.getPrecioActual() }}
-                        </td>
-                        <td>
-                            {# TODO #}
-                            {% if (subasta.getFinalizada() != 1) %}
-                                    <a href="/subasta/finalizar{{ subasta.getIdSubasta() }}" class="btn btn-danger">Finalizar subasta</a>
-                            {% endif %}
-                            <a href="/residencias/{{ (subasta.getIdResidencia()).getIdResidencia() }}"  class="btn btn-info">Detalles residencia</a>
+                          {# TODO #}
+                          {% if (subasta.getFinalizada() != 1) %}
+                              <a href="/subasta/finalizar/{{ subasta.getIdSubasta() }}" class="btn btn-danger">Finalizar subasta</a>
+                          {% endif %}
+                          <a href="/residencias/{{ (subasta.getIdResidencia()).getIdResidencia() }}"  class="btn btn-info">Detalles residencia</a>
                         </td>
                     </tr>
-            </tbody>
-        </table>
-        <a href="/subastas/listado" class="btn btn-outline-info">Volver a subastas</a>
+                </tbody>
+            </table>
+
+            <a href="/subastas/listado" class="btn btn-primary">Volver a subastas</a>
+            <br>
+            <br>
+            {% if pujas %}
+                <h5>Pujas</h5>
+                <ul class="list-group">
+                    {% for puja in pujas %}
+                        <li class="list-group-item">
+                            {{puja.email.nombre}} pujo: {{puja.monto}}
+                        </li>
+                    {% endfor %}
+
+                </ul>
+
+            {% else %}
+                <h5>No hay pujas para mostrar</h5>
+            {% endif %}
         </div>
+
+
+
+    <script>
+    $(document).ready(function(){
+        $('[data-toggle="popover"]').popover();
+    });
+    </script>
 {% endblock %}

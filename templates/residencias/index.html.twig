@@ -4,13 +4,17 @@
 
 {% block body %}
     <br>
-    <h1>Listado de residencias</h1>
+    <div class="row" style="padding-left: 50px;">
+        <div class="col-md-8">
+            <h1>Listado de residencias</h1>
+        </div>
+    </div>
     <hr>
     <br>
     
     <div class="container">
-
-        <table class="table table-hover">
+        {% if residencias %}
+        <table class="table table-hover table-responsive-lg">
             <thead class="thead-dark">
                 <tr>
                     <!--
@@ -42,6 +46,10 @@
             {% endfor %}
             </tbody>
         </table>
+        
+        {% else %}
+             <h3>No hay subastas para mostrar</h3>
+        {% endif %}
     
         <a href="{{ path('residencias_new') }}" class="btn btn-success">Añadir residencia</a>
     </div>

@@ -55,7 +55,7 @@ class PujasRepository extends ServiceEntityRepository
         
         ->innerJoin('p.email','usuarios')
         ->addSelect('usuarios')
-        ->andWhere('p.idSubasta >= :subasta')
+        ->andWhere('p.idSubasta = :subasta')
         ->setParameter('subasta', $id_subasta)
         ->andWhere('usuarios.creditos > 0')
         ->orderBy('p.monto','DESC')
@@ -63,5 +63,15 @@ class PujasRepository extends ServiceEntityRepository
         ->getResult()
         ;
         //->innerJoin('p', 'usuarios', 'u', 'p.email = u.email')
+    }
+
+    public function pujasOrdenadasMonto($id_subasta){
+        return $this -> createQueryBuilder('p')
+            ->andWhere('p.idSubasta = :subasta')
+            ->setParameter('subasta',$id_subasta)
+            ->orderBy('p.monto','DESC')
+            ->getQuery()
+            ->getResult()
+            ;
     }
 }

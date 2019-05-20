@@ -3,83 +3,86 @@
 {% block title %}Residencia{% endblock %}
 
 {% block body %}
-<br>
-<h1>Residencias</h1>
-<br>
-<br>
-
-<div class="container">
-    <div class="row">
+    <br>
+    <div class="row" style="padding-left: 50px;">
         <div class="col-md-8">
-            
-            <table class="table table-sm table-hover table-responsive-md">
-                <tbody>
-                    <!--
+                <h1>Residencia numero: {{ residencia.idResidencia }}</h1>
+            </div>
+        </div>
+    <hr>
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                
+                <table class="table table-sm table-hover table-responsive-md">
+                    <tbody>
+                        <!--
+                            <tr>
+                                <th>IdResidencia</th>
+                                <td>{{ residencia.idResidencia }}</td>
+                            </tr>
+                        -->
                         <tr>
-                            <th>IdResidencia</th>
-                            <td>{{ residencia.idResidencia }}</td>
+                            <th >Tipo</th>
+                            <td>{{ residencia.tipo }}</td>
                         </tr>
-                    -->
-                    <tr>
-                        <th >Tipo</th>
-                        <td>{{ residencia.tipo }}</td>
+                        <tr>
+                            <th>Habitaciones</th>
+                            <td>{{ residencia.habitaciones }}</td>
+                        </tr>
+                        <tr>
+                            <th>Descripcion</th>
+                            <td>{{ residencia.descripcion }}</td>
+                        </tr>
+                        <tr>
+                            <th>Calle</th>
+                            <td>{{ residencia.calle }}</td>
+                        </tr>
+                        <tr>
+                            <th>Ciudad</th>
+                            <td>{{ residencia.ciudad }}</td>
+                        </tr>
+                        <tr>
+                            <th>Provincia</th>
+                            <td>{{ residencia.provincia}}</td>
                     </tr>
-                    <tr>
-                        <th>Habitaciones</th>
-                        <td>{{ residencia.habitaciones }}</td>
-                    </tr>
-                    <tr>
-                        <th>Descripcion</th>
-                        <td>{{ residencia.descripcion }}</td>
-                    </tr>
-                    <tr>
-                        <th>Calle</th>
-                        <td>{{ residencia.calle }}</td>
-                    </tr>
-                    <tr>
-                        <th>Ciudad</th>
-                        <td>{{ residencia.ciudad }}</td>
-                    </tr>
-                    <tr>
-                        <th>Provincia</th>
-                        <td>{{ residencia.provincia}}</td>
-                   </tr>
-                   {% if residencia.depto != null %}
-                      <tr>
-                          <th>Depto</th>
-                          <td>{{ residencia.depto }}</td>
-                      </tr>
+                    {% if residencia.depto != null %}
+                        <tr>
+                            <th>Depto</th>
+                            <td>{{ residencia.depto }}</td>
+                        </tr>
+                        {% endif %}
+                        {% if residencia.piso != null %}
+                        <tr>
+                            <th>Piso</th>
+                            <td>{{ residencia.piso }}</td>
+                        </tr>
                     {% endif %}
-                    {% if residencia.piso != null %}
                     <tr>
-                        <th>Piso</th>
-                        <td>{{ residencia.piso }}</td>
+                            <th>Codigo Postal</th>
+                            <td>{{ residencia.codigoPostal}}</td>
                     </tr>
-                  {% endif %}
-                  <tr>
-                        <th>Codigo Postal</th>
-                        <td>{{ residencia.codigoPostal}}</td>
-                   </tr>
-            
-                    
-                    </tr>
-                </tbody>
-            </table>
-            
-        </div>
+                
+                        
+                        </tr>
+                    </tbody>
+                </table>
+                
+            </div>
 
-        <div class="col-md-4">
-            <br>
-            <a href="{{ path('residencias_edit', {'idResidencia': residencia.idResidencia}) }}" class="btn btn-primary">Editar</a>
-            <br>
-            <br>
-            {{ include('residencias/_delete_form.html.twig') }}
-            <br>
-            <a href="{{ path('residencias_index') }}" class="btn btn-secondary">Atras</a>
+            <div class="col-md-4">
+                <br>
+                <a href="{{ path('residencias_edit', {'idResidencia': residencia.idResidencia}) }}" class="btn btn-primary">Editar</a>
+                <br>
+                <br>
+                {{ include('residencias/_delete_form.html.twig') }}
+                <br>
+                <a href="{{ path('residencias_index') }}" class="btn btn-secondary">Atras</a>
 
+            </div>
         </div>
-    </div>
-    
+        
 
     </div>
 {% endblock %}
