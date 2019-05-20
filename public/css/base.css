@@ -1,0 +1,7 @@
+body { 
+    background-image: url('/images/bg/bg2.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center; 
+    z-index: -1;
+  }

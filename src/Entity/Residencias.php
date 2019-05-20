@@ -268,4 +268,8 @@ class Residencias
         return $this;
     }
 
+    public function __toString(){
+        return '('. $this->idResidencia . ') ' . 'Residencia de tipo: ' . $this->tipo . '; habitaciones: ' . $this->habitaciones;
+    }
+
 }
