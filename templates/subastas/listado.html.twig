@@ -5,13 +5,14 @@
 <div class="container">
 <h1>Subastas:</h1>
     {% if subastas %}
-        <table class="table table-striped">
-            <thead>
+        <table class="table table-hover">
+            <thead class="thead-dark">
                 <tr>
                     <th>Subasta</th>
                     <th>Residencia</th>
                     <th>Precio actual</th>
                     <th>Estado</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -27,12 +28,12 @@
                         {% endif %}
                         <td>
                             <a href="/subasta/detalles{{ subasta.getIdSubasta() }}" class="btn btn-info">Detalles</a>
-                        </td>
-                        <td>
                             {# TODO #}
                             {% if (subasta.getFinalizada() != 1) %}
                                     <a href="/subasta/finalizar/{{ subasta.getIdSubasta() }}" class="btn btn-danger">Finalizar subasta</a>
                             {% endif %}
+                        </td>
+                        <td>
                         </td>
                     </tr>
                 {% endfor %}

@@ -4,14 +4,15 @@
 {% block body %}
     <div class="container">
     <h1>Subasta: {{ subasta.getIdSubasta() }} de la residencia: {{ (subasta.getIdResidencia()).getIdResidencia() }} </h1>
-    <table class="table table-striped">
-            <thead>
+    <table class="table table-hover">
+            <thead class="thead-dark">
                 <tr>
                     <th>Residencia</th>
-                    <th>Precio actual</th>
+                    <th>Puja maxima</th>
                     <th>Fecha de reserva</th>
                     <th>Estado</th>
                     <th>Ganador</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -19,21 +20,26 @@
                         <td>{{ (subasta.getIdResidencia()).getIdResidencia() }}</td>
                         <td>{{ subasta.getPrecioActual() }}</td>
                         <td>{{ subasta.getFechaInicio().format('Y-m-d')}}</td>
+                        
                         {% if (subasta.getFinalizada() == 1) %}
-                                    <td>{{ "Finalizada" }}</td>
-                                    <td>{{ (subasta.getEmail()).getEmail() }}</td>
+                            <td>{{ "Finalizada" }}</td>
                         {% else %}
                             <td>{{ "Activa" }}</td>
-                            <td>{{ "--------------" }}</td>
                         {% endif %}
+                        
+                        {% if subasta.getEmail() is null %}
+                            <td>{{ "------" }}</td>
+                            
+                        {% else %}
+                            <td>{{ (subasta.getEmail()).getEmail() }}</td>
+                        {% endif %}
+                        
                         <td>
                             {# TODO #}
                             {% if (subasta.getFinalizada() != 1) %}
                                     <a href="/subasta/finalizar{{ subasta.getIdSubasta() }}" class="btn btn-danger">Finalizar subasta</a>
                             {% endif %}
-                        </td>
-                        <td>
-                            <a href="/residencia{{ (subasta.getIdResidencia()).getIdResidencia() }}"  class="btn btn-info">Detalles residencia</a>
+                            <a href="/residencias/{{ (subasta.getIdResidencia()).getIdResidencia() }}"  class="btn btn-info">Detalles residencia</a>
                         </td>
                     </tr>
             </tbody>
