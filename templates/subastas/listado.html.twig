@@ -40,7 +40,7 @@
                                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                                     {# TODO #}
                                       {% if (subasta.getFinalizada() != 1) %}
-                                          <a href="/subasta/finalizar{{ subasta.getIdSubasta() }}" class="btn btn-danger">Finalizar subasta</a>
+                                          <a href="/subasta/finalizar/{{ subasta.getIdSubasta() }}" class="btn btn-danger">Finalizar subasta</a>
                                       {% endif %}
 
                                       {% if (subasta.getFinalizada() != 1) %}

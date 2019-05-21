@@ -47,7 +47,7 @@
                         <td>
                             {# TODO #}
                             {% if (subasta.getFinalizada() != 1) %}
-                                    <a href="/subasta/finalizar{{ subasta.getIdSubasta() }}" class="btn btn-danger">Finalizar subasta</a>
+                                    <a href="/subasta/finalizar/{{ subasta.getIdSubasta() }}" class="btn btn-danger">Finalizar subasta</a>
                             {% endif %}
                              <a href="/residencias/{{ ((subasta.getIdResidencia()).getIdResidencia()) }}" class="btn btn-info">Detalles residencia</a>
                         </td>
