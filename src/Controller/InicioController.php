@@ -10,6 +10,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class InicioController extends Controller{
 
     /**
+     * @Route("/", name="index")
+     */
+    public function index(){
+
+      return $this->redirectToRoute('residencias_index');
+    }
+
+    /**
      * @Route("/inicio", name="inicio")
      */
 
