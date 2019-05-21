@@ -2,16 +2,14 @@
 
 {% block title %}Nueva residencia{% endblock %}
 
+{% block bodyTitle %}
+    <h1>Crear nueva residencia</h1>
+{% endblock %}
+
+
 {% block body %}
     {% form_theme form 'bootstrap_4_layout.html.twig' %}
-    <br>
-    <div class="row" style="padding-left: 50px;">
-        <div class="col-md-8">
-                <h1>Crear nueva residencia</h1>
-            </div>
-        </div>
-    <hr>
-    <br>
+    
     <div class="container">
 
         {{ include('residencias/_form.html.twig') }}

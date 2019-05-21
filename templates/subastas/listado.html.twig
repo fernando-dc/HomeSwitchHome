@@ -1,15 +1,11 @@
 {% extends 'base.html.twig' %}
 {% block title %}Subastas{% endblock %}
 
+{% block bodyTitle %}
+    <h1>Listado de subastas</h1>
+{% endblock %}
+
 {% block body %}
-<br>
-<div class="row" style="padding-left: 50px;">
-    <div class="col-md-8">
-        <h1>Listado de subastas</h1>
-    </div>
-</div>
-<hr>
-<br>
 
 <div class="container">
     {% if subastas %}

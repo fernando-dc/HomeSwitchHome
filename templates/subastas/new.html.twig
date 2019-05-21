@@ -2,24 +2,16 @@
 
 {% block styelsheets %}
     {{ parent() }}
-        
-       
-        
-    
 {% endblock %}
 
+{% block bodyTitle %}
+    <h1>Nueva Subasta:</h1>
+{% endblock %}
 
 
 {% block body %}
     {% form_theme subastaForm 'bootstrap_4_layout.html.twig' %}
-    <br>
-    <div class="row" style="padding-left: 80px;">
-        <div class="col-md-8">
-            <h1>Nueva Subasta:</h1>
-        </div>
-    </div>
-    <hr>
-    <br>
+
     <div class="container">
         
         {{form_start(subastaForm)}}
@@ -27,6 +19,7 @@
         {{form_widget(subastaForm)}}
         
         <button type="submit" class="btn btn-success">Crear</button>
+        <a href="{{ path('subastas_listado') }}" class="btn btn-danger">Cancelar</a>
     </div>
 {% endblock %}
 

@@ -2,16 +2,11 @@
 
 {% block title %}Residencias{% endblock %}
 
+{% block bodyTitle %}
+    <h1>Listado de residencias</h1>
+{% endblock %}
+
 {% block body %}
-    <br>
-    <div class="row" style="padding-left: 50px;">
-        <div class="col-md-8">
-            <h1>Listado de residencias</h1>
-        </div>
-    </div>
-    <hr>
-    <br>
-    
     <div class="container">
         {% if residencias %}
         <table class="table table-hover table-responsive-lg">

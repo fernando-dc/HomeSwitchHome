@@ -31,6 +31,17 @@
     <body>
         
         {% include ('includes/navbar.html.twig') %}
+
+        {% block bodyTitleStyle %}
+            <br>
+            <div class="row" style="width:100%;">
+                <div class="col-md-8" style="margin-left: 50px;">
+                    {% block bodyTitle %}{% endblock %}
+                </div>
+            </div>
+            <hr>
+            <br>
+        {% endblock %}
         
         {% for message in app.flashes('success') %}
             <div class="alert alert-success">

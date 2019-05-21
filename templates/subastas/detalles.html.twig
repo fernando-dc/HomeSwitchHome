@@ -1,22 +1,12 @@
 {% extends 'base.html.twig' %}
 {% block title %}Subasta{% endblock %}
 
-{% block body %}
-    <br>
-    <div class="row" style="padding-left: 50px;">
-        <div class="col-md-8">
-            <h1>Subasta numero: {{ subasta.getIdSubasta() }}</h1>
-        </div>
-    </div>
-    <hr>
-    <br>
-    <!--
-        <h6>
-            <p class="font-weight-light">
+{% block bodyTitle %}
+    <h1>Subasta numero: {{ subasta.getIdSubasta() }}</h1>
+{% endblock %}
 
-            </p>
-        </h6>
-    -->
+
+{% block body %}
 
     <div class="container">
         <table class="table table-hover table-responsive-lg">

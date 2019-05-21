@@ -1,9 +1,13 @@
 {% extends 'base.html.twig' %}
 {% block title %}Subastas en las que participo{% endblock %}
 
+{% block bodyTitle %}
+    <h1>Subastas en las que participo:</h1>
+{% endblock %}
+
+
 {% block body %}
 <div class="container">
-<h1>Subastas en las que participo:</h1>
     {% if subastas %}
         <table class="table table-striped">
             <thead>
