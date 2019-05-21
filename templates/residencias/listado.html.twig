@@ -2,6 +2,7 @@
 
 
 {% block body %}
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
     <br>
     <h1>Listado de residencias:</h1>
     <br>
@@ -34,4 +35,11 @@
             </table>
         {% endif %}
     </div>
+{% else %}
+    <div align="center" class="container">
+        </br></br> </br></br></br>
+        <p>No ha iniciado sesión</p>
+        <a href="/inicio" class="btn btn-info">Iniciar sesión</a>
+    </div>
+{% endif %}
 {% endblock %}

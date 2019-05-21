@@ -36,24 +36,22 @@
 
                         {% if (subasta.getFinalizada() == 1) %}
                             <td>{{ "Finalizada" }}</td>
+                            {% if (subasta.getEmail()) == null  %}
+                                <td>Sin ganador</td>
+                            {% endif %}
                         {% else %}
                             <td>{{ "Activa" }}</td>
                         {% endif %}
 
-                        {% if subasta.getEmail() is null %}
-                            <td>{{ "------" }}</td>
-
-                        {% else %}
-                            <td>{{ (subasta.getEmail()).getEmail() }}</td>
-                        {% endif %}
-
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                         <td>
-                          {# TODO #}
-                          {% if (subasta.getFinalizada() != 1) %}
-                              <a href="/subasta/finalizar/{{ subasta.getIdSubasta() }}" class="btn btn-danger">Finalizar subasta</a>
-                          {% endif %}
-                          <a href="/residencias/{{ (subasta.getIdResidencia()).getIdResidencia() }}"  class="btn btn-info">Detalles residencia</a>
+                            {# TODO #}
+                            {% if (subasta.getFinalizada() != 1) %}
+                                    <a href="/subasta/finalizar{{ subasta.getIdSubasta() }}" class="btn btn-danger">Finalizar subasta</a>
+                            {% endif %}
+                             <a href="/residencias/{{ ((subasta.getIdResidencia()).getIdResidencia()) }}" class="btn btn-info">Detalles residencia</a>
                         </td>
+                        {% endif %}
                     </tr>
                 </tbody>
             </table>
