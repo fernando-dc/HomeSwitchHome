@@ -3,6 +3,7 @@
 {% block title %}Nueva residencia{% endblock %}
 
 {% block body %}
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
     {% form_theme form 'bootstrap_4_layout.html.twig' %}
     <br>
     <h1>Crear nueva residencia</h1>
@@ -14,4 +15,12 @@
         <br>
         <a href="{{ path('residencias_index') }}" class="btn btn-secondary">Atras</a>
     </div>
+
+{% else %}
+    <div align="center" class="container">
+        </br></br> </br></br></br>
+        <p>No ha iniciado sesión</p>
+        <a href="/inicio" class="btn btn-info">Iniciar sesión</a>
+    </div>
+{% endif %}
 {% endblock %}

@@ -2,6 +2,8 @@
 {% block title %}Subastas en las que participo{% endblock %}
 
 {% block body %}
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+
 <div class="container">
 <h1>Subastas en las que participo:</h1>
     {% if subastas %}
@@ -47,4 +49,12 @@
         <p>No hay subastas para mostrar</p>
     {% endif %}
 </div>
+
+{% else %}
+    <div align="center" class="container">
+        </br></br> </br></br></br>
+        <p>No ha iniciado sesión</p>
+        <a href="/inicio" class="btn btn-info">Iniciar sesión</a>
+    </div>
+{% endif %}
 {% endblock %}

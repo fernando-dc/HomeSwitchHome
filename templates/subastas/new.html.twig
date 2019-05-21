@@ -11,6 +11,8 @@
 
 
 {% block body %}
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+
     {% form_theme subastaForm 'bootstrap_4_layout.html.twig' %}
     <br>
     <h1>Nueva Subasta:</h1>
@@ -24,6 +26,14 @@
         
         <button type="submit" class="btn btn-success">Crear</button>
     </div>
+
+{% else %}
+    <div align="center" class="container">
+        </br></br> </br></br></br>
+        <p>No ha iniciado sesión</p>
+        <a href="/inicio" class="btn btn-info">Iniciar sesión</a>
+    </div>
+{% endif %}
 {% endblock %}
 
 
@@ -42,5 +52,6 @@
             });
         });
     </script>
+
 
 {% endblock %}

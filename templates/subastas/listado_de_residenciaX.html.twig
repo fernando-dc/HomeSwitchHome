@@ -1,6 +1,8 @@
 {% extends 'base.html.twig' %}
 {% block title %}Subastas{% endblock %}
 {% block body %}
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+
     <div class="container">
 <h1>Subastas:</h1>
     {% if subastas %}
@@ -34,4 +36,11 @@
     {% else %}
         <p>No hay subastas para mostrar</p>
     {% endif %}
+{% else %}
+    <div align="center" class="container">
+        </br></br> </br></br></br>
+        <p>No ha iniciado sesión</p>
+        <a href="/inicio" class="btn btn-info">Iniciar sesión</a>
+    </div>
+{% endif %}
 {% endblock %}

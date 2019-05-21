@@ -3,6 +3,7 @@
 {% block title %}Residencia{% endblock %}
 
 {% block body %}
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
 <br>
 <h1>Residencias</h1>
 <br>
@@ -82,4 +83,11 @@
     
 
     </div>
+{% else %}
+    <div align="center" class="container">
+        </br></br> </br></br></br>
+        <p>No ha iniciado sesión</p>
+        <a href="/inicio" class="btn btn-info">Iniciar sesión</a>
+    </div>
+{% endif %}
 {% endblock %}

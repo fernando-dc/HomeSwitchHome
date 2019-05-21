@@ -2,6 +2,8 @@
 {% block title %}Paticipar en subasta{% endblock %}
 
 {% block body %}
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+
     <div align="center">
         <h1>Monto mínimo: {{ subasta.precioActual() }}</h1>
         <br/>
@@ -16,4 +18,12 @@
         <a href="/subastas/listado" class="btn btn-outline-info">Cancelar</a>
 
     </div>
+
+{% else %}
+    <div align="center" class="container">
+        </br></br> </br></br></br>
+        <p>No ha iniciado sesión</p>
+        <a href="/inicio" class="btn btn-info">Iniciar sesión</a>
+    </div>
+{% endif %}
 {% endblock %}

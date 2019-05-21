@@ -14,6 +14,9 @@ security:
             guard:
                 authenticators:
                     - App\Security\AppCustomAuthenticator
+            logout:
+                path: app_logout
+                target: 'inicio'
 
             # activate different ways to authenticate
 

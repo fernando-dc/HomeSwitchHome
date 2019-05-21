@@ -1,9 +1,12 @@
 {% extends 'base.html.twig' %}
+
 {% block title %}Subastas:{% endblock %}
 
 {% block body %}
-<div class="container">
-<h1>Subastas:</h1>
+
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+    <div class="container">
+    <h1>Subastas:</h1>
     {% if subastas %}
         <table class="table table-striped">
             <thead>
@@ -53,5 +56,16 @@
     {% endif %}
     <a href="/subasta/new" class="btn btn-info">Crear subasta</a>
     <a href="/subasta/participando" class="btn btn-info">Ver subastas en las que participo</a>
-</div>
+    </div>
+    
+
+
+{% else %}
+    <div align="center" class="container">
+        <br/><br/>
+        <h1>Inicie sesión.</h1>
+        <br/>
+        <a href="/inicio" class="btn btn-info">Iniciar sesión</a>
+    </div>
+{% endif %}
 {% endblock %}

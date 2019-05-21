@@ -180,6 +180,8 @@ class SubastasController extends AbstractController
      */
     public function participarDeSubasta($id, Request $request){
         $user = $this->getUser();
+        if($user != null){
+
         $email = $user->getEmail(); 
         
         $coleccion = Array();
@@ -239,6 +241,11 @@ class SubastasController extends AbstractController
             $this -> addFlash('danger', "No puede participar en la subasta.");
             return $this ->redirectToRoute('subastas_listado');
         }
+        }
+        else{
+            //
+            return $this->render('/subastas/new.html.twig');
+        }
     }
 
     /**
@@ -246,6 +253,8 @@ class SubastasController extends AbstractController
      */
     public function subastasParticipando(){
         $user = $this->getUser();
+        if ($user != null){
+
         $email = $user->getEmail(); 
         
         $coleccion = Array();
@@ -261,6 +270,11 @@ class SubastasController extends AbstractController
         }
 
         return $this->render('/subastas/participando.html.twig', ['subastas' => $coleccion]);
+        }
+        else{
+            //
+            return $this->render('/subastas/new.html.twig');
+        }
     }
 
 }

@@ -2,6 +2,8 @@
 {% block title %}Residencia{% endblock %}
 
 {% block body %}
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+
     <div class="container">
     <h1>Residencia: {{ residencia.getIdResidencia() }} </h1>
     <table class="table table-striped">
@@ -55,4 +57,8 @@
         </table>
         <a href="/residencias" class="btn btn-outline-info">Volver a residencias</a>
         </div>
+
+{% else %}
+    <h1>No logeado</h1>
+{% endif %}
 {% endblock %}

@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="/css/navbar.css">
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
 
 <div class="container"></div>
 <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgb(17, 25, 27);" >
@@ -14,13 +15,18 @@
     <div class="collapse navbar-collapse" id="mobile-nav">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <a class="nav-link" href="/residencias">Residencias</a>
+          <a class="nav-link" href="/residencias">Residencias |</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/subastas/listado">Subastas</a>
+          <a class="nav-link" href="/subastas/listado">Subastas |</a>
         </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/logout">Cerrar sesión {{ app.user.getEmail().getEmail() }}</a>
+          </li>
       </ul>
       </div>
     
   </nav>
 </div>
+{% else %}
+{% endif %}
