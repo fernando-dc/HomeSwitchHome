@@ -2,7 +2,7 @@
 {% block title %}Subasta{% endblock %}
 
 {% block body %}
-{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+
     <div class="container">
     <h1>Subasta: {{ subasta.getIdSubasta() }} de la residencia: {{ (subasta.getIdResidencia()).getIdResidencia() }} </h1>
     <table class="table table-striped">
@@ -23,7 +23,9 @@
                         <td>{{ subasta.getFechaInicio().format('Y-m-d')}}</td>
                         {% if (subasta.getFinalizada() == 1) %}
                                     <td>{{ "Finalizada" }}</td>
-                                    <td>{{ (subasta.getEmail()).getEmail() }}</td>
+                                    {% if (subasta.getEmail()) == null  %}
+                                    <td>Sin ganador</td>
+                                    {% endif %}
                         {% else %}
                             <td>{{ "Activa" }}</td>
                             <td>{{ "--------------" }}</td>
@@ -31,6 +33,7 @@
                         <td>
                             {{ subasta.getPrecioActual() }}
                         </td>
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                         <td>
                             {# TODO #}
                             {% if (subasta.getFinalizada() != 1) %}
@@ -41,16 +44,10 @@
                              <a href="/residencias/{{ ((subasta.getIdResidencia()).getIdResidencia()) }}" class="btn btn-info">Detalles residencia</a>
                             {#<a href="/residencia{{ (subasta.getIdResidencia()).getIdResidencia() }}"  class="btn btn-info">Detalles residencia</a>#}
                         </td>
+                        {% endif %}
                     </tr>
             </tbody>
         </table>
         <a href="/subastas/listado" class="btn btn-outline-info">Volver a subastas</a>
         </div>
-{% else %}
-    <div align="center" class="container">
-        </br></br> </br></br></br>
-        <p>No ha iniciado sesión</p>
-        <a href="/inicio" class="btn btn-info">Iniciar sesión</a>
-    </div>
-{% endif %}
 {% endblock %}

@@ -3,7 +3,7 @@
 {% block title %}Residencias{% endblock %}
 
 {% block body %}
-{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+
     <br>
     <h1>Listado de residencias</h1>
     <hr>
@@ -43,14 +43,14 @@
             {% endfor %}
             </tbody>
         </table>
-    
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
         <a href="{{ path('residencias_new') }}" class="btn btn-success">Añadir residencia</a>
     </div>
-{% else %}
+{#{% else %}
     <div align="center" class="container">
         </br></br> </br></br></br>
         <p>No ha iniciado sesión</p>
         <a href="/inicio" class="btn btn-info">Iniciar sesión</a>
-    </div>
+    </div>#}
 {% endif %}
 {% endblock %}

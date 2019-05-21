@@ -16,4 +16,13 @@ class InicioController extends Controller{
     public function inicio(){
       return $this->render('/login/inicio.html.twig');
     }
+
+    /**
+     * @Route("/inicie_sesion", name="inicie_sesion")
+     */
+
+    public function inicieSesion(){
+
+      return $this->render('/login/inicie_sesion.html.twig');
+    }
 }

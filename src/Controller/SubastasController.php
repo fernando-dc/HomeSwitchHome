@@ -244,7 +244,7 @@ class SubastasController extends AbstractController
         }
         else{
             //
-            return $this->render('/subastas/new.html.twig');
+            return $this->render('/login/inicie_sesion.html.twig');
         }
     }
 
@@ -273,7 +273,7 @@ class SubastasController extends AbstractController
         }
         else{
             //
-            return $this->render('/subastas/new.html.twig');
+            return $this->render('/login/inicie_sesion.html.twig');
         }
     }
 
