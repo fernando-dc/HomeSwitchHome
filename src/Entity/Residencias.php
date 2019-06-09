@@ -6,6 +6,10 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
+
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
+
 /**
  * Residencias
  *
@@ -70,7 +74,10 @@ class Residencias
         $this->reservas = new ArrayCollection();
         $this->subastas = new ArrayCollection();
     }
-
+    /**
+     * 
+     * @Assert\Type(type="integer")
+     */
     public function getCodigoPostal(): ?int
     {
         return $this->idDireccion->getCodigoPostal();

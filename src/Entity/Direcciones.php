@@ -4,6 +4,9 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
+
 /**
  * Direcciones
  *
@@ -32,6 +35,7 @@ class Direcciones
      * @var int
      *
      * @ORM\Column(name="codigo_postal", type="integer", nullable=false)
+     * @Assert\Type(type="integer")
      */
     private $codigoPostal;
 
