@@ -38,6 +38,8 @@ class Subastas
      * @var int
      *
      * @ORM\Column(name="duracion", type="integer", nullable=false, options={"default"="3"})
+     * @Assert\GreaterThan(0)
+     * @Assert\LessThanOrEqual(3)
      */
     private $duracion = '3';
 
@@ -45,6 +47,7 @@ class Subastas
      * @var float
      *
      * @ORM\Column(name="precio_actual", type="float", precision=10, scale=0, nullable=false)
+     * @Assert\GreaterThan(0)
      */
     private $precioActual;
 

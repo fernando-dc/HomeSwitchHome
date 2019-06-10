@@ -64,7 +64,7 @@ class Usuarios
      *
      * @ORM\Column(name="creditos", type="integer", nullable=false)
      */
-    private $creditos;
+    private $creditos = '2';
 
     /**
      * @var \DateTime|null
