@@ -2,24 +2,32 @@
 
 namespace App\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Usuarios
  *
- * @ORM\Table(name="usuarios")
+ * @ORM\Table(name="usuarios", uniqueConstraints={@ORM\UniqueConstraint(name="email", columns={"email"})}, indexes={@ORM\Index(name="suscripcion", columns={"suscripcion"})})
  * @ORM\Entity(repositoryClass="App\Repository\UsuariosRepository")
  */
 class Usuarios
 {
     /**
+     * @var int
+     *
+     * @ORM\Column(name="id_usuario", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idUsuario;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=40, nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $email;
 
@@ -59,11 +67,21 @@ class Usuarios
     private $creditos = '2';
 
     /**
-     * @var string
+     * @var \DateTime|null
      *
-     * @ORM\Column(name="suscripcion", type="string", length=30, nullable=false, options={"default"="standard"})
+     * @ORM\Column(name="fecha_registro", type="date", nullable=true)
      */
-    private $suscripcion = 'standard';
+    private $fechaRegistro;
+
+    /**
+     * @var \Suscripciones
+     *
+     * @ORM\ManyToOne(targetEntity="Suscripciones")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="suscripcion", referencedColumnName="nombre")
+     * })
+     */
+    private $suscripcion;
 
     /**
      * @ORM\OneToMany(targetEntity="Subastas", mappedBy="email")
@@ -81,9 +99,21 @@ class Usuarios
         $this->reservas = new ArrayCollection();
     }
 
+    public function getIdUsuario(): ?int
+    {
+        return $this->idUsuario;
+    }
+
     public function getEmail(): ?string
     {
         return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
     }
 
     public function getNombre(): ?string
@@ -146,16 +176,33 @@ class Usuarios
         return $this;
     }
 
-    public function getSuscripcion(): ?string
+    public function getFechaRegistro(): ?\DateTimeInterface
+    {
+        return $this->fechaRegistro;
+    }
+
+    public function setFechaRegistro(?\DateTimeInterface $fechaRegistro): self
+    {
+        $this->fechaRegistro = $fechaRegistro;
+
+        return $this;
+    }
+
+    public function getSuscripcion(): ?Suscripciones
     {
         return $this->suscripcion;
     }
 
-    public function setSuscripcion(string $suscripcion): self
+    public function setSuscripcion(?Suscripciones $suscripcion): self
     {
         $this->suscripcion = $suscripcion;
 
         return $this;
+    }
+
+    public function restarCredito(){
+        $this->creditos -= 1 ;
+        return $this->creditos;
     }
 
     /**
@@ -220,8 +267,4 @@ class Usuarios
         return $this;
     }
 
-    public function restarCredito(){
-        $this-> creditos -= 1 ;
-        return $this->creditos;
-    }
 }

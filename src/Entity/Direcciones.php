@@ -35,7 +35,6 @@ class Direcciones
      * @var int
      *
      * @ORM\Column(name="codigo_postal", type="integer", nullable=false)
-     * @Assert\Type(type="integer")
      */
     private $codigoPostal;
 
@@ -162,12 +161,12 @@ class Direcciones
 
         return $this;
     }
-   //public function __toString(): ?string
-  // {
-   
-  //  return $this->calle;
+    
+    //public function __toString(): ?string
+    // {
 
-   //} 
+    //  return $this->calle;
+    //} 
 
 
 }

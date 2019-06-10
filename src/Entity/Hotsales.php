@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Hotsales
  *
  * @ORM\Table(name="hotsales", indexes={@ORM\Index(name="token_admin", columns={"token_admin"})})
- * @ORM\Entity(repositoryClass="App\Repository\HotsalesRepository")
+ * @ORM\Entity
  */
 class Hotsales
 {

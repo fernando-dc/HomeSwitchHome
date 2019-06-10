@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Pujas
  *
- * @ORM\Table(name="pujas", indexes={@ORM\Index(name="email", columns={"email"}), @ORM\Index(name="id_subasta", columns={"id_subasta"})})
+ * @ORM\Table(name="pujas", indexes={@ORM\Index(name="id_subasta", columns={"id_subasta"}), @ORM\Index(name="id_usuario", columns={"id_usuario"})})
  * @ORM\Entity(repositoryClass="App\Repository\PujasRepository")
  */
 class Pujas
@@ -29,16 +29,6 @@ class Pujas
     private $monto;
 
     /**
-     * @var \Usuarios
-     *
-     * @ORM\ManyToOne(targetEntity="Usuarios")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="email", referencedColumnName="email")
-     * })
-     */
-    private $email;
-
-    /**
      * @var \Subastas
      *
      * @ORM\ManyToOne(targetEntity="Subastas", inversedBy="pujas")
@@ -47,6 +37,16 @@ class Pujas
      * })
      */
     private $idSubasta;
+
+    /**
+     * @var \Usuarios
+     *
+     * @ORM\ManyToOne(targetEntity="Usuarios")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_usuario", referencedColumnName="id_usuario")
+     * })
+     */
+    private $idUsuario;
 
     public function getIdPuja(): ?int
     {
@@ -65,18 +65,6 @@ class Pujas
         return $this;
     }
 
-    public function getEmail(): ?Usuarios
-    {
-        return $this->email;
-    }
-
-    public function setEmail(?Usuarios $email): self
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
     public function getIdSubasta(): ?Subastas
     {
         return $this->idSubasta;
@@ -85,6 +73,18 @@ class Pujas
     public function setIdSubasta(?Subastas $idSubasta): self
     {
         $this->idSubasta = $idSubasta;
+
+        return $this;
+    }
+
+    public function getIdUsuario(): ?Usuarios
+    {
+        return $this->idUsuario;
+    }
+
+    public function setIdUsuario(?Usuarios $idUsuario): self
+    {
+        $this->idUsuario = $idUsuario;
 
         return $this;
     }
