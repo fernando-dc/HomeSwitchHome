@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * SemanasReserva
  *
- * @ORM\Table(name="semanas_reserva", indexes={@ORM\Index(name="residencia", columns={"id_residencia"}), @ORM\Index(name="usuario", columns={"email"})})
+ * @ORM\Table(name="semanas_reserva", indexes={@ORM\Index(name="residencia", columns={"id_residencia"}), @ORM\Index(name="id_usuario", columns={"id_usuario"})})
  * @ORM\Entity(repositoryClass="App\Repository\SemanasReservaRepository")
  */
 class SemanasReserva
@@ -57,10 +57,10 @@ class SemanasReserva
      *
      * @ORM\ManyToOne(targetEntity="Usuarios", inversedBy="reservas")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="email", referencedColumnName="email")
+     *   @ORM\JoinColumn(name="id_usuario", referencedColumnName="id_usuario")
      * })
      */
-    private $email;
+    private $idUsuario;
 
     public function getIdSemana(): ?int
     {
@@ -115,14 +115,14 @@ class SemanasReserva
         return $this;
     }
 
-    public function getEmail(): ?Usuarios
+    public function getIdUsuario(): ?Usuarios
     {
-        return $this->email;
+        return $this->idUsuario;
     }
 
-    public function setEmail(?Usuarios $email): self
+    public function setIdUsuario(?Usuarios $idUsuario): self
     {
-        $this->email = $email;
+        $this->idUsuario = $idUsuario;
 
         return $this;
     }

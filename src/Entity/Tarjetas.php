@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Tarjetas
  *
- * @ORM\Table(name="tarjetas", indexes={@ORM\Index(name="usuario", columns={"email"})})
+ * @ORM\Table(name="tarjetas", indexes={@ORM\Index(name="id_usuario", columns={"id_usuario"})})
  * @ORM\Entity(repositoryClass="App\Repository\TarjetasRepository")
  */
 class Tarjetas
@@ -40,10 +40,10 @@ class Tarjetas
      *
      * @ORM\ManyToOne(targetEntity="Usuarios")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="email", referencedColumnName="email")
+     *   @ORM\JoinColumn(name="id_usuario", referencedColumnName="id_usuario")
      * })
      */
-    private $email;
+    private $idUsuario;
 
     public function getNumeroTarjeta(): ?string
     {
@@ -74,14 +74,14 @@ class Tarjetas
         return $this;
     }
 
-    public function getEmail(): ?Usuarios
+    public function getIdUsuario(): ?Usuarios
     {
-        return $this->email;
+        return $this->idUsuario;
     }
 
-    public function setEmail(?Usuarios $email): self
+    public function setIdUsuario(?Usuarios $idUsuario): self
     {
-        $this->email = $email;
+        $this->idUsuario = $idUsuario;
 
         return $this;
     }

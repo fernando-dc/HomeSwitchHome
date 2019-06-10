@@ -1,24 +1,23 @@
 <?php
 
 namespace App\Entity;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Administradores
  *
- * @ORM\Table(name="administradores", indexes={@ORM\Index(name="email", columns={"email"})})
+ * @ORM\Table(name="administradores", indexes={@ORM\Index(name="id_usuario", columns={"id_usuario"})})
  * @ORM\Entity(repositoryClass="App\Repository\AdministradoresRepository")
  */
-class Administradores implements UserInterface
+class Administradores
 {
     /**
      * @var string
      *
      * @ORM\Column(name="token", type="string", length=50, nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $token;
 
@@ -27,36 +26,29 @@ class Administradores implements UserInterface
      *
      * @ORM\ManyToOne(targetEntity="Usuarios")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="email", referencedColumnName="email")
+     *   @ORM\JoinColumn(name="id_usuario", referencedColumnName="id_usuario")
      * })
      */
-    private $email;
+    private $idUsuario;
 
     public function getToken(): ?string
     {
         return $this->token;
     }
 
-    public function setToken(int $token): self
+    public function getIdUsuario(): ?Usuarios
     {
-        $this->token = $token;
+        return $this->idUsuario;
+    }
+
+    public function setIdUsuario(?Usuarios $idUsuario): self
+    {
+        $this->idUsuario = $idUsuario;
 
         return $this;
     }
 
-    public function getEmail(): ?Usuarios
-    {
-        return $this->email;
-    }
-
-    public function setEmail(?Usuarios $email): self
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-
+    
     public function getSalt()
     {
         // podrías necesitar un verdadero salt dependiendo del encoder
@@ -80,5 +72,5 @@ class Administradores implements UserInterface
     {
        // return $this->username;
     }
-
+    
 }
