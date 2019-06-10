@@ -36,7 +36,7 @@
 
                         {% if (subasta.getFinalizada() == 1) %}
                             <td>{{ "Finalizada" }}</td>
-                            {% if (subasta.getEmail()) == null  %}
+                            {% if (subasta.getIdUsuario()) == null  %}
                                 <td>Sin ganador</td>
                             {% endif %}
                         {% else %}
@@ -64,7 +64,7 @@
                 <ul class="list-group">
                     {% for puja in pujas %}
                         <li class="list-group-item">
-                            {{puja.email.nombre}} pujo: {{puja.monto}}
+                            {{puja.idUsuario.nombre}} pujo: {{puja.monto}}
                         </li>
                     {% endfor %}
 

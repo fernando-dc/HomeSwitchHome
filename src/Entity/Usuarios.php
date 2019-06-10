@@ -217,7 +217,7 @@ class Usuarios
     {
         if (!$this->subastas->contains($subasta)) {
             $this->subastas[] = $subasta;
-            $subasta->setEmail($this);
+            $subasta->setIdUsuario($this);
         }
 
         return $this;
@@ -228,8 +228,8 @@ class Usuarios
         if ($this->subastas->contains($subasta)) {
             $this->subastas->removeElement($subasta);
             // set the owning side to null (unless already changed)
-            if ($subasta->getEmail() === $this) {
-                $subasta->setEmail(null);
+            if ($subasta->getIdUsuario() === $this) {
+                $subasta->setIdUsuario(null);
             }
         }
 
