@@ -4,20 +4,22 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Security\Core\User\UserInterface;
+
 /**
  * Administradores
  *
  * @ORM\Table(name="administradores", indexes={@ORM\Index(name="id_usuario", columns={"id_usuario"})})
  * @ORM\Entity(repositoryClass="App\Repository\AdministradoresRepository")
  */
-class Administradores
+class Administradores implements UserInterface
 {
     /**
      * @var string
      *
      * @ORM\Column(name="token", type="string", length=50, nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue(strategy="NONE")
      */
     private $token;
 
@@ -34,6 +36,13 @@ class Administradores
     public function getToken(): ?string
     {
         return $this->token;
+    }
+
+    public function setToken(int $token): self
+    {
+        $this->token = $token;
+
+        return $this;
     }
 
     public function getIdUsuario(): ?Usuarios
