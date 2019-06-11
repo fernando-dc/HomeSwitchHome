@@ -22,7 +22,8 @@
         </li>
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
         <li class="nav-item">
-            <a class="nav-link" href="/logout">Cerrar sesión {{ app.user.getIdUsuario().getEmail() }}</a>
+            {#para admin:<a class="nav-link" href="/logout">Cerrar sesión {{ app.user.getIdUsuario().getEmail() }}</a>#}
+            <a class="nav-link" href="/logout">Cerrar sesión</a>
         </li>
         {% endif %}
 

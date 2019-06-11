@@ -1,0 +1,37 @@
+body, html { height:100%;
+	margin:0;
+	padding:0;
+	width:100%;
+	background-color:white;
+}
+ 
+.recuadro1 {
+	width:30%;
+	display:inline-block;
+	height:99.5%;
+	overflow:hidden;
+}
+.recuadro2 {
+	width:39.5%;
+	display:inline-block;
+	height:99.5%;
+	overflow:hidden;
+}
+.recuadro3 {
+	width:99.5%;
+	display:inline-block;
+	height:55.5%;
+	overflow:hidden;
+}
+.recuadro4 {
+	width:99.5%;
+	display:inline-block;
+	height:15.5%;
+	overflow:hidden;
+}
+#uno{
+	background-color:rgba(61, 172, 187, 0.418);
+	}
+#dos{
+	background-color:rgba(5, 190, 214, 0.205);
+	}

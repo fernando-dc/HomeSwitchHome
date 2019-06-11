@@ -6,6 +6,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
+use App\Entity\Subastas;
+
 
 class InicioController extends Controller{
 
@@ -22,7 +24,12 @@ class InicioController extends Controller{
      */
 
     public function inicio(){
-      return $this->render('/login/inicio.html.twig');
+
+      $em = $this-> getDoctrine()->getManager();
+      $subastasActivas = $em->getRepository(Subastas::class)->findBy( ['finalizada' => '0'] );
+
+
+      return $this->render('/login/inicio.html.twig', ['subastas' => $subastasActivas]);
     }
 
     /**

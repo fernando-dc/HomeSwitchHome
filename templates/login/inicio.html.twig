@@ -1,21 +1,94 @@
 {% block title %}{% endblock %}
 {% block body %}
 <link rel="stylesheet" href="https://bootswatch.com/4/materia/bootstrap.min.css">
+<link rel="stylesheet" href="/css/inicio.css">
+<link rel="stylesheet" href="/css/base.css">
 {% if not(is_granted('IS_AUTHENTICATED_FULLY')) %}
+
+        <div class='recuadro1' id="uno">
+            <div align="center">
+                <div class='recuadro4' id='dos' >
+                <font size=5 color="Black">
+                    <strong>Subasta de la residencia: {{ (subastas[0].getIdResidencia()).getNombre() }}</p>
+                    </br>
+                </font>
+                <font size=3 color="Black">
+                <p>Para la semana: {{ subastas[0].getFechaInicio().format('Y-m-d') }} - {{ subastas[0].getFechaFin().format('Y-m-d') }}</p>
+                </div>
+                </font>
+                <font size=5 color="Fuchsia">
+                    <strong>Último monto pujado: {{ subastas[0].getPrecioActual() }}</p>
+                </font>
+                <font size=4 color="Black">
+                <p>Comenzó el día: {{ subastas[0].getFechaSubasta().format('Y-m-d') }}
+                    </br>Las subastas duran 3 días ¡No te la pierdas!</p>
+                </font>
+            </div>
+            <div class='recuadro3' id='dos' >
+            <div align="center" class="container" >
+                <table class="table-hover">
+                    <thead>
+                        <tr>
+                            <th>Tipo</th>
+                            <th>Ambientes </th>
+                            <th>Provincia</th>
+                            <th>Ciudad</th>
+                            <th>Calle</th>
+                            <th >Altura</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>{{subastas[0].getIdResidencia().getTipo()}}</td>
+                        <td align="center">{{ subastas[0].getIdResidencia().getHabitaciones() }}</td>
+                        <td>{{ subastas[0].getIdResidencia().getProvincia()}}</td>
+                        <td>{{ subastas[0].getIdResidencia().getCiudad()}}</td>
+                        <td>{{ subastas[0].getIdResidencia().getCalle()}}</td>
+                        <td>{{ subastas[0].getIdResidencia().getNumero()}}</td>
+                </table>
+            </div>
+                </br></br>
+                <p align="center">{{ subastas[0].getIdResidencia().getDescripcion() }}</p>
+                <p align="center">aca va la foto</p>
+            </div>
+        </div>
+        <div aling="center" class='recuadro1' id="uno">
+            <div align="center">
+                </br></br>
+                <font size=5 color="Black">
+                    <strong>Próximamente HotSales</p>
+                </font>
+            </div>
+            <div align="center">
+                <image id="logo-hotsale"src="/images/hotsale/hotsale-logo2.png" width="200" />
+            </div>
+        </div>
+    <div class='recuadro2'>
     
-    <br/><br/>
-    <div align="center">
-        <image id="logo-image"src="/images/logos/HSH-Complete.svg" width="500" />
+        <br/><br/>
+        <div align="center">
+            <image id="logo-image"src="/images/logos/HSH-Complete.svg" width="270" />
+        </div>
+        <br/><br/>
+        <div align="center">
+            <font size=5 color="Black">
+                <p>¡Registrate en nuetsra plataforma!</p>
+            </font>
+            </br></br></br></br></br></br></br></br></br></br></br></br></br></br>
+            <a href="/login" class="btn btn-light">Iniciar Sesión</a>
+            </br></br></br>
+            <a href="/loginAdmin" >Soy administrador</a>
+        </div>
     </div>
-    <br/><br/><br/>
-    <div align="center">
-        <a href="/login" class="btn btn-light">Soy administrador</a>
-    </div>
+
+    
+
 {% else %}
     <div align="center" class="container">
         </br></br> </br></br></br>
         <p>Usted ya ha iniciado sesión</p>
-        <a class="nav-link" href="/logout">Cerrar la de sesión {{ app.user.getIdUsuario().getEmail() }}</a>
+        {#para admin:<a class="nav-link" href="/logout">Cerrar la de sesión {{ app.user.getIdUsuario().getEmail() }}</a>#}
+        <a class="nav-link" href="/logout">Cerrar la de sesión</a>
         <a class="nav-link" href="/residencias">Ir a Home</a>
     </div>
 {% endif %}

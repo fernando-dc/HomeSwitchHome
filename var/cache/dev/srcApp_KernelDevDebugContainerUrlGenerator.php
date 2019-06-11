@@ -21,6 +21,7 @@ class srcApp_KernelDevDebugContainerUrlGenerator extends Symfony\Component\Routi
         if (null === self::$declaredRoutes) {
             self::$declaredRoutes = [
         '_twig_error_test' => [['code', '_format'], ['_controller' => 'twig.controller.preview_error::previewErrorPageAction', '_format' => 'html'], ['code' => '\\d+'], [['variable', '.', '[^/]++', '_format', true], ['variable', '/', '\\d+', 'code', true], ['text', '/_error']], [], []],
+        'index' => [[], ['_controller' => 'App\\Controller\\InicioController::index'], [], [['text', '/']], [], []],
         'inicio' => [[], ['_controller' => 'App\\Controller\\InicioController::inicio'], [], [['text', '/inicio']], [], []],
         'inicie_sesion' => [[], ['_controller' => 'App\\Controller\\InicioController::inicieSesion'], [], [['text', '/inicie_sesion']], [], []],
         'residencias_index' => [[], ['_controller' => 'App\\Controller\\ResidenciasController::index'], [], [['text', '/residencias/']], [], []],
@@ -29,7 +30,8 @@ class srcApp_KernelDevDebugContainerUrlGenerator extends Symfony\Component\Routi
         'residencias_edit' => [['idResidencia'], ['_controller' => 'App\\Controller\\ResidenciasController::edit'], [], [['text', '/edit'], ['variable', '/', '[^/]++', 'idResidencia', true], ['text', '/residencias']], [], []],
         'residencias_delete' => [['idResidencia'], ['_controller' => 'App\\Controller\\ResidenciasController::delete'], [], [['variable', '/', '[^/]++', 'idResidencia', true], ['text', '/residencias']], [], []],
         'residencia_detalle' => [['id'], ['_controller' => 'App\\Controller\\ResidenciasController::detallesResidencia'], [], [['variable', '', '[^/]++', 'id', true], ['text', '/residencias/residencia']], [], []],
-        'app_login' => [[], ['_controller' => 'App\\Controller\\SecurityController::login'], [], [['text', '/login']], [], []],
+        'app_login' => [[], ['_controller' => 'App\\Controller\\SecurityController::login'], [], [['text', '/loginAdmin']], [], []],
+        'app_login_user' => [[], ['_controller' => 'App\\Controller\\SecurityController::loginUser'], [], [['text', '/login']], [], []],
         'app_logout' => [[], ['_controller' => 'App\\Controller\\SecurityController::logout'], [], [['text', '/logout']], [], []],
         'subasta_nueva' => [[], ['_controller' => 'App\\Controller\\SubastasController::new'], [], [['text', '/subasta/new']], [], []],
         'subastas_de_residenciaX' => [['id'], ['_controller' => 'App\\Controller\\SubastasController::subastasResidencia'], [], [['variable', '', '[^/]++', 'id', true], ['text', '/subastas/residencia']], [], []],

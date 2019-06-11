@@ -2,12 +2,17 @@
 
 namespace App\Security;
 
-use App\Entity\Administradores;
+use App\Entity\Usuarios;
+
 use Doctrine\ORM\EntityManagerInterface;
+
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
 use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 use Symfony\Component\Security\Core\Security;
@@ -18,34 +23,37 @@ use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticator;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
 
-class AppCustomAuthenticator extends AbstractFormLoginAuthenticator
+class Otro extends AbstractFormLoginAuthenticator
 {
     use TargetPathTrait;
 
     private $entityManager;
     private $urlGenerator;
     private $csrfTokenManager;
+    private $passwordEncoder;
 
-    public function __construct(EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager)
+    public function __construct(EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager, UserPasswordEncoderInterface $passwordEncoder)
     {
         $this->entityManager = $entityManager;
         $this->urlGenerator = $urlGenerator;
         $this->csrfTokenManager = $csrfTokenManager;
+        $this->passwordEncoder = $passwordEncoder;
     }
 
     public function supports(Request $request)
     {
-        $matchesMyRoute = ('app_login' ===
-            $request->attributes->get('_route') && $request->isMethod('POST'));
+        $matchesMyRoute = 'app_login_user' ===
+            $request->attributes->get('_route')&& $request->isMethod('POST');
 
-        $matchesMyUri = ('/path/to/secured/resource' ===
-            $request->getUri());
-        return ($matchesMyRoute || $matchesMyUri)&& $request->isMethod('POST') ;
-        //return 'app_login' === $request->attributes->get('_route')
+        $matchesMyUri = '/path/to/secured/resource' ===
+            $request->getUri()&& $request->isMethod('POST');
+
+        return $matchesMyRoute || $matchesMyUri;
+        //return 'app_login_user' === $request->attributes->get('_route')
           //  && $request->isMethod('POST');
     }
 
-    /*public function getCredentials(Request $request)
+    public function getCredentials(Request $request)
     {
         $credentials = [
             'email' => $request->request->get('email'),
@@ -58,39 +66,8 @@ class AppCustomAuthenticator extends AbstractFormLoginAuthenticator
         );
 
         return $credentials;
-    }*/
-    public function getCredentials(Request $request)
-    {
-        
-        $credentials = [
-            'token' => $request->request->get('token'),
-            'password' => $request->request->get('password'),
-            'csrf_token' => $request->request->get('_csrf_token'),
-        ];
-        $request->getSession()->set(
-            Security::LAST_USERNAME,
-            $credentials['token']
-        );
-
-        return $credentials;
     }
 
-    /*public function getUser($credentials, UserProviderInterface $userProvider)
-    {
-        $token = new CsrfToken('authenticate', $credentials['csrf_token']);
-        if (!$this->csrfTokenManager->isTokenValid($token)) {
-            throw new InvalidCsrfTokenException();
-        }
-
-        $user = $this->entityManager->getRepository(Administradores::class)->findOneBy(['email' => $credentials['email']]);
-
-        if (!$user) {
-            // fail authentication with a custom error
-            throw new CustomUserMessageAuthenticationException('Email could not be found.');
-        }
-
-        return $user;
-    }*/
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
         $token = new CsrfToken('authenticate', $credentials['csrf_token']);
@@ -98,12 +75,11 @@ class AppCustomAuthenticator extends AbstractFormLoginAuthenticator
             throw new InvalidCsrfTokenException();
         }
 
-        $user = $this->entityManager->getRepository(Administradores::class)->findOneBy(['token' => $credentials['token']]);
+        $user = $this->entityManager->getRepository(Usuarios::class)->findOneBy(['email' => $credentials['email']]);
 
         if (!$user) {
             // fail authentication with a custom error
-            //throw new CustomUserMessageAuthenticationException('Token could not be found.');
-            throw new CustomUserMessageAuthenticationException('Token incorrecto. Por favor vuelva a intentar');
+            throw new CustomUserMessageAuthenticationException('Email could not be found.');
         }
 
         return $user;
@@ -117,7 +93,14 @@ class AppCustomAuthenticator extends AbstractFormLoginAuthenticator
 
         //throw new \Exception('TODO: check the credentials inside '.__FILE__);
 
-        return true;
+        $user = $this->entityManager->getRepository(Usuarios::class)->findOneBy(['email' => $credentials['email']]);
+        if ($user->getPassword() == ($credentials['password'])){
+            return true;
+        }
+        else{
+            throw new CustomUserMessageAuthenticationException('Datos incorrectos. Por favor vuelva a intentar');
+        }
+        //return $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
     }
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
@@ -139,6 +122,6 @@ class AppCustomAuthenticator extends AbstractFormLoginAuthenticator
 
     protected function getLoginUrl()
     {
-        return $this->urlGenerator->generate('app_login');
+        return $this->urlGenerator->generate('app_login_user');
     }
 }
