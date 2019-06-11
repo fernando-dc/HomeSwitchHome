@@ -1,0 +1,13 @@
+#semana_card{
+    /*margin-bottom: 2.5rem;
+    */
+}
+
+a.custom_card,
+a.custom_card:hover{
+    color: inherit;
+}
+
+span#highlight{
+    color: #A9FFFC;
+}

@@ -298,4 +298,22 @@ class Residencias
 
         return $this;
     }
+
+    public function ocupadaEntreFechas($f_inicial, $f_final): bool {
+        /*if ($this->hayReservaEnFecha($f_inicial,$f_final)){
+            return true;
+        }
+        return false;
+        */
+        return $this->hayReservaEnFecha($f_inicial, $f_final);
+    }
+
+    private function hayReservaEnFecha($f_inicial, $f_final):bool {
+        foreach ($this->reservas as $reserva) {
+            if($f_inicial >= $reserva->getFechaInicio() && $f_final <= $reserva->getFechaFin() ) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

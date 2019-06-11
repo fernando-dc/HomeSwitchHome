@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block styelsheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block title %}Buscar Residencias{% endblock %}
+
+{% block body %}
+<!--
+
+    <style>
+        .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+        .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    </style>
+    
+    <div class="example-wrapper">
+        <h1>Hello {{ controller_name }}! ✅</h1>
+        
+        This friendly message is coming from:
+        <ul>
+            <li>Your controller at <code><a href="{{ 'D:/xampp/htdocs/HomeSwitchHome/src/Controller/FiltroController.php'|file_link(0) }}">src/Controller/FiltroController.php</a></code></li>
+            <li>Your template at <code><a href="{{ 'D:/xampp/htdocs/HomeSwitchHome/templates/filtro/index.html.twig'|file_link(0) }}">templates/filtro/index.html.twig</a></code></li>
+        </ul>
+    </div>
+-->
+    <div class="container">
+
+        {{form(filtroForm)}}
+    </div>
+
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent()}}
+    
+    <script>
+        jQuery(document).ready(function(){
+            $('.js-datepicker-start').datepicker({
+                weekStart: 1,
+                //startDate: "+25w",
+                //endDate:"+26w",
+                daysOfWeekDisabled: "0,2,3,4,5,6",
+                daysOfWeekHighlighted: "1",
+                format: "yyyy/mm/dd",
+            });
+        });
+
+        jQuery(document).ready(function(){
+            $('.js-datepicker-end').datepicker({
+                weekStart: 1,
+                //startDate: "+25w",
+                //endDate: "+26w",
+                daysOfWeekDisabled: "1,2,3,4,5,6",
+                daysOfWeekHighlighted: "1",
+                format: "yyyy/mm/dd",
+            });
+        });
+    </script>
+
+
+{% endblock %}

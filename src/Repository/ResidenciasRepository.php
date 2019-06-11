@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Residencias;
 use App\Entity\SemanasReserva;
+use App\Entity\Direcciones;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -55,5 +56,16 @@ class ResidenciasRepository extends ServiceEntityRepository
         ->setParameter('fecha', $fecha)
         ->getQuery()
         ->getOneOrNullResult();
+    }
+
+    public function residenciasEnCiudad($ciudad){
+        return $this->createQueryBuilder('r')
+            ->innerJoin('r.idDireccion', 'd')
+            ->addSelect('d')
+            ->andWhere('r.idDireccion = d.idDireccion')
+            ->andWhere('d.ciudad = :ciudad')
+            ->setParameter('ciudad', $ciudad)
+            ->getQuery()
+            ->getResult();
     }
 }
