@@ -53,7 +53,7 @@ class PujasRepository extends ServiceEntityRepository
     public function pujasOrdenadasMontoUsuarioValido($id_subasta){
         return $this -> createQueryBuilder('p')
         
-        ->innerJoin('p.email','usuarios')
+        ->innerJoin('p.idUsuario','usuarios')
         ->addSelect('usuarios')
         ->andWhere('p.idSubasta = :subasta')
         ->setParameter('subasta', $id_subasta)

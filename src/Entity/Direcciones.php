@@ -4,6 +4,9 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
+
 /**
  * Direcciones
  *
@@ -158,12 +161,12 @@ class Direcciones
 
         return $this;
     }
-   //public function __toString(): ?string
-  // {
-   
-  //  return $this->calle;
+    
+    //public function __toString(): ?string
+    // {
 
-   //} 
+    //  return $this->calle;
+    //} 
 
 
 }

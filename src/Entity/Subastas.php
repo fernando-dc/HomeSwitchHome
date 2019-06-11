@@ -2,9 +2,10 @@
 
 namespace App\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping as ORM;
 
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
@@ -12,7 +13,7 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 /**
  * Subastas
  *
- * @ORM\Table(name="subastas", indexes={@ORM\Index(name="token_admin", columns={"token_admin"}), @ORM\Index(name="id_residencia", columns={"id_residencia"}), @ORM\Index(name="usuario", columns={"email"})})
+ * @ORM\Table(name="subastas", indexes={@ORM\Index(name="token_admin", columns={"token_admin"}), @ORM\Index(name="usuario", columns={"id_usuario"}), @ORM\Index(name="id_residencia", columns={"id_residencia"})})
  * @ORM\Entity(repositoryClass="App\Repository\SubastasRepository")
  */
 class Subastas
@@ -37,7 +38,6 @@ class Subastas
      * @var int
      *
      * @ORM\Column(name="duracion", type="integer", nullable=false, options={"default"="3"})
-     * 
      * @Assert\GreaterThan(0)
      * @Assert\LessThanOrEqual(3)
      */
@@ -47,9 +47,7 @@ class Subastas
      * @var float
      *
      * @ORM\Column(name="precio_actual", type="float", precision=10, scale=0, nullable=false)
-     * 
      * @Assert\GreaterThan(0)
-     * 
      */
     private $precioActual;
 
@@ -85,16 +83,6 @@ class Subastas
     private $tokenAdmin;
 
     /**
-     * @var \Usuarios
-     *
-     * @ORM\ManyToOne(targetEntity="Usuarios",inversedBy="subastas")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="email", referencedColumnName="email")
-     * })
-     */
-    private $email;
-
-    /**
      * @var \Residencias
      *
      * @ORM\ManyToOne(targetEntity="Residencias", inversedBy="subastas")
@@ -105,6 +93,16 @@ class Subastas
     private $idResidencia;
 
     /**
+     * @var \Usuarios
+     *
+     * @ORM\ManyToOne(targetEntity="Usuarios", inversedBy="subastas")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_usuario", referencedColumnName="id_usuario")
+     * })
+     */
+    private $idUsuario;
+
+    /**
      * @ORM\OneToMany(targetEntity="Pujas", mappedBy="idSubasta")
      */
     private $pujas;
@@ -113,120 +111,120 @@ class Subastas
     {
         $this->pujas = new ArrayCollection();
     }
-    
+
     public function getIdSubasta(): ?int
     {
         return $this->idSubasta;
     }
-    
+
     public function getFechaSubasta(): ?\DateTimeInterface
     {
         return $this->fechaSubasta;
     }
-    
+
     public function setFechaSubasta(\DateTimeInterface $fechaSubasta): self
     {
         $this->fechaSubasta = $fechaSubasta;
-        
+
         return $this;
     }
-    
+
     public function getDuracion(): ?int
     {
         return $this->duracion;
     }
-    
+
     public function setDuracion(int $duracion): self
     {
         $this->duracion = $duracion;
-        
+
         return $this;
     }
-    
+
     public function getPrecioActual(): ?float
     {
         return $this->precioActual;
     }
-    
+
     public function setPrecioActual(float $precioActual): self
     {
         $this->precioActual = $precioActual;
-        
+
         return $this;
     }
-    
+
     public function getFechaInicio(): ?\DateTimeInterface
     {
         return $this->fechaInicio;
     }
-    
+
     public function setFechaInicio(\DateTimeInterface $fechaInicio): self
     {
         $this->fechaInicio = $fechaInicio;
-        
+
         return $this;
     }
-    
+
     public function getFechaFin(): ?\DateTimeInterface
     {
         return $this->fechaFin;
     }
-    
+
     public function setFechaFin(\DateTimeInterface $fechaFin): self
     {
         $this->fechaFin = $fechaFin;
-        
+
         return $this;
     }
-    
+
     public function getFinalizada(): ?bool
     {
         return $this->finalizada;
     }
-    
+
     public function setFinalizada(bool $finalizada): self
     {
         $this->finalizada = $finalizada;
-        
+
         return $this;
     }
-    
+
     public function getTokenAdmin(): ?Administradores
     {
         return $this->tokenAdmin;
     }
-    
+
     public function setTokenAdmin(?Administradores $tokenAdmin): self
     {
         $this->tokenAdmin = $tokenAdmin;
-        
+
         return $this;
     }
-    
-    public function getEmail(): ?Usuarios
-    {
-        return $this->email;
-    }
-    
-    public function setEmail(?Usuarios $email): self
-    {
-        $this->email = $email;
-        
-        return $this;
-    }
-    
+
     public function getIdResidencia(): ?Residencias
     {
         return $this->idResidencia;
     }
-    
+
     public function setIdResidencia(?Residencias $idResidencia): self
     {
         $this->idResidencia = $idResidencia;
-        
+
         return $this;
     }
 
+    public function getIdUsuario(): ?Usuarios
+    {
+        return $this->idUsuario;
+    }
+
+    public function setIdUsuario(?Usuarios $idUsuario): self
+    {
+        $this->idUsuario = $idUsuario;
+        
+        return $this;
+    }
+    
     
         /**
          * @return Collection|Pujas[]
@@ -258,7 +256,6 @@ class Subastas
     
             return $this;
         }
-    
         
     /**
      * @Assert\Callback
@@ -294,5 +291,5 @@ class Subastas
         }
     
     }
-    
+
 }

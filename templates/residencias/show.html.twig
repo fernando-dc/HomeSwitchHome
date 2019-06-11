@@ -11,7 +11,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8">
-                
+
                 <table class="table table-sm table-hover table-responsive-md">
                     <tbody>
                         <!--
@@ -60,26 +60,30 @@
                             <th>Codigo Postal</th>
                             <td>{{ residencia.codigoPostal}}</td>
                     </tr>
-                
-                        
-                        </tr>
-                    </tbody>
-                </table>
-                
-            </div>
+                </tbody>
+            </table>
 
-            <div class="col-md-4">
-                <br>
-                <a href="{{ path('residencias_edit', {'idResidencia': residencia.idResidencia}) }}" class="btn btn-primary">Editar</a>
-                <br>
-                <br>
-                {{ include('residencias/_delete_form.html.twig') }}
-                <br>
-                <a href="{{ path('residencias_index') }}" class="btn btn-secondary">Atras</a>
+        </div>
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <div class="col-md-4">
+            <br>
+            <a href="{{ path('residencias_edit', {'idResidencia': residencia.idResidencia}) }}" class="btn btn-primary">Editar</a>
+            <br>
+            <br>
+            {{ include('residencias/_delete_form.html.twig') }}
+            <br>
+            <a href="{{ path('residencias_index') }}" class="btn btn-secondary">Atras</a>
 
             </div>
         </div>
-        
+
 
     </div>
+{#{% else %}
+    <div align="center" class="container">
+        </br></br> </br></br></br>
+        <p>No ha iniciado sesión</p>
+        <a href="/inicio" class="btn btn-info">Iniciar sesión</a>
+    </div>#}
+{% endif %}
 {% endblock %}

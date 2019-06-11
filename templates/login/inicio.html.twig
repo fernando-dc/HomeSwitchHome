@@ -1,6 +1,8 @@
 {% block title %}{% endblock %}
 {% block body %}
-    <link rel="stylesheet" href="https://bootswatch.com/4/materia/bootstrap.min.css">
+<link rel="stylesheet" href="https://bootswatch.com/4/materia/bootstrap.min.css">
+{% if not(is_granted('IS_AUTHENTICATED_FULLY')) %}
+    
     <br/><br/>
     <div align="center">
         <image id="logo-image"src="/images/logos/HSH-Complete.svg" width="500" />
@@ -9,4 +11,12 @@
     <div align="center">
         <a href="/login" class="btn btn-light">Soy administrador</a>
     </div>
+{% else %}
+    <div align="center" class="container">
+        </br></br> </br></br></br>
+        <p>Usted ya ha iniciado sesión</p>
+        <a class="nav-link" href="/logout">Cerrar la de sesión {{ app.user.getIdUsuario().getEmail() }}</a>
+        <a class="nav-link" href="/residencias">Ir a Home</a>
+    </div>
+{% endif %}
 {% endblock %}

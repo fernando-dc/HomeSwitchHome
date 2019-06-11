@@ -6,6 +6,8 @@
 {% endblock %}
 
 {% block body %}
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+
     <div class="container">
     <table class="table table-striped">
             <thead>
@@ -58,4 +60,8 @@
         </table>
         <a href="/residencias" class="btn btn-outline-info">Volver a residencias</a>
         </div>
+
+{% else %}
+    <h1>No logeado</h1>
+{% endif %}
 {% endblock %}

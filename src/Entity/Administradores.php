@@ -1,14 +1,15 @@
 <?php
 
 namespace App\Entity;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 use Doctrine\ORM\Mapping as ORM;
+
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Administradores
  *
- * @ORM\Table(name="administradores", indexes={@ORM\Index(name="email", columns={"email"})})
+ * @ORM\Table(name="administradores", indexes={@ORM\Index(name="id_usuario", columns={"id_usuario"})})
  * @ORM\Entity(repositoryClass="App\Repository\AdministradoresRepository")
  */
 class Administradores implements UserInterface
@@ -27,10 +28,10 @@ class Administradores implements UserInterface
      *
      * @ORM\ManyToOne(targetEntity="Usuarios")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="email", referencedColumnName="email")
+     *   @ORM\JoinColumn(name="id_usuario", referencedColumnName="id_usuario")
      * })
      */
-    private $email;
+    private $idUsuario;
 
     public function getToken(): ?string
     {
@@ -44,19 +45,19 @@ class Administradores implements UserInterface
         return $this;
     }
 
-    public function getEmail(): ?Usuarios
+    public function getIdUsuario(): ?Usuarios
     {
-        return $this->email;
+        return $this->idUsuario;
     }
 
-    public function setEmail(?Usuarios $email): self
+    public function setIdUsuario(?Usuarios $idUsuario): self
     {
-        $this->email = $email;
+        $this->idUsuario = $idUsuario;
 
         return $this;
     }
 
-
+    
     public function getSalt()
     {
         // podrías necesitar un verdadero salt dependiendo del encoder
@@ -80,5 +81,5 @@ class Administradores implements UserInterface
     {
        // return $this->username;
     }
-
+    
 }

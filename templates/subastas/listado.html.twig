@@ -37,22 +37,30 @@
                         </td>
                         <td>
                             <a href="/subasta/detalles{{ subasta.getIdSubasta() }}" class="btn btn-info">Detalles</a>
-                            {# TODO #}
-                            {% if (subasta.getFinalizada() != 1) %}
-                                    <a href="/subasta/finalizar/{{ subasta.getIdSubasta() }}" class="btn btn-danger">Finalizar subasta</a>
-                            {% endif %}
-                            {% if (subasta.getFinalizada() != 1) %}
-                                    <a href="/subasta/participarDeLaSubasta{{ subasta.getIdSubasta() }}" class="btn btn-info">Participar</a>
-                            {% endif %}
+                                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                                    {# TODO #}
+                                      {% if (subasta.getFinalizada() != 1) %}
+                                          <a href="/subasta/finalizar/{{ subasta.getIdSubasta() }}" class="btn btn-danger">Finalizar subasta</a>
+                                      {% endif %}
+
+                                      {% if (subasta.getFinalizada() != 1) %}
+                                          <a href="/subasta/participarDeLaSubasta{{ subasta.getIdSubasta() }}" class="btn btn-info">Participar</a>
+                                      {% endif %}
+                                {% endif %}
                         </td>
                     </tr>
+
                 {% endfor %}
             </tbody>
         </table>
     {% else %}
         <p>No hay subastas para mostrar</p>
     {% endif %}
+
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
     <a href="/subasta/new" class="btn btn-success">Crear subasta</a>
+    {% endif %}
+
     <a href="/subasta/participando" class="btn btn-primary">Ver subastas en las que participo</a>
 </div>
 {% endblock %}

@@ -2,9 +2,14 @@
 
 namespace App\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping as ORM;
+
+
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
  * Residencias
@@ -22,28 +27,35 @@ class Residencias
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $idResidencia;
-
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nombre", type="string", length=70, nullable=false)
+     */
+    private $nombre;
+    
     /**
      * @var string
      *
      * @ORM\Column(name="tipo", type="string", length=20, nullable=false)
      */
     private $tipo;
-
+    
     /**
      * @var int
      *
      * @ORM\Column(name="habitaciones", type="integer", nullable=false)
      */
     private $habitaciones;
-
+    
     /**
      * @var string
      *
      * @ORM\Column(name="descripcion", type="string", length=1000, nullable=false)
      */
     private $descripcion;
-
+    
     /**
      * @var \Direcciones
      *
@@ -52,25 +64,93 @@ class Residencias
      *   @ORM\JoinColumn(name="id_direccion", referencedColumnName="id_direccion")
      * })
      */
-    protected $idDireccion;
-
+    private $idDireccion;
+    
     /**
      * @ORM\OneToMany(targetEntity="SemanasReserva", mappedBy="idResidencia")
      */
     private $reservas;
-
+    
     /**
      * @ORM\OneToMany(targetEntity="Subastas", mappedBy="idResidencia")
      */
     private $subastas;
+    
+    public function getIdResidencia(): ?int
+    {
+        return $this->idResidencia;
+    }
+    
+    public function getNombre(): ?string
+    {
+        return $this->nombre;
+    }
+    
+    public function setNombre(string $nombre): self
+    {
+        $this->nombre = $nombre;
+    
+        return $this;
+    }
 
-
+    public function getTipo(): ?string
+    {
+        return $this->tipo;
+    }
+    
+    public function setTipo(string $tipo): self
+    {
+        $this->tipo = $tipo;
+        
+        return $this;
+    }
+    
+    public function getHabitaciones(): ?int
+    {
+        return $this->habitaciones;
+    }
+    
+    public function setHabitaciones(int $habitaciones): self
+    {
+        $this->habitaciones = $habitaciones;
+        
+        return $this;
+    }
+    
+    public function getDescripcion(): ?string
+    {
+        return $this->descripcion;
+    }
+    
+    public function setDescripcion(string $descripcion): self
+    {
+        $this->descripcion = $descripcion;
+        
+        return $this;
+    }
+    
+    public function getIdDireccion(): ?Direcciones
+    {
+        return $this->idDireccion;
+    }
+    
+    public function setIdDireccion(?Direcciones $idDireccion): self
+    {
+        $this->idDireccion = $idDireccion;
+        
+        return $this;
+    }
+    
+    
     public function __construct()
     {
         $this->reservas = new ArrayCollection();
         $this->subastas = new ArrayCollection();
     }
-
+    /**
+     * 
+     * @Assert\Type(type="integer")
+     */
     public function getCodigoPostal(): ?int
     {
         return $this->idDireccion->getCodigoPostal();
@@ -153,57 +233,8 @@ class Residencias
         return false;
     }
 
-    public function getIdResidencia(): ?int
-    {
-        return $this->idResidencia;
-    }
-
-    public function getTipo(): ?string
-    {
-        return $this->tipo;
-    }
-
-    public function setTipo(string $tipo): self
-    {
-        $this->tipo = $tipo;
-
-        return $this;
-    }
-
-    public function getHabitaciones(): ?int
-    {
-        return $this->habitaciones;
-    }
-
-    public function setHabitaciones(int $habitaciones): self
-    {
-        $this->habitaciones = $habitaciones;
-
-        return $this;
-    }
-
-    public function getDescripcion(): ?string
-    {
-        return $this->descripcion;
-    }
-
-    public function setDescripcion(string $descripcion): self
-    {
-        $this->descripcion = $descripcion;
-
-        return $this;
-    }
-
-    public function getIdDireccion(): ?Direcciones
-    {
-        return $this->idDireccion;
-    }
-
-    public function setIdDireccion(?Direcciones $idDireccion): self
-    {
-        $this->idDireccion = $idDireccion;
-
-        return $this;
+    public function __toString(){
+        return '('. $this->idResidencia . ') ' . 'Residencia de tipo: ' . $this->tipo . '; habitaciones: ' . $this->habitaciones;
     }
 
     /**
@@ -267,9 +298,4 @@ class Residencias
 
         return $this;
     }
-
-    public function __toString(){
-        return '('. $this->idResidencia . ') ' . 'Residencia de tipo: ' . $this->tipo . '; habitaciones: ' . $this->habitaciones;
-    }
-
 }

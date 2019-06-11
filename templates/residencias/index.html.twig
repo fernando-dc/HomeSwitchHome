@@ -41,11 +41,19 @@
             {% endfor %}
             </tbody>
         </table>
-        
+
         {% else %}
              <h3>No hay subastas para mostrar</h3>
         {% endif %}
-    
-        <a href="{{ path('residencias_new') }}" class="btn btn-success">Añadir residencia</a>
+
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <a href="{{ path('residencias_new') }}" class="btn btn-success">Añadir residencia</a>
     </div>
+{#{% else %}
+    <div align="center" class="container">
+        </br></br> </br></br></br>
+        <p>No ha iniciado sesión</p>
+        <a href="/inicio" class="btn btn-info">Iniciar sesión</a>
+    </div>#}
+{% endif %}
 {% endblock %}

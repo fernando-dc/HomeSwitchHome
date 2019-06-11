@@ -147,10 +147,10 @@ class SubastasController extends AbstractController
             $reserva -> setFechaInicio($subasta->getFechaInicio());
             $reserva -> setFechaFin($subasta->getFechaFin());
             $reserva -> setIdResidencia($subasta->getIdResidencia());
-            $reserva -> setEmail($usuario);
+            $reserva -> setIdUsuario($usuario);
 
             //se establece el ganador en la subasta
-            $subasta -> setEmail($usuario);
+            $subasta -> setIdUsuario($usuario);
             $subasta -> setFinalizada(true);
             $usuario -> restarCredito();
 
@@ -175,7 +175,7 @@ class SubastasController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $pujas = $em->getRepository(Pujas::class)->pujasOrdenadasMontoUsuarioValido($subasta->getIdSubasta());
             if (!empty($pujas)){
-                return $em->getRepository(Usuarios::class)->find($pujas[0]->getEmail());
+                return $em->getRepository(Usuarios::class)->find($pujas[0]->getIdUsuario());
             }
         }
         return null;
@@ -185,12 +185,14 @@ class SubastasController extends AbstractController
      * @Route("/subasta/participarDeLaSubasta{id}", name="subastas_participar")
      */
     public function participarDeSubasta($id, Request $request){
-        $user = $this->getUser();
-        $email = $user->getEmail(); 
+        $user = $this->getUser()->getIdUsuario();
+        if($user != null){
+
+        //$user = $user->getEmail(); 
         
         $coleccion = Array();
-        $idUsuarioLogeado = $email->getEmail();
-        $pujas = $this-> getDoctrine()->getManager()->getRepository(Pujas::class)->findBy(['email' => $idUsuarioLogeado]);
+        $idUsuarioLogeado = $user;
+        $pujas = $this-> getDoctrine()->getManager()->getRepository(Pujas::class)->findBy(['idUsuario' => $idUsuarioLogeado]);
         if($pujas){
             for ($i = 0; $i < sizeOf($pujas); $i++){    
                 $subastaDePuja = $pujas[$i]->getIdSubasta();
@@ -217,7 +219,7 @@ class SubastasController extends AbstractController
                 
                 //crea la puja del usuario
                 $puja->setMonto($puja->getMonto());
-                $puja->setEmail($email);
+                $puja->setIdUsuario($user);
                 $puja->setIdSubasta($subasta);
 
                 $entityManager = $this->getDoctrine()->getManager();
@@ -229,13 +231,14 @@ class SubastasController extends AbstractController
                 $entityManager->flush();
                 
                 $this -> addFlash('success', "Usted se encuentra participando de la subasta.");
+                return $this ->redirectToRoute('subasta_detalles',['id'=> $subasta->getIdSubasta()]);
             }
             else{
                 $this -> addFlash('danger', "Su monto no supera el monto mínimo.");
             }
         }
 
-        if((sizeOf($coleccion)) < (($user->getEmail()->getCreditos())*2)){
+        if((sizeOf($coleccion)) < (($user->getCreditos())*2)){
             //el usuario puede participar
             $subasta = $this-> getDoctrine()->getManager()->getRepository(Subastas::class)->find($id);  
             return $this ->render('/subastas/participar.html.twig', ['form' => $form->createView(), 'subasta' => $subasta] );
@@ -245,18 +248,25 @@ class SubastasController extends AbstractController
             $this -> addFlash('danger', "No puede participar en la subasta.");
             return $this ->redirectToRoute('subastas_listado');
         }
+        }
+        else{
+            //
+            return $this->render('/login/inicie_sesion.html.twig');
+        }
     }
 
     /**
      * @Route("/subasta/participando", name="subastas_participando")
      */
     public function subastasParticipando(){
-        $user = $this->getUser();
-        $email = $user->getEmail(); 
+        $user = $this->getUser()->getIdUsuario();
+        if ($user != null){
+
+        //$user = $user->getEmail(); 
         
         $coleccion = Array();
-        $idUsuarioLogeado = $email->getEmail();
-        $pujas = $this-> getDoctrine()->getManager()->getRepository(Pujas::class)->findBy(['email' => $idUsuarioLogeado]);
+        $idUsuarioLogeado = $user;
+        $pujas = $this-> getDoctrine()->getManager()->getRepository(Pujas::class)->findBy(['idUsuario' => $idUsuarioLogeado]);
         if($pujas){
             for ($i = 0; $i < sizeOf($pujas); $i++){
                 $subastaDePuja = $pujas[$i]->getIdSubasta();
@@ -267,6 +277,11 @@ class SubastasController extends AbstractController
         }
 
         return $this->render('/subastas/participando.html.twig', ['subastas' => $coleccion]);
+        }
+        else{
+            //
+            return $this->render('/login/inicie_sesion.html.twig');
+        }
     }
 
 }
