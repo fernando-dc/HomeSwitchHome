@@ -24,9 +24,24 @@
         </ul>
     </div>
 -->
-    <div class="container">
+    {% form_theme filtroForm 'bootstrap_4_layout.html.twig' %}
 
-        {{form(filtroForm)}}
+    <div class="container">
+        <br>
+        <br>
+        <div class="row">
+            <div class="col-md-8"></div>
+            <div class="col-md-4">
+                <div class="card bg-dark text-white" >
+                    <div class="card-body">
+                        <h5 class="card-title">Busqueda de residencias</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Seleccione un lugar y un rango de fechas no mayor a 2 meses</h6>
+                        {{form(filtroForm)}}
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 {% endblock %}
@@ -39,8 +54,8 @@
         jQuery(document).ready(function(){
             $('.js-datepicker-start').datepicker({
                 weekStart: 1,
-                //startDate: "+25w",
-                //endDate:"+26w",
+                startDate: "+6m",
+                endDate:"+1y",
                 daysOfWeekDisabled: "0,2,3,4,5,6",
                 daysOfWeekHighlighted: "1",
                 format: "yyyy/mm/dd",
@@ -50,8 +65,8 @@
         jQuery(document).ready(function(){
             $('.js-datepicker-end').datepicker({
                 weekStart: 1,
-                //startDate: "+25w",
-                //endDate: "+26w",
+                startDate: "+6m",
+                endDate: "+1y",
                 daysOfWeekDisabled: "1,2,3,4,5,6",
                 daysOfWeekHighlighted: "1",
                 format: "yyyy/mm/dd",

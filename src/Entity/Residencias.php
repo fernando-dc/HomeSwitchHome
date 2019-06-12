@@ -75,6 +75,11 @@ class Residencias
      * @ORM\OneToMany(targetEntity="Subastas", mappedBy="idResidencia")
      */
     private $subastas;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Fotos", mappedBy="idResidencia")
+     */
+    private $fotos;
     
     public function getIdResidencia(): ?int
     {
@@ -146,6 +151,7 @@ class Residencias
     {
         $this->reservas = new ArrayCollection();
         $this->subastas = new ArrayCollection();
+        $this->fotos = new ArrayCollection();
     }
     /**
      * 
@@ -315,5 +321,36 @@ class Residencias
             }
         }
         return false;
+    }
+
+    /**
+     * @return Collection|Fotos[]
+     */
+    public function getFotos(): Collection
+    {
+        return $this->fotos;
+    }
+
+    public function addFoto(Fotos $foto): self
+    {
+        if (!$this->fotos->contains($foto)) {
+            $this->fotos[] = $foto;
+            $foto->setIdResidencia($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFoto(Fotos $foto): self
+    {
+        if ($this->fotos->contains($foto)) {
+            $this->fotos->removeElement($foto);
+            // set the owning side to null (unless already changed)
+            if ($foto->getIdResidencia() === $this) {
+                $foto->setIdResidencia(null);
+            }
+        }
+
+        return $this;
     }
 }

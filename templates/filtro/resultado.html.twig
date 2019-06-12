@@ -40,11 +40,17 @@
                                 <p class="card-text">
                                 </p>
                                 
-                                <a href="/semana_{{semana.fecha_inicial}}_{{semana.fecha_final}}_{{semana.residencia.idResidencia}}" class="stretched-link"></a>
+                                <a href="/semana/{{semana.fecha_inicial}}_{{semana.fecha_final}}_{{semana.residencia.idResidencia}}" class="stretched-link"></a>
                             </div>
                         </div>
                 {% endfor %}
-            
+                
+        {% else %}
+
+        <div class="text-center">
+            <h2>No hay residencias para mostrar</h2>
+        </div>
+
         {% endif %}
     </div>
 

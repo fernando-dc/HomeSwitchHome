@@ -24,12 +24,12 @@ class FiltroController extends AbstractController
             ->add('lugar', TextType::class)
             ->add('fecha_inicial', DateType::class, [
                 'widget' => 'single_text',
-                'attr' => ['class' => 'js-datepicker-start', ],
+                'attr' => ['class' => 'js-datepicker-start', 'onkeydown'=>'return false', 'autocomplete'=>'off', ],
                 'html5' => false,
             ])
             ->add('fecha_final', DateType::class, [
                 'widget' => 'single_text',
-                'attr' => ['class' => 'js-datepicker-end', ],
+                'attr' => ['class' => 'js-datepicker-end', 'onkeydown'=>'return false', 'autocomplete'=>'off', ],
                 'html5' => false,
             ])
             ->add('buscar', SubmitType::class, ['label'=>'Buscar!', 'attr'=>['class'=> 'btn btn-success']])
