@@ -5,6 +5,7 @@
 
 {% block stylesheets %}
     {{ parent() }}
+    <link rel="stylesheet" href="/css/filtro.css">
 {% endblock %}
 
 {% block body %}
@@ -43,7 +44,7 @@
         
         <div class="row">
             <div class="col-md-5">
-                <img src="https://via.placeholder.com/300x400" class="img-fluid" alt="Imagen residencia">
+                <img src="{{residencia.fotos[0].ruta}}" class="img-fluid rounded border border-primary"  id="img_detalle" alt="Imagen residencia">
             </div>
             <div class="col-md-7">
                 <!-- Columnas con la informacion de la residencia -->

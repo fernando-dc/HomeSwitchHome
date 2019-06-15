@@ -11,12 +11,15 @@
     <div class="container">
         {% if semanas %}
                 {% for semana in semanas %}
-                        <div class="card mb-5 bg-dark text-white" id="semana_card" >
+                        <div class="card mb-5 bg-dark text-white residencia-img-cover" >
                             <!--
                                 <h5 class="card-header">
                                 </h5>
 
                             -->
+                            <img src="{{semana.residencia.fotos[0].ruta}}" alt="Image" class="residencia-img-cover" height="170px">
+                            <div class="card-img-overlay">
+
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-8">
@@ -42,6 +45,8 @@
                                 
                                 <a href="/semana/{{semana.fecha_inicial}}_{{semana.fecha_final}}_{{semana.residencia.idResidencia}}" class="stretched-link"></a>
                             </div>
+                        </div>
+                            
                         </div>
                 {% endfor %}
                 

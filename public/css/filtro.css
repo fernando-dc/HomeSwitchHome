@@ -1,6 +1,9 @@
-#semana_card{
-    /*margin-bottom: 2.5rem;
-    */
+
+img{
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 300px;
+    padding: 5px;
 }
 
 a.custom_card,
@@ -8,6 +11,19 @@ a.custom_card:hover{
     color: inherit;
 }
 
+.residencia-img-cover {
+    object-fit: cover;
+  
+}
+
 span#highlight{
     color: #A9FFFC;
 }
+
+#img_detalle{
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 300px;
+    padding: 5px;
+}
+
