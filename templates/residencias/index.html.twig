@@ -3,7 +3,9 @@
 {% block title %}Residencias{% endblock %}
 
 {% block bodyTitle %}
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
     <h1>Listado de residencias</h1>
+    {% endif %}
 {% endblock %}
 
 {% block body %}

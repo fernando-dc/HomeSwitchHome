@@ -14,6 +14,19 @@
     <div class="collapse navbar-collapse" id="mobile-nav">
 
       <ul class="navbar-nav ml-auto">
+        {% if is_granted('ROLE_ADMIN') %}
+          <li class="nav-item">
+            <a class="nav-link" href="/usuarios/listado">Usuarios |</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/suscripciones/configurar">Configuración de precios |</a>
+          </li>
+        {% endif %}
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <li class="nav-item">
+          <a class="nav-link" href="/usuarios/perfil">Mi Perfil |</a>
+        </li>
+        {% endif %}
         <li class="nav-item">
           <a class="nav-link" href="/residencias">Residencias |</a>
         </li>
@@ -22,8 +35,11 @@
         </li>
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
         <li class="nav-item">
-            {#para admin:<a class="nav-link" href="/logout">Cerrar sesión {{ app.user.getIdUsuario().getEmail() }}</a>#}
-            <a class="nav-link" href="/logout">Cerrar sesión</a>
+          {% if is_granted("ROLE_ADMIN") %}
+            <a class="nav-link" href="/logout">Cerrar sesión {{ app.user.getIdUsuario().getEmail() }}</a>
+          {% else %}
+            <a class="nav-link" href="/logout">Cerrar sesión {{app.user.getEmail()}}</a>
+          {% endif %}
         </li>
         {% endif %}
 

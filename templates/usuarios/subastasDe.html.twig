@@ -1,16 +1,20 @@
 {% extends 'base.html.twig' %}
-{% block title %}Subastas en las que participo{% endblock %}
+{% block title %}Subastas en las que participa {{usuario.getEmail()}}{% endblock %}
 
 {% block bodyTitle %}
     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-    <h1>Subastas en las que participo:</h1>
+    {% if is_granted("ROLE_ADMIN") %}
+    <h1>Subastas en las que participa {{usuario.getEmail()}}:</h1>
+    {% else %}
+        Tu usuario no tiene acceso a esta pagina.
+    {% endif %}
     {% endif %}
 {% endblock %}
 
 
 {% block body %}
 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-
+{% if is_granted('ROLE_ADMIN') %}
 <div class="container">
     {% if subastas %}
         <table class="table table-hover table-responsive-lg">
@@ -53,7 +57,7 @@
         <p>No hay subastas para mostrar</p>
     {% endif %}
 </div>
-
+{% endif %}
 {% else %}
     <div align="center" class="container">
         </br></br> </br></br></br>

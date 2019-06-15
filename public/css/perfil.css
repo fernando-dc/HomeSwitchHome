@@ -1,0 +1,36 @@
+.recuadro1 {
+	width:100%;
+	display:inline-block;
+	height:30.5%;
+	overflow:hidden;
+}
+.recuadro2 {
+	width:30%;
+	display:inline-block;
+	height:5.5%;
+	overflow:hidden;
+}
+.recuadro3 {
+	width:30.5%;
+	display:inline-block;
+	height:62.5%;
+	overflow:hidden;
+}
+.recuadro4 {
+	width:30.5%;
+	display:inline-block;
+	height:99.5%;
+	overflow:hidden;
+}
+.margen {
+	width:20%;
+	display:inline-block;
+	height:30.5%;
+	overflow:hidden;
+}
+#uno{
+	background-color:rgba(61, 172, 187, 0.418);
+    }
+#dos{
+    background-color:rgba(138, 233, 174, 0.418);
+    }

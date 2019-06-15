@@ -45,6 +45,13 @@ class Tarjetas
      */
     private $idUsuario;
 
+    public function setNumeroTarjeta(string $numeroTarjeta): self
+    {
+        $this->numeroTarjeta = $numeroTarjeta;
+
+        return $this;
+    }
+
     public function getNumeroTarjeta(): ?string
     {
         return $this->numeroTarjeta;

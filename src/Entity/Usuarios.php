@@ -9,6 +9,7 @@ use Doctrine\Common\Collections\Collection;
 
 use Symfony\Component\Security\Core\User\UserInterface;
 
+
 /**
  * Usuarios
  *
@@ -292,5 +293,10 @@ class Usuarios implements UserInterface
     public function getUsername()
     {
        // return $this->username;
+    }
+
+
+    public function getNumeroTarjeta(){
+
     }
 }

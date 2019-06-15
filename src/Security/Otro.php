@@ -42,7 +42,8 @@ class Otro extends AbstractFormLoginAuthenticator
 
     public function supports(Request $request)
     {
-        $matchesMyRoute = 'app_login_user' ===
+        //$matchesMyRoute = 'app_login_user' ===
+        $matchesMyRoute = 'inicio' ===
             $request->attributes->get('_route')&& $request->isMethod('POST');
 
         $matchesMyUri = '/path/to/secured/resource' ===
@@ -79,7 +80,7 @@ class Otro extends AbstractFormLoginAuthenticator
 
         if (!$user) {
             // fail authentication with a custom error
-            throw new CustomUserMessageAuthenticationException('Email could not be found.');
+            throw new CustomUserMessageAuthenticationException('Email inválido.');
         }
 
         return $user;
@@ -122,6 +123,7 @@ class Otro extends AbstractFormLoginAuthenticator
 
     protected function getLoginUrl()
     {
-        return $this->urlGenerator->generate('app_login_user');
+        //return $this->urlGenerator->generate('app_login_user');
+        return $this->urlGenerator->generate('inicio');
     }
 }

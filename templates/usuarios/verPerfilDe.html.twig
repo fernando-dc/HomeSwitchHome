@@ -1,0 +1,93 @@
+{% extends 'base.html.twig' %}
+{% block title %}Perfil{% endblock %}
+
+{% block bodyTitle %}
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+    {% if is_granted("ROLE_ADMIN") %}
+        <h1>Detalles de Usuario</h1>
+    {% else %}
+        Tu usuario no tiene acceso a esta pagina.
+    {% endif %}
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    <link rel="stylesheet" href="/css/perfil.css">
+
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+    {% if is_granted("ROLE_ADMIN") %}
+    <div class="margen"></div>
+    <div class="recuadro3">
+    <div class="recuadro1" id="uno">
+        <p align="center"><strong><font size=4>Datos personales</font></strong></p>
+        <p align="center"><strong>Nombre: </strong>{{ usuario.getNombre() }} {{ usuario.getApellido() }}</p>
+        <p align="center"><strong>DNI: </strong>{{ usuario.getDni() }}</p>
+        <p align="center"><strong>Email: </strong>{{ usuario.getEmail() }}</p>
+        <p align="center"><strong>Fecha de registro: </strong>{{ usuario.getFechaRegistro().format('Y-m-d') }}</p>
+        </br></br>
+    </div>
+
+    </br>
+
+    <div class="recuadro1" id="uno">
+        <p align="center"><strong><font size=4>Forma de pago</font></strong></p>
+        <p align="center"><strong>Número de tarjeta: </strong> {{ tarjeta.getNumeroTarjeta() }}</p>
+        <p align="center"><strong>Vencimiento: </strong>{{ tarjeta.getVencimiento() }}</p>
+        </br></br></br></br></br>
+    </div>
+    </div>
+
+    <div class="recuadro4" id="dos">
+        <p align="center"><strong>Sus créditos disponibles:  {{ usuario.getCreditos() }}</strong></p>
+        <p align="center"><strong>Su suscripción: <font color="Green"> {{ usuario.getSuscripcion().getNombre() }}</font></strong></p>
+        
+        <!-- Button trigger modal -->
+                            <p align="center"><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal">
+                                Cambiar de suscripción
+                            </button></p>
+                            <!-- Modal -->
+                            <div  align="center" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Cambiar suscripción</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            {% if usuario.getSuscripcion().getNombre() == 'standard' %}
+                                                Está seguro que quiere cambiar la suscripcion del usuario {{ usuario.getEmail() }} a suscripción Premium
+                                            {% else %}
+                                                Está seguro que quiere cambiar la suscripcion del usuario {{ usuario.getEmail() }} a suscripción Standard
+                                            {% endif %}
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                                            <a href="{{ path('cambiar_suscripcion', {'usuario_email': (usuario.getEmail())}) }}" class="btn btn-primary">Si</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+
+        <p align="center"><a href="{{ path('ver_subastas_de_un_usuario', {'idUsuario': usuario.getIdUsuario()}) }}" class="btn btn-info">
+            Subastas en las que participa
+        </a></p>
+        <p align="center"><a href="{{ path('ver_reservas_de_un_usuario', {'idUsuario': usuario.getIdUsuario()}) }}" class="btn btn-info">
+            Sus reservas
+        </a></p>
+        </br></br></br></br></br></br></br></br></br>
+    </div>
+    {% endif %}
+{% else %}
+    <div align="center" class="container">
+        </br></br> </br></br></br>
+        <p>No ha iniciado sesión</p>
+        <a href="/inicio" class="btn btn-info">Iniciar sesión</a>
+    </div>
+{% endif %}
+{% endblock %}
