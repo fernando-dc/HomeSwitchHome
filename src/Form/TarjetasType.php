@@ -20,7 +20,7 @@ class TarjetasType extends AbstractType
         ->add('numero_tarjeta', TextType::class, array('attr' => array('class' => 'form-control')))
         ->add('codigo', NumberType::class, array('attr' => array('class' => 'form-control')))
         ->add('vencimiento', TextType::class, array('attr' => array('class' => 'form-control')))
-        ->add('IdUsuario',UsuariosType::class, ['label'=>'Datos:']) 
+        ->add('IdUsuario',UsuariosType::class, ['label'=>'Datos personales:']) 
         ;
     }
 

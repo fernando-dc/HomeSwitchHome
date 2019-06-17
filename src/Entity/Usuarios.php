@@ -87,12 +87,12 @@ class Usuarios implements UserInterface
     private $suscripcion;
 
     /**
-     * @ORM\OneToMany(targetEntity="Subastas", mappedBy="email")
+     * @ORM\OneToMany(targetEntity="Subastas", mappedBy="idUsuario")
      */
     private $subastas;
 
     /**
-     * @ORM\OneToMany(targetEntity="SemanasReserva", mappedBy="idResidencia")
+     * @ORM\OneToMany(targetEntity="SemanasReserva", mappedBy="idUsuario")
      */
     private $reservas;
 

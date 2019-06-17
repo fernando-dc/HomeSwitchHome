@@ -19,18 +19,18 @@
         <link rel="stylesheet" href="/css/base.css">
         {% block stylesheets %}
         
-        <!-- Bootstrap-->
+        <!-- Bootstrapss-->
         
         {% endblock %}
         
         <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.css" rel="stylesheet" type="text/css" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.js" type="text/javascript"></script>
         
+        {% include ('includes/navbar.html.twig') %}
     </head>
 
     <body>
         
-        {% include ('includes/navbar.html.twig') %}
 
         {% block bodyTitleStyle %}
             <br>

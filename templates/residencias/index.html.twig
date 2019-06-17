@@ -10,6 +10,10 @@
 
 {% block body %}
     <div class="container">
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <a href="{{ path('residencias_new') }}" class="btn btn-success">Añadir residencia</a>
+        {% endif %}
+        <br><br>
         {% if residencias %}
         <table class="table table-hover table-responsive-lg">
             <thead class="thead-dark">
@@ -17,8 +21,11 @@
                     <!--
                         <th>IdResidencia</th>
                     -->
+                    <th></th>
+                    <th>Nombre</th>
                     <th>Tipo</th>
                     <th>Habitaciones</th>
+                    <th>Ciudad</th>
                     <th>Descripcion</th>
                     <th>Acciones</th>
                 </tr>
@@ -29,8 +36,13 @@
                     <!--
                         <td>{{ residencia.idResidencia }}</td>
                     -->
+                    <td style="width:20%;heigth:30%">
+                            <img src="{{residencia.fotos[0].ruta}}" class="img-fluid border border-primary" alt="Imagen residencia">
+                    </td>
+                    <td>{{ residencia.getNombre }}</td>
                     <td>{{ residencia.tipo }}</td>
                     <td>{{ residencia.habitaciones }}</td>
+                    <td>{{ residencia.getIdDireccion().getCiudad() }}</td>
                     <td>{{ residencia.descripcion }}</td>
                     <td>
                         <a href="{{ path('residencias_show', {'idResidencia': residencia.idResidencia}) }}" class="btn btn-info">Detalle</a>
@@ -48,8 +60,6 @@
              <h3>No hay subastas para mostrar</h3>
         {% endif %}
 
-        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-            <a href="{{ path('residencias_new') }}" class="btn btn-success">Añadir residencia</a>
     </div>
 {#{% else %}
     <div align="center" class="container">
@@ -57,5 +67,5 @@
         <p>No ha iniciado sesión</p>
         <a href="/inicio" class="btn btn-info">Iniciar sesión</a>
     </div>#}
-{% endif %}
+
 {% endblock %}

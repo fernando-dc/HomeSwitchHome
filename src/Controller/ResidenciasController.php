@@ -18,9 +18,7 @@ class ResidenciasController extends AbstractController
     public function listadoResidencias()
     {
         $em = $this->getDoctrine()->getManager();
-        $residencias = $em->getRepository(Residencias::class)->findAll();
-
-
+        $residencias = $em->getRepository(Residencias::class)->findBy(['eliminado' => 0]);  
         return $this-> render('residencias/listado.html.twig', ['residencias' => $residencias]);
     }
     /**
