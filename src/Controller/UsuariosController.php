@@ -224,6 +224,10 @@ class UsuariosController extends AbstractController
     public function misReservas(){
          $usuario = $this->getUser();
 
+         if($this->isGranted('ROLE_ADMIN')){
+            $usuario = $usuario->getIdUsuario();
+        }
+
          $reservas = $this->getDoctrine()->getManager()->getRepository(SemanasReserva::class)->findBy(['idUsuario' => $usuario->getIdUsuario()]);
 
          return $this->render("/usuarios/misReservas.html.twig", ['reservas' => $reservas]);

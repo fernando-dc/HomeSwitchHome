@@ -11,7 +11,6 @@
         <table class="table table-hover table-responsive-lg">
             <thead class="thead-dark">
                 <tr>
-                    <th>Usuario</th>
                     <th>Nombre</th>
                     <th>Apellido</th>
                     <th>Email</th>
@@ -24,7 +23,6 @@
             <tbody>
                 {% for usuario in usuarios %}
                     <tr>
-                        <td></td>
                         <td>{{ usuario.getNombre() }}</td>
                         <td> {{ usuario.getApellido() }} </td>
                         <td> {{ usuario.getEmail() }} </td>

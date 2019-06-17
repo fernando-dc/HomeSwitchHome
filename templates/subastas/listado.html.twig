@@ -11,9 +11,10 @@
     {% if is_granted('ROLE_ADMIN') %}
     <a href="/subasta/new" class="btn btn-success">Crear subasta</a>
     {% endif %}
-
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
     <a href="/subasta/participando" class="btn btn-primary">Ver subastas en las que participo</a>
     </br></br>
+    {% endif %}
     {% if subastas %}
         <table class="table table-hover table-responsive-lg">
             <thead class="thead-dark">
@@ -75,7 +76,7 @@
             </tbody>
         </table>
     {% else %}
-        <p>No hay subastas para mostrar</p>
+        <p align="center">No hay subastas para mostrar</p>
     {% endif %}
 
     

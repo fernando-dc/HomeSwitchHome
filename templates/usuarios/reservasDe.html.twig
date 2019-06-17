@@ -30,7 +30,9 @@
             <tbody>
                 {% for reserva in reservas %}
                     <tr>
-                        <td>Aca iría la foto</td>
+                        <td style="width:20%;heigth:30%">
+                            <img src="{{reserva.getIdResidencia.fotos[0].ruta}}" class="img-fluid border border-primary" alt="Imagen residencia">
+                    </td>
                         <td>{{ reserva.getIdResidencia().getNombre() }}</td>
                         <td>
                             <strong> <font color='Blue'>
@@ -45,7 +47,7 @@
         </table>
     </div>
     {% else %}
-        <p>No hay reservas para mostrar</p>
+        <p align="center">No hay subastas para mostrar</p>
     {% endif %}
 {% endif %}
 {% else %}
