@@ -5,54 +5,55 @@
 <link rel="stylesheet" href="/css/base.css">
 {% if not(is_granted('IS_AUTHENTICATED_FULLY')) %}
 
+        <div class="recuadro1" style="top:70px;height:40px">
+            <font size=4 color="Black"><p align="center">Subasta recomendada</p></font>
+        </div>
+
         <div class='recuadro1' id="uno">
             <div align="center">
-                <div class='recuadro4' id='dos' >
+            {% if subastas %}
+                <div class='recuadro4' id='dos' style="top: 15%" style="heigth:150px" >
                     <font size=5 color="Black">
-                        <strong>Subasta de la residencia: {{ (subastas[0].getIdResidencia()).getNombre() }}</p>
-                        </br>
+                        <strong>{{ (subastas[0].getIdResidencia()).getNombre() }}</strong>
                     </font>
                     <font size=3 color="Black">
                     <p>Para la semana: {{ subastas[0].getFechaInicio().format('Y-m-d') }} - {{ subastas[0].getFechaFin().format('Y-m-d') }}</p>
                 </div>
                 </font>
-                <font size=5 color="Fuchsia">
-                    <strong>Último monto pujado: ${{ subastas[0].getPrecioActual() }}</p>
-                </font>
-                <font size=4 color="Black">
-                    <p>Comenzó el día: {{ subastas[0].getFechaSubasta().format('Y-m-d') }}
-                    </br>Las subastas duran 3 días ¡No te la pierdas!</p>
-                </font>
-            </div>
-            <div class='recuadro3' id='dos' >
-                <div align="center" class="container" >
-                    <table class="table-hover">
-                        <thead>
-                            <tr>
-                                <th>Tipo</th>
-                                <th>Ambientes </th>
-                                <th>Provincia</th>
-                                <th>Ciudad</th>
-                                <th>Calle</th>
-                                <th >Altura</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>{{subastas[0].getIdResidencia().getTipo()}}</td>
-                            <td align="center">{{ subastas[0].getIdResidencia().getHabitaciones() }}</td>
-                            <td>{{ subastas[0].getIdResidencia().getProvincia()}}</td>
-                            <td>{{ subastas[0].getIdResidencia().getCiudad()}}</td>
-                            <td>{{ subastas[0].getIdResidencia().getCalle()}}</td>
-                            <td>{{ subastas[0].getIdResidencia().getNumero()}}</td>
-                    </table>
+                <div class='recuadro4' style="top:220px;height:300px" >
+                    <font size=5> 
+                        <strong class="text-success">Último monto pujado: ${{ subastas[0].getPrecioActual() }}</strong>
+                    </font>
+                    </br>
+                    <font size=3 color="Black">
+                        <strong>Comenzó el día: {{ subastas[0].getFechaSubasta().format('Y-m-d') }}</strong>
+                        
+                        <p>¡No te la pierdas!</p>
+                    <strong><p align="center">Tipo: {{subastas[0].getIdResidencia().getTipo()}}</p>
+                    <p align="center">Ambientes: {{ subastas[0].getIdResidencia().getHabitaciones() }}</p>
+                    <a href="#" title="Direccion" data-toggle="popover" data-trigger="hover" data-content="
+                                [ Calle: {{subastas[0].getIdResidencia().getIdDireccion().getCalle()}}
+                                Numero: {{subastas[0].getIdResidencia().getIdDireccion().getNumero()}}
+                                Ciudad: {{subastas[0].getIdResidencia().getIdDireccion().getCiudad()}}
+                                Provincia: {{subastas[0].getIdResidencia().getIdDireccion().getProvincia}} ]">
+                                Ubicación
+                            </a>
+                    </strong>
+                    </font>
                 </div>
-                </br></br>
-                <p align="center">{{ subastas[0].getIdResidencia().getDescripcion() }}</p>
-                <p align="center">aca va la foto</p>
             </div>
+        {% else %}
+            <br><br>
+            <font size=5 color="Black">
+                <strong>Por el momento no hay subastas activas.</strong>
+            </font>
+            </div>
+        {% endif %}
         </div>
-        <div aling="center" class='recuadro1' id="uno">
+        <div class="recuadro1" style="top:70px;height:40px;left:460px">
+            <font size=4 color="Black"><p align="center">Hotsale recomendado</p></font>
+        </div>
+        <div aling="center" class='recuadro1' id="uno" style="left: 30%">
             <div align="center">
                 </br></br>
                 <font size=5 color="Black">
@@ -121,4 +122,9 @@
         <a class="nav-link" href="/residencias">Ir a Home</a>
     </div>
 {% endif %}
+<script>
+    $(document).ready(function(){
+        $('[data-toggle="popover"]').popover();
+    });
+    </script>
 {% endblock %}

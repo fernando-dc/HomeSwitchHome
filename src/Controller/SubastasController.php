@@ -10,6 +10,7 @@ use App\Form\SubastaFormType;
 use App\Entity\Subastas;
 use App\Entity\Pujas;
 use App\Entity\Usuarios;
+use App\Entity\Notificaciones;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -158,6 +159,14 @@ class SubastasController extends AbstractController
 
             $em->persist($reserva);
             $em->flush();
+
+            //aca se hace la notificación para el ganador
+            $notificacion = new Notificaciones();
+            $notificacion->setIdUsuario($usuario);
+            $notificacion->setTexto('¡Has ganado la subasta! ' );
+            $em->persist($notificacion);
+            $em->flush();
+
 
             $this -> addFlash('success','Subasta finalizada con exito. El ganador de la subasta es: ' . $usuario->getNombre() . ' ' . $usuario->getApellido());
             return $this ->redirectToRoute('subastas_listado');

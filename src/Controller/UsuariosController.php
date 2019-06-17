@@ -24,12 +24,15 @@ use App\Entity\Tarjetas;
 use App\Entity\Suscripciones;
 use App\Entity\SemanasReserva;
 use App\Entity\Pujas;
+use App\Entity\Notificaciones;
 
 use App\Form\TarjetasType;
+use App\Form\UsuariosType;
 
 
 class UsuariosController extends AbstractController
 {
+
     /**
     * @Route("/usuarios/perfil", name="miPerfil")
     */
@@ -54,6 +57,24 @@ class UsuariosController extends AbstractController
 
         return $this->render("/usuarios/verPerfilDe.html.twig", ['usuario' => $usuario, 'tarjeta' => $tarjeta]);
     }
+
+    /**
+     * @Route("/usuarios/notificaciones", name="notificaciones")
+     */
+    public function notificaciones(){
+
+        $usuario = $this->getUser();
+        if($usuario != null){
+            $notificaciones = $this->getDoctrine()->getManager()->getRepository(Notificaciones::class)->findBy(['idUsuario' => $usuario->getIdUsuario()]);
+
+            return $this->render("/usuarios/notificaciones.html.twig", ['notificaciones' => $notificaciones]);
+        }
+        else{
+            return $this->render('/login/inicie_sesion.html.twig');
+        }
+    }
+
+
     /**
      * @Route("/usuarios/registrarsePaso1", name="registrarse_paso1")
      */
@@ -91,6 +112,66 @@ class UsuariosController extends AbstractController
 
 
     }
+
+    /**
+     * @var string
+     */
+    private $emailInvalido;
+
+    /**
+     * @Route("/usuarios/edit", name="usuario_edit",  methods={"GET","POST"})
+     */
+    public function editarUsuario(Request $request): Response{
+
+        $emailInvalido = 'false';
+
+        $usuario = $this->getUser();
+
+        if($this->isGranted('ROLE_ADMIN')){
+            $usuario = $usuario->getIdUsuario();
+        }
+        $emailLogeado = $usuario->getEmail();
+
+        if($usuario != null){
+            $form = $this->createForm(UsuariosType::class, $usuario);
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $emailNuevo = $form->getData()->getEmail();
+                if($emailNuevo != $emailLogeado){
+                    if($this->getDoctrine()->getManager()->getRepository(Usuarios::class)->findBy(['email' => $emailNuevo]) == null){
+                        $this->getDoctrine()->getManager()->flush();
+
+                        return $this->redirectToRoute('miPerfil');
+                    }
+                    else{
+                        $emailInvalido = 'true';
+                        //$this->addFlash('danger', 'Email ya existente en el sistema. Modificación fallida.');
+                        //return $this->redirectToRoute('miPerfil');
+                    }
+                }
+                if($emailNuevo == $emailLogeado){
+                        $this->getDoctrine()->getManager()->flush();
+
+                        return $this->redirectToRoute('miPerfil');
+                }
+                
+            }
+            if($emailInvalido == 'true'){
+                $this->addFlash('danger', 'Email ya existente en el sistema. Modificación fallida.');
+                return $this->redirectToRoute('usuario_edit');
+            }
+            return $this->render('/usuarios/edit.html.twig', [
+                'usuario' => $usuario,
+                'form' => $form->createView(),
+            ]); 
+        }
+        else{
+            //
+            return $this->render('/login/inicie_sesion.html.twig');
+        }
+    }
+
 
     /**
      * @Route("/usuarios/listado", name="usuarios_listado")

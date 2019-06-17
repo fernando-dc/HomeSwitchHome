@@ -27,8 +27,10 @@ class srcApp_KernelDevDebugContainerUrlMatcher extends Symfony\Bundle\FrameworkB
             '/subasta/participando' => [[['_route' => 'subastas_participando', '_controller' => 'App\\Controller\\SubastasController::subastasParticipando'], null, null, null, false, false, null]],
             '/suscripciones/configurar' => [[['_route' => 'configurar_precios', '_controller' => 'App\\Controller\\SuscripcionesController::configurarSuscripciones'], null, null, null, false, false, null]],
             '/usuarios/perfil' => [[['_route' => 'miPerfil', '_controller' => 'App\\Controller\\UsuariosController::perfil'], null, null, null, false, false, null]],
+            '/usuarios/notificaciones' => [[['_route' => 'notificaciones', '_controller' => 'App\\Controller\\UsuariosController::notificaciones'], null, null, null, false, false, null]],
             '/usuarios/registrarsePaso1' => [[['_route' => 'registrarse_paso1', '_controller' => 'App\\Controller\\UsuariosController::mayorDeEdad'], null, null, null, false, false, null]],
             '/usuarios/registrarsePaso2' => [[['_route' => 'app_usuarios_registrarse', '_controller' => 'App\\Controller\\UsuariosController::registrarse'], null, null, null, false, false, null]],
+            '/usuarios/edit' => [[['_route' => 'usuario_edit', '_controller' => 'App\\Controller\\UsuariosController::editarUsuario'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
             '/usuarios/listado' => [[['_route' => 'usuarios_listado', '_controller' => 'App\\Controller\\UsuariosController::listado'], null, null, null, false, false, null]],
             '/usuarios/misReservas' => [[['_route' => 'mis_reservas', '_controller' => 'App\\Controller\\UsuariosController::misReservas'], null, null, null, false, false, null]],
         ];

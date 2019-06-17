@@ -1,31 +1,15 @@
 .recuadro1 {
+	position: fixed;
 	width:100%;
 	display:inline-block;
-	height:30.5%;
+	height:280px;
 	overflow:hidden;
 }
-.recuadro2 {
+.recuadro1_2 {
+	position: absolute;
 	width:30%;
 	display:inline-block;
-	height:5.5%;
-	overflow:hidden;
-}
-.recuadro3 {
-	width:30.5%;
-	display:inline-block;
-	height:62.5%;
-	overflow:hidden;
-}
-.recuadro4 {
-	width:30.5%;
-	display:inline-block;
-	height:99.5%;
-	overflow:hidden;
-}
-.margen {
-	width:20%;
-	display:inline-block;
-	height:30.5%;
+	height:135px;
 	overflow:hidden;
 }
 #uno{
