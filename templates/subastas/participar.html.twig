@@ -5,15 +5,16 @@
 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
 
     <div align="center">
-        <h1>Monto mínimo: {{ subasta.precioActual() }}</h1>
+        <h1>Monto mínimo: {{ subasta.precioActual() + 1 }}</h1>
         <br/>
         <h1 class="h3 mb-3 font-weight-normal">Ingresa el monto a pujar:</h1>
         <br/>
 
+        <div align="center" style="width:25%" class="container">
         {{ form_start(form) }}
         {{ form_widget(form) }}
         {{ form_end(form) }}
-
+        </div>
         <br/>
         <a href="/subastas/listado" class="btn btn-outline-info">Cancelar</a>
 

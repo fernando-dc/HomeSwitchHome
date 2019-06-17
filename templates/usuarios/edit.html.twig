@@ -1,0 +1,39 @@
+{% block title %}
+{% endblock %}
+{% block bodyTitle %}
+{% endblock %}
+{% block body %}
+
+{% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        {% for message in app.flashes('danger') %}
+            <div class="alert alert-danger">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/base.css">
+
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+<h1 align="center">Ingresa los datos que queres modificar:</h1>
+<div align="center" style="width:25%" class="container">
+    </br></br>
+    
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        {{ form_end(form) }}
+
+        <a href="{{ path('miPerfil') }}" class="btn btn-danger">Cancelar</a>
+
+        </div>
+
+{% endif %}
+{% endblock %}

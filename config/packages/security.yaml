@@ -1,9 +1,13 @@
 security:
+    encoders:
+        App\Entity\Usuarios:
+            algorithm: bcrypt
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
-        users:
-            entity:
-                class: App\Entity\Administradores
+        app_user_provider: 
+            entity: { class: App\Entity\Usuarios }
+        app_customer_provider: 
+            entity: { class: App\Entity\Administradores }
         #in_memory: { memory: ~ }
     firewalls:
         dev:
@@ -11,9 +15,12 @@ security:
             security: false
         main:
             anonymous: true
+            provider: app_user_provider
             guard:
+                entry_point: App\Security\AppCustomAuthenticator
                 authenticators:
                     - App\Security\AppCustomAuthenticator
+                    - App\Security\Otro
             logout:
                 path: app_logout
                 target: 'inicio'
@@ -30,5 +37,8 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         #- { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-         - { path: ^/admin, roles: ROLE_ADMIN }
+        # - { path: ^/, roles: ROLE_ADMIN }
+        - { path: ^/usuarios/listado, roles: ROLE_ADMIN }
+        - { path: ^/configurar/^, roles: ROLE_ADMIN }
+        
         # - { path: ^/profile, roles: ROLE_USER }

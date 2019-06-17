@@ -1,0 +1,46 @@
+
+ESTE TEMPLATE NO ESTA EN USO, LO DEJO POR LAS DUDAS.
+{#{% block title %}{% endblock %}
+
+{% block body %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<br/><br/><br/><br/>
+<div align="center">
+    <form style="width:30%" method="post">
+        {% if error %}
+            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+        <label for="inputEmail" class="sr-only">Email</label>
+        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+
+        <input type="hidden" name="_csrf_token"
+           value="{{ csrf_token('authenticate') }}"
+        >
+
+        <input type="hidden" name="_csrf_token"
+           value="{{ csrf_token('authenticate') }}"
+        >
+
+    {#
+        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+        See https://symfony.com/doc/current/security/remember_me.html
+
+        <div class="checkbox mb-3">
+            <label>
+                <input type="checkbox" name="_remember_me"> Remember me
+            </label>
+        </div>
+    #}
+     
+    {#   <br/>
+        <div align="center">
+            <button class="btn btn-lg btn-primary" type="submit">
+                Iniciar sesión
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}#}

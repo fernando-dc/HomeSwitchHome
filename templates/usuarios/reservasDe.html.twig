@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+{% block title %}Reservas de {{usuario.getEmail()}}{% endblock %}
+
+{% block bodyTitle %}
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+    {% if is_granted("ROLE_ADMIN") %}
+    <h1>Reservas de {{usuario.getEmail()}}</h1>
+    {% else %}
+        Tu usuario no tiene acceso a esta pagina.
+    {% endif %}
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+{% if is_granted('ROLE_ADMIN') %}
+    <p>Ordenar por alguna fecha</p>
+    
+     {% if reservas %}
+     <div align="center" class="container">
+        <table class="table table-hover table-responsive-lg">
+            <thead class="thead-dark">
+                <tr>
+                    <th></th>
+                    <th>Residencia</th>
+                    <th>Semana</th>
+                    <th>Precio</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for reserva in reservas %}
+                    <tr>
+                        <td>Aca iría la foto</td>
+                        <td>{{ reserva.getIdResidencia().getNombre() }}</td>
+                        <td>
+                            <strong> <font color='Blue'>
+                                {{ reserva.getFechaInicio().format('Y-m-d') }} / {{ reserva.getFechaFin().format('Y-m-d') }}</font>
+                            </p>
+                        </td>
+                        <td> {{ reserva.getPrecio() }} </td>
+                        <td><a href="{{ path('residencias_show', {'idResidencia': reserva.idResidencia().getIdResidencia()}) }}" class="btn btn-info">Ver Residencia</a>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+        <p>No hay reservas para mostrar</p>
+    {% endif %}
+{% endif %}
+{% else %}
+    <div align="center" class="container">
+        </br></br> </br></br></br>
+        <p>No ha iniciado sesión</p>
+        <a href="/inicio" class="btn btn-info">Iniciar sesión</a>
+    </div>
+{% endif %}
+{% endblock %}

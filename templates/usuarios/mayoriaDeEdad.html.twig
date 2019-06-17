@@ -1,0 +1,35 @@
+{% block title %}
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <div class="container" align="center">
+            </br></br>
+            <p>Tu usuario no tiene acceso a esta pagina. Ya has iniciado en la plataforma.</p>
+            {% if is_granted("ROLE_ADMIN") %}
+                <a class="nav-link" href="/logout">Cerrar la de sesión {{ app.user.getIdUsuario().getEmail() }}</a>
+            {% else %}
+                <a class="nav-link" href="/logout">Cerrar la de sesión {{ app.user.getEmail() }} </a>
+            {% endif %}
+            <a class="nav-link" href="/residencias">Ir a Home</a>
+        </div>
+    {% endif %}
+{% endblock %}
+{% block body %}
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/base.css">
+
+{% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+
+
+<div align="center"  class="container">
+    </br></br>
+    <h2 align="center">Paso 1</h2>
+    <h1 align="center">Para registrarte en la plataforma de Home Switch Home, necesitás tener 18 años o más</h1>
+    </br></br>
+    <p>¿Sos mayor de edad?</p>
+        <a href="/usuarios/registrarsePaso2" class="btn btn-success">Sí</a>
+        <a href="/inicio" class="btn btn-danger">No</a>
+
+        </div>
+
+{% endif %}
+{% endblock %}

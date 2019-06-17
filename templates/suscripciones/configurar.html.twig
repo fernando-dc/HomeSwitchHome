@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Configurar suscripciones{% endblock %}
+
+{% block bodyTitle %}
+    
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+    {% if is_granted('ROLE_ADMIN') %}
+        <h1>Configurar suscripciones</h1>
+    {% else  %}
+        <h1>Tu usuario no tiene acceso a esta pagina.</h1>
+    {% endif %}
+{% endif %}
+{% endblock %}
+
+
+{% block body %}
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+{% if is_granted('ROLE_ADMIN') %}
+
+
+    <div class="container" align="center">
+
+        <p>Suscripción Standard: <strong class="text-success">${{ suscripcionStandard.getPrecio() }}</strong></p>
+        </br>
+        <a href="{{ path('configurar_suscripcion', {'suscripcion': suscripcionStandard.getNombre()}) }}" class="btn btn-warning">Configurar suscripción Standard</a>
+        </br></br>
+        <p>Suscripción Premium: <strong class="text-success">${{ suscripcionPremium.getPrecio() }}</strong></p>
+        </br>
+        <a href="{{ path('configurar_suscripcion', {'suscripcion': suscripcionPremium.getNombre()}) }}" class="btn btn-warning">Configurar suscripción Premium</a>
+{% endif %}
+{% else %}
+    <div align="center" class="container">
+        </br></br> </br></br></br>
+        <p>No ha iniciado sesión</p>
+        <a href="/inicio" class="btn btn-info">Iniciar sesión</a>
+    </div>
+{% endif %}
+{% endblock %}
