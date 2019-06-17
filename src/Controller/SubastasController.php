@@ -87,11 +87,17 @@ class SubastasController extends AbstractController
      */
     public function subastas(){
         $em = $this-> getDoctrine()->getManager();
-        $subastasActivas = $em->getRepository(Subastas::class)->findBy(['finalizada' => '0']);
-        $subastasFinalizadas = $em->getRepository(Subastas::class)->findBy(['finalizada' => '1']);
-        $subastas = array_merge($subastasActivas, $subastasFinalizadas);
-
-        return $this->render("/subastas/listado.html.twig", ['subastas' => $subastas ]);
+        if($this->isGranted('ROLE_ADMIN')){
+            $subastasActivas = $em->getRepository(Subastas::class)->findBy(['finalizada' => '0']);
+            $subastasFinalizadas = $em->getRepository(Subastas::class)->findBy(['finalizada' => '1']);
+            $subastas = array_merge($subastasActivas, $subastasFinalizadas);
+            return $this->render("/subastas/listado.html.twig", ['subastas' => $subastas ]);
+        }
+        else{
+            $subastasActivas = $em->getRepository(Subastas::class)->findBy(['finalizada' => '0']);
+            return $this->render("/subastas/listado.html.twig", ['subastas' => $subastasActivas ]);
+        }
+        
     }
 
     /**

@@ -4,6 +4,9 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
+
 /**
  * Tarjetas
  *
@@ -18,6 +21,7 @@ class Tarjetas
      * @ORM\Column(name="numero_tarjeta", type="string", length=16, nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
+     * @Assert\Length(16)
      */
     private $numeroTarjeta;
 
@@ -25,6 +29,7 @@ class Tarjetas
      * @var int
      *
      * @ORM\Column(name="codigo", type="integer", nullable=false)
+     * @Assert\Length(4)
      */
     private $codigo;
 
@@ -93,5 +98,15 @@ class Tarjetas
         return $this;
     }
 
-
+    /**
+     * @Assert\Callback
+     * Checkea que el vencimiento no sea menor al mes y año actual
+     */
+    public function validarVencimiento(){
+        if ($this->vencimiento< date('my')) {
+            $context->buildViolation('La tarjeta esta vencida')
+                -> atPath('vencimiento')
+                ->addViolation();
+        }
+    }
 }
