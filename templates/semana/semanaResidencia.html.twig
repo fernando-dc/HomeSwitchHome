@@ -1,0 +1,188 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}Buscar Residencias{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="/css/filtro.css">
+{% endblock %}
+
+{% block body %}
+<div class="container-fluid pl-5 pr-5">
+    <div class="jumbotron">
+        <div class="row mb-4">
+            <div class="col-8">
+                <h2>
+                    {{residencia.nombre}}
+                </h2>
+            </div>
+            <div class="col-4">
+                <div class="card float-right text-center text-white bg-info mb-1"  style="max-width: 20rem;">
+                    <div class="card-body">
+                        <!--
+                            <h5 class="card-title">Semana</h5>
+                        -->
+                        <p class="card-text">
+                            Desde el:
+                            <span id="highlight">
+                                <strong>
+                                    {{semana.fecha_inicial}}
+                                </strong>
+                            </span>
+                            al:
+                            <span id="highlight">
+                                <strong>
+                                    {{semana.fecha_final}}
+                                </strong>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-5">
+                <img src="{{residencia.fotos[0].ruta}}" class="img-fluid border border-primary"  id="img_detalle" alt="Imagen residencia">
+            </div>
+            <div class="col-md-7">
+                <!-- Columnas con la informacion de la residencia -->
+                <div class="row">
+                    <div class="col-md-7">
+                        <h5>
+                            Info de la residencia:
+                        </h5>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item list-group-item-info">
+                                <strong>Tipo:  </strong>
+                                {{residencia.tipo}}
+                            </li>
+                            <li class="list-group-item list-group-item-info">
+                                <strong>Habitaciones:  </strong>
+                                {{residencia.habitaciones}}
+                            </li>
+                            <li class="list-group-item list-group-item-info">
+                                <strong>Descripcion:  </strong>
+                                <br>
+                                {{residencia.descripcion}}
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="col-md-5">
+                        <h5>
+                            Direccion:
+                        </h5>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item list-group-item-info">
+                                <strong>Provincia:  </strong>
+                                {{residencia.idDireccion.provincia}}
+                            </li>
+                            <li class="list-group-item list-group-item-info">
+                                <strong>Ciudad:  </strong>
+                                {{residencia.idDireccion.ciudad}}
+                            </li>
+                            <li class="list-group-item list-group-item-info">
+                                <strong>Codigo postal:  </strong>
+                                {{residencia.idDireccion.codigoPostal}}
+                            </li>
+                            <li class="list-group-item list-group-item-info">
+                                <strong>Calle:  </strong>
+                                {{residencia.idDireccion.calle}}
+                            </li>
+                            <li class="list-group-item list-group-item-info">
+                                <strong>Numero:  </strong>
+                                {{residencia.idDireccion.numero}}
+                            </li>
+                            
+                            <br>
+                            
+                            {% if residencia.idDireccion.piso is not null %}
+                            <li class="list-group-item list-group-item-info">
+                                <strong>Piso:  </strong>
+                                {{residencia.idDireccion.piso}}
+                            </li>
+                            {% endif %}
+                            
+                            {% if residencia.idDireccion.depto is not null %}
+                            <li class="list-group-item list-group-item-info">
+                                <strong>Depto:  </strong>
+                                {{residencia.idDireccion.depto}}
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                    
+                </div>
+                
+            </div>
+            
+        </div>
+
+            <br>
+            <br>
+
+            <!-- Button trigger modal -->
+            <div class="text-right">
+                <!--TODO: Cambiar el ROLE_USER por ROLE_PREMIUM o el que sea requerido solo para el usuario premium y admin-->
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalAdjudicar" data-backdrop="static" data-keyboard="false"
+                {% if not is_granted('ROLE_USER') %} disabled="true" {% endif %}
+                >
+                    Adjudicar
+                </button>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="modalAdjudicar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Confirmar operacion</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {% if usuario is not null %}
+                        {% if usuario.getIdUsuario.getCreditos >= 1 %}
+                            <h5>
+                                La operacion requiere 1 credito
+                            </h5>
+                            <h4>
+                                Creditos actuales: 
+                                <strong>
+                                    {{usuario.getIdUsuario.getCreditos}}
+                                </strong>
+                            </h4>
+                            <br>
+
+                            Seguro que desea concretar la operacion?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Dejame pensarlo</button>
+                            <a href="/semana/adjudicar/{{semana.fecha_inicial}}_{{semana.fecha_final}}_{{residencia.idResidencia}}" class="btn btn-success">Confirmar</a>
+                        </div>
+                        {% else %}
+                            <div class="alert alert-danger" role="alert">
+                                ERROR: La operacion requiere 1 credito, usted no tiene creditos suficientes!
+                                    Contactese con el administrador del sitio.
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Volver</button>
+                        </div>
+                        {% endif %}
+        
+                    {% endif %}
+                </div>
+                
+                </div>
+            </div>
+            </div>
+
+           
+       </div>
+    </div>
+
+{% endblock %}

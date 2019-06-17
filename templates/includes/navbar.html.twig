@@ -4,8 +4,9 @@
 <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgb(17, 25, 27);" >
 
     <a class="navbar-brand" href="/residencias">
-        <img id="logo-image"src="/images/logos/HSH-Logo.svg" alt="Brand_logo">
-        <img id="logo-text" src="/images/logos/HSH-Text.svg" alt="">
+        {#<img id="logo-image"src="/images/logos/HSH-Logo.svg" alt="Brand_logo">
+        <img id="logo-text" src="/images/logos/HSH-Text.svg" alt="">#}
+        <image id="logo-image"src="/images/logos/HSH-Complete.svg" style="width:20%" />
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobile-nav" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -14,15 +15,32 @@
     <div class="collapse navbar-collapse" id="mobile-nav">
 
       <ul class="navbar-nav ml-auto">
+        {% if is_granted('ROLE_ADMIN') %}
+          <li class="nav-item">
+            <a class="nav-link" href="/usuarios/listado">Usuarios </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/suscripciones/configurar">Configuración de precios </a>
+          </li>
+        {% endif %}
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
         <li class="nav-item">
-          <a class="nav-link" href="/residencias">Residencias |</a>
+          <a class="nav-link" href="/usuarios/perfil">Mi Perfil </a>
+        </li>
+        {% endif %}
+        <li class="nav-item">
+          <a class="nav-link" href="/residencias">Residencias </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/subastas/listado">Subastas |</a>
+          <a class="nav-link" href="/subastas/listado">Subastas </a>
         </li>
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
         <li class="nav-item">
+          {% if is_granted("ROLE_ADMIN") %}
             <a class="nav-link" href="/logout">Cerrar sesión {{ app.user.getIdUsuario().getEmail() }}</a>
+          {% else %}
+            <a class="nav-link" href="/logout">Cerrar sesión {{app.user.getEmail()}}</a>
+          {% endif %}
         </li>
         {% endif %}
 

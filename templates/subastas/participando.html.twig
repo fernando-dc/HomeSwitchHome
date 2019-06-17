@@ -2,7 +2,9 @@
 {% block title %}Subastas en las que participo{% endblock %}
 
 {% block bodyTitle %}
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
     <h1>Subastas en las que participo:</h1>
+    {% endif %}
 {% endblock %}
 
 
@@ -11,38 +13,36 @@
 
 <div class="container">
     {% if subastas %}
-        <table class="table table-striped">
+        <table class="table table-hover table-responsive-lg">
             <thead>
                 <tr>
                     <th>Subasta</th>
-                    <th>Residencia</th>
                     <th>Precio actual</th>
                     <th>Estado</th>
-                    <th>Fecha de reserva</th>
                 </tr>
             </thead>
             <tbody>
                 {% for subasta in subastas %}
                     <tr>
-                        <td>{{ subasta.getIdSubasta() }}</td>
-                        <td>{{ (subasta.getIdResidencia()).getIdResidencia() }}</td>
+                        <td>
+                            <p>Subasta de la residencia: <strong>{{ (subasta.getIdResidencia()).getNombre() }}.</strong></p1>
+                            <p>Para la semana: 
+                            <font color="Blue">{{ subasta.getFechaInicio().format('Y-m-d') }} - {{ subasta.getFechaFin().format('Y-m-d') }}</font></p>
+                        </td>
                         <td>{{ subasta.getPrecioActual() }}</td>
                         {% if (subasta.getFinalizada() == 1) %}
                                     <td>{{ "Finalizada" }}</td>
                         {% else %}
                             <td>{{ "Activa" }}</td>
                         {% endif %}
-                        {% set stringValue = subasta.getFechaInicio().format('Y-m-d') %}
-                        <td>
-                            {{ stringValue }}
-                        </td>
                         <td>
                             <a href="/subasta/detalles{{ subasta.getIdSubasta() }}" class="btn btn-info">Detalles</a>
                         </td>
                         <td>
-                            {# TODO #}
-                            {% if (subasta.getFinalizada() != 1) %}
+                            {% if is_granted('ROLE_ADMIN')%}
+                                {% if (subasta.getFinalizada() != 1) %}
                                     <a href="/subasta/finalizar{{ subasta.getIdSubasta() }}" class="btn btn-danger">Finalizar subasta</a>
+                                {% endif %}
                             {% endif %}
                         </td>
                     </tr>

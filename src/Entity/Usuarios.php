@@ -7,13 +7,16 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
+use Symfony\Component\Security\Core\User\UserInterface;
+
+
 /**
  * Usuarios
  *
  * @ORM\Table(name="usuarios", uniqueConstraints={@ORM\UniqueConstraint(name="email", columns={"email"})}, indexes={@ORM\Index(name="suscripcion", columns={"suscripcion"})})
  * @ORM\Entity(repositoryClass="App\Repository\UsuariosRepository")
  */
-class Usuarios
+class Usuarios implements UserInterface
 {
     /**
      * @var int
@@ -84,12 +87,12 @@ class Usuarios
     private $suscripcion;
 
     /**
-     * @ORM\OneToMany(targetEntity="Subastas", mappedBy="email")
+     * @ORM\OneToMany(targetEntity="Subastas", mappedBy="idUsuario")
      */
     private $subastas;
 
     /**
-     * @ORM\OneToMany(targetEntity="SemanasReserva", mappedBy="idResidencia")
+     * @ORM\OneToMany(targetEntity="SemanasReserva", mappedBy="idUsuario")
      */
     private $reservas;
 
@@ -216,7 +219,8 @@ class Usuarios
     public function addSubasta(Subastas $subasta): self
     {
         if (!$this->subastas->contains($subasta)) {
-            $this->subastas[] = $subasta;
+            array_push($subastas, $subasta);
+            //$this->subastas[] = $subasta;
             $subasta->setIdUsuario($this);
         }
 
@@ -247,7 +251,8 @@ class Usuarios
     public function addReserva(SemanasReserva $reserva): self
     {
         if (!$this->reservas->contains($reserva)) {
-            $this->reservas[] = $reserva;
+            array_push($reservas, $reserva);
+            //$this->reservas[] = $reserva;
             $reserva->setIdResidencia($this);
         }
 
@@ -267,4 +272,31 @@ class Usuarios
         return $this;
     }
 
+
+
+
+
+    public function getSalt()
+    {
+        // podrías necesitar un verdadero salt dependiendo del encoder
+        // ver la sección salt debajo
+        return null;
+    }
+
+    public function getRoles()
+    {
+        return array('ROLE_USER');
+    }
+    public function eraseCredentials()
+    {
+    }
+    public function getUsername()
+    {
+       // return $this->username;
+    }
+
+
+    public function getNumeroTarjeta(){
+
+    }
 }

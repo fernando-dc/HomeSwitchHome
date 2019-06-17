@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}Buscar Residencias{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="/css/filtro.css">
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        {% if semanas %}
+                {% for semana in semanas %}
+                        <div class="card mb-5 bg-dark text-white residencia-img-cover" id="gradient-overlay" >
+                            <!--
+                                <h5 class="card-header">
+                                </h5>
+
+                            -->
+                                <img src="{{semana.residencia.fotos[0].ruta}}" alt="Image" class="residencia-img-cover" height="170px">
+
+                            
+                            <div class="card-img-overlay">
+
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-8">
+                                        <h3 class="card-title">
+                                            Residencia: {{semana.residencia.nombre}}
+                                        </h3>
+                                    </div>
+                                    <div class="col text-right font-weight-bold">
+                                        Desde el:
+                                        <span id="highlight">
+                                            {{semana.fecha_inicial}}
+                                        </span>
+                                        al:
+                                        <span id="highlight">
+                                            {{semana.fecha_final}}
+                                        </span>
+
+                                    </div>
+
+                                </div>
+                                <p class="card-text">
+                                </p>
+                                
+                                <a href="/semana/{{semana.fecha_inicial}}_{{semana.fecha_final}}_{{semana.residencia.idResidencia}}" class="stretched-link"></a>
+                            </div>
+                        </div>
+                            
+                        </div>
+                {% endfor %}
+                
+        {% else %}
+
+        <div class="text-center">
+            <h2>No hay residencias para mostrar</h2>
+        </div>
+
+        {% endif %}
+    </div>
+
+{% endblock %}

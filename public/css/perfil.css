@@ -1,0 +1,20 @@
+.recuadro1 {
+	position: fixed;
+	width:100%;
+	display:inline-block;
+	height:280px;
+	overflow:hidden;
+}
+.recuadro1_2 {
+	position: absolute;
+	width:30%;
+	display:inline-block;
+	height:135px;
+	overflow:hidden;
+}
+#uno{
+	background-color:rgba(61, 172, 187, 0.418);
+    }
+#dos{
+    background-color:rgba(138, 233, 174, 0.418);
+    }

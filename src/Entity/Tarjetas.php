@@ -17,7 +17,7 @@ class Tarjetas
      *
      * @ORM\Column(name="numero_tarjeta", type="string", length=16, nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue(strategy="NONE")
      */
     private $numeroTarjeta;
 
@@ -44,6 +44,13 @@ class Tarjetas
      * })
      */
     private $idUsuario;
+
+    public function setNumeroTarjeta(string $numeroTarjeta): self
+    {
+        $this->numeroTarjeta = $numeroTarjeta;
+
+        return $this;
+    }
 
     public function getNumeroTarjeta(): ?string
     {
