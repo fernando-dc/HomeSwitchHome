@@ -1,0 +1,135 @@
+{% extends 'base.html.twig' %}
+{% block title %}Perfil{% endblock %}
+
+{% block bodyTitle %}
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+    <h1>Detalles de Usuario</h1>
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    <link rel="stylesheet" href="/css/perfil.css">
+
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+
+    {% if is_granted('ROLE_ADMIN') %}
+        {% set usuario = usuario.getIdUsuario() %}
+    {% endif %}
+
+    
+    <div class="recuadro1" id="uno" style="width:30%;top:30%;left:20%">
+        <p align="center"><strong><font size=4>Datos personales</font></strong></p>
+        <p align="center"><strong>•Nombre: </strong>{{ usuario.getNombre() }} {{ usuario.getApellido() }}</p>
+        <p align="center"><strong>•DNI: </strong>{{ usuario.getDni() }}</p>
+        <p align="center"><strong>•Email: </strong>{{ usuario.getEmail() }}</p>
+        <p align="center"><strong>•Fecha de registro: </strong>{{ usuario.getFechaRegistro().format('Y-m-d') }}</p>
+        <p align="center"><a href="/usuarios/edit" class="btn btn-success">
+            Modificar mis datos
+        </a></p>
+        </br></br>
+    </div>
+
+    </br>
+
+    <div class="recuadro1" id="uno" style="width:30%;top:70%;left:20%;height:25%">
+        <p align="center"><strong><font size=4>Forma de pago</font></strong></p>
+        <p align="center"><strong>•Número de tarjeta: </strong> {{ tarjeta.getNumeroTarjeta() }}</p>
+        <p align="center"><strong>•Vencimiento: </strong>{{ tarjeta.getVencimiento() }}</p>
+        <p align="center"><a href="" class="btn btn-success">
+            Cambiar forma de pago
+        </a></p>
+        </br></br></br></br></br>
+    </div>
+
+    <div class="recuadro1" id="dos" style="width:30%;top:30%;left:53%;height:45%">
+        </br></br>
+        <p align="center"><strong>Tus créditos disponibles:  {{ usuario.getCreditos() }}</strong></p>
+        <p align="center"><strong>Tus suscripción: <font color="Green"> {{ usuario.getSuscripcion().getNombre() }}</font></strong></p>
+        
+        {##}
+
+
+        
+        <p align="center"><a href="/usuarios/notificaciones" class="btn btn-info" >
+            Notificaciones
+        </a></p>
+        <p align="center"><a href="/subasta/participando" class="btn btn-info">
+            Subastas en las que participo
+        </a></p>
+        <p align="center"><a href="/usuarios/misReservas" class="btn btn-info">
+            Mis reservas
+        </a></p>
+        </br></br></br></br></br></br></br>
+    </div>
+
+    <div class="recuadro1_2"  style="top:76%;left:53%">
+
+
+        {% if usuario.getSuscripcion.getNombre() != 'premium' %}
+            <font size=4><strong><p align="center">¡Pasate a Premium y disfruta de más beneficios!</p></strong></font>
+            
+            <!-- Button trigger modal -->
+            <p align="center"><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal">
+                Quiero ser Premium
+            </button></p>
+            <!-- Modal -->
+            <div  align="center" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Suscripción Premium</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Para pedir tu suscripción Premium, por favor contactate con la empresa. Escribinos al email: homeswitchhome@suscripciones.com
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        {% else %}
+            </br>
+            <!-- Button trigger modal -->
+            <p align="center"><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal">
+                Quiero una suscripción Standard
+            </button></p>
+            <!-- Modal -->
+            <div  align="center" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Suscripción Standard</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Para pedir tu suscripción Standard, por favor contactate con la empresa. Escribinos al email: homeswitchhome@suscripciones.com
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        {% endif %}
+
+    </div>
+
+    
+
+{% else %}
+    <div align="center" class="container">
+        </br></br> </br></br></br>
+        <p>No ha iniciado sesión</p>
+        <a href="/inicio" class="btn btn-info">Iniciar sesión</a>
+    </div>
+{% endif %}
+{% endblock %}

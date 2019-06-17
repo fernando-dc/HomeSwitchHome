@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+{% block title %}Subastas en las que participa {{usuario.getEmail()}}{% endblock %}
+
+{% block bodyTitle %}
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+    {% if is_granted("ROLE_ADMIN") %}
+    <h1>Subastas en las que participa {{usuario.getEmail()}}:</h1>
+    {% else %}
+        Tu usuario no tiene acceso a esta pagina.
+    {% endif %}
+    {% endif %}
+{% endblock %}
+
+
+{% block body %}
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+{% if is_granted('ROLE_ADMIN') %}
+<div class="container">
+    {% if subastas %}
+        <table class="table table-hover table-responsive-lg">
+            <thead>
+                <tr>
+                    <th>Subasta</th>
+                    <th>Precio actual</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for subasta in subastas %}
+                    <tr>
+                        <td>
+                            <p>Subasta de la residencia: <strong>{{ (subasta.getIdResidencia()).getNombre() }}.</strong></p1>
+                            <p>Para la semana: 
+                            <font color="Blue">{{ subasta.getFechaInicio().format('Y-m-d') }} - {{ subasta.getFechaFin().format('Y-m-d') }}</font></p>
+                        </td>
+                        <td>{{ subasta.getPrecioActual() }}</td>
+                        {% if (subasta.getFinalizada() == 1) %}
+                                    <td>{{ "Finalizada" }}</td>
+                        {% else %}
+                            <td>{{ "Activa" }}</td>
+                        {% endif %}
+                        <td>
+                            <a href="/subasta/detalles{{ subasta.getIdSubasta() }}" class="btn btn-info">Detalles</a>
+                        </td>
+                        <td>
+                            {% if is_granted('ROLE_ADMIN')%}
+                                {% if (subasta.getFinalizada() != 1) %}
+                                    <a href="/subasta/finalizar{{ subasta.getIdSubasta() }}" class="btn btn-danger">Finalizar subasta</a>
+                                {% endif %}
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No hay subastas para mostrar</p>
+    {% endif %}
+</div>
+{% endif %}
+{% else %}
+    <div align="center" class="container">
+        </br></br> </br></br></br>
+        <p>No ha iniciado sesión</p>
+        <a href="/inicio" class="btn btn-info">Iniciar sesión</a>
+    </div>
+{% endif %}
+{% endblock %}

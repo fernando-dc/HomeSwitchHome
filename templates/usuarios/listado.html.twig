@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+{% block title %}Usuarios{% endblock %}
+
+{% block bodyTitle %}
+    <h1>Usuarios del sistema</h1>
+{% endblock %}
+
+{% block body %}
+    <div align="center" class="container">
+     {% if usuarios %}
+        <table class="table table-hover table-responsive-lg">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Usuario</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Email</th>
+                    <th>Fecha de registro</th>
+                    <th>Suscripción</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for usuario in usuarios %}
+                    <tr>
+                        <td></td>
+                        <td>{{ usuario.getNombre() }}</td>
+                        <td> {{ usuario.getApellido() }} </td>
+                        <td> {{ usuario.getEmail() }} </td>
+                        <td>{{ usuario.getFechaRegistro().format('Y-m-d') }}</td>
+                        <td> {{ usuario.getSuscripcion().getNombre() }} </td>
+                        <td>
+                            {% if app.user.getIdUsuario.getEmail == usuario.getEmail() %}
+                                <a href="/usuarios/perfil" class="btn btn-warning">Ver Mi Perfil</a>
+                            {% else %}
+                                <a href="{{ path('ver_perfil_de_un_usuario', {'idUsuario': (usuario.getIdUsuario())}) }}" class="btn btn-info">Ver su Perfil</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        </div>
+        {% else %}
+            <p>El sistema aún no tiene usuarios</p>
+        {% endif %}
+{% endblock %}

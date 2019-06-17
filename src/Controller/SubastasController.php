@@ -10,6 +10,7 @@ use App\Form\SubastaFormType;
 use App\Entity\Subastas;
 use App\Entity\Pujas;
 use App\Entity\Usuarios;
+use App\Entity\Notificaciones;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -86,7 +87,9 @@ class SubastasController extends AbstractController
      */
     public function subastas(){
         $em = $this-> getDoctrine()->getManager();
-        $subastas = $em->getRepository(Subastas::class)->findAll();
+        $subastasActivas = $em->getRepository(Subastas::class)->findBy(['finalizada' => '0']);
+        $subastasFinalizadas = $em->getRepository(Subastas::class)->findBy(['finalizada' => '1']);
+        $subastas = array_merge($subastasActivas, $subastasFinalizadas);
 
         return $this->render("/subastas/listado.html.twig", ['subastas' => $subastas ]);
     }
@@ -157,6 +160,14 @@ class SubastasController extends AbstractController
             $em->persist($reserva);
             $em->flush();
 
+            //aca se hace la notificación para el ganador
+            $notificacion = new Notificaciones();
+            $notificacion->setIdUsuario($usuario);
+            $notificacion->setTexto('¡Has ganado la subasta! ' );
+            $em->persist($notificacion);
+            $em->flush();
+
+
             $this -> addFlash('success','Subasta finalizada con exito. El ganador de la subasta es: ' . $usuario->getNombre() . ' ' . $usuario->getApellido());
             return $this ->redirectToRoute('subastas_listado');
         }
@@ -185,70 +196,71 @@ class SubastasController extends AbstractController
      * @Route("/subasta/participarDeLaSubasta{id}", name="subastas_participar")
      */
     public function participarDeSubasta($id, Request $request){
-        $user = $this->getUser()->getIdUsuario();
+        $user = $this->getUser();
         if($user != null){
+            
+            if ($hasAccess = $this->isGranted('ROLE_ADMIN')){ $user = $this->getUser()->getIdUsuario(); }
 
-        //$user = $user->getEmail(); 
-        
-        $coleccion = Array();
-        $idUsuarioLogeado = $user;
-        $pujas = $this-> getDoctrine()->getManager()->getRepository(Pujas::class)->findBy(['idUsuario' => $idUsuarioLogeado]);
-        if($pujas){
-            for ($i = 0; $i < sizeOf($pujas); $i++){    
-                $subastaDePuja = $pujas[$i]->getIdSubasta();
-                if($subastaDePuja->getFinalizada() != 1 && !( in_array($subastaDePuja, $coleccion )) ){
-                    array_push($coleccion, $subastaDePuja );
+            $coleccion = Array();
+            $idUsuarioLogeado = $user;
+            $pujas = $this-> getDoctrine()->getManager()->getRepository(Pujas::class)->findBy(['idUsuario' => $idUsuarioLogeado]);
+            if($pujas){
+                for ($i = 0; $i < sizeOf($pujas); $i++){    
+                    $subastaDePuja = $pujas[$i]->getIdSubasta();
+                    if($subastaDePuja->getFinalizada() != 1 && !( in_array($subastaDePuja, $coleccion )) ){
+                        array_push($coleccion, $subastaDePuja );
+                    }
                 }
             }
-        }
         
-        $puja = new Pujas();
-        $form = $this->createFormBuilder($puja)
-        ->add('monto', IntegerType::class, array('attr' => array('class' => 'form-control')))
-        ->add('save', SubmitType::class, array('label' => 'Pujar', 'attr' => array('class' => 'btn btn-info')))
-        ->getForm();
-        $form -> handleRequest($request);
+            $puja = new Pujas();
+            $form = $this->createFormBuilder($puja)
+            ->add('monto', IntegerType::class, array('attr' => array('class' => 'form-control')))
+            ->add('save', SubmitType::class, array('label' => 'Pujar', 'attr' => array('class' => 'btn btn-info')))
+            ->getForm();
+            $form -> handleRequest($request);
 
-        if( $form->isSubmitted() && $form->isValid() ){
+            if( $form->isSubmitted() && $form->isValid() ){
 
-            $em = $this-> getDoctrine()->getManager();
-            $subasta = $em->getRepository(Subastas::class)->find($id);    
+                $em = $this-> getDoctrine()->getManager();
+                $subasta = $em->getRepository(Subastas::class)->find($id);    
 
-            $puja = $form->getData();
-            if(($puja->getMonto()) > ($subasta->getPrecioActual()) ){
+                $puja = $form->getData();
+                if(($puja->getMonto()) > ($subasta->getPrecioActual()) ){
                 
-                //crea la puja del usuario
-                $puja->setMonto($puja->getMonto());
-                $puja->setIdUsuario($user);
-                $puja->setIdSubasta($subasta);
+                    //crea la puja del usuario
+                    $puja->setMonto($puja->getMonto());
+                    $puja->setIdUsuario($user);
+                    $puja->setIdSubasta($subasta);
 
-                $entityManager = $this->getDoctrine()->getManager();
-                $entityManager->persist($puja);
-                $entityManager->flush();
+                    $entityManager = $this->getDoctrine()->getManager();
+                    $entityManager->persist($puja);
+                    $entityManager->flush();
 
-                //actualiza el precio actual de la subasta
-                $subasta->setPrecioActual($puja->getMonto());
-                $entityManager->flush();
+                    //actualiza el precio actual de la subasta
+                    $subasta->setPrecioActual($puja->getMonto());
+                    $entityManager->flush();
                 
-                $this -> addFlash('success', "Usted se encuentra participando de la subasta.");
-                return $this ->redirectToRoute('subasta_detalles',['id'=> $subasta->getIdSubasta()]);
+                    $this -> addFlash('success', "Usted se encuentra participando de la subasta.");
+                    return $this ->redirectToRoute('subasta_detalles',['id'=> $subasta->getIdSubasta()]);
+                }
+                else{
+                    $this -> addFlash('danger', "Su monto no supera el monto mínimo.");
+                }
+            }
+
+            
+            if((sizeOf($coleccion)) < (($user->getCreditos())*2)){
+                //el usuario puede participar
+                $subasta = $this-> getDoctrine()->getManager()->getRepository(Subastas::class)->find($id);  
+                return $this ->render('/subastas/participar.html.twig', ['form' => $form->createView(), 'subasta' => $subasta] );
             }
             else{
-                $this -> addFlash('danger', "Su monto no supera el monto mínimo.");
+                //el usuario no puede participar
+                $this -> addFlash('danger', "No tiene créditos suficientes para participar de la subasta.");
+                return $this ->redirectToRoute('subastas_listado');
+                }
             }
-        }
-
-        if((sizeOf($coleccion)) < (($user->getCreditos())*2)){
-            //el usuario puede participar
-            $subasta = $this-> getDoctrine()->getManager()->getRepository(Subastas::class)->find($id);  
-            return $this ->render('/subastas/participar.html.twig', ['form' => $form->createView(), 'subasta' => $subasta] );
-        }
-        else{
-            //el usuario no puede participar
-            $this -> addFlash('danger', "No puede participar en la subasta.");
-            return $this ->redirectToRoute('subastas_listado');
-        }
-        }
         else{
             //
             return $this->render('/login/inicie_sesion.html.twig');

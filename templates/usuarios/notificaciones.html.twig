@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+{% block title %}Notificaciones{% endblock %}
+
+{% block bodyTitle %}
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+    <h1>Mis notificaciones:</h1>
+    {% endif %}
+{% endblock %}
+
+
+{% block body %}
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+
+<div class="container">
+    {% if notificaciones %}
+        <table class="table table-hover table-responsive-lg">
+            <thead>
+                <tr>
+                    <th>Notificación</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for notificacion in notificaciones %}
+                    <tr>
+                        <td>
+                            <p>{{notificacion.getTexto()}}</strong></p>
+                        </td>
+                        <td>
+                            <a href="" class="btn btn-info">Ver detalles subasta</a>
+                        </td>
+                        <td>
+                            <a href="" class="btn btn-info">Ver detalles residencia</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No hay notificaciones para mostrar.</p>
+    {% endif %}
+</div>
+
+{% else %}
+    <div align="center" class="container">
+        </br></br> </br></br></br>
+        <p>No ha iniciado sesión</p>
+        <a href="/inicio" class="btn btn-info">Iniciar sesión</a>
+    </div>
+{% endif %}
+{% endblock %}

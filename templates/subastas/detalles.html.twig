@@ -2,7 +2,9 @@
 {% block title %}Subasta{% endblock %}
 
 {% block bodyTitle %}
-    <h1>Subasta numero: {{ subasta.getIdSubasta() }}</h1>
+    <h1>Subasta de la residencia: <strong>{{ (subasta.getIdResidencia()).getNombre() }}.</strong></h1>
+    <p>Para la semana: 
+    <font color="Blue">{{ subasta.getFechaInicio().format('Y-m-d') }} - {{ subasta.getFechaFin().format('Y-m-d') }}</font></p>
 {% endblock %}
 
 
@@ -12,17 +14,20 @@
         <table class="table table-hover table-responsive-lg">
                 <thead class="thead-dark">
                     <tr>
+                        <th></th>
                         <th>Residencia</th>
-                        <th>Puja actual</th>
+                        <th>Última puja</th>
                         <th>Fecha de reserva</th>
                         <th>Estado</th>
                         <th>Ganador</th>
-                        <th>Acciones</th>
+                        <th></th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td> Residencia numero: {{ (subasta.getIdResidencia()).getIdResidencia() }}
+                        <td>Aca iría la foto</td>
+                        <td> <strong>{{ (subasta.getIdResidencia()).getNombre() }}.</strong>
                             <a href="#" title="Direccion" data-toggle="popover" data-trigger="hover" data-content="
                                 [ Calle: {{subasta.getIdResidencia().getIdDireccion().getCalle()}}
                                 Numero: {{subasta.getIdResidencia().getIdDireccion().getNumero()}}
@@ -41,15 +46,19 @@
                             {% endif %}
                         {% else %}
                             <td>{{ "Activa" }}</td>
+                            <td> ------- </td>
                         {% endif %}
 
+                        
+
                         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <td><a href="/residencias/{{ ((subasta.getIdResidencia()).getIdResidencia()) }}" class="btn btn-info">Detalles residencia</a></td>
                         <td>
-                            {# TODO #}
+                            {% if is_granted('ROLE_ADMIN')%}
                             {% if (subasta.getFinalizada() != 1) %}
                                     <a href="/subasta/finalizar/{{ subasta.getIdSubasta() }}" class="btn btn-danger">Finalizar subasta</a>
                             {% endif %}
-                             <a href="/residencias/{{ ((subasta.getIdResidencia()).getIdResidencia()) }}" class="btn btn-info">Detalles residencia</a>
+                            {% endif %}
                         </td>
                         {% endif %}
                     </tr>

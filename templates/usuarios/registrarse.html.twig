@@ -1,0 +1,35 @@
+{% block title %}
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <div class="container" align="center">
+            </br></br>
+            <p>Tu usuario no tiene acceso a esta pagina. Ya has iniciado en la plataforma.</p>
+            {% if is_granted("ROLE_ADMIN") %}
+                <a class="nav-link" href="/logout">Cerrar la de sesión {{ app.user.getIdUsuario().getEmail() }}</a>
+            {% else %}
+                <a class="nav-link" href="/logout">Cerrar la de sesión {{ app.user.getEmail() }} </a>
+            {% endif %}
+            <a class="nav-link" href="/residencias">Ir a Home</a>
+        </div>
+    {% endif %}
+{% endblock %}
+{% block body %}
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/base.css">
+
+{% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+<h1 align="center">Ingresa tus datos y los de tu tarjeta:</h1>
+<div align="center" style="width:25%" class="container">
+    </br></br>
+    
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        {{ form_end(form) }}
+
+        </div>
+
+{% endif %}
+{% endblock %}

@@ -1,0 +1,33 @@
+
+.recuadro1 {
+	position: fixed;
+	left: 10px;
+	top: 15%;
+	width:29%; 
+	display:inline-block;
+	height:80.5%;
+	overflow:hidden;
+}
+.recuadro2 {
+	position: fixed;
+	right: 0px;
+	width:39.5%;
+	display:inline-block;
+	height:99.5%;
+	overflow:hidden;
+}
+.recuadro4 {
+	position: fixed;
+	/*width:99.5%;*/
+	left: 10px;
+	width:29%;
+	display:inline-block;
+	height:15.5%;
+	overflow:hidden;
+}
+#uno{
+	background-color:rgba(61, 172, 187, 0.418);
+	}
+#dos{
+	background-color:rgba(5, 190, 214, 0.205);
+	}

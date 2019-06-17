@@ -75,6 +75,11 @@ class Residencias
      * @ORM\OneToMany(targetEntity="Subastas", mappedBy="idResidencia")
      */
     private $subastas;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Fotos", mappedBy="idResidencia")
+     */
+    private $fotos;
     
     public function getIdResidencia(): ?int
     {
@@ -146,6 +151,7 @@ class Residencias
     {
         $this->reservas = new ArrayCollection();
         $this->subastas = new ArrayCollection();
+        $this->fotos = new ArrayCollection();
     }
     /**
      * 
@@ -220,7 +226,7 @@ class Residencias
         return $this;
     }
 
-
+    //$fecha_inicio y $fecha_fin esperan una instancia de la clase Date o DateTime, no un string con la fecha
     public function existeSubastaEntreFechas($fecha_inicio, $fecha_fin, $duracion):bool
     {
         foreach ($this->subastas as $subasta) {
@@ -293,6 +299,55 @@ class Residencias
             // set the owning side to null (unless already changed)
             if ($subasta->getIdResidencia() === $this) {
                 $subasta->setIdResidencia(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function ocupadaEntreFechas($f_inicial, $f_final): bool {
+        /*if ($this->hayReservaEnFecha($f_inicial,$f_final)){
+            return true;
+        }
+        return false;
+        */
+        return $this->hayReservaEnFecha($f_inicial, $f_final);
+    }
+
+    private function hayReservaEnFecha($f_inicial, $f_final):bool {
+        foreach ($this->reservas as $reserva) {
+            if($f_inicial >= $reserva->getFechaInicio() && $f_final <= $reserva->getFechaFin() ) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * @return Collection|Fotos[]
+     */
+    public function getFotos(): Collection
+    {
+        return $this->fotos;
+    }
+
+    public function addFoto(Fotos $foto): self
+    {
+        if (!$this->fotos->contains($foto)) {
+            $this->fotos[] = $foto;
+            $foto->setIdResidencia($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFoto(Fotos $foto): self
+    {
+        if ($this->fotos->contains($foto)) {
+            $this->fotos->removeElement($foto);
+            // set the owning side to null (unless already changed)
+            if ($foto->getIdResidencia() === $this) {
+                $foto->setIdResidencia(null);
             }
         }
 

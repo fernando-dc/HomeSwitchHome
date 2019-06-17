@@ -3,12 +3,19 @@
 {% block title %}Editar residencia{% endblock %}
 
 {% block bodyTitle %}
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+    {% if is_granted('ROLE_ADMIN') %}
     <h1>Editar residencia</h1>
+    {% else  %}
+        <h1>Tu usuario no tiene acceso a esta pagina.</h1>
+    {% endif %}
+    {% endif %}
 {% endblock %}
 
 
 {% block body %}
 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+{% if is_granted('ROLE_ADMIN') %}
 
     {% form_theme form 'bootstrap_4_layout.html.twig' %}
 
@@ -23,6 +30,7 @@
         <br>
             
     </div>
+{% endif %}
 {% else %}
     <div align="center" class="container">
         </br></br> </br></br></br>

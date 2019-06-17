@@ -31,7 +31,7 @@ class Fotos
     /**
      * @var \Residencias
      *
-     * @ORM\ManyToOne(targetEntity="Residencias")
+     * @ORM\ManyToOne(targetEntity="Residencias", inversedBy="fotos")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_residencia", referencedColumnName="id_residencia")
      * })
