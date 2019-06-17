@@ -226,7 +226,7 @@ class Residencias
         return $this;
     }
 
-
+    //$fecha_inicio y $fecha_fin esperan una instancia de la clase Date o DateTime, no un string con la fecha
     public function existeSubastaEntreFechas($fecha_inicio, $fecha_fin, $duracion):bool
     {
         foreach ($this->subastas as $subasta) {

@@ -11,23 +11,25 @@
     <div class="container">
         {% if semanas %}
                 {% for semana in semanas %}
-                        <div class="card mb-5 bg-dark text-white residencia-img-cover" >
+                        <div class="card mb-5 bg-dark text-white residencia-img-cover" id="gradient-overlay" >
                             <!--
                                 <h5 class="card-header">
                                 </h5>
 
                             -->
-                            <img src="{{semana.residencia.fotos[0].ruta}}" alt="Image" class="residencia-img-cover" height="170px">
+                                <img src="{{semana.residencia.fotos[0].ruta}}" alt="Image" class="residencia-img-cover" height="170px">
+
+                            
                             <div class="card-img-overlay">
 
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-8">
-                                        <h5 class="card-title">
+                                        <h3 class="card-title">
                                             Residencia: {{semana.residencia.nombre}}
-                                        </h5>
+                                        </h3>
                                     </div>
-                                    <div class="col text-right">
+                                    <div class="col text-right font-weight-bold">
                                         Desde el:
                                         <span id="highlight">
                                             {{semana.fecha_inicial}}

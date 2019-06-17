@@ -44,7 +44,7 @@
         
         <div class="row">
             <div class="col-md-5">
-                <img src="{{residencia.fotos[0].ruta}}" class="img-fluid rounded border border-primary"  id="img_detalle" alt="Imagen residencia">
+                <img src="{{residencia.fotos[0].ruta}}" class="img-fluid border border-primary"  id="img_detalle" alt="Imagen residencia">
             </div>
             <div class="col-md-7">
                 <!-- Columnas con la informacion de la residencia -->
@@ -125,7 +125,10 @@
 
             <!-- Button trigger modal -->
             <div class="text-right">
-                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalAdjudicar" data-backdrop="static" data-keyboard="false">
+                <!--TODO: Cambiar el ROLE_USER por ROLE_PREMIUM o el que sea requerido solo para el usuario premium y admin-->
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalAdjudicar" data-backdrop="static" data-keyboard="false"
+                {% if not is_granted('ROLE_USER') %} disabled="true" {% endif %}
+                >
                     Adjudicar
                 </button>
             </div>
@@ -141,12 +144,39 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    Listo para rajarte una semana?
+                    {% if usuario is not null %}
+                        {% if usuario.getIdUsuario.getCreditos >= 1 %}
+                            <h5>
+                                La operacion requiere 1 credito
+                            </h5>
+                            <h4>
+                                Creditos actuales: 
+                                <strong>
+                                    {{usuario.getIdUsuario.getCreditos}}
+                                </strong>
+                            </h4>
+                            <br>
+
+                            Seguro que desea concretar la operacion?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Dejame pensarlo</button>
+                            <a href="/semana/adjudicar/{{semana.fecha_inicial}}_{{semana.fecha_final}}_{{residencia.idResidencia}}" class="btn btn-success">Confirmar</a>
+                        </div>
+                        {% else %}
+                            <div class="alert alert-danger" role="alert">
+                                ERROR: La operacion requiere 1 credito, usted no tiene creditos suficientes!
+                                    Contactese con el administrador del sitio.
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Volver</button>
+                        </div>
+                        {% endif %}
+        
+                    {% endif %}
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Dejame pensarlo...</button>
-                    <button type="button" class="btn btn-success">Vos mandale</button>
-                </div>
+                
                 </div>
             </div>
             </div>

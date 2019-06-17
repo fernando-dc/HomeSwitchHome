@@ -1,18 +1,12 @@
-
-img{
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    width: 300px;
-    padding: 5px;
-}
-
 a.custom_card,
 a.custom_card:hover{
     color: inherit;
 }
 
-.residencia-img-cover {
+img.residencia-img-cover {
     object-fit: cover;
+    opacity: 0.5;
+    z-index: 0;
   
 }
 
@@ -21,9 +15,10 @@ span#highlight{
 }
 
 #img_detalle{
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    width: 300px;
-    padding: 5px;
+    border-radius: 0.8rem;
+}
+
+#gradient-overlay{
+    background-image: linear-gradient(to bottom right, rgba(0, 53, 255, 0.61),rgb(0, 0, 0), rgba(255, 177, 0, 0.62))
 }
 
