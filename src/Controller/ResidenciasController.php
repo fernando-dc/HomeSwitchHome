@@ -3,12 +3,19 @@
 namespace App\Controller;
 
 use App\Entity\Residencias;
+use App\Entity\Direcciones;
+use App\Entity\Fotos;
 use App\Form\ResidenciasType;
+
+use App\Form\FotoType;
 use App\Repository\ResidenciasRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+
 
 /**
  * @Route("/residencias")
@@ -18,7 +25,7 @@ class ResidenciasController extends AbstractController
     public function listadoResidencias()
     {
         $em = $this->getDoctrine()->getManager();
-        $residencias = $em->getRepository(Residencias::class)->findBy(['eliminado' => 0]);  
+        $residencias = $em->getRepository(Residencias::class)->findBy(['eliminado'=>0]);
         return $this-> render('residencias/listado.html.twig', ['residencias' => $residencias]);
     }
     /**
@@ -26,9 +33,11 @@ class ResidenciasController extends AbstractController
      */
     public function index(ResidenciasRepository $residenciasRepository): Response
     {
+        if ($hasAccess = $this->isGranted('ROLE_ADMIN')){
         return $this->render('residencias/index.html.twig', [
-            'residencias' => $residenciasRepository->findAll(),
+            'residencias' => $residenciasRepository->findBy(['eliminado'=>0]),
         ]);
+        }
     }
 
     /**
@@ -37,18 +46,45 @@ class ResidenciasController extends AbstractController
     public function new(Request $request): Response
     {
         $residencia = new Residencias();
-        $form = $this->createForm(ResidenciasType::class, $residencia);
+        $foto = new Fotos();
+        //$form = $this->createForm(ResidenciasType::class, $residencia);
+        $form = $this->createForm(FotoType::class,$foto);
         $form->handleRequest($request);
-
+        $em = $this->getDoctrine()->getManager();
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($residencia->getIDdireccion());
-            $entityManager->persist($residencia);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('residencias_index');
+            //$foto = $form->getData();
+            $residencia = $foto->getIdResidencia();
+            if($em->getRepository(Residencias::class)->findBy(['nombre'=>$residencia->getNombre()]) == null)
+            {
+                if($em->getRepository(Direcciones::class)->findBy(['calle' => $residencia->getCalle(),'numero' => $residencia->getNumero()])==null)
+        
+                
+                {        
+                    /** @var Symfony\Component\HttpFoundation\File\UploadedFile $archivo */
+                    $archivo= $foto->getRuta();     
+                    try {                     
+                        $archivo->move(
+                            '/images/residencias/',
+                            $residencia->getNombre());
+                    
+                    } catch (FileException $e){}
+                     $entityManager = $this->getDoctrine()->getManager();   
+                     $entityManager->persist($residencia->getIDdireccion());
+                     $entityManager->persist($residencia);
+                     $entityManager->flush();
+                     $this->addFlash('success','Se creo correctamente la residencia.');
+                     return $this->redirectToRoute('residencias_index');
+                }
+                else
+                {
+                     $this->addFlash('danger','Ya existe una residencia con esa direccion.');
+                }
+            }
+            else 
+            {
+                $this->addFlash('danger','Ya existe una residencia con ese nombre.');                     
+            }           
         }
-
         return $this->render('residencias/new.html.twig', [
             'residencia' => $residencia,
             'form' => $form->createView(),
@@ -92,9 +128,11 @@ class ResidenciasController extends AbstractController
      */
     public function delete(Request $request, Residencias $residencia): Response
     {
+        
+        $em = $this->getDoctrine()->getManager();
         if ($this->isCsrfTokenValid('delete'.$residencia->getIdResidencia(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($residencia);
+            $entityManager = $this->getDoctrine()->getManager(); 
+            $residencia->setEliminado(1);
             $entityManager->flush();
         }
 
