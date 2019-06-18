@@ -325,13 +325,24 @@ class Residencias
         }
         return false;
         */
-        return $this->hayReservaEnFecha($f_inicial, $f_final);
+        return $this->hayReservaEnFecha($f_inicial, $f_final) || $this->haySubastaActivaParaFecha($f_inicial, $f_final);
     }
 
     private function hayReservaEnFecha($f_inicial, $f_final):bool {
         foreach ($this->reservas as $reserva) {
             if($f_inicial >= $reserva->getFechaInicio() && $f_final <= $reserva->getFechaFin() ) {
                 return true;
+            }
+        }
+        return false;
+    }
+
+    private function haySubastaActivaParaFecha($f_inicial,$f_final):bool {
+        foreach ($this->subastas as $subasta) {
+            if ($subasta->getFinalizada() == false){
+                if ($f_inicial >= $subasta->getFechaInicio() && $f_final <= $subasta->getFechaFin()) {
+                    return true;
+                }
             }
         }
         return false;

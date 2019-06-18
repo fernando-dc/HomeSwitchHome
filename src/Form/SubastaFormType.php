@@ -37,7 +37,7 @@ class SubastaFormType extends AbstractType
             ->add('idResidencia', EntityType::class,[
                 'class' => Residencias::class,
                 'choice_label' => function($residencia){
-                    return '(' . $residencia->getNombre() . ') ' . $residencia->getTipo() . '; habitaciones: ' . $residencia->getHabitaciones();
+                    return '(' . $residencia->getNombre() . ') ' . $residencia->getTipo() . '; habitaciones: ' . $residencia->getHabitaciones(). '. En ciudad: '.$residencia->getIdDireccion()->getCiudad(). ', '. $residencia->getIdDireccion()->getProvincia();
                 },
                 'multiple'=>false,
                 'label' => 'Residencia'

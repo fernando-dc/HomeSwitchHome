@@ -66,6 +66,7 @@ class FiltroController extends AbstractController
                     //$fecha_final = date('Y-m-d', strtotime($fecha_inicial.' + 6 days'));
                     $fecha_final = clone $fecha_inicial;
                     $fecha_final->add(date_interval_create_from_date_string('6 days'));
+                    //Se evalua si la residencia esta ocupada en la semana dada, si no lo esta se agrega al arreglo de semanas libres para esa residencia
                     if (!$residencia->ocupadaEntreFechas($fecha_inicial,$fecha_final)) {
                         array_push($semanasDisponibles,['residencia'=> $residencia, 'fecha_inicial'=>$fecha_inicial->format('Y-m-d'), 'fecha_final'=>$fecha_final->format('Y-m-d')]);
                         
