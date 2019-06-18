@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 use App\Entity\SemanasReserva;
 use App\Entity\Residencias;
+use App\Entity\Notificaciones;
 
 class SemanaController extends AbstractController
 {
@@ -74,6 +75,18 @@ class SemanaController extends AbstractController
 
                 $em->persist($semanaReserva);
                 $em->flush();
+
+                //se genera la notificacion para el usuario
+                $notificacion = new Notificaciones();
+                $notificacion->setIdUsuario($user);
+                $notificacion->setIdResidencia($residencia);
+                $notificacion->setFecha((date_create(date('Y-m-d'))));
+                $notificacion->setTexto('¡Has reservado la residencia! ' );
+                $em->persist($notificacion);
+                $em->flush();
+
+
+
                 $this->addFlash('success','La residencia ha sido correctamente reservada.');
 
             }
@@ -81,6 +94,6 @@ class SemanaController extends AbstractController
 
         }
 
-        return $this->redirectToRoute('inicio');
+        return $this->redirectToRoute('filtro');
     }
 }

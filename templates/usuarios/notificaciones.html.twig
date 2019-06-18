@@ -16,6 +16,7 @@
         <table class="table table-hover table-responsive-lg">
             <thead>
                 <tr>
+                    <th>Fecha</th>
                     <th>Notificación</th>
                 </tr>
             </thead>
@@ -23,14 +24,23 @@
                 {% for notificacion in notificaciones %}
                     <tr>
                         <td>
+                            {{ notificacion.getFecha().format('Y-m-d') }}
+                        </td>
+                        <td>
                             <p>{{notificacion.getTexto()}}</strong></p>
                         </td>
-                        <td>
-                            <a href="" class="btn btn-info">Ver detalles subasta</a>
-                        </td>
-                        <td>
-                            <a href="" class="btn btn-info">Ver detalles residencia</a>
-                        </td>
+                        {% if notificacion.getIdSubasta != null %}
+                            <td>
+                                <a href="{{ path('residencias_show', {'idResidencia': notificacion.getIdSubasta.getIdResidencia.getIdResidencia}) }}" class="btn btn-info">Ver detalles residencia</a>
+                            </td>
+                            <td>
+                                <a href="{{ path('subasta_detalles', {'id': notificacion.getIdSubasta.getIdSubasta}) }}" class="btn btn-info">Ver detalles subasta</a>
+                            </td>
+                        {% else %}
+                            <td>
+                                <a href="{{ path('residencias_show', {'idResidencia': notificacion.getIdResidencia.getIdResidencia}) }}" class="btn btn-info">Ver detalles residencia</a>
+                            </td>
+                        {% endif %}
                     </tr>
                 {% endfor %}
             </tbody>
