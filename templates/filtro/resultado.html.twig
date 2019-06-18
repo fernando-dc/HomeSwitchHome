@@ -7,9 +7,14 @@
 <link rel="stylesheet" href="/css/filtro.css">
 {% endblock %}
 
+{% block bodyTitle %}
+        <h1>Semanas para residencias en: {{ubicacion}}</h1>
+{% endblock %}
+
 {% block body %}
     <div class="container">
         {% if semanas %}
+
                 {% for semana in semanas %}
                         <div class="card mb-5 bg-dark text-white residencia-img-cover" id="gradient-overlay" >
                             <!--
@@ -28,6 +33,7 @@
                                         <h3 class="card-title">
                                             Residencia: {{semana.residencia.nombre}}
                                         </h3>
+                                        <p class="card-text"> <span> Tipo: {{semana.residencia.tipo}} </span> <span>; Habitaciones: {{semana.residencia.habitaciones}}</span></p>
                                     </div>
                                     <div class="col text-right font-weight-bold">
                                         Desde el:

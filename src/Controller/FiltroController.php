@@ -74,7 +74,7 @@ class FiltroController extends AbstractController
                     $fecha_inicial ->add(date_interval_create_from_date_string('7 days'));
                 }
             }
-            return $this->render('filtro/resultado.html.twig', ['semanas' => $semanasDisponibles]);
+            return $this->render('filtro/resultado.html.twig', ['semanas' => $semanasDisponibles, 'ubicacion' => ucwords(strtolower($formData['lugar'])) ]);
 
             }
             else {
