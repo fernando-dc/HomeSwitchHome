@@ -116,7 +116,7 @@ class Otro extends AbstractFormLoginAuthenticator
         $this->saveTargetPath($request->getSession(), $providerKey, $request->getUri());
 
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
-            return new RedirectResponse($this->urlGenerator->generate("residencias_index"));
+            return new RedirectResponse($this->urlGenerator->generate("filtro"));
         }
         else{throw new \Exception('ERROR '.__FILE__);}
     }

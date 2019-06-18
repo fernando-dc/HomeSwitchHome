@@ -127,7 +127,15 @@
             <div class="text-right">
                 <!--TODO: Cambiar el ROLE_USER por ROLE_PREMIUM o el que sea requerido solo para el usuario premium y admin-->
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalAdjudicar" data-backdrop="static" data-keyboard="false"
-                {% if not is_granted('ROLE_USER') %} disabled="true" {% endif %}
+                {% if not(is_granted('IS_AUTHENTICATED_FULLY')) %}
+                    disabled="true"
+                {% endif %}
+                {% if is_granted('ROLE_ADMIN') %}
+                        {% if app.user.getIdUsuario.getSuscripcion.getNombre != 'premium' %} disabled="true" 
+                        {% endif %}
+                {% else %}
+                    {% if app.user.getSuscripcion.getNombre != 'premium' %} disabled="true" 
+                {% endif %}{% endif %}
                 >
                     Adjudicar
                 </button>
@@ -145,14 +153,17 @@
                 </div>
                 <div class="modal-body">
                     {% if usuario is not null %}
-                        {% if usuario.getIdUsuario.getCreditos >= 1 %}
+                        {% if is_granted('ROLE_ADMIN') %}
+                            {% set usuario = usuario.getIdUsuario %}
+                        {% endif %}
+                        {% if usuario.getCreditos >= 1 %}
                             <h5>
                                 La operacion requiere 1 credito
                             </h5>
                             <h4>
                                 Creditos actuales: 
                                 <strong>
-                                    {{usuario.getIdUsuario.getCreditos}}
+                                    {{usuario.getCreditos}}
                                 </strong>
                             </h4>
                             <br>

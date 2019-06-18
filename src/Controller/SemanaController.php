@@ -52,8 +52,11 @@ class SemanaController extends AbstractController
      */
     public function adjudicarSemana($f_i, $f_f, $idRes)
     {
+        $user = $this->getUser();
         $em= $this->getDoctrine()->getManager();
-        $user = $this->getUser()->getIdUsuario();
+        if($this->isGranted('ROLE_ADMIN')){
+            $user = $user->getIdUsuario();
+        }
         $residencia = $em->getRepository(Residencias::class)->find($idRes);
         
         //Si la residencia existe y no esta ocupada en la semana deseada, se crea la reserva y se resta un credito al usuario

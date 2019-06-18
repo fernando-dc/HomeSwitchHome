@@ -10,6 +10,10 @@
 
 {% block body %}
     <div class="container">
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <a href="{{ path('residencias_new') }}" class="btn btn-success">Añadir residencia</a>
+        {% endif %}
+        <br><br>
         {% if residencias %}
         <table class="table table-hover table-responsive-lg" id="example">
             <thead class="thead-dark">
@@ -17,9 +21,13 @@
                     <!--
                         <th>IdResidencia</th>
                     -->
+                    <th></th>
+                    <th>Nombre</th>
                     <th>Tipo</th>
                     <th>Habitaciones</th>
                     <th id="filtrar">Descripcion</th>
+                    <th>Ciudad</th>
+                    <th>Descripcion</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -29,8 +37,13 @@
                     <!--
                         <td>{{ residencia.idResidencia }}</td>
                     -->
+                    <td style="width:20%;heigth:30%">
+                            <img src="{{residencia.fotos[0].ruta}}" class="img-fluid border border-primary" alt="Imagen residencia">
+                    </td>
+                    <td>{{ residencia.getNombre }}</td>
                     <td>{{ residencia.tipo }}</td>
                     <td>{{ residencia.habitaciones }}</td>
+                    <td>{{ residencia.getIdDireccion().getCiudad() }}</td>
                     <td>{{ residencia.descripcion }}</td>
                     <td>
                         <a href="{{ path('residencias_show', {'idResidencia': residencia.idResidencia}) }}" class="btn btn-info">Detalle</a>
@@ -53,7 +66,7 @@
                 $('#example thead tr:eq(1) th').each( function (i) {
                     var title = $(this).text();
                     $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
-            
+
                     $( 'input', this ).on( 'keyup change', function () {
                         if ( table.column(i).search() !== this.value ) {
                             table
@@ -63,7 +76,7 @@
                         }
                     } );
                 } );
-            
+
                 var table = $('#example').DataTable( {
                     orderCellsTop: true,
                     fixedHeader: true,
@@ -76,8 +89,6 @@
              <h3>No hay residencias para mostrar</h3>
         {% endif %}
 
-        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-            <a href="{{ path('residencias_new') }}" class="btn btn-success">Añadir residencia</a>
     </div>
 {#{% else %}
     <div align="center" class="container">
@@ -89,4 +100,5 @@
 
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/fixedheader/3.1.5/js/dataTables.fixedHeader.min.js"></script>
+
 {% endblock %}
