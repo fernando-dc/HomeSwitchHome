@@ -94,24 +94,31 @@ class UsuariosController extends AbstractController
         
 
         if ($form->isSubmitted() && $form->isValid()) {
-            //ver tamaños de lo ingresado para tarjeta por ej: el cod no deberia ser mayor ni menor que 12 digitos    
+            //ver vencimiento  
             $tarjeta = $form->getData();
             $emailNuevo = $form->getData()->getIdUsuario()->getEmail();
             
                     if($this->getDoctrine()->getManager()->getRepository(Usuarios::class)->findBy(['email' => $emailNuevo]) == null){
 
-
-                        $entityManager = $this->getDoctrine()->getManager();
-                        $tarjeta->getIdUsuario()->setSuscripcion($this->getDoctrine()->getManager()->getRepository(Suscripciones::class)->findOneBy(['nombre' => 'standard']));
-                        $tarjeta->getIdUsuario()->setFechaRegistro(date_create(date('Y-m-d')));
-                        $entityManager->persist($tarjeta->getIDUsuario());
-
-                        $entityManager->persist($tarjeta);
-                        $entityManager->flush();
+                        if( $this->getDoctrine()->getManager()->getRepository(Tarjetas::class)->findBy(['numeroTarjeta' => $tarjeta->getNumeroTarjeta()]) == null){
 
 
-                        $this->addFlash('success', 'Ya estás registrado en nuestra plataforma. Por favor, inicia sesión');
-                        return $this->redirectToRoute('inicio');
+                            $entityManager = $this->getDoctrine()->getManager();
+                            $tarjeta->getIdUsuario()->setSuscripcion($this->getDoctrine()->getManager()->getRepository(Suscripciones::class)->findOneBy(['nombre' => 'standard']));
+                            $tarjeta->getIdUsuario()->setFechaRegistro(date_create(date('Y-m-d')));
+                            $entityManager->persist($tarjeta->getIDUsuario());
+
+                            $entityManager->persist($tarjeta);
+                            $entityManager->flush();
+
+
+                            $this->addFlash('success', 'Ya estás registrado en nuestra plataforma. Por favor, inicia sesión');
+                            return $this->redirectToRoute('inicio');
+                        }
+                        else{
+                            $this->addFlash('danger', 'La tarjeta ingresada ya existe en el sistema. Por favor, pruebe con otra tarjeta, no permitimos el uso de la misma tarjeta
+                            para usuarios diferentes.');
+                        }
                     }
                     else{
                         $this->addFlash('danger', 'Email ya existente en el sistema. Pruebe con otro email.');

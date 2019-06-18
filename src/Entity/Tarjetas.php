@@ -102,11 +102,11 @@ class Tarjetas
      * @Assert\Callback
      * Checkea que el vencimiento no sea menor al mes y año actual
      */
-    public function validarVencimiento(){
+    /*public function validarVencimiento(){
         if ($this->vencimiento< date('my')) {
             $context->buildViolation('La tarjeta esta vencida')
                 -> atPath('vencimiento')
                 ->addViolation();
         }
-    }
+    }*/
 }

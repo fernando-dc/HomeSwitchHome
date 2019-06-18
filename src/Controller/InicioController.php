@@ -34,14 +34,14 @@ class InicioController extends AbstractController{
     public function inicio(AuthenticationUtils $authenticationUtils): Response{
 
       $em = $this-> getDoctrine()->getManager();
-      $subastasActivas = $em->getRepository(Subastas::class)->findBy( ['finalizada' => '0'] );
+      $subastaActiva = $em->getRepository(Subastas::class)->findOneBy( ['finalizada' => '0'] );
 
       // get the login error if there is one
       $error = $authenticationUtils->getLastAuthenticationError();
       // last username entered by the user
       $lastUsername = $authenticationUtils->getLastUsername();
 
-      return $this->render('/login/inicio.html.twig', ['subastas' => $subastasActivas, 'last_username' => $lastUsername, 'error' => $error]);
+      return $this->render('/login/inicio.html.twig', ['subasta' => $subastaActiva, 'last_username' => $lastUsername, 'error' => $error]);
     }
 
     /*public function inicio(){

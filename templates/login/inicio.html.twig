@@ -29,37 +29,38 @@
 
         <div class='recuadro1' id="uno">
             <div align="center">
-            {% if subastas %}
+            {% if subasta %}
                 <div class='recuadro4' id='dos' style="top: 15%" style="heigth:150px" >
                     <font size=5 color="Black">
-                        <strong>{{ (subastas[0].getIdResidencia()).getNombre() }}</strong>
+                        <strong>{{ (subasta.getIdResidencia()).getNombre() }}</strong>
                     </font>
                     <font size=3 color="Black">
-                    <p>Para la semana: {{ subastas[0].getFechaInicio().format('Y-m-d') }} - {{ subastas[0].getFechaFin().format('Y-m-d') }}</p>
+                    <p>Para la semana: <font color="Blue">{{ subasta.getFechaInicio().format('Y-m-d') }} - {{ subasta.getFechaFin().format('Y-m-d') }}</font></p>
                 </div>
                 </font>
-                <div class='recuadro4' style="top:220px;height:300px" >
+                <div class='recuadro4' style="top:220px;height:450px" >
                     <font size=5> 
-                        <strong class="text-success">Último monto pujado: ${{ subastas[0].getPrecioActual() }}</strong>
+                        <strong class="text-success">Último monto pujado: ${{ subasta.getPrecioActual() }}</strong>
                     </font>
                     </br>
                     <font size=3 color="Black">
-                        <strong>Comenzó el día: {{ subastas[0].getFechaSubasta().format('Y-m-d') }}</strong>
+                        <strong>Comenzó el día: {{ subasta.getFechaSubasta().format('Y-m-d') }}</strong>
                         
                         <p>¡No te la pierdas!</p>
-                    <strong><p align="center">Tipo: {{subastas[0].getIdResidencia().getTipo()}}</p>
-                    <p align="center">Ambientes: {{ subastas[0].getIdResidencia().getHabitaciones() }}</p>
+                    <strong><p align="center">Tipo:</strong> {{subasta.getIdResidencia().getTipo()}}{#</p>#}
+                    {#<p align="center">#}<strong>Ambientes:</strong> {{ subasta.getIdResidencia().getHabitaciones() }}</p>
                     <a href="#" title="Direccion" data-toggle="popover" data-trigger="hover" data-content="
-                                [ Calle: {{subastas[0].getIdResidencia().getIdDireccion().getCalle()}}
-                                Numero: {{subastas[0].getIdResidencia().getIdDireccion().getNumero()}}
-                                Ciudad: {{subastas[0].getIdResidencia().getIdDireccion().getCiudad()}}
-                                Provincia: {{subastas[0].getIdResidencia().getIdDireccion().getProvincia}} ]">
+                                [ Calle: {{subasta.getIdResidencia().getIdDireccion().getCalle()}}
+                                Numero: {{subasta.getIdResidencia().getIdDireccion().getNumero()}}
+                                Ciudad: {{subasta.getIdResidencia().getIdDireccion().getCiudad()}}
+                                Provincia: {{subasta.getIdResidencia().getIdDireccion().getProvincia}} ]">
                                 Ubicación
                             </a>
                     </strong>
                     </font>
                     <br>
-                    <img src="{{subastas[0].getIdResidencia.fotos[0].ruta}}" style="width:90%;height:100%" class="img-fluid border border-primary" alt="Imagen residencia">
+                    <img src="{{subasta.getIdResidencia.fotos[0].ruta}}" style="width:90%;height:45%" class="img-fluid border border-primary" alt="Imagen residencia">
+                    <br><br><a href="{{ path('subasta_detalles', {'id': subasta.getIdSubasta()}) }}" class="btn btn-success">Ver Subasta</a>
                 </div>
             </div>
         {% else %}
