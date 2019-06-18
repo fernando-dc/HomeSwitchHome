@@ -35,7 +35,7 @@
         <p align="center"><strong><font size=4>Forma de pago</font></strong></p>
         <p align="center"><strong>•Número de tarjeta: </strong> {{ tarjeta.getNumeroTarjeta() }}</p>
         <p align="center"><strong>•Vencimiento: </strong>{{ tarjeta.getVencimiento() }}</p>
-        <p align="center"><a href="" class="btn btn-success">
+        <p align="center"><a href="/usuarios/modificarTarjeta" class="btn btn-success">
             Cambiar forma de pago
         </a></p>
         </br></br></br></br></br>
@@ -43,7 +43,7 @@
 
     <div class="recuadro1" id="dos" style="width:30%;top:30%;left:53%;height:45%">
         </br></br>
-        <p align="center"><strong>Tus créditos disponibles:  {{ usuario.getCreditos() }}</strong></p>
+        <p align="center"><strong>Tus créditos disponibles:  {{ usuario.getCreditos() }}{#Vencimiento: {{ vencimiento }}#}</strong></p>
         <p align="center"><strong>Tus suscripción: <font color="Green"> {{ usuario.getSuscripcion().getNombre() }}</font></strong></p>
         
         {##}

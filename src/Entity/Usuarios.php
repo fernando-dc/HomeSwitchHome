@@ -34,8 +34,6 @@ class Usuarios implements UserInterface
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=40, nullable=false)
-     * @Assert\GreaterThan(0)
-     * @Assert\LessThanOrEqual(40)
      */
     private $email;
 
@@ -43,8 +41,6 @@ class Usuarios implements UserInterface
      * @var string
      *
      * @ORM\Column(name="nombre", type="string", length=50, nullable=false)
-     *  @Assert\GreaterThan(0)
-     * @Assert\LessThanOrEqual(50)
      */
     private $nombre;
 
@@ -52,8 +48,6 @@ class Usuarios implements UserInterface
      * @var string
      *
      * @ORM\Column(name="apellido", type="string", length=50, nullable=false)
-     * *@Assert\GreaterThan(0)
-     * @Assert\LessThanOrEqual(50)
      */
     private $apellido;
 
@@ -61,8 +55,6 @@ class Usuarios implements UserInterface
      * @var string
      *
      * @ORM\Column(name="password", type="string", length=20, nullable=false)
-     * @Assert\GreaterThan(0)
-     * @Assert\LessThanOrEqual(20)
      */
     private $password;
 
@@ -70,8 +62,6 @@ class Usuarios implements UserInterface
      * @var string
      *
      * @ORM\Column(name="dni", type="string", length=50, nullable=false)
-     * @Assert\GreaterThan(0)
-     * @Assert\LessThanOrEqual(50)
      */
     private $dni;
 

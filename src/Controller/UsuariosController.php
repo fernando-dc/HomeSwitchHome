@@ -28,6 +28,7 @@ use App\Entity\Notificaciones;
 
 use App\Form\TarjetasType;
 use App\Form\UsuariosType;
+use App\Form\TarjetasType2;
 
 
 class UsuariosController extends AbstractController
@@ -39,13 +40,21 @@ class UsuariosController extends AbstractController
     
     public function perfil(){
         $usuario = $this->getUser();
-
+        /*if($this->isGranted('ROLE_ADMIN')){
+            $usuario = $usuario->getIdUsuario();
+        }*/
         
         $id = $usuario->getIdUsuario(); 
         $em = $this-> getDoctrine()->getManager();
         $tarjeta = $em->getRepository(Tarjetas::class)->findOneBy(['idUsuario' => $id]);
+        if($this->isGranted('ROLE_ADMIN')){
+        $vencimiento = strtotime( '+1 year' , strtotime( $usuario->getIdUsuario()->getFechaRegistro()->format('Y-m-d')));
+        }
+        else{
+        $vencimiento = $usuario->getFechaRegistro()->add(date_interval_create_from_date_string('1 years'));
+        }
 
-        return $this->render('/usuarios/perfil.html.twig', ['usuario' => $usuario, 'tarjeta' => $tarjeta]);
+        return $this->render('/usuarios/perfil.html.twig', ['usuario' => $usuario, 'tarjeta' => $tarjeta, 'vencimiento' => $vencimiento]);
     }
     /**
      * @Route("ver_perfil_de_{idUsuario}", name="ver_perfil_de_un_usuario")
@@ -269,5 +278,29 @@ class UsuariosController extends AbstractController
         return $this->render('/usuarios/subastasDe.html.twig', ['subastas' => $coleccion, 'usuario' => $idUsuario]);
         }
      
-    
+    /**
+     * @Route("/usuarios/modificarTarjeta", name="modificar_tarjeta")
+     */
+    public function modificarTarjeta(Request $request): Response{
+        $usuario = $this->getUser();
+        if($usuario != null){
+            $tarjeta = $this->getDoctrine()->getManager()->getRepository(Tarjetas::class)->findOneBy(['idUsuario' => $usuario->getIdUsuario()]);
+        $form = $this->createForm(TarjetasType2::class, $tarjeta);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('miPerfil');
+        }
+        
+        return $this->render('/usuarios/modificarTarjeta.html.twig', 
+        ['tarjeta' => $tarjeta,
+            'form' => $form->createView(),
+        ]);
+        }
+        else{
+            return $this->render('/login/inicie_sesion.html.twig');
+        }
+    }
 }

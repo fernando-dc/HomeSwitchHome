@@ -111,7 +111,7 @@ class Tarjetas
             $context->buildViolation('La tarjeta esta vencida')
             -> atPath('vencimiento')
             ->addViolation();
-        } elseif ($year = date('y')) {
+        } elseif ($year == date('y')) {
             //Pero si el anio es igual, esta vencida solo si el mes del vencimiento es menor al mes actual
             if ($month < date('m')) {
                 $context->buildViolation('La tarjeta esta vencida')

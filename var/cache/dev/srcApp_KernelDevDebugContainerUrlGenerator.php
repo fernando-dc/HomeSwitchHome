@@ -67,6 +67,7 @@ class srcApp_KernelDevDebugContainerUrlGenerator extends Symfony\Component\Routi
         'mis_reservas' => [[], ['_controller' => 'App\\Controller\\UsuariosController::misReservas'], [], [['text', '/usuarios/misReservas']], [], []],
         'ver_reservas_de_un_usuario' => [['idUsuario'], ['_controller' => 'App\\Controller\\UsuariosController::verReservasDe'], [], [['variable', '/', '[^/]++', 'idUsuario', true], ['text', '/usuarios/reservasDe']], [], []],
         'ver_subastas_de_un_usuario' => [['idUsuario'], ['_controller' => 'App\\Controller\\UsuariosController::verSubastasDe'], [], [['variable', '', '[^/]++', 'idUsuario', true], ['text', '/usuarios/subastasDe']], [], []],
+        'modificar_tarjeta' => [[], ['_controller' => 'App\\Controller\\UsuariosController::modificarTarjeta'], [], [['text', '/usuarios/modificarTarjeta']], [], []],
     ];
         }
     }

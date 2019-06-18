@@ -387,6 +387,9 @@
     <service id="App\Form\TarjetasType" class="App\Form\TarjetasType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
+    <service id="App\Form\TarjetasType2" class="App\Form\TarjetasType2" autowire="true" autoconfigure="true">
+      <tag name="form.type"/>
+    </service>
     <service id="App\Form\UsuariosType" class="App\Form\UsuariosType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
@@ -683,6 +686,7 @@
         <argument>App\Form\SubastaFormType</argument>
         <argument>App\Form\SuscripcionesType</argument>
         <argument>App\Form\TarjetasType</argument>
+        <argument>App\Form\TarjetasType2</argument>
         <argument>App\Form\UsuariosType</argument>
         <argument>Symfony\Component\Form\Extension\Core\Type\FormType</argument>
         <argument>Symfony\Component\Form\Extension\Core\Type\ChoiceType</argument>
@@ -922,7 +926,7 @@
       <argument type="service" id="form.registry"/>
     </service>
     <service id="form.extension" class="Symfony\Component\Form\Extension\DependencyInjection\DependencyInjectionExtension" public="false">
-      <argument type="service" id=".service_locator.Kd.0ngC"/>
+      <argument type="service" id=".service_locator.3ReLjgE"/>
       <argument type="collection">
         <argument key="Symfony\Component\Form\Extension\Core\Type\FormType" type="iterator">
           <argument type="service" id="form.type_extension.form.transformation_failure_handling"/>
@@ -3320,6 +3324,8 @@
     <service id=".abstract.instanceof.App\Form\SuscripcionesType" class="App\Form\SuscripcionesType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\TarjetasType" class="App\Form\TarjetasType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\TarjetasType" class="App\Form\TarjetasType" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\TarjetasType2" class="App\Form\TarjetasType2" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\TarjetasType2" class="App\Form\TarjetasType2" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\UsuariosType" class="App\Form\UsuariosType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\UsuariosType" class="App\Form\UsuariosType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\AdministradoresRepository" class="App\Repository\AdministradoresRepository" autowire="true" abstract="true"/>
@@ -3614,7 +3620,7 @@
       <argument type="service" id="debug.argument_resolver.variadic.inner"/>
       <argument type="service" id="debug.stopwatch"/>
     </service>
-    <service id=".service_locator.Kd.0ngC" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+    <service id=".service_locator.3ReLjgE" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Form\DireccionesType" type="service" id="App\Form\DireccionesType"/>
@@ -3623,6 +3629,7 @@
         <argument key="App\Form\SubastaFormType" type="service" id="App\Form\SubastaFormType"/>
         <argument key="App\Form\SuscripcionesType" type="service" id="App\Form\SuscripcionesType"/>
         <argument key="App\Form\TarjetasType" type="service" id="App\Form\TarjetasType"/>
+        <argument key="App\Form\TarjetasType2" type="service" id="App\Form\TarjetasType2"/>
         <argument key="App\Form\UsuariosType" type="service" id="App\Form\UsuariosType"/>
         <argument key="Symfony\Bridge\Doctrine\Form\Type\EntityType" type="service" id="form.type.entity"/>
         <argument key="Symfony\Component\Form\Extension\Core\Type\ChoiceType" type="service" id="form.type.choice"/>

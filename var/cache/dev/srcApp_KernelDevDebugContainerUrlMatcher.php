@@ -40,6 +40,7 @@ class srcApp_KernelDevDebugContainerUrlMatcher extends Symfony\Bundle\FrameworkB
             '/usuarios/edit' => [[['_route' => 'usuario_edit', '_controller' => 'App\\Controller\\UsuariosController::editarUsuario'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
             '/usuarios/listado' => [[['_route' => 'usuarios_listado', '_controller' => 'App\\Controller\\UsuariosController::listado'], null, null, null, false, false, null]],
             '/usuarios/misReservas' => [[['_route' => 'mis_reservas', '_controller' => 'App\\Controller\\UsuariosController::misReservas'], null, null, null, false, false, null]],
+            '/usuarios/modificarTarjeta' => [[['_route' => 'modificar_tarjeta', '_controller' => 'App\\Controller\\UsuariosController::modificarTarjeta'], null, null, null, false, false, null]],
         ];
         $this->regexpList = [
             0 => '{^(?'
