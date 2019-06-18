@@ -27,6 +27,7 @@ class Residencias
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $idResidencia;
+
     
     /**
      * @var string
@@ -48,6 +49,13 @@ class Residencias
      * @ORM\Column(name="habitaciones", type="integer", nullable=false)
      */
     private $habitaciones;
+
+    /**
+     * @var bool
+     * 
+     * @ORM\Column(name="eliminado",type="boolean",nullable=false)
+     */
+    private $eliminado= '0';
     
     /**
      * @var string
@@ -95,6 +103,11 @@ class Residencias
     {
         $this->nombre = $nombre;
     
+        return $this;
+    }
+    public function setEliminado(bool $eliminado): self
+    {
+        $this->eliminado = $eliminado;
         return $this;
     }
 
@@ -145,6 +158,7 @@ class Residencias
         
         return $this;
     }
+ 
     
     
     public function __construct()

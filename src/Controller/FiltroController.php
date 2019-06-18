@@ -21,6 +21,7 @@ class FiltroController extends AbstractController
      */
     public function index(Request $request)
     {
+        //Se crea el formulario del filtro que tiene 3 campos: la localidad, la fecha de inicio y la fecha de fin del rango.
         $defaultData = ['message' => 'Buscar residencias para el lugar:'];
         $form = $this->createFormBuilder($defaultData)
             ->add('lugar', TextType::class)
@@ -48,10 +49,11 @@ class FiltroController extends AbstractController
             $formData = $form->getData();
             $em = $this->getDoctrine()->getManager();
 
+            //Cuando el form se envia, se evalua que el rango de fechas no sea mayor a 2 meses.
             $twoMonths = clone $formData['fecha_inicial'];
             $twoMonths->add(date_interval_create_from_date_string('2 months'));
+
             if ($formData['fecha_final'] <= $twoMonths) {
-            
 
             $residencias = $em->getRepository(Residencias::class)->residenciasEnCiudad($formData['lugar']);
             $semanasDisponibles =[];
