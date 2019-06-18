@@ -19,7 +19,11 @@ class ResidenciasType extends AbstractType
             ->add('tipo')
             ->add('habitaciones')
             ->add('descripcion', TextareaType::class ,)        
-            ->add('IdDireccion',DireccionesType::class, ['label'=>'Direccion:'])  
+            ->add('IdDireccion',DireccionesType::class, ['label'=>'Direccion:'])
+            ->add('imageFile', FileType::class, [
+                'label'=>'Foto de la residencia:',
+                'mapped' => false,
+                ])
             //->add('fotos', FileType::class)
         ;
     }

@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 
 /**
@@ -46,34 +47,48 @@ class ResidenciasController extends AbstractController
     public function new(Request $request): Response
     {
         $residencia = new Residencias();
-        $foto = new Fotos();
-        //$form = $this->createForm(ResidenciasType::class, $residencia);
-        $form = $this->createForm(FotoType::class,$foto);
+        $form = $this->createForm(ResidenciasType::class, $residencia);
+        //$form = $this->createForm(FotoType::class,$foto);
         $form->handleRequest($request);
         $em = $this->getDoctrine()->getManager();
         if ($form->isSubmitted() && $form->isValid()) {
-            //$foto = $form->getData();
-            $residencia = $foto->getIdResidencia();
+            
             if($em->getRepository(Residencias::class)->findBy(['nombre'=>$residencia->getNombre()]) == null)
             {
                 if($em->getRepository(Direcciones::class)->findBy(['calle' => $residencia->getCalle(),'numero' => $residencia->getNumero()])==null)
-        
-                
                 {        
-                    /** @var Symfony\Component\HttpFoundation\File\UploadedFile $archivo */
-                    $archivo= $foto->getRuta();     
-                    try {                     
-                        $archivo->move(
-                            '/images/residencias/',
-                            $residencia->getNombre());
+                    /** @var UploadedFile $foto */
+
+                    $foto= $form['imageFile']->getData();
+                    $destino = $this->getParameter('directorio_imagenes_residencias');
                     
-                    } catch (FileException $e){}
-                     $entityManager = $this->getDoctrine()->getManager();   
-                     $entityManager->persist($residencia->getIDdireccion());
-                     $entityManager->persist($residencia);
-                     $entityManager->flush();
-                     $this->addFlash('success','Se creo correctamente la residencia.');
-                     return $this->redirectToRoute('residencias_index');
+                    $originalFilename = pathinfo($foto->getClientOriginalName(), PATHINFO_FILENAME);
+                    $newFilename = md5(uniqid()).'.'.$foto->guessExtension();
+
+                    try {                     
+                        $foto->move(
+                            $destino,
+                            $newFilename
+                        );
+                    
+                    } catch (FileException $e){
+                        $this->addFlash('danger','Ocurrió un problema al cargar la foto, intente nuevamente.');
+                        return $this->redirectToRoute('residencias_index');
+                        
+                    }
+
+
+                    $foto = new Fotos();
+                    $foto->setRuta($this->getParameter('relativo_imagenes_residencias').$newFilename);
+                    $foto->setIdResidencia($residencia);
+
+                    $entityManager = $this->getDoctrine()->getManager();   
+                    $entityManager->persist($residencia->getIDdireccion());
+                    $entityManager->persist($residencia);
+                    $entityManager->persist($foto);
+                    $entityManager->flush();
+                    $this->addFlash('success','Se creo correctamente la residencia.');
+                    return $this->redirectToRoute('residencias_index');
                 }
                 else
                 {
