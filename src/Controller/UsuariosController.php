@@ -91,19 +91,32 @@ class UsuariosController extends AbstractController
         $tarjeta = new Tarjetas();
         $form = $this->createForm(TarjetasType::class, $tarjeta);
         $form->handleRequest($request);
+        
 
         if ($form->isSubmitted() && $form->isValid()) {
-            //fijarse si el email ya existe y ver tamaños de lo ingresado para tarjeta por ej: el cod no deberia ser mayor ni menor que 12 digitos
-            //ponerle fecha de registro al usuario
-            $entityManager = $this->getDoctrine()->getManager();
-            $tarjeta->getIdUsuario()->setSuscripcion(
-                $this->getDoctrine()->getManager()->getRepository(Suscripciones::class)->findOneBy(['nombre' => 'standard']));
-            $entityManager->persist($tarjeta->getIDUsuario());
-            $entityManager->persist($tarjeta);
-            $entityManager->flush();
+            //ver tamaños de lo ingresado para tarjeta por ej: el cod no deberia ser mayor ni menor que 12 digitos    
+            $tarjeta = $form->getData();
+            $emailNuevo = $form->getData()->getIdUsuario()->getEmail();
+            
+                    if($this->getDoctrine()->getManager()->getRepository(Usuarios::class)->findBy(['email' => $emailNuevo]) == null){
 
-            return $this->redirectToRoute('residencias_index');
-        }
+
+                        $entityManager = $this->getDoctrine()->getManager();
+                        $tarjeta->getIdUsuario()->setSuscripcion($this->getDoctrine()->getManager()->getRepository(Suscripciones::class)->findOneBy(['nombre' => 'standard']));
+                        $tarjeta->getIdUsuario()->setFechaRegistro(date_create(date('Y-m-d')));
+                        $entityManager->persist($tarjeta->getIDUsuario());
+
+                        $entityManager->persist($tarjeta);
+                        $entityManager->flush();
+
+
+                        $this->addFlash('success', 'Ya estás registrado en nuestra plataforma. Por favor, inicia sesión');
+                        return $this->redirectToRoute('inicio');
+                    }
+                    else{
+                        $this->addFlash('danger', 'Email ya existente en el sistema. Pruebe con otro email.');
+                    }
+                }
 
         return $this->render('/usuarios/registrarse.html.twig', [
             'tarjeta' => $tarjeta,
