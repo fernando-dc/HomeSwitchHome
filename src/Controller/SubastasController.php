@@ -169,6 +169,9 @@ class SubastasController extends AbstractController
             //aca se hace la notificación para el ganador
             $notificacion = new Notificaciones();
             $notificacion->setIdUsuario($usuario);
+            $notificacion->setIdSubasta($subasta);
+            $notificacion->setIdResidencia($subasta->getIdResidencia());
+            $notificacion->setFecha((date_create(date('Y-m-d'))));
             $notificacion->setTexto('¡Has ganado la subasta! ' );
             $em->persist($notificacion);
             $em->flush();

@@ -22,13 +22,6 @@ class Notificaciones
     private $idNotificacion;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="texto", type="string", length=100, nullable=false)
-     */
-    private $texto;
-
-    /**
      * @var \Usuarios
      *
      * @ORM\ManyToOne(targetEntity="Usuarios")
@@ -37,6 +30,42 @@ class Notificaciones
      * })
      */
     private $idUsuario;
+
+    /**
+     * @var \Residencias
+     *
+     * @ORM\ManyToOne(targetEntity="Residencias", inversedBy="subastas")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_residencia", referencedColumnName="id_residencia")
+     * })
+     */
+    private $idResidencia;
+
+    /**
+     * @var \Subastas
+     *
+     * @ORM\ManyToOne(targetEntity="Subastas", inversedBy="pujas")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_subasta", referencedColumnName="id_subasta")
+     * })
+     */
+    private $idSubasta;
+
+    /**
+     * @var \DateTime|null
+     *
+     * @ORM\Column(name="fecha", type="date", nullable=true)
+     */
+    private $fecha;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="texto", type="string", length=100, nullable=false)
+     */
+    private $texto;
+
+    
 
     public function getIdNotificacion(): ?int
     {
@@ -63,6 +92,39 @@ class Notificaciones
     public function setIdUsuario(?Usuarios $idUsuario): self
     {
         $this->idUsuario = $idUsuario;
+
+        return $this;
+    }
+    public function getIdResidencia(): ?Residencias
+    {
+        return $this->idResidencia;
+    }
+
+    public function setIdResidencia(?Residencias $idResidencia): self
+    {
+        $this->idResidencia = $idResidencia;
+
+        return $this;
+    }
+    public function getIdSubasta(): ?Subastas
+    {
+        return $this->idSubasta;
+    }
+
+    public function setIdSubasta(?Subastas $idSubasta): self
+    {
+        $this->idSubasta = $idSubasta;
+
+        return $this;
+    }
+    public function getFecha(): ?\DateTimeInterface
+    {
+        return $this->fecha;
+    }
+
+    public function setFecha(?\DateTimeInterface $fecha): self
+    {
+        $this->fecha = $fecha;
 
         return $this;
     }
