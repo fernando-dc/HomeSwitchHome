@@ -107,7 +107,7 @@ class UsuariosController extends AbstractController
             $tarjeta = $form->getData();
             $emailNuevo = $form->getData()->getIdUsuario()->getEmail();
             
-                    if($this->getDoctrine()->getManager()->getRepository(Usuarios::class)->findBy(['email' => $emailNuevo]) == null){
+                    //if($this->getDoctrine()->getManager()->getRepository(Usuarios::class)->findBy(['email' => $emailNuevo]) == null){
 
                         if( $this->getDoctrine()->getManager()->getRepository(Tarjetas::class)->findBy(['numeroTarjeta' => $tarjeta->getNumeroTarjeta()]) == null){
 
@@ -128,10 +128,10 @@ class UsuariosController extends AbstractController
                             $this->addFlash('danger', 'La tarjeta ingresada ya existe en el sistema. Por favor, pruebe con otra tarjeta, no permitimos el uso de la misma tarjeta
                             para usuarios diferentes.');
                         }
-                    }
-                    else{
-                        $this->addFlash('danger', 'Email ya existente en el sistema. Pruebe con otro email.');
-                    }
+                    //}
+                    //else{
+                    //    $this->addFlash('danger', 'Email ya existente en el sistema. Pruebe con otro email.');
+                    //}
                 }
 
         return $this->render('/usuarios/registrarse.html.twig', [

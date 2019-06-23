@@ -47,6 +47,9 @@ class Tarjetas
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_usuario", referencedColumnName="id_usuario")
      * })
+     * 
+     * Este assert permite que se validen los datos de usuario en el formulario de registro/edicion
+     * @Assert\Valid()
      */
     private $idUsuario;
 

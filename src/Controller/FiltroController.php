@@ -13,6 +13,8 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 use Symfony\Component\Validator\Constraints\GreaterThan;
+use Symfony\Component\Validator\Constraints\Callback;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 class FiltroController extends AbstractController
 {
@@ -22,8 +24,8 @@ class FiltroController extends AbstractController
     public function index(Request $request)
     {
         //Se crea el formulario del filtro que tiene 3 campos: la localidad, la fecha de inicio y la fecha de fin del rango.
-        $defaultData = ['message' => 'Buscar residencias para el lugar:'];
-        $form = $this->createFormBuilder($defaultData)
+        $formData = ['message' => 'Buscar residencias para el lugar:'];
+        $form = $this->createFormBuilder($formData)
             ->add('lugar', TextType::class)
 
             ->add('fecha_inicial', DateType::class, [
@@ -36,6 +38,9 @@ class FiltroController extends AbstractController
                 'widget' => 'single_text',
                 'attr' => ['class' => 'js-datepicker-end', 'onkeydown'=>'return false', 'autocomplete'=>'off', ],
                 'html5' => false,
+                'constraints'=> [
+                    new Callback([$this, 'validarRangoFechas'])
+                ]
 
             ])
             ->add('buscar', SubmitType::class, ['label'=>'Buscar!', 'attr'=>['class'=> 'btn btn-success']])
@@ -44,16 +49,18 @@ class FiltroController extends AbstractController
         $form-> handleRequest($request);
 
 
-        if ($form->isSubmitted()){
+        if ($form->isSubmitted() && $form->isValid()){
 
             $formData = $form->getData();
             $em = $this->getDoctrine()->getManager();
 
+            /*
             //Cuando el form se envia, se evalua que el rango de fechas no sea mayor a 2 meses.
             $twoMonths = clone $formData['fecha_inicial'];
             $twoMonths->add(date_interval_create_from_date_string('2 months'));
 
             if ($formData['fecha_final'] <= $twoMonths) {
+            */
 
             $residencias = $em->getRepository(Residencias::class)->residenciasEnCiudad($formData['lugar']);
             $semanasDisponibles =[];
@@ -76,11 +83,12 @@ class FiltroController extends AbstractController
             }
             return $this->render('filtro/resultado.html.twig', ['semanas' => $semanasDisponibles, 'ubicacion' => ucwords(strtolower($formData['lugar'])) ]);
 
+            /*
             }
             else {
                 $this->addFlash('danger','El rango de las fechas debe ser menor o igual a 2 meses!');
             }
-
+            */
 
         }
         
@@ -89,6 +97,22 @@ class FiltroController extends AbstractController
             'controller_name' => 'FiltroController',
             'filtroForm' => $form->createView() ,
         ]);
+    }
+
+    public function validarRangoFechas($valor, ExecutionContextInterface $context){
+        $form = $context->getRoot();
+        $data = $form->getData();
+
+        $twoMonths = clone $data['fecha_inicial'];
+        $twoMonths->add(date_interval_create_from_date_string('2 months'));
+
+        if ($data['fecha_final'] > $twoMonths){
+            $context
+                ->buildViolation('El rango de fechas debe ser igual o menor a 2   .')
+                -> atPath('fecha_inicial')
+                ->addViolation();
+        }
+
     }
 
 

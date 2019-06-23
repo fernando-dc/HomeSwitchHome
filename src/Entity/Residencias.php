@@ -71,6 +71,7 @@ class Residencias
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_direccion", referencedColumnName="id_direccion")
      * })
+     * @Assert\Valid()
      */
     private $idDireccion;
     
