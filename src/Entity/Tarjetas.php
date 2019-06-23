@@ -119,19 +119,27 @@ class Tarjetas
         $vencimiento = str_split($this->vencimiento);
         $month = $vencimiento[0]*10 + $vencimiento[1];
         $year = $vencimiento[2]*10 + $vencimiento[3];
+
         //Si el anio de vencimiento es menor al anio actual, la tarjeta ya esta vencida
-        if($year < date('y')){
-            $context->buildViolation('La tarjeta esta vencida')
-            -> atPath('vencimiento')
-            ->addViolation();
-        } elseif ($year == date('y')) {
-            //Pero si el anio es igual, esta vencida solo si el mes del vencimiento es menor al mes actual
-            if ($month < date('m')) {
+        if(!($month < 1 || $month > 12)){
+            if($year < date('y')){
                 $context->buildViolation('La tarjeta esta vencida')
                 -> atPath('vencimiento')
                 ->addViolation();
-        
+            } elseif ($year == date('y')) {
+                //Pero si el anio es igual, esta vencida solo si el mes del vencimiento es menor al mes actual
+                if ($month < date('m')) {
+                    $context->buildViolation('La tarjeta esta vencida')
+                    -> atPath('vencimiento')
+                    ->addViolation();
+            
+                }
             }
+        } else {
+            $context->buildViolation('El mes de vencimiento es invalido')
+                    -> atPath('vencimiento')
+                    ->addViolation();
         }
+        
     }
 }

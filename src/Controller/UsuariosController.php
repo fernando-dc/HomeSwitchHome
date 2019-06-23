@@ -93,7 +93,7 @@ class UsuariosController extends AbstractController
     }
 
     /**
-     * @Route("/usuarios/registrarsePaso2")
+     * @Route("/usuarios/registrarsePaso2", name="registrarse_paso2")
      */
     public function registrarse(Request $request): Response{
 

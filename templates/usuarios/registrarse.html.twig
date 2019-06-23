@@ -37,10 +37,10 @@
 <h1 align="center">Ingresa tus datos y los de tu tarjeta:</h1>
 <div class="container text-center">
     </br></br>
-
+    
+    {{ form_start(form) }}
         <div class="row justify-content-between">
             <div class="col-md-6" id="user-data-form">
-                {{ form_start(form) }}
                 <h3>{{form_label(form.idUsuario)}}</h3>
                 <br>
                 {{form_widget(form.idUsuario)}}
