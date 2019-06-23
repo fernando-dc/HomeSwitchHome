@@ -60,9 +60,10 @@ class SemanaController extends AbstractController
         }
         $residencia = $em->getRepository(Residencias::class)->find($idRes);
         
+        
         //Si la residencia existe y no esta ocupada en la semana deseada, se crea la reserva y se resta un credito al usuario
 
-        if(! is_null($residencia)){
+        if(!is_null($residencia)){
             if(!$residencia->ocupadaEntreFechas($f_i,$f_f)){
                 $semanaReserva = new SemanasReserva();
                 $semanaReserva->setPrecio(3000);
@@ -89,9 +90,10 @@ class SemanaController extends AbstractController
 
                 $this->addFlash('success','La residencia ha sido correctamente reservada.');
 
-            }
-            $this->addFlash('danger','La residencia ya fue reservada para esa semana, operacion anulada.');
+            } else{
 
+                $this->addFlash('danger','La residencia ya fue reservada para esa semana, operacion anulada.');
+            }
         }
 
         return $this->redirectToRoute('filtro');

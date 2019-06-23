@@ -21,9 +21,9 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\Table(name="usuarios", uniqueConstraints={@ORM\UniqueConstraint(name="email", columns={"email"})}, indexes={@ORM\Index(name="suscripcion", columns={"suscripcion"})})
  * @ORM\Entity(repositoryClass="App\Repository\UsuariosRepository")
  * @UniqueEntity(
- *          fields={"nombre"},
+ *          fields={"email"},
  *          message="email.usuario.duplicado",
- *          errorPath="nombre",
+ *          errorPath="email",
  * 
  * )
  */
@@ -56,7 +56,6 @@ class Usuarios implements UserInterface
      * @var string
      *
      * @ORM\Column(name="apellido", type="string", length=50, nullable=false)
-     * @Assert\Length(4)
      */
     private $apellido;
 

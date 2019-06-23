@@ -5,3 +5,22 @@ body {
     background-position: center; 
     z-index: -1;
   }
+
+
+#user-data-form{
+  background-color:rgba(0, 0, 0, 0.13);
+  border-radius: .5rem;
+}
+#user-data-form:hover{
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+#card-data-form{
+  background-color: rgba(226, 188, 0, 0.25);
+  padding-top: 15px;
+  border-radius: .5rem;
+}
+#card-data-form:hover{
+  
+  background-color: rgba(226, 188, 0, 0.507);
+}

@@ -32,15 +32,34 @@
 {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
 
 {% form_theme form 'bootstrap_4_layout.html.twig' %}
+
 <h2 align="center">Paso 2</h2>
 <h1 align="center">Ingresa tus datos y los de tu tarjeta:</h1>
-<div align="center" style="width:25%" class="container">
+<div class="container text-center">
     </br></br>
-    
-        {{ form_start(form) }}
-        {{ form_widget(form) }}
-        {{ form_end(form) }}
 
+        <div class="row justify-content-between">
+            <div class="col-md-6" id="user-data-form">
+                {{ form_start(form) }}
+                <h3>{{form_label(form.idUsuario)}}</h3>
+                <br>
+                {{form_widget(form.idUsuario)}}
+            </div>
+            <br>
+            <div class="col-md-4" id="card-data-form">
+                <h3>Información de pago: </h3>
+                <br>
+                {{form_row(form.numeroTarjeta)}}
+                {{form_row(form.codigo)}}
+                {{form_row(form.vencimiento)}}
+            </div>
+        </div>
+        
+        <br><br>
+        <div class="text-right">
+                {{form_row(form.save)}}
+        </div>
+        {{form_end(form)}}
         </div>
 
 {% endif %}

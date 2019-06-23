@@ -54,13 +54,6 @@ class FiltroController extends AbstractController
             $formData = $form->getData();
             $em = $this->getDoctrine()->getManager();
 
-            /*
-            //Cuando el form se envia, se evalua que el rango de fechas no sea mayor a 2 meses.
-            $twoMonths = clone $formData['fecha_inicial'];
-            $twoMonths->add(date_interval_create_from_date_string('2 months'));
-
-            if ($formData['fecha_final'] <= $twoMonths) {
-            */
 
             $residencias = $em->getRepository(Residencias::class)->residenciasEnCiudad($formData['lugar']);
             $semanasDisponibles =[];
@@ -82,16 +75,8 @@ class FiltroController extends AbstractController
                 }
             }
             return $this->render('filtro/resultado.html.twig', ['semanas' => $semanasDisponibles, 'ubicacion' => ucwords(strtolower($formData['lugar'])) ]);
-
-            /*
-            }
-            else {
-                $this->addFlash('danger','El rango de las fechas debe ser menor o igual a 2 meses!');
-            }
-            */
-
+            
         }
-        
 
         return $this->render('filtro/index.html.twig', [
             'controller_name' => 'FiltroController',
@@ -108,8 +93,7 @@ class FiltroController extends AbstractController
 
         if ($data['fecha_final'] > $twoMonths){
             $context
-                ->buildViolation('El rango de fechas debe ser igual o menor a 2   .')
-                -> atPath('fecha_inicial')
+                ->buildViolation('filtro.rango.fechas.mayor')
                 ->addViolation();
         }
 

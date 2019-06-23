@@ -7,11 +7,20 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 /**
  * Tarjetas
  *
  * @ORM\Table(name="tarjetas", indexes={@ORM\Index(name="id_usuario", columns={"id_usuario"})})
  * @ORM\Entity(repositoryClass="App\Repository\TarjetasRepository")
+ * @UniqueEntity(
+ *          fields={"numeroTarjeta"},
+ *          message="tarjeta.numero.duplicado",
+ *          errorPath="numeroTarjeta",
+ * 
+ * )
+ * @Assert\GroupSequence({"Tarjetas", "Callbacks"})
  */
 class Tarjetas
 {
@@ -21,7 +30,7 @@ class Tarjetas
      * @ORM\Column(name="numero_tarjeta", type="string", length=16, nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
-     * @Assert\Length(16)
+     * @Assert\Length(16, exactMessage="tarjeta.digitos")
      */
     private $numeroTarjeta;
 
@@ -29,7 +38,7 @@ class Tarjetas
      * @var int
      *
      * @ORM\Column(name="codigo", type="integer", nullable=false)
-     * @Assert\Length(4)
+     * @Assert\Length(4, exactMessage="tarjeta.codigo.digitos")
      */
     private $codigo;
 
@@ -37,6 +46,7 @@ class Tarjetas
      * @var string
      *
      * @ORM\Column(name="vencimiento", type="string", length=4, nullable=false)
+     * @Assert\Length(4, exactMessage="tarjeta.vencimiento.digitos")
      */
     private $vencimiento;
 
@@ -102,7 +112,7 @@ class Tarjetas
     }
 
     /**
-     * @Assert\Callback
+     * @Assert\Callback(groups={"Callbacks"})
      * Checkea que el vencimiento no sea menor al mes y año actual
      */
     public function validarVencimiento(ExecutionContextInterface $context, $payload){
