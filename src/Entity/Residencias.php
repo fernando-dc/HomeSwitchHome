@@ -378,4 +378,9 @@ class Residencias
 
         return $this;
     }
+
+    public function getEliminado(): ?bool
+    {
+        return $this->eliminado;
+    }
 }
