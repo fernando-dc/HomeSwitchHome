@@ -64,6 +64,7 @@ class ResidenciasRepository extends ServiceEntityRepository
             ->addSelect('d')
             ->andWhere('r.idDireccion = d.idDireccion')
             ->andWhere('d.ciudad = :ciudad')
+            ->andWhere('r.eliminado = 0')
             ->setParameter('ciudad', $ciudad)
             ->getQuery()
             ->getResult();
