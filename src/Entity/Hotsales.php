@@ -7,8 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Hotsales
  *
- * @ORM\Table(name="hotsales", indexes={@ORM\Index(name="token_admin", columns={"token_admin"})})
- * @ORM\Entity
+ * @ORM\Table(name="hotsales", uniqueConstraints={@ORM\UniqueConstraint(name="id_semana", columns={"id_semana"})})
+ * @ORM\Entity(repositoryClass="App\Repository\HotsalesRepository")
  */
 class Hotsales
 {
@@ -22,47 +22,28 @@ class Hotsales
     private $idHotsale;
 
     /**
-     * @var float
+     * @var \SemanasReserva
      *
-     * @ORM\Column(name="descuento", type="float", precision=10, scale=0, nullable=false)
-     */
-    private $descuento;
-
-    /**
-     * @var \Administradores
-     *
-     * @ORM\ManyToOne(targetEntity="Administradores")
+     * @ORM\ManyToOne(targetEntity="SemanasReserva")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="token_admin", referencedColumnName="token")
+     *   @ORM\JoinColumn(name="id_semana", referencedColumnName="id_semana")
      * })
      */
-    private $tokenAdmin;
+    private $idSemana;
 
     public function getIdHotsale(): ?int
     {
         return $this->idHotsale;
     }
 
-    public function getDescuento(): ?float
+    public function getIdSemana(): ?SemanasReserva
     {
-        return $this->descuento;
+        return $this->idSemana;
     }
 
-    public function setDescuento(float $descuento): self
+    public function setIdSemana(?SemanasReserva $idSemana): self
     {
-        $this->descuento = $descuento;
-
-        return $this;
-    }
-
-    public function getTokenAdmin(): ?Administradores
-    {
-        return $this->tokenAdmin;
-    }
-
-    public function setTokenAdmin(?Administradores $tokenAdmin): self
-    {
-        $this->tokenAdmin = $tokenAdmin;
+        $this->idSemana = $idSemana;
 
         return $this;
     }
