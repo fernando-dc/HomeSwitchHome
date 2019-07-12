@@ -31,7 +31,7 @@
 <div class="container-fluid pt-5">
     
     <div class="row">
-            <div class="col-lg-4 order-lg-12">
+            <div class="col-lg-4 order-lg-12" id="login-column">
                     <div class="text-center">
                         <!--RECUADRO2-->
                         <br/><br/>
@@ -78,11 +78,11 @@
         
                 </div>
 
-        <div class="col-lg-4 order-lg-1">
+        <div class="col-lg-4 order-lg-1" id="subasta-column">
             <div class="text-center" id="recuadro1">
                 <h3>Subasta recomendada</h3>
                 
-                <div id="uno">
+                <div id="">
                     {% if subasta %}
                     <!--RECUADRO4-->
                     <font size=5 color="Black">
@@ -114,7 +114,7 @@
                         </strong>
                     </font>
                     <br>
-                    <img src="{{subasta.getIdResidencia.fotos[0].ruta}}" style="width:90%;height:45%" class="img-fluid border border-primary" alt="Imagen residencia">
+                    <img src="{{subasta.getIdResidencia.fotos[0].ruta}}" style="max-width: 85%" class="img-fluid border border-primary" alt="Imagen residencia">
                     <br><br>
                     <a href="{{ path('subasta_detalles', {'id': subasta.getIdSubasta()}) }}" class="btn btn-success">Ver Subasta</a>
         
@@ -131,10 +131,13 @@
 
     
 
-        <div class="col-lg-4 order-lg-2">
+        <div class="col-lg-4 order-lg-2" id="hotsale-column">
             <div class="text-center">
                 <!--RECUADRO1-->
-                <font size=4 color="Black"><p align="center">Hotsale recomendado</p></font>
+                <h3>
+                    <p align="center">Hotsale recomendado</p></font>
+                </h3> 
+                    
                 
                 <!--RECUADRO1-->
                 </br>

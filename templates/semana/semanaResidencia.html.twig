@@ -126,7 +126,7 @@
             <!-- Button trigger modal -->
             <div class="text-right">
                 <!--TODO: Cambiar el ROLE_USER por ROLE_PREMIUM o el que sea requerido solo para el usuario premium y admin-->
-                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalAdjudicar" data-backdrop="static" data-keyboard="false"
+                <button type="button" class="btn btn-lg btn-success" data-toggle="modal" data-target="#modalAdjudicar" data-backdrop="static" data-keyboard="false"
                 {% if not(is_granted('IS_AUTHENTICATED_FULLY')) %}
                     disabled="true"
                 {% else %}

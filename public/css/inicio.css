@@ -32,3 +32,26 @@
 #dos{
 	background-color:rgba(5, 190, 214, 0.205);
 	}
+
+#login-column{
+	background-image: linear-gradient(45deg, rgba(0, 0, 0, 0.31),#ffc10757);
+	background-image: linear-gradient(45deg, rgba(58, 168, 187, 0.144),#fefff169);
+}
+#login-column:hover{
+	background-image: linear-gradient(45deg, rgba(117, 117, 117, 0.952),#fad567f5);
+	background-image: linear-gradient(45deg, rgba(0, 0, 0, 0.31),#ffc10757);
+}
+
+#subasta-column{
+	background-image: linear-gradient(45deg, rgba(0, 0, 0, 0.31),#07ffdd57);
+}
+#subasta-column:hover{
+	background-image: linear-gradient(45deg, rgb(116, 116, 116), #9affee);
+}
+
+#hotsale-column{
+	background-image: linear-gradient(45deg, rgba(0, 0, 0, 0.31),#ffc10700);
+}
+#hotsale-column:hover{
+	background-image: linear-gradient(45deg, rgba(156, 156, 156, 0.904),#ddddddf1);
+}
