@@ -34,6 +34,7 @@ class srcApp_KernelDevDebugContainerUrlGenerator extends Symfony\Component\Routi
         '_profiler_exception_css' => [['token'], ['_controller' => 'web_profiler.controller.exception::cssAction'], [], [['text', '/exception.css'], ['variable', '/', '[^/]++', 'token', true], ['text', '/_profiler']], [], []],
         'filtro' => [[], ['_controller' => 'App\\Controller\\FiltroController::index'], [], [['text', '/filtro']], [], []],
         'hotsales_index' => [[], ['_controller' => 'App\\Controller\\HotsalesController::index'], [], [['text', '/hotsales/']], [], []],
+        'adjudicar_Hotsale' => [['idHotsale'], ['_controller' => 'App\\Controller\\HotsalesController::adjudicar'], [], [['variable', '/', '[^/]++', 'idHotsale', true], ['text', '/hotsales/adjudicar']], [], []],
         'hotsales_new' => [[], ['_controller' => 'App\\Controller\\HotsalesController::new'], [], [['text', '/hotsales/new']], [], []],
         'hotsales_show' => [['idHotsale'], ['_controller' => 'App\\Controller\\HotsalesController::show'], [], [['variable', '/', '[^/]++', 'idHotsale', true], ['text', '/hotsales']], [], []],
         'hotsales_edit' => [['idHotsale'], ['_controller' => 'App\\Controller\\HotsalesController::edit'], [], [['text', '/edit'], ['variable', '/', '[^/]++', 'idHotsale', true], ['text', '/hotsales']], [], []],

@@ -61,41 +61,44 @@ class srcApp_KernelDevDebugContainerUrlMatcher extends Symfony\Bundle\FrameworkB
                             .'|(*:159)'
                         .')'
                     .')'
-                    .'|/hotsales/([^/]++)(?'
-                        .'|(*:190)'
-                        .'|/edit(*:203)'
-                        .'|(*:211)'
+                    .'|/hotsales/(?'
+                        .'|adjudicar/([^/]++)(*:200)'
+                        .'|([^/]++)(?'
+                            .'|(*:219)'
+                            .'|/edit(*:232)'
+                            .'|(*:240)'
+                        .')'
                     .')'
                     .'|/residencias/(?'
                         .'|([^/]++)(?'
-                            .'|(*:247)'
-                            .'|/edit(*:260)'
-                            .'|(*:268)'
+                            .'|(*:277)'
+                            .'|/edit(*:290)'
+                            .'|(*:298)'
                         .')'
-                        .'|residencia([^/]++)(*:295)'
+                        .'|residencia([^/]++)(*:325)'
                     .')'
                     .'|/s(?'
                         .'|emana/(?'
-                            .'|([^/_]++)_([^/_]++)_([^/]++)(*:346)'
-                            .'|adjudicar/([^/_]++)_([^/_]++)_([^/]++)(*:392)'
+                            .'|([^/_]++)_([^/_]++)_([^/]++)(*:376)'
+                            .'|adjudicar/([^/_]++)_([^/_]++)_([^/]++)(*:422)'
                         .')'
                         .'|u(?'
                             .'|basta(?'
-                                .'|s/residencia([^/]++)(*:433)'
+                                .'|s/residencia([^/]++)(*:463)'
                                 .'|/(?'
-                                    .'|detalles([^/]++)(*:461)'
-                                    .'|finalizar/([^/]++)(*:487)'
-                                    .'|participarDeLaSubasta([^/]++)(*:524)'
+                                    .'|detalles([^/]++)(*:491)'
+                                    .'|finalizar/([^/]++)(*:517)'
+                                    .'|participarDeLaSubasta([^/]++)(*:554)'
                                 .')'
                             .')'
-                            .'|scripciones/configurar/([^/]++)(*:565)'
+                            .'|scripciones/configurar/([^/]++)(*:595)'
                         .')'
                     .')'
-                    .'|/ver_perfil_de_([^/]++)(*:598)'
+                    .'|/ver_perfil_de_([^/]++)(*:628)'
                     .'|/usuarios/(?'
-                        .'|cambiarSuscripcion/([^/]++)(*:646)'
-                        .'|reservasDe/([^/]++)(*:673)'
-                        .'|subastasDe([^/]++)(*:699)'
+                        .'|cambiarSuscripcion/([^/]++)(*:676)'
+                        .'|reservasDe/([^/]++)(*:703)'
+                        .'|subastasDe([^/]++)(*:729)'
                     .')'
                 .')/?$}sDu',
         ];
@@ -107,24 +110,25 @@ class srcApp_KernelDevDebugContainerUrlMatcher extends Symfony\Bundle\FrameworkB
             136 => [[['_route' => '_profiler_exception', '_controller' => 'web_profiler.controller.exception::showAction'], ['token'], null, null, false, false, null]],
             149 => [[['_route' => '_profiler_exception_css', '_controller' => 'web_profiler.controller.exception::cssAction'], ['token'], null, null, false, false, null]],
             159 => [[['_route' => '_profiler', '_controller' => 'web_profiler.controller.profiler::panelAction'], ['token'], null, null, false, true, null]],
-            190 => [[['_route' => 'hotsales_show', '_controller' => 'App\\Controller\\HotsalesController::show'], ['idHotsale'], ['GET' => 0], null, false, true, null]],
-            203 => [[['_route' => 'hotsales_edit', '_controller' => 'App\\Controller\\HotsalesController::edit'], ['idHotsale'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-            211 => [[['_route' => 'hotsales_delete', '_controller' => 'App\\Controller\\HotsalesController::delete'], ['idHotsale'], ['DELETE' => 0], null, false, true, null]],
-            247 => [[['_route' => 'residencias_show', '_controller' => 'App\\Controller\\ResidenciasController::show'], ['idResidencia'], ['GET' => 0], null, false, true, null]],
-            260 => [[['_route' => 'residencias_edit', '_controller' => 'App\\Controller\\ResidenciasController::edit'], ['idResidencia'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-            268 => [[['_route' => 'residencias_delete', '_controller' => 'App\\Controller\\ResidenciasController::delete'], ['idResidencia'], ['DELETE' => 0], null, false, true, null]],
-            295 => [[['_route' => 'residencia_detalle', '_controller' => 'App\\Controller\\ResidenciasController::detallesResidencia'], ['id'], ['GET' => 0], null, false, true, null]],
-            346 => [[['_route' => 'semana_residencia', '_controller' => 'App\\Controller\\SemanaController::semanaDeReserva'], ['f_i', 'f_f', 'idRes'], null, null, false, true, null]],
-            392 => [[['_route' => 'adjudicar_semana', '_controller' => 'App\\Controller\\SemanaController::adjudicarSemana'], ['f_i', 'f_f', 'idRes'], null, null, false, true, null]],
-            433 => [[['_route' => 'subastas_de_residenciaX', '_controller' => 'App\\Controller\\SubastasController::subastasResidencia'], ['id'], null, null, false, true, null]],
-            461 => [[['_route' => 'subasta_detalles', '_controller' => 'App\\Controller\\SubastasController::subastasDetalles'], ['id'], null, null, false, true, null]],
-            487 => [[['_route' => 'subasta_finalizar', '_controller' => 'App\\Controller\\SubastasController::finalizarSubasta'], ['id'], null, null, false, true, null]],
-            524 => [[['_route' => 'subastas_participar', '_controller' => 'App\\Controller\\SubastasController::participarDeSubasta'], ['id'], null, null, false, true, null]],
-            565 => [[['_route' => 'configurar_suscripcion', '_controller' => 'App\\Controller\\SuscripcionesController::configurarSuscripcion'], ['suscripcion'], ['GET' => 0, 'POST' => 1], null, false, true, null]],
-            598 => [[['_route' => 'ver_perfil_de_un_usuario', '_controller' => 'App\\Controller\\UsuariosController::verPerfilDe'], ['idUsuario'], null, null, false, true, null]],
-            646 => [[['_route' => 'cambiar_suscripcion', '_controller' => 'App\\Controller\\UsuariosController::cambiarSuscripcion'], ['usuario_email'], ['GET' => 0], null, false, true, null]],
-            673 => [[['_route' => 'ver_reservas_de_un_usuario', '_controller' => 'App\\Controller\\UsuariosController::verReservasDe'], ['idUsuario'], ['GET' => 0], null, false, true, null]],
-            699 => [[['_route' => 'ver_subastas_de_un_usuario', '_controller' => 'App\\Controller\\UsuariosController::verSubastasDe'], ['idUsuario'], ['GET' => 0], null, false, true, null]],
+            200 => [[['_route' => 'adjudicar_Hotsale', '_controller' => 'App\\Controller\\HotsalesController::adjudicar'], ['idHotsale'], null, null, false, true, null]],
+            219 => [[['_route' => 'hotsales_show', '_controller' => 'App\\Controller\\HotsalesController::show'], ['idHotsale'], ['GET' => 0], null, false, true, null]],
+            232 => [[['_route' => 'hotsales_edit', '_controller' => 'App\\Controller\\HotsalesController::edit'], ['idHotsale'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+            240 => [[['_route' => 'hotsales_delete', '_controller' => 'App\\Controller\\HotsalesController::delete'], ['idHotsale'], ['DELETE' => 0], null, false, true, null]],
+            277 => [[['_route' => 'residencias_show', '_controller' => 'App\\Controller\\ResidenciasController::show'], ['idResidencia'], ['GET' => 0], null, false, true, null]],
+            290 => [[['_route' => 'residencias_edit', '_controller' => 'App\\Controller\\ResidenciasController::edit'], ['idResidencia'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+            298 => [[['_route' => 'residencias_delete', '_controller' => 'App\\Controller\\ResidenciasController::delete'], ['idResidencia'], ['DELETE' => 0], null, false, true, null]],
+            325 => [[['_route' => 'residencia_detalle', '_controller' => 'App\\Controller\\ResidenciasController::detallesResidencia'], ['id'], ['GET' => 0], null, false, true, null]],
+            376 => [[['_route' => 'semana_residencia', '_controller' => 'App\\Controller\\SemanaController::semanaDeReserva'], ['f_i', 'f_f', 'idRes'], null, null, false, true, null]],
+            422 => [[['_route' => 'adjudicar_semana', '_controller' => 'App\\Controller\\SemanaController::adjudicarSemana'], ['f_i', 'f_f', 'idRes'], null, null, false, true, null]],
+            463 => [[['_route' => 'subastas_de_residenciaX', '_controller' => 'App\\Controller\\SubastasController::subastasResidencia'], ['id'], null, null, false, true, null]],
+            491 => [[['_route' => 'subasta_detalles', '_controller' => 'App\\Controller\\SubastasController::subastasDetalles'], ['id'], null, null, false, true, null]],
+            517 => [[['_route' => 'subasta_finalizar', '_controller' => 'App\\Controller\\SubastasController::finalizarSubasta'], ['id'], null, null, false, true, null]],
+            554 => [[['_route' => 'subastas_participar', '_controller' => 'App\\Controller\\SubastasController::participarDeSubasta'], ['id'], null, null, false, true, null]],
+            595 => [[['_route' => 'configurar_suscripcion', '_controller' => 'App\\Controller\\SuscripcionesController::configurarSuscripcion'], ['suscripcion'], ['GET' => 0, 'POST' => 1], null, false, true, null]],
+            628 => [[['_route' => 'ver_perfil_de_un_usuario', '_controller' => 'App\\Controller\\UsuariosController::verPerfilDe'], ['idUsuario'], null, null, false, true, null]],
+            676 => [[['_route' => 'cambiar_suscripcion', '_controller' => 'App\\Controller\\UsuariosController::cambiarSuscripcion'], ['usuario_email'], ['GET' => 0], null, false, true, null]],
+            703 => [[['_route' => 'ver_reservas_de_un_usuario', '_controller' => 'App\\Controller\\UsuariosController::verReservasDe'], ['idUsuario'], ['GET' => 0], null, false, true, null]],
+            729 => [[['_route' => 'ver_subastas_de_un_usuario', '_controller' => 'App\\Controller\\UsuariosController::verSubastasDe'], ['idUsuario'], ['GET' => 0], null, false, true, null]],
         ];
     }
 }

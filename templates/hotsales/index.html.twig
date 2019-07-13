@@ -27,6 +27,7 @@
                </thead>
                <tbody>
                    {% for hotsale in hotsales %}
+                   {% if hotsale.getIdSemana.getIdUsuario is null %}
                        <tr>
                            <td style="width:20%;heigth:30%">
                                <img src="{{hotsale.getIdSemana.getIdResidencia.fotos[0].ruta}}" class="img-fluid border border-primary" alt="Imagen residencia">
@@ -38,8 +39,19 @@
                                </p>
                            </td>
                            <td> {{ hotsale.getIdSemana.getPrecio() }} </td>
-                           <td><a href="{{ path('hotsales_show', {'idResidencia': hotsale.getIdSemana.idResidencia().getIdResidencia()}) }}" class="btn btn-info">Ver Residencia</a>
-                       </tr>
+                           <td><a href="{{ path('residencias_show', {'idResidencia': hotsale.getIdSemana.idResidencia().getIdResidencia()}) }}" class="btn btn-info">Ver Residencia</a>
+                            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                              {% if is_granted("ROLE_ADMIN") %}
+                              <a href="{{ path('hotsales_delete', {'idHotsale': hotsale.getIdHotsale()})}}" class="btn btn-info">Eliminar</a>
+                                 {% if app.user.getIdUsuario().getCreditos() != 0 %}
+                                <a href="{{ path('adjudicar_Hotsale', {'idHotsale': hotsale.getIdHotsale()})}}" class="btn btn-info">Adjudicar</a>
+                                 {% endif %}
+                              {% elseif app.user.getCreditos() != 0 %}
+                                <a href="{{ path('adjudicar_Hotsale', {'idHotsale': hotsale.getIdHotsale()})}}" class="btn btn-info">Adjudicar</a>
+                              {% endif %}
+                            {% endif %}
+                        </tr>
+                   {% endif %}
                    {% endfor %}
                 </tbody>
             </table>

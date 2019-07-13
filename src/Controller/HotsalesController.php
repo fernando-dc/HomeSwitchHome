@@ -24,6 +24,30 @@ class HotsalesController extends AbstractController
             'hotsales' => $hotsalesRepository->findAll(),
         ]);
     }
+    
+    /** 
+     * @Route("/adjudicar/{idHotsale}", name ="adjudicar_Hotsale")
+     */
+     public function adjudicar($idHotsale)
+     {
+        $em=$this->getDoctrine()->getManager();
+        if ($this->isGranted('IS_AUTHENTICATED_FULLY')){
+           if ($this->isGranted("ROLE_ADMIN")){
+              $usuario = $this->getUser()->getidUsuario();
+           }
+              else{
+              $usuario = $this->getUser();
+              }
+        }
+        $usuario->restarCredito();
+        $hotsale = $this->getDoctrine()->getRepository(Hotsales::class)->find($idHotsale);
+        $hotsale->getIdSemana()->setidUsuario($usuario);
+        $em->flush();
+        return $this->redirectToRoute('hotsales_index');
+     }
+
+
+
 
     /**
      * @Route("/new", name="hotsales_new", methods={"GET","POST"})
@@ -83,13 +107,14 @@ class HotsalesController extends AbstractController
     /**
      * @Route("/{idHotsale}", name="hotsales_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, Hotsales $hotsale): Response
+    public function delete($idHotsale): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$hotsale->getIdHotsale(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($hotsale);
-            $entityManager->flush();
-        }
+        $hotsale = $this->getDoctrine()->getRepository(Hotsales::class)->find($idHotsale);
+        $semana =  $this->getDoctrine()->getRepository(SemanasReserva::class)->find($hotsale->getIdSemana);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($semana);
+        $entityManager->remove($hotsale);
+        $entityManager->flush();
 
         return $this->redirectToRoute('hotsales_index');
     }
