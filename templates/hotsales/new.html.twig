@@ -3,9 +3,31 @@
 {% block title %}New Hotsales{% endblock %}
 
 {% block body %}
-    <h1>Create new Hotsales</h1>
+
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+<div class="container">
+<h1>Create new Hotsales</h1>
 
     {{ include('hotsales/_form.html.twig') }}
 
-    <a href="{{ path('hotsales_index') }}">back to list</a>
+    <a href="{{ path('hotsales_index') }}">Volver a la lista</a>
+</div>
+    {% endblock %}
+    {% block javascripts %}
+    {{ parent()}}
+    
+    <script>
+        jQuery(document).ready(function(){
+            $('.js-datepicker-start').datepicker({
+                weekStart: 1,
+                startDate: "+1w",
+                //endDate: "+26w",
+                daysOfWeekDisabled: "0,2,3,4,5,6",
+                daysOfWeekHighlighted: "1",
+                format: "yyyy/mm/dd",
+            });
+        });
+    </script>
+
+
 {% endblock %}

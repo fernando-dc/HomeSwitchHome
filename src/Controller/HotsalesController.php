@@ -4,11 +4,17 @@ namespace App\Controller;
 
 use App\Entity\Hotsales;
 use App\Form\HotsalesType;
+use App\Form\HotsalesType2;
 use App\Repository\HotsalesRepository;
+use App\Entity\SemanasReserva;
+
+
+use App\Repository\SemanasReservaRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Notificaciones;
 
 /**
  * @Route("/hotsales")
@@ -39,9 +45,16 @@ class HotsalesController extends AbstractController
               $usuario = $this->getUser();
               }
         }
-        $usuario->restarCredito();
         $hotsale = $this->getDoctrine()->getRepository(Hotsales::class)->find($idHotsale);
+        $residencia = $hotsale->getIdSemana()->getIdResidencia();
         $hotsale->getIdSemana()->setidUsuario($usuario);
+        //se genera la notificacion para el usuario
+        $notificacion = new Notificaciones();
+        $notificacion->setIdUsuario($usuario);
+        $notificacion->setIdResidencia($residencia);
+        $notificacion->setFecha((date_create(date('Y-m-d'))));
+        $notificacion->setTexto('¡Has reservado el Hotsale! ' );
+        $em->persist($notificacion);
         $em->flush();
         return $this->redirectToRoute('hotsales_index');
      }
@@ -60,7 +73,12 @@ class HotsalesController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+            $duracion = '+ 7 days';
+            $fecha_fin_hotsale = $hotsale->getIdSemana()->getFechaInicio()->format('Y-m-d');
+            $hotsale->getIdSemana()->setFechaFin(new \DateTime('@'.strtotime( $fecha_fin_hotsale . $duracion)));
+            $entityManager->persist($hotsale->getIdSemana());
             $entityManager->persist($hotsale);
+
             $entityManager->flush();
 
             return $this->redirectToRoute('hotsales_index');
@@ -87,10 +105,10 @@ class HotsalesController extends AbstractController
      */
     public function edit(Request $request, Hotsales $hotsale): Response
     {
-        $form = $this->createForm(HotsalesType::class, $hotsale);
+        $form = $this->createForm(HotsalesType2::class, $hotsale);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted()) {
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('hotsales_index', [
@@ -105,17 +123,17 @@ class HotsalesController extends AbstractController
     }
 
     /**
-     * @Route("/{idHotsale}", name="hotsales_delete", methods={"DELETE"})
+     * @Route("/delete/{idHotsale}", name="hotsales_delete")
      */
-    public function delete($idHotsale): Response
+    public function delete($idHotsale)
     {
+    
         $hotsale = $this->getDoctrine()->getRepository(Hotsales::class)->find($idHotsale);
-        $semana =  $this->getDoctrine()->getRepository(SemanasReserva::class)->find($hotsale->getIdSemana);
+        $semana =  $this->getDoctrine()->getRepository(SemanasReserva::class)->find($hotsale->getIdSemana());
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->remove($semana);
         $entityManager->remove($hotsale);
         $entityManager->flush();
-
         return $this->redirectToRoute('hotsales_index');
     }
 }

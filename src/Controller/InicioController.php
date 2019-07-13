@@ -14,6 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
 
+use App\Entity\Hotsales;
 use App\Entity\Subastas;
 
 
@@ -35,13 +36,13 @@ class InicioController extends AbstractController{
 
       $em = $this-> getDoctrine()->getManager();
       $subastaActiva = $em->getRepository(Subastas::class)->findOneBy( ['finalizada' => '0'] );
-
+      $hotsaleRecomendado = $em->getRepository(Hotsales::class)->unaHotsale();
       // get the login error if there is one
       $error = $authenticationUtils->getLastAuthenticationError();
       // last username entered by the user
       $lastUsername = $authenticationUtils->getLastUsername();
 
-      return $this->render('/login/inicio.html.twig', ['subasta' => $subastaActiva, 'last_username' => $lastUsername, 'error' => $error]);
+      return $this->render('/login/inicio.html.twig', ['subasta' => $subastaActiva, 'last_username' => $lastUsername, 'error' => $error, 'hotsale' => $hotsaleRecomendado ]);
     }
 
     /*public function inicio(){

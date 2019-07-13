@@ -47,4 +47,15 @@ class HotsalesRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function unaHotsale(){
+        return $this->createQueryBuilder('h')
+            ->innerJoin('h.idSemana', 's')
+            ->addSelect('s')
+            ->andWhere('h.idSemana = s.idSemana')
+            ->andWhere('s.idUsuario is not null')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }

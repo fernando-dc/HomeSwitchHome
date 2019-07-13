@@ -41,15 +41,13 @@
                            <td> {{ hotsale.getIdSemana.getPrecio() }} </td>
                            <td><a href="{{ path('residencias_show', {'idResidencia': hotsale.getIdSemana.idResidencia().getIdResidencia()}) }}" class="btn btn-info">Ver Residencia</a>
                             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                              {% if is_granted("ROLE_ADMIN") %}
-                              <a href="{{ path('hotsales_delete', {'idHotsale': hotsale.getIdHotsale()})}}" class="btn btn-info">Eliminar</a>
-                                 {% if app.user.getIdUsuario().getCreditos() != 0 %}
                                 <a href="{{ path('adjudicar_Hotsale', {'idHotsale': hotsale.getIdHotsale()})}}" class="btn btn-info">Adjudicar</a>
-                                 {% endif %}
-                              {% elseif app.user.getCreditos() != 0 %}
-                                <a href="{{ path('adjudicar_Hotsale', {'idHotsale': hotsale.getIdHotsale()})}}" class="btn btn-info">Adjudicar</a>
-                              {% endif %}
                             {% endif %}
+                            {% if is_granted("ROLE_ADMIN") %}
+                                <a href="{{ path('hotsales_delete', {'idHotsale': hotsale.getIdHotsale()})}}" class="btn btn-info">Eliminar</a>
+                                <a href="{{ path('hotsales_edit', {'idHotsale': hotsale.getIdHotsale()})}}" class="btn btn-info">Modificar</a>
+                            {% endif %}
+                           
                         </tr>
                    {% endif %}
                    {% endfor %}

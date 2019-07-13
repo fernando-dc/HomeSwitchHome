@@ -38,7 +38,7 @@ class srcApp_KernelDevDebugContainerUrlGenerator extends Symfony\Component\Routi
         'hotsales_new' => [[], ['_controller' => 'App\\Controller\\HotsalesController::new'], [], [['text', '/hotsales/new']], [], []],
         'hotsales_show' => [['idHotsale'], ['_controller' => 'App\\Controller\\HotsalesController::show'], [], [['variable', '/', '[^/]++', 'idHotsale', true], ['text', '/hotsales']], [], []],
         'hotsales_edit' => [['idHotsale'], ['_controller' => 'App\\Controller\\HotsalesController::edit'], [], [['text', '/edit'], ['variable', '/', '[^/]++', 'idHotsale', true], ['text', '/hotsales']], [], []],
-        'hotsales_delete' => [['idHotsale'], ['_controller' => 'App\\Controller\\HotsalesController::delete'], [], [['variable', '/', '[^/]++', 'idHotsale', true], ['text', '/hotsales']], [], []],
+        'hotsales_delete' => [['idHotsale'], ['_controller' => 'App\\Controller\\HotsalesController::delete'], [], [['variable', '/', '[^/]++', 'idHotsale', true], ['text', '/hotsales/delete']], [], []],
         'index' => [[], ['_controller' => 'App\\Controller\\InicioController::index'], [], [['text', '/']], [], []],
         'inicio' => [[], ['_controller' => 'App\\Controller\\InicioController::inicio'], [], [['text', '/inicio']], [], []],
         'inicie_sesion' => [[], ['_controller' => 'App\\Controller\\InicioController::inicieSesion'], [], [['text', '/inicie_sesion']], [], []],

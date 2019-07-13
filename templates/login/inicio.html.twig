@@ -137,15 +137,42 @@
                 <h3>
                     <p align="center">Hotsale recomendado</p></font>
                 </h3> 
-                    
-                
-                <!--RECUADRO1-->
-                </br>
+                {% if hotsale %}
+                <!--RECUADRO4-->
                 <font size=5 color="Black">
-                    <strong><p>Próximamente HotSales</p></strong>
+                    <strong>{{ (hotsale.getIdSemana().getIdResidencia()).getNombre() }}</strong>
                 </font>
-                <image id="logo-hotsale"src="/images/hotsale/hotsale-logo2.png" width="200" />
-            
+                <font size=3 color="Black">
+                    <p>Para la semana: <font color="Blue">{{ hotsale.getIdSemana().getFechaInicio().format('Y-m-d') }} - {{ hotsale.getIdSemana().getFechaFin().format('Y-m-d') }}</font></p>
+                    
+                </font>
+                </br>
+                </br>
+                <font size=3 color="Black">
+                <p>¡No te la pierdas!</p>
+                    <strong>
+                        <p align="center">Tipo:</strong> {{hotsale.getIdSemana().getIdResidencia().getTipo()}}{#</p>#}
+                        {#<p align="center">#}<strong>Ambientes:</strong> {{ hotsale.getIdSemana().getIdResidencia().getHabitaciones() }}</p>
+                        <a href="#" title="Direccion" data-toggle="popover" data-trigger="hover" data-content="
+                        [ Calle: {{subasta.getIdResidencia().getIdDireccion().getCalle()}}
+                        Numero: {{subasta.getIdResidencia().getIdDireccion().getNumero()}}
+                        Ciudad: {{subasta.getIdResidencia().getIdDireccion().getCiudad()}}
+                        Provincia: {{subasta.getIdResidencia().getIdDireccion().getProvincia}} ]">
+                        Ubicación
+                        </a>
+                    </strong>
+                </font>
+                <br>
+                <img src="{{hotsale.getIdSemana().getIdResidencia.fotos[0].ruta}}" style="max-width: 85%" class="img-fluid border border-primary" alt="Imagen residencia">
+                <br><br>
+                <a href="{{ path('hotsales_index') }}" class="btn btn-success">Ver HotSales</a>
+                {% else %}  
+                <br><br>
+                <font size=5 color="Black">
+                    <strong>Por el momento no hay subastas activas.</strong>
+                </font>
+                {% endif %}
+                    
             </div>
 
         </div>

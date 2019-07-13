@@ -391,7 +391,16 @@
     <service id="App\Form\HotsalesType" class="App\Form\HotsalesType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
+    <service id="App\Form\HotsalesType2" class="App\Form\HotsalesType2" autowire="true" autoconfigure="true">
+      <tag name="form.type"/>
+    </service>
     <service id="App\Form\ResidenciasType" class="App\Form\ResidenciasType" autowire="true" autoconfigure="true">
+      <tag name="form.type"/>
+    </service>
+    <service id="App\Form\SemanasType" class="App\Form\SemanasType" autowire="true" autoconfigure="true">
+      <tag name="form.type"/>
+    </service>
+    <service id="App\Form\SemanasType2" class="App\Form\SemanasType2" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
     <service id="App\Form\SubastaFormType" class="App\Form\SubastaFormType" autowire="true" autoconfigure="true">
@@ -728,7 +737,10 @@
         <argument>App\Form\DireccionesType</argument>
         <argument>App\Form\FotoType</argument>
         <argument>App\Form\HotsalesType</argument>
+        <argument>App\Form\HotsalesType2</argument>
         <argument>App\Form\ResidenciasType</argument>
+        <argument>App\Form\SemanasType</argument>
+        <argument>App\Form\SemanasType2</argument>
         <argument>App\Form\SubastaFormType</argument>
         <argument>App\Form\SuscripcionesType</argument>
         <argument>App\Form\TarjetasType</argument>
@@ -977,7 +989,7 @@
       <argument type="service" id="form.registry"/>
     </service>
     <service id="form.extension" class="Symfony\Component\Form\Extension\DependencyInjection\DependencyInjectionExtension" public="false">
-      <argument type="service" id=".service_locator.ZmWhnVs"/>
+      <argument type="service" id=".service_locator.0TdggwP"/>
       <argument type="collection">
         <argument key="Symfony\Component\Form\Extension\Core\Type\FormType" type="iterator">
           <argument type="service" id="form.type_extension.form.transformation_failure_handling"/>
@@ -3915,8 +3927,14 @@
     <service id=".abstract.instanceof.App\Form\FotoType" class="App\Form\FotoType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\HotsalesType" class="App\Form\HotsalesType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\HotsalesType" class="App\Form\HotsalesType" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\HotsalesType2" class="App\Form\HotsalesType2" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\HotsalesType2" class="App\Form\HotsalesType2" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\ResidenciasType" class="App\Form\ResidenciasType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\ResidenciasType" class="App\Form\ResidenciasType" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\SemanasType" class="App\Form\SemanasType" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\SemanasType" class="App\Form\SemanasType" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\SemanasType2" class="App\Form\SemanasType2" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\SemanasType2" class="App\Form\SemanasType2" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\SubastaFormType" class="App\Form\SubastaFormType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\SubastaFormType" class="App\Form\SubastaFormType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\SuscripcionesType" class="App\Form\SuscripcionesType" autowire="true" abstract="true"/>
@@ -4161,11 +4179,10 @@
         <argument key="idUsuario" type="service" id=".errored..service_locator.d01A8OY.App\Entity\Usuarios"/>
       </argument>
     </service>
-    <service id=".service_locator.XuXSTZm" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+    <service id=".service_locator.NBufEZD" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\FiltroController::validarRangoFechas" type="service" id=".service_locator.c5RbIE3"/>
-        <argument key="App\Controller\HotsalesController::delete" type="service" id=".service_locator.Mnhgvah"/>
         <argument key="App\Controller\HotsalesController::edit" type="service" id=".service_locator.Mnhgvah"/>
         <argument key="App\Controller\HotsalesController::index" type="service" id=".service_locator.zUFTGN_"/>
         <argument key="App\Controller\HotsalesController::show" type="service" id=".service_locator.Mnhgvah"/>
@@ -4179,7 +4196,6 @@
         <argument key="App\Controller\UsuariosController::verReservasDe" type="service" id=".service_locator.d01A8OY"/>
         <argument key="App\Controller\UsuariosController::verSubastasDe" type="service" id=".service_locator.d01A8OY"/>
         <argument key="App\Controller\FiltroController:validarRangoFechas" type="service" id=".service_locator.c5RbIE3"/>
-        <argument key="App\Controller\HotsalesController:delete" type="service" id=".service_locator.Mnhgvah"/>
         <argument key="App\Controller\HotsalesController:edit" type="service" id=".service_locator.Mnhgvah"/>
         <argument key="App\Controller\HotsalesController:index" type="service" id=".service_locator.zUFTGN_"/>
         <argument key="App\Controller\HotsalesController:show" type="service" id=".service_locator.Mnhgvah"/>
@@ -4263,13 +4279,16 @@
       <argument type="service" id="debug.argument_resolver.variadic.inner"/>
       <argument type="service" id="debug.stopwatch"/>
     </service>
-    <service id=".service_locator.ZmWhnVs" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+    <service id=".service_locator.0TdggwP" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Form\DireccionesType" type="service" id="App\Form\DireccionesType"/>
         <argument key="App\Form\FotoType" type="service" id="App\Form\FotoType"/>
         <argument key="App\Form\HotsalesType" type="service" id="App\Form\HotsalesType"/>
+        <argument key="App\Form\HotsalesType2" type="service" id="App\Form\HotsalesType2"/>
         <argument key="App\Form\ResidenciasType" type="service" id="App\Form\ResidenciasType"/>
+        <argument key="App\Form\SemanasType" type="service" id="App\Form\SemanasType"/>
+        <argument key="App\Form\SemanasType2" type="service" id="App\Form\SemanasType2"/>
         <argument key="App\Form\SubastaFormType" type="service" id="App\Form\SubastaFormType"/>
         <argument key="App\Form\SuscripcionesType" type="service" id="App\Form\SuscripcionesType"/>
         <argument key="App\Form\TarjetasType" type="service" id="App\Form\TarjetasType"/>
@@ -4492,7 +4511,7 @@
       <argument type="service" id="security.token_storage"/>
     </service>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver" public="false">
-      <argument type="service" id=".service_locator.XuXSTZm"/>
+      <argument type="service" id=".service_locator.NBufEZD"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver" public="false"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver" public="false"/>
@@ -4777,7 +4796,7 @@
     <service id="security.authentication.session_strategy.main" alias="security.authentication.session_strategy"/>
     <service id="security.user_checker.main" alias="security.user_checker" public="false"/>
     <service id="Symfony\Component\Security\Core\User\UserCheckerInterface" alias="security.user_checker" public="false"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.XuXSTZm"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.NBufEZD"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem" public="false"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface" alias="logger" public="false"/>
