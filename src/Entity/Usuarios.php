@@ -12,12 +12,20 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 
 /**
  * Usuarios
  *
  * @ORM\Table(name="usuarios", uniqueConstraints={@ORM\UniqueConstraint(name="email", columns={"email"})}, indexes={@ORM\Index(name="suscripcion", columns={"suscripcion"})})
  * @ORM\Entity(repositoryClass="App\Repository\UsuariosRepository")
+ * @UniqueEntity(
+ *          fields={"email"},
+ *          message="email.usuario.duplicado",
+ *          errorPath="email",
+ * 
+ * )
  */
 class Usuarios implements UserInterface
 {

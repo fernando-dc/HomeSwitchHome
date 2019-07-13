@@ -24,7 +24,7 @@ class InicioController extends AbstractController{
      */
     public function index(){
 
-      return $this->redirectToRoute('residencias_index');
+      return $this->redirectToRoute('inicio');
     }
 
     /**

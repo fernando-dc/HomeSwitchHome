@@ -1,6 +1,8 @@
 {% block title %}{% endblock %}
 {% block body %}
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
@@ -21,24 +23,76 @@
 <link rel="stylesheet" href="https://bootswatch.com/4/materia/bootstrap.min.css">
 <link rel="stylesheet" href="/css/inicio.css">
 <link rel="stylesheet" href="/css/base.css">
+
 {% if not(is_granted('IS_AUTHENTICATED_FULLY')) %}
 
-        <div class="recuadro1" style="top:70px;height:40px">
-            <font size=4 color="Black"><p align="center">Subasta recomendada</p></font>
-        </div>
 
-        <div class='recuadro1' id="uno">
-            <div align="center">
-            {% if subasta %}
-                <div class='recuadro4' id='dos' style="top: 15%" style="heigth:150px" >
+
+<div class="container-fluid pt-5">
+    
+    <div class="row">
+            <div class="col-lg-4 order-lg-12" id="login-column">
+                    <div class="text-center">
+                        <!--RECUADRO2-->
+                        <br/><br/>
+                        <image id="logo-image"src="/images/logos/HSH-Complete.svg" width="400" />
+                        <div class="row justify-content-center">
+                            <div class="col-xl-6 col-lg-8 col-md-8 col-sm-6 col-8">
+                                
+                                <br/><br/>
+                                
+                                <form method="post">
+                                    {% if error %}
+                                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                                    {% endif %}
+                                    <h1 class="h3 mb-3 font-weight-normal">Inicia sesión en la plataforma</h1>
+                                    <label for="inputEmail" class="sr-only">Email</label>
+                                    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
+                                    <label for="inputPassword" class="sr-only">Password</label>
+                                    <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                                    
+                                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" >
+                                    
+                                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                                    <br/>
+                                    <div align="center">
+                                        <button class="btn btn-lg btn-primary" type="submit">
+                                            Iniciar sesión
+                                        </button>
+                                    </div>
+                                </form>
+                                    
+                                    
+                                    
+                                </br></br>
+                                <font size=3 color="Black">
+                                    <p>¿Todavía no tenes una cuenta?¡Registrate en nuestra plataforma!</p>
+                                </font>
+                                <a href="/usuarios/registrarsePaso1" class="btn btn-light">Registrarme</a>
+                                </br></br>
+                                <a href="/loginAdmin" >Soy administrador</a>
+                                
+                            </div>
+                        </div>
+                    </div>
+        
+                </div>
+
+        <div class="col-lg-4 order-lg-1" id="subasta-column">
+            <div class="text-center" id="recuadro1">
+                <h3>Subasta recomendada</h3>
+                
+                <div id="">
+                    {% if subasta %}
+                    <!--RECUADRO4-->
                     <font size=5 color="Black">
                         <strong>{{ (subasta.getIdResidencia()).getNombre() }}</strong>
                     </font>
                     <font size=3 color="Black">
-                    <p>Para la semana: <font color="Blue">{{ subasta.getFechaInicio().format('Y-m-d') }} - {{ subasta.getFechaFin().format('Y-m-d') }}</font></p>
-                </div>
-                </font>
-                <div class='recuadro4' style="top:220px;height:450px" >
+                        <p>Para la semana: <font color="Blue">{{ subasta.getFechaInicio().format('Y-m-d') }} - {{ subasta.getFechaFin().format('Y-m-d') }}</font></p>
+                        
+                    </font>
+                    <!--RECUADRO4-->
                     <font size=5> 
                         <strong class="text-success">Último monto pujado: ${{ subasta.getPrecioActual() }}</strong>
                     </font>
@@ -47,87 +101,61 @@
                         <strong>Comenzó el día: {{ subasta.getFechaSubasta().format('Y-m-d') }}</strong>
                         
                         <p>¡No te la pierdas!</p>
-                    <strong><p align="center">Tipo:</strong> {{subasta.getIdResidencia().getTipo()}}{#</p>#}
-                    {#<p align="center">#}<strong>Ambientes:</strong> {{ subasta.getIdResidencia().getHabitaciones() }}</p>
-                    <a href="#" title="Direccion" data-toggle="popover" data-trigger="hover" data-content="
-                                [ Calle: {{subasta.getIdResidencia().getIdDireccion().getCalle()}}
-                                Numero: {{subasta.getIdResidencia().getIdDireccion().getNumero()}}
-                                Ciudad: {{subasta.getIdResidencia().getIdDireccion().getCiudad()}}
-                                Provincia: {{subasta.getIdResidencia().getIdDireccion().getProvincia}} ]">
-                                Ubicación
+                        <strong>
+                            <p align="center">Tipo:</strong> {{subasta.getIdResidencia().getTipo()}}{#</p>#}
+                            {#<p align="center">#}<strong>Ambientes:</strong> {{ subasta.getIdResidencia().getHabitaciones() }}</p>
+                            <a href="#" title="Direccion" data-toggle="popover" data-trigger="hover" data-content="
+                            [ Calle: {{subasta.getIdResidencia().getIdDireccion().getCalle()}}
+                            Numero: {{subasta.getIdResidencia().getIdDireccion().getNumero()}}
+                            Ciudad: {{subasta.getIdResidencia().getIdDireccion().getCiudad()}}
+                            Provincia: {{subasta.getIdResidencia().getIdDireccion().getProvincia}} ]">
+                            Ubicación
                             </a>
-                    </strong>
+                        </strong>
                     </font>
                     <br>
-                    <img src="{{subasta.getIdResidencia.fotos[0].ruta}}" style="width:90%;height:45%" class="img-fluid border border-primary" alt="Imagen residencia">
-                    <br><br><a href="{{ path('subasta_detalles', {'id': subasta.getIdSubasta()}) }}" class="btn btn-success">Ver Subasta</a>
+                    <img src="{{subasta.getIdResidencia.fotos[0].ruta}}" style="max-width: 85%" class="img-fluid border border-primary" alt="Imagen residencia">
+                    <br><br>
+                    <a href="{{ path('subasta_detalles', {'id': subasta.getIdSubasta()}) }}" class="btn btn-success">Ver Subasta</a>
+        
+                    {% else %}
+                    <br><br>
+                    <font size=5 color="Black">
+                        <strong>Por el momento no hay subastas activas.</strong>
+                    </font>
+                    {% endif %}
                 </div>
             </div>
-        {% else %}
-            <br><br>
-            <font size=5 color="Black">
-                <strong>Por el momento no hay subastas activas.</strong>
-            </font>
-            </div>
-        {% endif %}
+
         </div>
-        <div class="recuadro1" style="top:70px;height:40px;left:460px">
-            <font size=4 color="Black"><p align="center">Hotsale recomendado</p></font>
-        </div>
-        <div aling="center" class='recuadro1' id="uno" style="left: 30%">
-            <div align="center">
-                </br></br>
-                <font size=5 color="Black">
-                    <strong>Próximamente HotSales</p>
-                </font>
-            </div>
-            <div align="center">
-                <image id="logo-hotsale"src="/images/hotsale/hotsale-logo2.png" width="200" />
-            </div>
-        </div>
-        <div class='recuadro2'>
+
     
-            <br/><br/>
-            <div align="center">
-                <image id="logo-image"src="/images/logos/HSH-Complete.svg" width="400" />
-            </div>
-            <br/><br/>
-            <div align="center">
-                <form style="width:30%" method="post">
-                    {% if error %}
-                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-                    {% endif %}
-                    <h1 class="h3 mb-3 font-weight-normal">Inicia sesión en la plataforma</h1>
-                    <label for="inputEmail" class="sr-only">Email</label>
-                    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
-                    <label for="inputPassword" class="sr-only">Password</label>
-                    <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
 
-                    <input type="hidden" name="_csrf_token"
-                    value="{{ csrf_token('authenticate') }}"
-                    >
-
-                    <input type="hidden" name="_csrf_token"
-                    value="{{ csrf_token('authenticate') }}"
-                    >
-                    <br/>
-                    <div align="center">
-                    <button class="btn btn-lg btn-primary" type="submit">
-                        Iniciar sesión
-                    </button>
-                </form>
+        <div class="col-lg-4 order-lg-2" id="hotsale-column">
+            <div class="text-center">
+                <!--RECUADRO1-->
+                <h3>
+                    <p align="center">Hotsale recomendado</p></font>
+                </h3> 
+                    
+                
+                <!--RECUADRO1-->
+                </br>
+                <font size=5 color="Black">
+                    <strong><p>Próximamente HotSales</p></strong>
+                </font>
+                <image id="logo-hotsale"src="/images/hotsale/hotsale-logo2.png" width="200" />
+            
             </div>
 
-
-            </br></br>
-            <font size=3 color="Black">
-                <p>¿Todavía no tenes una cuenta?¡Registrate en nuestra plataforma!</p>
-            </font>
-            <a href="/usuarios/registrarsePaso1" class="btn btn-light">Registrarme</a>
-            </br></br>
-            <a href="/loginAdmin" >Soy administrador</a>
         </div>
-    {#</div>#}
+
+        
+
+    </div>
+
+</div>
+
 
     
 

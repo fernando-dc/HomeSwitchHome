@@ -71,6 +71,7 @@ class Residencias
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_direccion", referencedColumnName="id_direccion")
      * })
+     * @Assert\Valid()
      */
     private $idDireccion;
     
@@ -377,5 +378,10 @@ class Residencias
         }
 
         return $this;
+    }
+
+    public function getEliminado(): ?bool
+    {
+        return $this->eliminado;
     }
 }

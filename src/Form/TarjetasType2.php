@@ -18,10 +18,20 @@ class TarjetasType2 extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        ->add('numero_tarjeta', TextType::class, array('attr' => array('class' => 'form-control')))
-        ->add('codigo', NumberType::class, array('attr' => array('class' => 'form-control')))
-        ->add('vencimiento', TextType::class, array('attr' => array('class' => 'form-control')))
-        ->add('save', SubmitType::class, array('label' => 'Siguiente', 'attr' => array('class' => 'btn btn-info')))  
+        ->add('numeroTarjeta', TextType::class, ['attr' => ['class' => 'form-control'], 'help' => 'Ingrese los 16 digitos de su tarjeta'])
+        ->add('codigo', NumberType::class, [
+            'attr' => [
+                'class' => 'form-control',
+                'placeholder' => 'XXXX'
+            ],
+            'help' => 'Codigo al dorso de su tarjeta'
+            ])
+        ->add('vencimiento', TextType::class, [
+            'attr' => ['class' => 'form-control',
+            'placeholder' => 'MMAA',],
+            'help' => 'Utilize 2 digitos para el mes y 2 para el año'
+            ])
+        ->add('save', SubmitType::class, array('label' => 'Guardar', 'attr' => array('class' => 'btn btn-lg btn-success')))  
         ;
     }
 

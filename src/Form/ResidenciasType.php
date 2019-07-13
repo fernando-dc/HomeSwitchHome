@@ -10,6 +10,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Mapping\ClassMetadata;
+
 class ResidenciasType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -23,6 +26,9 @@ class ResidenciasType extends AbstractType
             ->add('imageFile', FileType::class, [
                 'label'=>'Foto de la residencia:',
                 'mapped' => false,
+                'constraints' => [
+                    new File(['mimesType' => ['application/image']])
+                    ],
                 ])
             //->add('fotos', FileType::class)
         ;

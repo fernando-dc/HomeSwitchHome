@@ -1,39 +1,55 @@
-{% block title %}
-{% endblock %}
+{% extends 'base.html.twig' %}
+
+{% block title %}Editar informacion de usuario{% endblock %}
+
 {% block bodyTitle %}
+    <h1>
+        Editar informacion del perfil
+    </h1>
+    <h6 class="font-weight-light">Ingresa los datos que queres modificar:</h6>
 {% endblock %}
+
+
+
 {% block body %}
-
-{% for message in app.flashes('success') %}
-            <div class="alert alert-success">
-                {{ message }}
-            </div>
-        {% endfor %}
-
-        {% for message in app.flashes('danger') %}
-            <div class="alert alert-danger">
-                {{ message }}
-            </div>
-        {% endfor %}
-
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/base.css">
 
 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
 
 {% form_theme form 'bootstrap_4_layout.html.twig' %}
 
-<h1 align="center">Ingresa los datos que queres modificar:</h1>
-<div align="center" style="width:25%" class="container">
-    </br></br>
+<div class="container text-center">
     
-        {{ form_start(form) }}
-        {{ form_widget(form) }}
+        <div class="row justify-content-center">
+            
+            <div class="col-md-6 border  " id="user-data-form"> 
+                <h3>Mis datos:</h3>
+                <br>
+                {{ form_start(form) }}
+                {{form_row(form.DNI)}}
+                {{form_row(form.nombre)}}
+                {{form_row(form.apellido)}}
+                {{form_row(form.email)}}
+                {{form_row(form.password)}}
+                
+            </div>
+            
+        </div>
+        <br><br>
+
+        <div class="row justify-content-center">
+            <div class="col-sm-6">
+                <a href="{{ path('miPerfil') }}" class="btn btn-lg btn-danger">Cancelar</a>
+
+            </div>
+            <div class="col-sm-6">
+                <button type="submit" class="btn btn-lg btn-success">Guardar</button>
+
+            </div>
+        </div>
         {{ form_end(form) }}
 
-        <a href="{{ path('miPerfil') }}" class="btn btn-danger">Cancelar</a>
 
-        </div>
+</div>
 
 {% endif %}
 {% endblock %}

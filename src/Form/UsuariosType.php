@@ -19,12 +19,16 @@ class UsuariosType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        ->add('email', EmailType::class, array('attr' => array('class' => 'form-control')))
-        ->add('nombre', TextType::class, array('attr' => array('class' => 'form-control')))
-        ->add('apellido', TextType::class, array('attr' => array('class' => 'form-control')))
-        ->add('password', PasswordType::class, array('attr' => array('class' => 'form-control')))
-        ->add('DNI', TextType::class, array('attr' => array('class' => 'form-control')))
-        ->add('save', SubmitType::class, array('label' => 'Siguiente', 'attr' => array('class' => 'btn btn-info')))  
+        ->add('DNI', TextType::class, ['attr' => ['class' => 'form-control'], 'label'=>'DNI'])
+        ->add('nombre', TextType::class, ['attr' => ['class' => 'form-control']])
+        ->add('apellido', TextType::class, ['attr' => ['class' => 'form-control']])
+        ->add('email', EmailType::class, [
+            'attr' => [
+                'class' => 'form-control',
+                'placeholder' => 'ejemplo@email.com',
+                ],
+            ])
+        ->add('password', PasswordType::class, ['attr' => ['class' => 'form-control']])
         ;
     }
 

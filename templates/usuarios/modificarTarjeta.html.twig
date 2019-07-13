@@ -5,6 +5,7 @@
 {% block bodyTitle %}
     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
     <h1>Cambiar forma de pago</h1>
+    <h6 class="font-weight-light">Ingresa los datos que queres modificar:</h6>
     {% else  %}
         <h1>Tu usuario no tiene acceso a esta pagina.</h1>
     {% endif %}
@@ -12,19 +13,37 @@
 
 
 {% block body %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
 
-   <h1 align="center">Ingresa los datos que queres modificar:</h1>
-<div align="center" style="width:25%" class="container">
-    </br></br>
+<div class="container text-center">
     
-        {{ form_start(form) }}
-        {{ form_widget(form) }}
-        {{ form_end(form) }}
-
-        <a href="{{ path('miPerfil') }}" class="btn btn-danger">Cancelar</a>
-
+    <div class="row justify-content-center">
+        <div class="col-sm-5" id="card-data-form">
+            <h3>Datos de la tarjeta:</h3>
+            <br>
+            {{ form_start(form) }}
+            {{ form_row(form.numeroTarjeta) }}
+            {{ form_row(form.codigo) }}
+            {{ form_row(form.vencimiento) }}
+            
         </div>
+    </div>
+    <br>
+    <br>
+    
+    <div class="row justify-content-center">
+        <div class="col-sm-4">
+            <a href="{{ path('miPerfil') }}" class="btn btn-lg btn-danger">Cancelar</a>
+            
+        </div>
+        <div class="col-sm-4">
+                {{ form_row(form.save) }}
+            
+        </div>
+    </div>
+    {{ form_end(form) }}
+
 {% else %}
     <div align="center" class="container">
         </br></br> </br></br></br>
