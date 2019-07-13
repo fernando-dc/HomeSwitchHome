@@ -17,6 +17,7 @@
                     <th>Semana</th>
                     <th>Precio</th>
                     <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -33,6 +34,11 @@
                         </td>
                         <td> {{ reserva.getPrecio() }} </td>
                         <td><a href="{{ path('residencias_show', {'idResidencia': reserva.idResidencia().getIdResidencia()}) }}" class="btn btn-info">Ver Residencia</a>
+                        
+                        
+                       {% if (reserva.fechaInicio.format('Y/m/d') > ("now" |date("Y/m/d"))) %}
+                        <td><a href="/cancelarReserva/{{ reserva.getIdSemana() }}" class="btn btn-info">Cancelar Reserva</a>
+                        {% endif %}
                     </tr>
                 {% endfor %}
             </tbody>

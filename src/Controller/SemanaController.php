@@ -100,4 +100,25 @@ class SemanaController extends AbstractController
 
         return $this->redirectToRoute('filtro');
     }
+
+    /**
+     * @Route("/cancelarReserva/{idReserva}", name="cancelar_reserva")
+     */
+    public function cancelarReserva(SemanasReserva $reserva){
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($reserva);
+        $entityManager->flush();
+        
+        $usuario = $this->getUser();
+
+         if($this->isGranted('ROLE_ADMIN')){
+            $usuario = $usuario->getIdUsuario();
+        }
+
+         $reservas = $this->getDoctrine()->getManager()->getRepository(SemanasReserva::class)->findBy(['idUsuario' => $usuario->getIdUsuario()]);
+
+         $reservas = array_reverse($reservas);
+         return $this->render("/usuarios/misReservas.html.twig", ['reservas' => $reservas]);
+    }
 }

@@ -4132,6 +4132,12 @@
         <argument key="residencia" type="service" id=".errored..service_locator.He_3lwD.App\Entity\Residencias"/>
       </argument>
     </service>
+    <service id=".service_locator.MTXy5.q" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="reserva" type="service" id=".errored..service_locator.MTXy5.q.App\Entity\SemanasReserva"/>
+      </argument>
+    </service>
     <service id=".service_locator.JXabfFl" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -4150,7 +4156,7 @@
         <argument key="idUsuario" type="service" id=".errored..service_locator.d01A8OY.App\Entity\Usuarios"/>
       </argument>
     </service>
-    <service id=".service_locator.PwI13u7" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+    <service id=".service_locator.kxqJXwL" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\FiltroController::validarRangoFechas" type="service" id=".service_locator.c5RbIE3"/>
@@ -4160,6 +4166,7 @@
         <argument key="App\Controller\ResidenciasController::index" type="service" id=".service_locator.iAgrosP"/>
         <argument key="App\Controller\ResidenciasController::show" type="service" id=".service_locator.He_3lwD"/>
         <argument key="App\Controller\SecurityController::login" type="service" id=".service_locator.EbLunuf"/>
+        <argument key="App\Controller\SemanaController::cancelarReserva" type="service" id=".service_locator.MTXy5.q"/>
         <argument key="App\Controller\SubastasController::eliminarSubasta" type="service" id=".service_locator.JXabfFl"/>
         <argument key="App\Controller\SubastasController::modificarSubasta" type="service" id=".service_locator.JXabfFl"/>
         <argument key="App\Controller\SuscripcionesController::configurarSuscripcion" type="service" id=".service_locator.9IeoZrX"/>
@@ -4172,6 +4179,7 @@
         <argument key="App\Controller\ResidenciasController:index" type="service" id=".service_locator.iAgrosP"/>
         <argument key="App\Controller\ResidenciasController:show" type="service" id=".service_locator.He_3lwD"/>
         <argument key="App\Controller\SecurityController:login" type="service" id=".service_locator.EbLunuf"/>
+        <argument key="App\Controller\SemanaController:cancelarReserva" type="service" id=".service_locator.MTXy5.q"/>
         <argument key="App\Controller\SubastasController:eliminarSubasta" type="service" id=".service_locator.JXabfFl"/>
         <argument key="App\Controller\SubastasController:modificarSubasta" type="service" id=".service_locator.JXabfFl"/>
         <argument key="App\Controller\SuscripcionesController:configurarSuscripcion" type="service" id=".service_locator.9IeoZrX"/>
@@ -4471,12 +4479,13 @@
       <argument type="service" id="security.token_storage"/>
     </service>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver" public="false">
-      <argument type="service" id=".service_locator.PwI13u7"/>
+      <argument type="service" id=".service_locator.kxqJXwL"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver" public="false"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver" public="false"/>
     <service id=".errored..service_locator.c5RbIE3.Symfony\Component\Validator\Context\ExecutionContextInterface" class="Symfony\Component\Validator\Context\ExecutionContextInterface"/>
     <service id=".errored..service_locator.He_3lwD.App\Entity\Residencias" class="App\Entity\Residencias"/>
+    <service id=".errored..service_locator.MTXy5.q.App\Entity\SemanasReserva" class="App\Entity\SemanasReserva"/>
     <service id=".errored..service_locator.JXabfFl.App\Entity\Subastas" class="App\Entity\Subastas"/>
     <service id=".errored..service_locator.9IeoZrX.App\Entity\Suscripciones" class="App\Entity\Suscripciones"/>
     <service id=".errored..service_locator.d01A8OY.App\Entity\Usuarios" class="App\Entity\Usuarios"/>
@@ -4756,7 +4765,7 @@
     <service id="security.authentication.session_strategy.main" alias="security.authentication.session_strategy"/>
     <service id="security.user_checker.main" alias="security.user_checker" public="false"/>
     <service id="Symfony\Component\Security\Core\User\UserCheckerInterface" alias="security.user_checker" public="false"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.PwI13u7"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.kxqJXwL"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem" public="false"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface" alias="logger" public="false"/>

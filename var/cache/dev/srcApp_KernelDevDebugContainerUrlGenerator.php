@@ -49,6 +49,7 @@ class srcApp_KernelDevDebugContainerUrlGenerator extends Symfony\Component\Routi
         'semana' => [[], ['_controller' => 'App\\Controller\\SemanaController::index'], [], [['text', '/semana']], [], []],
         'semana_residencia' => [['f_i', 'f_f', 'idRes'], ['_controller' => 'App\\Controller\\SemanaController::semanaDeReserva'], [], [['variable', '_', '[^/]++', 'idRes', true], ['variable', '_', '[^/_]++', 'f_f', true], ['variable', '/', '[^/_]++', 'f_i', true], ['text', '/semana']], [], []],
         'adjudicar_semana' => [['f_i', 'f_f', 'idRes'], ['_controller' => 'App\\Controller\\SemanaController::adjudicarSemana'], [], [['variable', '_', '[^/]++', 'idRes', true], ['variable', '_', '[^/_]++', 'f_f', true], ['variable', '/', '[^/_]++', 'f_i', true], ['text', '/semana/adjudicar']], [], []],
+        'cancelar_reserva' => [['idReserva'], ['_controller' => 'App\\Controller\\SemanaController::cancelarReserva'], [], [['variable', '/', '[^/]++', 'idReserva', true], ['text', '/cancelarReserva']], [], []],
         'subasta_nueva' => [[], ['_controller' => 'App\\Controller\\SubastasController::new'], [], [['text', '/subasta/new']], [], []],
         'subastas_de_residenciaX' => [['id'], ['_controller' => 'App\\Controller\\SubastasController::subastasResidencia'], [], [['variable', '', '[^/]++', 'id', true], ['text', '/subastas/residencia']], [], []],
         'subastas_listado' => [[], ['_controller' => 'App\\Controller\\SubastasController::subastas'], [], [['text', '/subastas/listado']], [], []],

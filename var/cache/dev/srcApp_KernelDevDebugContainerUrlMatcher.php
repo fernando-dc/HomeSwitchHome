@@ -90,11 +90,12 @@ class srcApp_KernelDevDebugContainerUrlMatcher extends Symfony\Bundle\FrameworkB
                             .'|scripciones/configurar/([^/]++)(*:562)'
                         .')'
                     .')'
-                    .'|/ver_perfil_de_([^/]++)(*:595)'
+                    .'|/cancelarReserva/([^/]++)(*:597)'
+                    .'|/ver_perfil_de_([^/]++)(*:628)'
                     .'|/usuarios/(?'
-                        .'|cambiarSuscripcion/([^/]++)(*:643)'
-                        .'|reservasDe/([^/]++)(*:670)'
-                        .'|subastasDe([^/]++)(*:696)'
+                        .'|cambiarSuscripcion/([^/]++)(*:676)'
+                        .'|reservasDe/([^/]++)(*:703)'
+                        .'|subastasDe([^/]++)(*:729)'
                     .')'
                 .')/?$}sDu',
         ];
@@ -119,10 +120,11 @@ class srcApp_KernelDevDebugContainerUrlMatcher extends Symfony\Bundle\FrameworkB
             484 => [[['_route' => 'subasta_finalizar', '_controller' => 'App\\Controller\\SubastasController::finalizarSubasta'], ['id'], null, null, false, true, null]],
             521 => [[['_route' => 'subastas_participar', '_controller' => 'App\\Controller\\SubastasController::participarDeSubasta'], ['id'], null, null, false, true, null]],
             562 => [[['_route' => 'configurar_suscripcion', '_controller' => 'App\\Controller\\SuscripcionesController::configurarSuscripcion'], ['suscripcion'], ['GET' => 0, 'POST' => 1], null, false, true, null]],
-            595 => [[['_route' => 'ver_perfil_de_un_usuario', '_controller' => 'App\\Controller\\UsuariosController::verPerfilDe'], ['idUsuario'], null, null, false, true, null]],
-            643 => [[['_route' => 'cambiar_suscripcion', '_controller' => 'App\\Controller\\UsuariosController::cambiarSuscripcion'], ['usuario_email'], ['GET' => 0], null, false, true, null]],
-            670 => [[['_route' => 'ver_reservas_de_un_usuario', '_controller' => 'App\\Controller\\UsuariosController::verReservasDe'], ['idUsuario'], ['GET' => 0], null, false, true, null]],
-            696 => [[['_route' => 'ver_subastas_de_un_usuario', '_controller' => 'App\\Controller\\UsuariosController::verSubastasDe'], ['idUsuario'], ['GET' => 0], null, false, true, null]],
+            597 => [[['_route' => 'cancelar_reserva', '_controller' => 'App\\Controller\\SemanaController::cancelarReserva'], ['idReserva'], null, null, false, true, null]],
+            628 => [[['_route' => 'ver_perfil_de_un_usuario', '_controller' => 'App\\Controller\\UsuariosController::verPerfilDe'], ['idUsuario'], null, null, false, true, null]],
+            676 => [[['_route' => 'cambiar_suscripcion', '_controller' => 'App\\Controller\\UsuariosController::cambiarSuscripcion'], ['usuario_email'], ['GET' => 0], null, false, true, null]],
+            703 => [[['_route' => 'ver_reservas_de_un_usuario', '_controller' => 'App\\Controller\\UsuariosController::verReservasDe'], ['idUsuario'], ['GET' => 0], null, false, true, null]],
+            729 => [[['_route' => 'ver_subastas_de_un_usuario', '_controller' => 'App\\Controller\\UsuariosController::verSubastasDe'], ['idUsuario'], ['GET' => 0], null, false, true, null]],
         ];
     }
 }
