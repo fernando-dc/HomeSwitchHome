@@ -25,7 +25,7 @@
                     <th>Precio actual</th>
                     <th>Estado</th>
                     {#<th>Fecha de reserva</th>#}
-                    <th></th><th></th><th></th><th></th>
+                    <th></th><th></th><th></th><th></th><th></th>
                 </tr>
             </thead>
             <tbody>
@@ -68,6 +68,8 @@
                                             {% if subasta.pujas is empty %}
                                             <td>
                                             <a href="/subastas/edit/{{ subasta.getIdSubasta() }}" class="btn btn-danger">Modificar subasta</a></td>
+                                            <td>
+                                            <a href="/subastas/delete/{{ subasta.getIdSubasta() }}" class="btn btn-outline-danger">Eliminar subasta</a></td>
                                             {% endif %}
                                         {% endif %}
                                     {% endif %}

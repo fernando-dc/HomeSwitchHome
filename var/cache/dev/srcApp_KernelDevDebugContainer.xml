@@ -1988,14 +1988,6 @@
         <argument>2048</argument>
       </call>
       <call method="addListener">
-        <argument>console.command</argument>
-        <argument type="collection">
-          <argument type="service" id="debug.debug_handlers_listener"/>
-          <argument>configure</argument>
-        </argument>
-        <argument>2048</argument>
-      </call>
-      <call method="addListener">
         <argument>kernel.request</argument>
         <argument type="collection">
           <argument type="service" id="router_listener"/>
@@ -4158,7 +4150,7 @@
         <argument key="idUsuario" type="service" id=".errored..service_locator.d01A8OY.App\Entity\Usuarios"/>
       </argument>
     </service>
-    <service id=".service_locator.GIDyl6D" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+    <service id=".service_locator.PwI13u7" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\FiltroController::validarRangoFechas" type="service" id=".service_locator.c5RbIE3"/>
@@ -4168,6 +4160,7 @@
         <argument key="App\Controller\ResidenciasController::index" type="service" id=".service_locator.iAgrosP"/>
         <argument key="App\Controller\ResidenciasController::show" type="service" id=".service_locator.He_3lwD"/>
         <argument key="App\Controller\SecurityController::login" type="service" id=".service_locator.EbLunuf"/>
+        <argument key="App\Controller\SubastasController::eliminarSubasta" type="service" id=".service_locator.JXabfFl"/>
         <argument key="App\Controller\SubastasController::modificarSubasta" type="service" id=".service_locator.JXabfFl"/>
         <argument key="App\Controller\SuscripcionesController::configurarSuscripcion" type="service" id=".service_locator.9IeoZrX"/>
         <argument key="App\Controller\UsuariosController::verReservasDe" type="service" id=".service_locator.d01A8OY"/>
@@ -4179,6 +4172,7 @@
         <argument key="App\Controller\ResidenciasController:index" type="service" id=".service_locator.iAgrosP"/>
         <argument key="App\Controller\ResidenciasController:show" type="service" id=".service_locator.He_3lwD"/>
         <argument key="App\Controller\SecurityController:login" type="service" id=".service_locator.EbLunuf"/>
+        <argument key="App\Controller\SubastasController:eliminarSubasta" type="service" id=".service_locator.JXabfFl"/>
         <argument key="App\Controller\SubastasController:modificarSubasta" type="service" id=".service_locator.JXabfFl"/>
         <argument key="App\Controller\SuscripcionesController:configurarSuscripcion" type="service" id=".service_locator.9IeoZrX"/>
         <argument key="App\Controller\UsuariosController:verReservasDe" type="service" id=".service_locator.d01A8OY"/>
@@ -4477,7 +4471,7 @@
       <argument type="service" id="security.token_storage"/>
     </service>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver" public="false">
-      <argument type="service" id=".service_locator.GIDyl6D"/>
+      <argument type="service" id=".service_locator.PwI13u7"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver" public="false"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver" public="false"/>
@@ -4762,7 +4756,7 @@
     <service id="security.authentication.session_strategy.main" alias="security.authentication.session_strategy"/>
     <service id="security.user_checker.main" alias="security.user_checker" public="false"/>
     <service id="Symfony\Component\Security\Core\User\UserCheckerInterface" alias="security.user_checker" public="false"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.GIDyl6D"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.PwI13u7"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem" public="false"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface" alias="logger" public="false"/>

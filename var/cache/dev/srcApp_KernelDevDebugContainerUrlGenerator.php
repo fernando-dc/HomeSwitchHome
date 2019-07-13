@@ -57,6 +57,7 @@ class srcApp_KernelDevDebugContainerUrlGenerator extends Symfony\Component\Routi
         'subastas_participar' => [['id'], ['_controller' => 'App\\Controller\\SubastasController::participarDeSubasta'], [], [['variable', '', '[^/]++', 'id', true], ['text', '/subasta/participarDeLaSubasta']], [], []],
         'subastas_participando' => [[], ['_controller' => 'App\\Controller\\SubastasController::subastasParticipando'], [], [['text', '/subasta/participando']], [], []],
         'subastas_edit' => [['idSubasta'], ['_controller' => 'App\\Controller\\SubastasController::modificarSubasta'], [], [['variable', '/', '[^/]++', 'idSubasta', true], ['text', '/subastas/edit']], [], []],
+        'subasta_delete' => [['idSubasta'], ['_controller' => 'App\\Controller\\SubastasController::eliminarSubasta'], [], [['variable', '/', '[^/]++', 'idSubasta', true], ['text', '/subastas/delete']], [], []],
         'configurar_precios' => [[], ['_controller' => 'App\\Controller\\SuscripcionesController::configurarSuscripciones'], [], [['text', '/suscripciones/configurar']], [], []],
         'configurar_suscripcion' => [['suscripcion'], ['_controller' => 'App\\Controller\\SuscripcionesController::configurarSuscripcion'], [], [['variable', '/', '[^/]++', 'suscripcion', true], ['text', '/suscripciones/configurar']], [], []],
         'miPerfil' => [[], ['_controller' => 'App\\Controller\\UsuariosController::perfil'], [], [['text', '/usuarios/perfil']], [], []],
