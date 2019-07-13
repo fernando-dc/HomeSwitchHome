@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Preguntas frecuentes{% endblock %}
+
+{% block bodyTitle %}
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <h1>Preguntas Frecuentes</h1>
+    {% endif %}
+{% endblock %}
+
+
+{% block body %}
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+    <div class="container">
+        <h5><strong>¿Cómo puedo filtrar residencias disponibles por localidad y fecha?</strong></h5>
+        </br>
+        <h6>Debes eligir una localidad, y luego una fecha principal seis meses mayor a la fecha actual. Luego, la segunda fecha
+        no debe ser mayor a dos meses desde la primer fecha ingresada. Clickeas el botón para buscar, y ¡listo! </h6>
+        </br>
+        <hr>
+        <h5><strong>¿Cómo puedo adjudicar una residencia?</strong></h5>
+        </br>
+        <h6>Puedes adjudicar una residencia para una semana determinada, participando de subastas, comprando un HotSale, o si eres Premium, 
+        ¡puedes hacerlo directamente! Si tienes unas suscripción Premium, y por lo menos un crédito, sólo debes filtrar por localidad y fecha, 
+        elegerir una semana de reserva, y clickear en el botón "Adjudicar residencia".</h6>
+        </br>
+        <hr>
+        <h5><strong>¿Cómo puedo participar de una subasta?</strong></h5>
+        </br>
+        <h6>Para participar de una subasta, debes dirigirte al listado de subastas, y desde ahí ya podrás participar de la subasta que elijas.
+        Podrás participar de una cantidad de subastas igual al doble de los créditos de Home Switch Home que tengas en el momento.</h6>
+        </br>
+        <hr>
+        <h5><strong>¿Cómo puedo comprar un HotSale?</strong></h5>
+        </br>
+        <h6>Para comprar un HotSale, dirígete al listado de HotSales, y desde allí podrás eligir el que te interese. Luego, si tienes suficientes
+        créditos, podrás comprarlo, y así adjudicar la residencia en la semana de reserva del HotSale. Los HotSales, son accesibles a todas
+        las suscripciones ¡Anímate!</h6>
+        </br>
+        <hr>
+        <h5><strong>¿Cómo puedo cambiar mi suscripción?</strong></h5>
+        </br>
+        <h6>Para cambiar tu suscripción, debes dirigirte a la información de tu perfil. Una vez allí, verás el botón que te permite cambiar
+        tu suscripción.</h6>
+        </br>
+        <hr>
+        <h5><strong>¿Cómo puedo cambiar los datos de mi perfil?</strong></h5>
+        </br>
+        <h6>Debes dirigirte a la información de tu perfil, y podrás desde allí modificar los datos que necesites.</h6>
+        </br>
+        <hr>
+        <h5><strong>¿Cómo puedo ver mis reservas adjudicadas?</strong></h5>
+        </br>
+        <h6>Debes dirigirte a la información de tu perfil, y desde allí clickear en el botón "Mis Reservas"</h6>
+        </br>
+        <hr>
+        <h5><strong>¿Cómo puedo ver las subastas en las que participo?</strong></h5>
+        </br>
+        <h6>Debes dirigirte a la información de tu perfil, y desde allí clickear en el botón "Subastas en las que participo".
+        También encontrarás el mismo botón si te diriges al listado de subastas.</h6>
+        </br>
+        <hr>
+        <h5><strong>¿Cómo puedo ver mis notifiaciones?</strong></h5>
+        </br>
+        <h6>Debes dirigirte a la información de tu perfil, y desde allí clickear en el botón "Notificaciones".
+        Te enviaremos notifiaciones cuando ganes una subasta, y cuando adjudiques una reserva de forma inmediata.</h6>
+        </br>
+        <hr>
+    </div>
+{% else %}
+    <div align="center" class="container">
+        </br></br> </br></br></br>
+        <p>No ha iniciado sesión</p>
+        <a href="/inicio" class="btn btn-info">Iniciar sesión</a>
+    </div>
+{% endif %}
+{% endblock %}

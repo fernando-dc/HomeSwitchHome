@@ -125,6 +125,15 @@
 
             <!-- Button trigger modal -->
             <div class="text-right">
+            {% if is_granted('ROLE_ADMIN') %}
+                {% set suscripcion = app.user.getIdUsuario.getSuscripcion.getNombre %}
+            {% else %}
+                {% set suscripcion = app.user.getSuscripcion.getNombre %}
+            {% endif %}
+            {% if suscripcion != 'premium' %} 
+                <p>¡Pasate a Premium y podrás realizar reservas inmediatas! ¡Pagarías sólo
+                <font color= "Green"><strong> ${{ precioPremium }}</strong></font> por mes!</p>
+                        {% endif %}
                 <!--TODO: Cambiar el ROLE_USER por ROLE_PREMIUM o el que sea requerido solo para el usuario premium y admin-->
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalAdjudicar" data-backdrop="static" data-keyboard="false"
                 {% if not(is_granted('IS_AUTHENTICATED_FULLY')) %}
