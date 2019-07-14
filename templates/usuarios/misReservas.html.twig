@@ -15,7 +15,6 @@
                     <th></th>
                     <th>Residencia</th>
                     <th>Semana</th>
-                    <th>Precio</th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -32,12 +31,11 @@
                                 {{ reserva.getFechaInicio().format('Y-m-d') }} / {{ reserva.getFechaFin().format('Y-m-d') }}</font>
                             </p>
                         </td>
-                        <td> {{ reserva.getPrecio() }} </td>
                         <td><a href="{{ path('residencias_show', {'idResidencia': reserva.idResidencia().getIdResidencia()}) }}" class="btn btn-info">Ver Residencia</a>
                         
                         
                        {% if (reserva.fechaInicio.format('Y/m/d') > ("now" |date("Y/m/d"))) %}
-                        <td><a href="/cancelarReserva/{{ reserva.getIdSemana() }}" class="btn btn-info">Cancelar Reserva</a>
+                        <td><a href="{{ path('cancelar_reserva', {'idSemana': reserva.idSemana}) }}" class="btn btn-info">Cancelar Reserva</a>
                         {% endif %}
                     </tr>
                 {% endfor %}

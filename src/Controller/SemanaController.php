@@ -10,6 +10,7 @@ use App\Entity\SemanasReserva;
 use App\Entity\Residencias;
 use App\Entity\Notificaciones;
 use App\Entity\Suscripciones;
+use App\Entity\Hotsales;
 
 class SemanaController extends AbstractController
 {
@@ -102,23 +103,23 @@ class SemanaController extends AbstractController
     }
 
     /**
-     * @Route("/cancelarReserva/{idReserva}", name="cancelar_reserva")
+     * @Route("/cancelarReserva/{idSemana}", name="cancelar_reserva")
      */
-    public function cancelarReserva(SemanasReserva $reserva){
+    public function cancelarReserva(SemanasReserva $semana){
 
         $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->remove($reserva);
-        $entityManager->flush();
-        
-        $usuario = $this->getUser();
 
-         if($this->isGranted('ROLE_ADMIN')){
-            $usuario = $usuario->getIdUsuario();
+        $hotsale =$this->getDoctrine()->getManager()->getRepository(Hotsales::class)->findOneBy(['idSemana' => $semana->getIdSemana()]);
+        if( $hotsale != null){
+            $entityManager->remove($hotsale);
+            $entityManager->flush();
         }
 
-         $reservas = $this->getDoctrine()->getManager()->getRepository(SemanasReserva::class)->findBy(['idUsuario' => $usuario->getIdUsuario()]);
-
-         $reservas = array_reverse($reservas);
-         return $this->render("/usuarios/misReservas.html.twig", ['reservas' => $reservas]);
+       
+        $entityManager->remove($semana);
+        $entityManager->flush();
+        
+         $this->addFlash('success','Se ha cancelado correctamente la reserva.');
+         return $this->redirectToRoute('mis_reservas');
     }
 }
