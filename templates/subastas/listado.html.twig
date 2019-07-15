@@ -25,9 +25,7 @@
                     <th>Precio actual</th>
                     <th>Estado</th>
                     {#<th>Fecha de reserva</th>#}
-                    <th><th>Acciones</th></th>
-                    <th></th>
-                    <th></th>
+                    <th></th><th></th><th></th><th></th>
                 </tr>
             </thead>
             <tbody>
@@ -66,6 +64,11 @@
                                     {% if is_granted('ROLE_ADMIN') %}
                                         {% if (subasta.getFinalizada() != 1) %}
                                             <a href="/subasta/finalizar/{{ subasta.getIdSubasta() }}" class="btn btn-danger">Finalizar subasta</a>
+                                            
+                                            {% if subasta.pujas is empty %}
+                                            <td>
+                                            <a href="/subastas/edit/{{ subasta.getIdSubasta() }}" class="btn btn-danger">Modificar subasta</a></td>
+                                            {% endif %}
                                         {% endif %}
                                     {% endif %}
                                 {% endif %}

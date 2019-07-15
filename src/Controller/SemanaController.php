@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use App\Entity\SemanasReserva;
 use App\Entity\Residencias;
 use App\Entity\Notificaciones;
+use App\Entity\Suscripciones;
 
 class SemanaController extends AbstractController
 {
@@ -36,13 +37,14 @@ class SemanaController extends AbstractController
         $residencia = $em->getRepository(Residencias::class)->find($idRes);
         $usuario = $this->getUser();
 
-
+        $premium = $em->getRepository(Suscripciones::class)->findOneBy(['nombre' => 'premium']);
+        $precioPremium = $premium->getPrecio();
         
         return $this->render('semana/semanaResidencia.html.twig', [
             'controller_name' => 'SemanaController',
             'residencia'=> $residencia,
             'semana' => ['fecha_inicial' =>$f_i, 'fecha_final'=> $f_f],
-            'usuario' => $usuario,
+            'usuario' => $usuario, 'precioPremium' =>  $precioPremium
             
         ]);
         //return new Response($f_i.' '.$f_f.' '.$idRes);

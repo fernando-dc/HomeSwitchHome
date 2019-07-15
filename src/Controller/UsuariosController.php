@@ -196,6 +196,7 @@ class UsuariosController extends AbstractController
         $usuarios = $this->getDoctrine()->getManager()->getRepository(Usuarios::class)->findAll();
 
         ksort($usuarios);
+        $usuarios = array_reverse($usuarios);
 
         return $this->render("/usuarios/listado.html.twig", ['usuarios' => $usuarios]);
     }

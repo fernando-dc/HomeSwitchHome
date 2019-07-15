@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contacto{% endblock %}
+
+{% block bodyTitle %}
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <h1 align="center">Contacto con Home Switch Home</h1>
+    {% endif %}
+{% endblock %}
+
+
+{% block body %}
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+    <h5 align="center" >Para contactarse con la empresa, por favor envié un correo a la siguiente dirección de email:</h5>
+    </br>
+    <h3 align="center"><font color="Green">homeswitchhome@contacto.com.ar</font></h3>
+    </br>
+    <h5 align="center" >Resolveremos todas sus dudas con gusto. También puede enviarnos sugerencias.</h5>
+{% else %}
+    <div align="center" class="container">
+        </br></br> </br></br></br>
+        <p>No ha iniciado sesión</p>
+        <a href="/inicio" class="btn btn-info">Iniciar sesión</a>
+    </div>
+{% endif %}
+{% endblock %}
