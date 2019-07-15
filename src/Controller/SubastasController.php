@@ -307,7 +307,7 @@ class SubastasController extends AbstractController
         }
     }
     /**
-     * @Route("/subastas/edit/{idSubasta}", name="subastas_edit")
+     * @Route("/subastas/edit/{idSubasta}", name="subastas_edit", Methods={"GET","POST"})
      */
 
     public function modificarSubasta (Request $request, Subastas $subasta): Response{
@@ -315,9 +315,9 @@ class SubastasController extends AbstractController
         $form = $this->createForm(SubastaFormType2::class, $subasta);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $subastaModificada = $form->getData();
-            $subasta->setPrecioActual($subastaModificada->getPrecioActual());
+        if ($form->isSubmitted()) {
+            //$subastaModificada = $form->getData();
+            //$subasta->setPrecioActual($subastaModificada->getPrecioActual());
 
             $this->getDoctrine()->getManager()->flush();
 
@@ -328,6 +328,17 @@ class SubastasController extends AbstractController
             'subasta' => $subasta,
             'form' => $form->createView(),
         ]);
+    }
+
+    /**
+     * @Route("/subastas/delete/{idSubasta}", name="subasta_delete")
+     */
+    public function eliminarSubasta(Subastas $subasta){
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($subasta);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('subastas_listado');
     }
 
 }

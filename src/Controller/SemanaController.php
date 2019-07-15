@@ -10,6 +10,7 @@ use App\Entity\SemanasReserva;
 use App\Entity\Residencias;
 use App\Entity\Notificaciones;
 use App\Entity\Suscripciones;
+use App\Entity\Hotsales;
 
 class SemanaController extends AbstractController
 {
@@ -99,5 +100,26 @@ class SemanaController extends AbstractController
         }
 
         return $this->redirectToRoute('filtro');
+    }
+
+    /**
+     * @Route("/cancelarReserva/{idSemana}", name="cancelar_reserva")
+     */
+    public function cancelarReserva(SemanasReserva $semana){
+
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $hotsale =$this->getDoctrine()->getManager()->getRepository(Hotsales::class)->findOneBy(['idSemana' => $semana->getIdSemana()]);
+        if( $hotsale != null){
+            $entityManager->remove($hotsale);
+            $entityManager->flush();
+        }
+
+       
+        $entityManager->remove($semana);
+        $entityManager->flush();
+        
+         $this->addFlash('success','Se ha cancelado correctamente la reserva.');
+         return $this->redirectToRoute('mis_reservas');
     }
 }
