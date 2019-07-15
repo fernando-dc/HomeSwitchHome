@@ -39,6 +39,8 @@ class ResidenciasController extends AbstractController
             'residencias' => $residenciasRepository->findBy(['eliminado'=>0]),
         ]);
         }
+        else { return new Response('Accesso no autorizado');
+        }
     }
 
     /**

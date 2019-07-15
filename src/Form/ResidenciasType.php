@@ -12,6 +12,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
+//use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints\File;
 
 class ResidenciasType extends AbstractType
 {
@@ -26,9 +28,11 @@ class ResidenciasType extends AbstractType
             ->add('imageFile', FileType::class, [
                 'label'=>'Foto de la residencia:',
                 'mapped' => false,
-                'constraints' => [
-                    new File(['mimesType' => ['application/image']])
-                    ],
+                'constraints' => [ new File([
+                    'mimeTypes' => 'image/*',
+                    'mimeTypesMessage' => 'El archivo debe ser una imagen',
+                        
+                ])],
                 ])
             //->add('fotos', FileType::class)
         ;

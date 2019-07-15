@@ -126,73 +126,104 @@
             <!-- Button trigger modal -->
             <div class="text-right">
                 <!--TODO: Cambiar el ROLE_USER por ROLE_PREMIUM o el que sea requerido solo para el usuario premium y admin-->
-                <button type="button" class="btn btn-lg btn-success" data-toggle="modal" data-target="#modalAdjudicar" data-backdrop="static" data-keyboard="false"
-                {% if not(is_granted('IS_AUTHENTICATED_FULLY')) %}
-                    disabled="true"
-                {% else %}
+                {% if (is_granted('IS_AUTHENTICATED_FULLY')) %}
                     {% if is_granted('ROLE_ADMIN') %}
-                            {% if app.user.getIdUsuario.getSuscripcion.getNombre != 'premium' %} disabled="true" 
-                            {% endif %}
+                        {% set user = app.user.idUsuario %}
                     {% else %}
-                        {% if app.user.getSuscripcion.getNombre != 'premium' %} disabled="true" 
-                        {% endif %}
-                    {% endif %}    
+                        {% set user = app.user %}
+
+                    {% endif %} 
+                    {% if user.suscripcion.nombre == 'premium' %}
+                        <button type="button" class="btn btn-lg btn-success" data-toggle="modal" data-target="#modalAdjudicar" data-backdrop="static" data-keyboard="false">Adjudicar</button>
+                        {% set modalType = 1 %}
+                    {% else %}
+                        <button type="button" class="btn btn-lg hvr-back-pulse" data-toggle="modal" data-target="#modalAdjudicar" data-backdrop="static" data-keyboard="false">Convertirme en Premium</button>
+                        {% set modalType = 2 %}
+                    {% endif %}
+                    
+                {% else %}
+                    {% set modalType = 2 %}
+                    <button type="button" class="btn btn-lg hvr-back-pulse" data-toggle="modal" data-target="#modalAdjudicar" data-backdrop="static" data-keyboard="false">Convertirme en Premium</button>
                 {% endif %}
-                >
-                    Adjudicar
-                </button>
+                
+                
+                
             </div>
 
             <!-- Modal -->
             <div class="modal fade" id="modalAdjudicar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Confirmar operacion</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    {% if usuario is not null %}
-                        {% if is_granted('ROLE_ADMIN') %}
-                            {% set usuario = usuario.getIdUsuario %}
-                        {% endif %}
-                        {% if usuario.getCreditos >= 1 %}
-                            <h5>
-                                La operacion requiere 1 credito
-                            </h5>
-                            <h4>
-                                Creditos actuales: 
-                                <strong>
-                                    {{usuario.getCreditos}}
-                                </strong>
-                            </h4>
-                            <br>
+                {% if modalType == 1 %}
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Confirmar operacion</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        {% if usuario is not null %}
+                            {% if is_granted('ROLE_ADMIN') %}
+                                {% set usuario = usuario.getIdUsuario %}
+                            {% endif %}
+                            {% if usuario.getCreditos >= 1 %}
+                                <h5>
+                                    La operacion requiere 1 credito
+                                </h5>
+                                <h4>
+                                    Creditos actuales: 
+                                    <strong>
+                                        {{usuario.getCreditos}}
+                                    </strong>
+                                </h4>
+                                <br>
 
-                            Seguro que desea concretar la operacion?
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Dejame pensarlo</button>
-                            <a href="/semana/adjudicar/{{semana.fecha_inicial}}_{{semana.fecha_final}}_{{residencia.idResidencia}}" class="btn btn-success">Confirmar</a>
-                        </div>
-                        {% else %}
-                            <div class="alert alert-danger" role="alert">
-                                ERROR: La operacion requiere 1 credito, usted no tiene creditos suficientes!
+                                Seguro que desea concretar la operacion?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Dejame pensarlo</button>
+                        <a href="/semana/adjudicar/{{semana.fecha_inicial}}_{{semana.fecha_final}}_{{residencia.idResidencia}}" class="btn btn-success">Confirmar</a>
+                    </div>
+                            {% else %}
+                                <div class="alert alert-danger" role="alert">
+                                    ERROR: La operacion requiere 1 credito, usted no tiene creditos suficientes!
                                     Contactese con el administrador del sitio.
+                                </div>
                             </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Volver</button>
-                        </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Volver</button>
+                            </div>
+                            {% endif %}
+            
                         {% endif %}
-        
-                    {% endif %}
+                    </div>
+                {% else %}
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="exampleModalLongTitle">Suscripcion Premium</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <h5>
+                                    <strong>
+                                        Suscribase como usuario premium para disfrutar de beneficios como reservar ésta semana de manera inmediata!
+                                    </strong>
+                                </h5>
+                                Para mas informacion escribanos a nuestro email por favor: <a href="mailto:homeswitchhome@suscripciones.com">homeswitchhome@suscripciones.com</a> 
+                                
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Volver</button>
+                                    </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                {% endif %}
                 </div>
-                
-                </div>
-            </div>
-            </div>
+
 
            
        </div>
