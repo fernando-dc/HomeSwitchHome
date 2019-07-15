@@ -124,37 +124,44 @@
             <br>
 
             <!-- Button trigger modal -->
-            <div class="text-right">
-            {% if is_granted('ROLE_ADMIN') %}
-                {% set suscripcion = app.user.getIdUsuario.getSuscripcion.getNombre %}
-            {% else %}
-                {% set suscripcion = app.user.getSuscripcion.getNombre %}
-            {% endif %}
-            {% if suscripcion != 'premium' %} 
-                <p>¡Pasate a Premium y podrás realizar reservas inmediatas! ¡Pagarías sólo
-                <font color= "Green"><strong> ${{ precioPremium }}</strong></font> por mes!</p>
-                        {% endif %}
-                <!--TODO: Cambiar el ROLE_USER por ROLE_PREMIUM o el que sea requerido solo para el usuario premium y admin-->
+            {#
                 {% if (is_granted('IS_AUTHENTICATED_FULLY')) %}
-                    {% if is_granted('ROLE_ADMIN') %}
-                        {% set user = app.user.idUsuario %}
-                    {% else %}
-                        {% set user = app.user %}
-
-                    {% endif %} 
-                    {% if user.suscripcion.nombre == 'premium' %}
-                        <button type="button" class="btn btn-lg btn-success" data-toggle="modal" data-target="#modalAdjudicar" data-backdrop="static" data-keyboard="false">Adjudicar</button>
-                        {% set modalType = 1 %}
-                    {% else %}
-                        <button type="button" class="btn btn-lg hvr-back-pulse" data-toggle="modal" data-target="#modalAdjudicar" data-backdrop="static" data-keyboard="false">Convertirme en Premium</button>
-                        {% set modalType = 2 %}
-                    {% endif %}
-                    
+                {% if is_granted('ROLE_ADMIN') %}
+                {% set suscripcion = app.user.usuario.suscripcion.getNombre %}
                 {% else %}
-                    {% set modalType = 2 %}
-                    <button type="button" class="btn btn-lg hvr-back-pulse" data-toggle="modal" data-target="#modalAdjudicar" data-backdrop="static" data-keyboard="false">Convertirme en Premium</button>
+                {% set suscripcion = app.user.suscripcion.getNombre %}
                 {% endif %}
+                {% if suscripcion != 'premium' %} 
+                {% endif %}
+                <!--TODO: Cambiar el ROLE_USER por ROLE_PREMIUM o el que sea requerido solo para el usuario premium y admin-->
+                #}
+            
+            <div class="text-right">
+
+            {% if (is_granted('IS_AUTHENTICATED_FULLY')) %}
+                {% if is_granted('ROLE_ADMIN') %}
+                    {% set user = app.user.idUsuario %}
+                {% else %}
+                    {% set user = app.user %}
+                {% endif %} 
                 
+                {% if user.suscripcion.nombre == 'premium' %}
+                    <button type="button" class="btn btn-lg btn-success" data-toggle="modal" data-target="#modalAdjudicar" data-backdrop="static" data-keyboard="false">Adjudicar</button>
+                    {% set modalType = 1 %}
+                
+                {% else %}
+                    <button type="button" class="btn btn-lg hvr-back-pulse" data-toggle="modal" data-target="#modalAdjudicar" data-backdrop="static" data-keyboard="false">Convertirme en Premium</button>
+                    {% set modalType = 2 %}
+                
+                {% endif %}
+                            
+            {% else %}
+                {% set modalType = 2 %}
+                <button type="button" class="btn btn-lg hvr-back-pulse" data-toggle="modal" data-target="#modalAdjudicar" data-backdrop="static" data-keyboard="false">Convertirme en Premium</button>
+            
+            {% endif %}
+
+                    
                 
                 
             </div>
@@ -221,6 +228,9 @@
                                         Suscribase como usuario premium para disfrutar de beneficios como reservar ésta semana de manera inmediata!
                                     </strong>
                                 </h5>
+                                <h4>
+                                    Tan solo por la cuota de <font color= "Green"><strong> ${{ precioPremium }}</strong></font> por mes!</p>
+                                </h4>
                                 Para mas informacion escribanos a nuestro email por favor: <a href="mailto:homeswitchhome@suscripciones.com">homeswitchhome@suscripciones.com</a> 
                                 
                                     <div class="modal-footer">
