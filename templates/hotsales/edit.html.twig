@@ -2,13 +2,25 @@
 
 {% block title %}Edit Hotsales{% endblock %}
 
+{% block bodyTitle %}
+    <h1>Editar Hotsale</h1>
+{% endblock %}
+
+
 {% block body %}
 {% form_theme form 'bootstrap_4_layout.html.twig' %}
 <div class="container">
-    <h1>Editar Hotsale</h1>
 
-    {{ include('hotsales/_form.html.twig', {'button_label': 'Update'}) }}
+    <div class="row justify-content-center">
+        <div class="col-6">
+            <div id="hotsale-form">
+                {{ include('hotsales/_form.html.twig', {'button_label': 'Guardar cambios'}) }}
+            </div>
+            
+            <br>
+            <a href="{{ path('hotsales_index') }}">Volver a la lista</a>
+        </div>
+    </div>
 
-    <a href="{{ path('hotsales_index') }}">Volver a la lista</a>
 </div>
 {% endblock %}

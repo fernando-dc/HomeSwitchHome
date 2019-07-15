@@ -2,20 +2,19 @@
 {% block title %}Hotsales index{% endblock %}
 
 {% block bodyTitle %}
-    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
     <h1>Listado de Hotsales</h1>
-    {% endif %}
 {% endblock %}
 
 {% block body %}
     <div class="container">
-        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        {% if is_granted('IS_AUTHENTICATED_FULLY') and is_granted("ROLE_ADMIN") %}
             <a href="{{ path('hotsales_new') }}" class="btn btn-success">Añadir Hotsale</a>
         {% endif %}
         <br><br>
-        {% if hotsales %}
         <div align="center" class="container">
-           <table class="table table-hover table-responsive-lg">
+        {% if hotsales %}
+
+            <table class="table table-hover table-responsive-lg">
                <thead class="thead-dark">
                    <tr>
                        <th></th>
@@ -29,32 +28,39 @@
                    {% for hotsale in hotsales %}
                    {% if hotsale.getIdSemana.getIdUsuario is null %}
                        <tr>
-                           <td style="width:20%;heigth:30%">
+                            <td style="width:20%;heigth:30%">
                                <img src="{{hotsale.getIdSemana.getIdResidencia.fotos[0].ruta}}" class="img-fluid border border-primary" alt="Imagen residencia">
-                       </td>
-                           <td>{{ hotsale.getIdSemana.getIdResidencia().getNombre() }}</td>
-                           <td>
-                               <strong> <font color='Blue'>
-                                   {{ hotsale.getIdSemana.getFechaInicio().format('Y-m-d') }} / {{ hotsale.getIdSemana.getFechaFin().format('Y-m-d') }}</font>
-                               </p>
-                           </td>
-                           <td> {{ hotsale.getIdSemana.getPrecio() }} </td>
-                           <td><a href="{{ path('residencias_show', {'idResidencia': hotsale.getIdSemana.idResidencia().getIdResidencia()}) }}" class="btn btn-info">Ver Residencia</a>
-                            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                                <a href="{{ path('adjudicar_Hotsale', {'idHotsale': hotsale.getIdHotsale()})}}" class="btn btn-info">Adjudicar</a>
-                            {% endif %}
-                            {% if is_granted("ROLE_ADMIN") %}
-                                <a href="{{ path('hotsales_delete', {'idHotsale': hotsale.getIdHotsale()})}}" class="btn btn-info">Eliminar</a>
-                                <a href="{{ path('hotsales_edit', {'idHotsale': hotsale.getIdHotsale()})}}" class="btn btn-info">Modificar</a>
-                            {% endif %}
-                           
+                            </td>
+                            <td>{{ hotsale.getIdSemana.getIdResidencia().getNombre() }}</td>
+                            <td>
+                                <strong>
+                                    <font color='Blue'>
+                                        {{ hotsale.getIdSemana.getFechaInicio().format('Y-m-d') }} / {{ hotsale.getIdSemana.getFechaFin().format('Y-m-d') }}
+                                    </font>
+                                </strong>
+                            </td>
+                            <td> {{ hotsale.getIdSemana.getPrecio() }} </td>
+                            <td>
+                                <a href="{{ path('residencias_show', {'idResidencia': hotsale.getIdSemana.idResidencia().getIdResidencia()}) }}" class="btn btn-warning">Ver Residencia</a>
+                                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                                    <a href="{{ path('adjudicar_Hotsale', {'idHotsale': hotsale.getIdHotsale()})}}" class="btn btn-success">Adjudicar</a>
+                                {% endif %}
+                                {% if is_granted("ROLE_ADMIN") %}
+                                    <a href="{{ path('hotsales_delete', {'idHotsale': hotsale.getIdHotsale()})}}" class="btn btn-danger">Eliminar</a>
+                                    <a href="{{ path('hotsales_edit', {'idHotsale': hotsale.getIdHotsale()})}}" class="btn btn-info">Modificar</a>
+                                {% endif %}
+                            </td>
                         </tr>
                    {% endif %}
                    {% endfor %}
                 </tbody>
             </table>
-        </div>
+            
         {% else %}
+            <h3>
+                No hay hotsales para mostrar
+            </h3>
             <p align="center">No hay hotsales para mostrar</p>
         {% endif %}
+        </div>
 {% endblock %}

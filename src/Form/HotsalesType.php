@@ -21,7 +21,7 @@ class HotsalesType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('idSemana', SemanasType::class, ['label'=>'Semana:'])
+            ->add('idSemana', SemanasType::class, ['label'=>'Datos de la semana:'])
         ;
     }
 

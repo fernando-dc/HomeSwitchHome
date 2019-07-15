@@ -26,8 +26,11 @@ class HotsalesController extends AbstractController
      */
     public function index(HotsalesRepository $hotsalesRepository): Response
     {
+        
+        $hotsales = $this->getDoctrine()->getManager()->getRepository(Hotsales::class)->hotsalesActivos();
+        
         return $this->render('hotsales/index.html.twig', [
-            'hotsales' => $hotsalesRepository->findAll(),
+            'hotsales' => $hotsales,
         ]);
     }
     

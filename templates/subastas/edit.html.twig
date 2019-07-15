@@ -20,14 +20,28 @@
     {% form_theme form 'bootstrap_4_layout.html.twig' %}
 
     <div class="container">
-
-        {{ form_start(form) }}
-        {{ form_widget(form) }}
-
-        <button type="submit" class="btn btn-success">Modificar</button>
-        <a href="{{ path('subastas_listado') }}" class="btn btn-danger">Cancelar</a>
+            {{form_start(form)}}
+            <div class="row justify-content-center">
+                <div class="col-sm-6">
+                    <div id="subasta-form">
+                                {{form_row(form.precioActual)}}
+    
+                    </div>
+                </div>
+            </div>
             
-    </div>
+            <br>
+            <div class="row justify-content-between text-center">
+                <div class="col-sm-6">
+                    <a href="{{ path('subastas_listado') }}" class="btn btn-lg btn-danger">Cancelar</a>
+                </div>
+                <br>
+                <div class="col-sm-6">
+                    <button type="submit" class="btn btn-lg btn-success">Guardar cambios</button>
+                </div>
+            </div>
+            {{form_end(form)}}
+        </div>
 {% endif %}
 {% else %}
     <div align="center" class="container">

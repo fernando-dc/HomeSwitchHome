@@ -1,16 +1,27 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Hotsales{% endblock %}
+{% block title %}Nuevo Hotsale{% endblock %}
+{% block bodyTitle %}
+    <h1>Crear un nuevo Hotsale</h1>
+{% endblock %}
 
 {% block body %}
 
 {% form_theme form 'bootstrap_4_layout.html.twig' %}
 <div class="container">
-<h1>Create new Hotsales</h1>
+    <br>
+    
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div id="hotsale-form">
+                {{ include('hotsales/_form.html.twig') }}
+        
+            </div>
+            <br>
+            <a href="{{ path('hotsales_index') }}">Volver a la lista</a>
+        </div>
+    </div>
 
-    {{ include('hotsales/_form.html.twig') }}
-
-    <a href="{{ path('hotsales_index') }}">Volver a la lista</a>
 </div>
     {% endblock %}
     {% block javascripts %}
@@ -25,6 +36,7 @@
                 daysOfWeekDisabled: "0,2,3,4,5,6",
                 daysOfWeekHighlighted: "1",
                 format: "yyyy/mm/dd",
+                autoclose: true,
             });
         });
     </script>

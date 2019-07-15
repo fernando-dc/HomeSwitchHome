@@ -53,9 +53,19 @@ class HotsalesRepository extends ServiceEntityRepository
             ->innerJoin('h.idSemana', 's')
             ->addSelect('s')
             ->andWhere('h.idSemana = s.idSemana')
-            ->andWhere('s.idUsuario is not null')
+            ->andWhere('s.idUsuario is null')
             ->setMaxResults(1)
             ->getQuery()
             ->getOneOrNullResult();
+    }
+
+    public function hotsalesActivos(){
+        return $this->createQueryBuilder('h')
+            ->innerJoin('h.idSemana', 's')
+            ->addSelect('s')
+            ->andWhere('h.idSemana = s.idSemana')
+            ->andWhere('s.idUsuario is null')
+            ->getQuery()
+            ->getResult();
     }
 }

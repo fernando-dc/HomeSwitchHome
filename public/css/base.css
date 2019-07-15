@@ -24,3 +24,23 @@ body {
   
   background-color: rgba(226, 188, 0, 0.507);
 }
+
+#hotsale-form{
+  background-color:rgba(0, 0, 0, 0.13);
+  border-radius: .5rem;
+  padding: 2rem;
+}
+
+#hotsale-form:hover{
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+#subasta-form{
+  background-color:rgba(18, 165, 223, 0.219);
+  border-radius: .5rem;
+  padding: 2rem;
+}
+
+#subasta-form:hover{
+  background-color: rgba(18, 165, 223, 0.397);
+}

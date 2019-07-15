@@ -22,13 +22,38 @@
     {% form_theme subastaForm 'bootstrap_4_layout.html.twig' %}
 
     <div class="container">
-        
         {{form_start(subastaForm)}}
+        <div class="row justify-content-center">
+            <div class="col-sm-8">
+                <div id="subasta-form">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            {{form_row(subastaForm.precioActual)}}
+
+                        </div>
+                        <div class="col-sm-6">
+                            {{form_row(subastaForm.fechaInicio)}}
+                        </div>
+                    </div>
+                    
+                    {{form_row(subastaForm.idResidencia)}}
+                    
+
+                </div>
+            </div>
+        </div>
         
-        {{form_widget(subastaForm)}}
-        
-        <button type="submit" class="btn btn-success">Crear</button>
-        <a href="{{ path('subastas_listado') }}" class="btn btn-danger">Cancelar</a>
+        <br>
+        <div class="row justify-content-between text-center">
+            <div class="col-sm-6">
+                <a href="{{ path('subastas_listado') }}" class="btn btn-lg btn-danger">Cancelar</a>
+            </div>
+            <br>
+            <div class="col-sm-6">
+                <button type="submit" class="btn btn-lg btn-success">Crear</button>
+            </div>
+        </div>
+        {{form_end(subastaForm)}}
     </div>
 {% endif %}
 {% else %}

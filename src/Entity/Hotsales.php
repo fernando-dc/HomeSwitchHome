@@ -60,8 +60,8 @@ class Hotsales
     public function validarFechaReserva(ExecutionContextInterface $context, $payload){
         foreach ($this->getIdSemana()->getidResidencia()->getReservas() as $reserva) {
             if ($this->getIdSemana()->getFechaInicio() >= $reserva->getFechaInicio() && $this->getIdSemana()->getfechaInicio() <= $reserva->getFechaFin()) {
-                $context->buildViolation('Esa fecha ya fue reservada')
-                    -> atPath('fechaInicio')
+                $context->buildViolation('Esa semana ya fue reservada para la residencia elegida')
+                    -> atPath('idSemana.fechaInicio')
                     ->addViolation();
             }
         }
@@ -79,8 +79,8 @@ class Hotsales
         $fecha_fin = date('Y-m-d',strtotime(($this->getIdSemana()->getfechaInicio()->format('Y-m-d')) . $duracion));
     
         if ($this->getidSemana()->getidResidencia()->existeSubastaEntreFechas($this->getIdSemana()->getfechaInicio(),$fecha_fin,$duracion)) {
-            $context->buildViolation('Existe una subasta para esa fecha')
-                -> atPath('fechaInicio')
+            $context->buildViolation('Existe una subasta para esa semana en la residencia elegida')
+                -> atPath('idSemana.fechaInicio')
                 ->addViolation();
         }
     

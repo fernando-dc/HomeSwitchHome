@@ -1,4 +1,30 @@
 {{ form_start(form) }}
+<h3>
+    {{form_label(form.idSemana)}}
+</h3>
+<div class="row">
+    {% if form.idSemana.fechaInicio is defined %}
+        <div class="col-sm-6">
+            {{form_row(form.idSemana.precio)}}
+        </div>
+        <div class="col-sm-6">
+            {{form_row(form.idSemana.fechaInicio)}}
+        </div>
+    {% else %}
+        <div class="col-12">
+            {{form_row(form.idSemana.precio)}}
+        </div>
+    {% endif %}
+</div>
+
+{% if form.idSemana.idResidencia is defined %}
+    <div class="row">
+        <div class="col-12">
+            {{form_row(form.idSemana.idResidencia)}}
+        </div>
+    </div>    
+{% endif %}
+    <br>
     {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    <button class="btn btn-lg btn-success">{{ button_label|default('Crear hotsale') }}</button>
 {{ form_end(form) }}

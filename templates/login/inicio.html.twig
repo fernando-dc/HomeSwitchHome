@@ -35,7 +35,9 @@
                     <div class="text-center">
                         <!--RECUADRO2-->
                         <br/><br/>
-                        <image id="logo-image"src="/images/logos/HSH-Complete.svg" width="400" />
+                        <a href="{{ path('filtro') }}">
+                            <image id="logo-image"src="/images/logos/HSH-Complete.svg" width="400" />
+                        </a>
                         <div class="row justify-content-center">
                             <div class="col-xl-6 col-lg-8 col-md-8 col-sm-6 col-8">
                                 
@@ -167,10 +169,11 @@
                 <br><br>
                 <a href="{{ path('hotsales_index') }}" class="btn btn-success">Ver HotSales</a>
                 {% else %}  
-                <br><br>
-                <font size=5 color="Black">
-                    <strong>Por el momento no hay subastas activas.</strong>
-                </font>
+                    <br><br>
+                    {# <font size=5 color="Black">
+                        <strong>Por el momento no hay hotsales activos.</strong>
+                    </font> #}
+                    <h1>Por el momento no hay hotsales activos</h1>
                 {% endif %}
                     
             </div>

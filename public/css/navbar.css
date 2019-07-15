@@ -4,3 +4,9 @@
 #logo-text{
     width:200px;
 }
+
+.navbar-nav > li > .dropdown-menu {     background-color: #2d3347;  }
+
+/* Dropdown menu font color*/ 
+
+ .navbar-nav > li > .dropdown-menu a{   color: #e3f9ff;  }

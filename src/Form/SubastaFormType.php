@@ -4,6 +4,8 @@ namespace App\Form;
 
 use App\Entity\Subastas;
 use App\Entity\Residencias;
+use App\Repository\ResidenciasRepository;
+
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -38,6 +40,10 @@ class SubastaFormType extends AbstractType
 
             ->add('idResidencia', EntityType::class,[
                 'class' => Residencias::class,
+                'query_builder' => function (ResidenciasRepository $er) {
+                    return $er->createQueryBuilder('r')
+                        ->andWhere('r.eliminado = 0');
+                },
                 'choice_label' => function($residencia){
                     return '(' . $residencia->getNombre() . ') ' . $residencia->getTipo() . '; habitaciones: ' . $residencia->getHabitaciones(). '. En ciudad: '.$residencia->getIdDireccion()->getCiudad(). ', '. $residencia->getIdDireccion()->getProvincia();
                 },
