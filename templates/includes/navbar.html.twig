@@ -18,14 +18,52 @@
           <a class="nav-link" href="/hotsales/">Hotsales </a>
         </li>
         {% if is_granted('ROLE_ADMIN') %}
-          <li class="nav-item">
+
+
+          <li class="nav-item dropdown show">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">Funciones de Administrador</a>
+            <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 37px, 0px); top: 0px; left: 0px; will-change: transform;">
+              <a class="dropdown-item" href="/residencias">Ver Residencias </a>
+              <a class="dropdown-item" href="/usuarios/listado">Ver Usuarios</a>
+              <a class="dropdown-item"href="/suscripciones/configurar">Configuración de precios</a>
+            </div>
+          </li>
+        {% endif %}
+
+
+
+
+          {#<li class="nav-item">
             <a class="nav-link" href="/usuarios/listado">Usuarios </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/suscripciones/configurar">Configuración de precios </a>
           </li>
-        {% endif %}
+        {% endif %}#}
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+
+          <li class="nav-item dropdown show">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">Funciones básicas</a>
+            <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 37px, 0px); top: 0px; left: 0px; will-change: transform;">
+              <a class="dropdown-item" href="/usuarios/perfil">Ver Mi Perfil </a>
+              <a class="dropdown-item" href="/subastas/listado"><font color="Green"><strong>Subastas </strong></font></a>
+              <a class="dropdown-item" href=""><strong><font color="Green">HotSales</strong> </font></a>
+              <a class="dropdown-item" href="/contacto">Contacto</a>
+              <a class="dropdown-item" href="/preguntas_frecuentes">Preguntas freceuntes</a>
+            </div>
+          </li>
+
+          <li class="nav-item">
+            {% if is_granted("ROLE_ADMIN") %}
+              <a class="nav-link" href="/logout">Cerrar sesión {{ app.user.getIdUsuario().getEmail() }}</a>
+            {% else %}
+              <a class="nav-link" href="/logout">Cerrar sesión {{app.user.getEmail()}}</a>
+            {% endif %}
+          </li>
+        {% endif %}
+
+
+        {#{% if is_granted('IS_AUTHENTICATED_FULLY') %}
         <li class="nav-item">
           <a class="nav-link" href="/usuarios/perfil">Mi Perfil </a>
         </li>
@@ -38,6 +76,9 @@
         <li class="nav-item">
           <a class="nav-link" href="/subastas/listado">Subastas </a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="">HotSales </a>
+        </li>
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
         <li class="nav-item">
           {% if is_granted("ROLE_ADMIN") %}
@@ -46,7 +87,8 @@
             <a class="nav-link" href="/logout">Cerrar sesión {{app.user.getEmail()}}</a>
           {% endif %}
         </li>
-        {% endif %}
+        
+        {% endif %}#}
 
         {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
           <li class="nav-item">

@@ -56,6 +56,7 @@ class FiltroController extends AbstractController
 
 
             $residencias = $em->getRepository(Residencias::class)->residenciasEnCiudad($formData['lugar']);
+            //$residencias = $em->getRepository(Residencias::class)->findBy(['eliminado' => '0', 'idDireccion.getCiudad' => $formData['lugar']]);
             $semanasDisponibles =[];
             
             foreach ($residencias as $residencia) {

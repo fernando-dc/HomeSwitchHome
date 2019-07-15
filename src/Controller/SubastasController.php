@@ -7,6 +7,7 @@ use App\Entity\SemanasReserva;
 USE App\Entity\Residencias;
 
 use App\Form\SubastaFormType;
+use App\Form\SubastaFormType2;
 use App\Entity\Subastas;
 use App\Entity\Pujas;
 use App\Entity\Usuarios;
@@ -88,6 +89,7 @@ class SubastasController extends AbstractController
     public function subastas(){
         $em = $this-> getDoctrine()->getManager();
         if($this->isGranted('ROLE_ADMIN')){
+
             $subastasActivas = $em->getRepository(Subastas::class)->findBy(['finalizada' => '0']);
             $subastasFinalizadas = $em->getRepository(Subastas::class)->findBy(['finalizada' => '1']);
             $subastas = array_merge($subastasActivas, $subastasFinalizadas);
@@ -303,6 +305,40 @@ class SubastasController extends AbstractController
             //
             return $this->render('/login/inicie_sesion.html.twig');
         }
+    }
+    /**
+     * @Route("/subastas/edit/{idSubasta}", name="subastas_edit", Methods={"GET","POST"})
+     */
+
+    public function modificarSubasta (Request $request, Subastas $subasta): Response{
+
+        $form = $this->createForm(SubastaFormType2::class, $subasta);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()) {
+            //$subastaModificada = $form->getData();
+            //$subasta->setPrecioActual($subastaModificada->getPrecioActual());
+
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('subastas_listado');
+        }
+
+        return $this->render('subastas/edit.html.twig', [
+            'subasta' => $subasta,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/subastas/delete/{idSubasta}", name="subasta_delete")
+     */
+    public function eliminarSubasta(Subastas $subasta){
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($subasta);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('subastas_listado');
     }
 
 }

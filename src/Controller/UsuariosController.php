@@ -76,6 +76,7 @@ class UsuariosController extends AbstractController
         if($usuario != null){
             $notificaciones = $this->getDoctrine()->getManager()->getRepository(Notificaciones::class)->findBy(['idUsuario' => $usuario->getIdUsuario()]);
 
+            $notificaciones = array_reverse($notificaciones);
             return $this->render("/usuarios/notificaciones.html.twig", ['notificaciones' => $notificaciones]);
         }
         else{
@@ -196,6 +197,7 @@ class UsuariosController extends AbstractController
         $usuarios = $this->getDoctrine()->getManager()->getRepository(Usuarios::class)->findAll();
 
         ksort($usuarios);
+        $usuarios = array_reverse($usuarios);
 
         return $this->render("/usuarios/listado.html.twig", ['usuarios' => $usuarios]);
     }
@@ -232,6 +234,7 @@ class UsuariosController extends AbstractController
 
          $reservas = $this->getDoctrine()->getManager()->getRepository(SemanasReserva::class)->findBy(['idUsuario' => $usuario->getIdUsuario()]);
 
+         $reservas = array_reverse($reservas);
          return $this->render("/usuarios/misReservas.html.twig", ['reservas' => $reservas]);
     }
 
