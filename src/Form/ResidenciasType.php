@@ -23,7 +23,7 @@ class ResidenciasType extends AbstractType
             ->add('nombre')
             ->add('tipo')
             ->add('habitaciones')
-            ->add('descripcion', TextareaType::class ,)        
+            ->add('descripcion', TextareaType::class[])        
             ->add('IdDireccion',DireccionesType::class, ['label'=>'Direccion:'])
             ->add('imageFile', FileType::class, [
                 'label'=>'Foto de la residencia:',

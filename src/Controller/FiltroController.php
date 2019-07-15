@@ -97,6 +97,12 @@ class FiltroController extends AbstractController
                 ->buildViolation('filtro.rango.fechas.mayor')
                 ->addViolation();
         }
+        if($data['fecha_inicial'] >= $data['fecha_final']){
+            $context
+                ->buildViolation('filtro.rango.fechas.menorOIgual')
+                ->addViolation();
+        }
+
 
     }
 

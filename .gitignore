@@ -17,3 +17,13 @@ var/cache/dev/srcApp_KernelDevDebugContainerUrlGenerator.php
 var/cache/dev/srcApp_KernelDevDebugContainerUrlGenerator.php.meta
 var/cache/dev/srcApp_KernelDevDebugContainerUrlMatcher.php
 var/cache/dev/srcApp_KernelDevDebugContainerUrlMatcher.php.meta
+var/cache/dev/srcApp_KernelDevDebugContainer.php
+var/cache/dev/srcApp_KernelDevDebugContainer.php.meta
+var/cache/dev/srcApp_KernelDevDebugContainer.xml
+var/cache/dev/srcApp_KernelDevDebugContainer.xml.meta
+var/cache/dev/srcApp_KernelDevDebugContainerCompiler.log
+var/cache/dev/srcApp_KernelDevDebugContainerDeprecations.log
+var/cache/dev/srcApp_KernelDevDebugContainerUrlGenerator.php
+var/cache/dev/srcApp_KernelDevDebugContainerUrlGenerator.php.meta
+var/cache/dev/srcApp_KernelDevDebugContainerUrlMatcher.php
+var/cache/dev/srcApp_KernelDevDebugContainerUrlMatcher.php.meta

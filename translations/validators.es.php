@@ -6,4 +6,5 @@ return [
     'tarjeta.numero.duplicado' => 'El numero de tarjeta ya existe en el sistema.',
     'filtro.rango.fechas.mayor' => 'El rango de las fechas debe ser igual o menor a 2 meses!.',
     'tarjeta.vencimiento.digitos' => 'El vencimiento debe tener 4 digitos (2 para el mes y 2 para el año).',
+    'filtro.rango.fechas.menorOIgual' => 'La fecha de fin de la semana debe ser menor a la fecha de inicio.',
 ];
