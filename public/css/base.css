@@ -44,3 +44,13 @@ body {
 #subasta-form:hover{
   background-color: rgba(18, 165, 223, 0.397);
 }
+
+#residencia-form{
+  background-color:rgba(18, 165, 223, 0.219);
+  border-radius: .5rem;
+  padding: 2rem;
+}
+
+#residencia-form:hover{
+  background-color: rgba(18, 165, 223, 0.397);
+}

@@ -12,7 +12,7 @@ class DireccionesType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('codigo_postal', NumberType::class [])
+            ->add('codigo_postal', NumberType::class)
             ->add('calle')
             ->add('numero')
             ->add('ciudad')
